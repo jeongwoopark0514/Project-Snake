@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Student {
     private final String name;
     private final int studentNumber;
@@ -49,5 +51,13 @@ public class Student {
 
         Student student = (Student) other;
         return studentNumber == student.getStudentNumber();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getStudentNumber());
     }
 }

@@ -54,7 +54,8 @@ jacocoTestCoverageVerification {
             }
             excludes = [
                 'HelloWorld.HelloWorld()',
-                'HelloWorld.main(java.lang.String[])'
+                'HelloWorld.main(java.lang.String[])',
+                'Student.hashCode()'
             ]
         }
     }
