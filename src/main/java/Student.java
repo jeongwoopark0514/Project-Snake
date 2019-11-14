@@ -7,7 +7,7 @@ public class Student {
     /**
      * Create a new Student object.
      *
-     * @param name Name of the Student
+     * @param name          Name of the Student
      * @param studentNumber Student number used to identify student in central administration
      */
     public Student(String name, int studentNumber) {
@@ -54,33 +54,10 @@ public class Student {
     }
 
     /**
-     * Check whether the current studentNumber is a valid number (7 digits).
-     *
-     * @return boolean value indicating the validity of the number
-     */
-    public boolean isValidStudentNumber() {
-        if (studentNumber >= 1000000 && studentNumber <= 9999999) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getStudentNumber());
-    }
-
-    /**
-     * Retrieve a String representation of this Student object.
-     *
-     * @return String representation of the current student object.
-     */
-    @Override
-    public String toString() {
-        return this.getName() + " (" + this.getStudentNumber() + ")";
     }
 }
