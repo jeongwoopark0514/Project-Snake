@@ -16,6 +16,9 @@ plugins {
 
     // FindBugs / SpotBugs
     id "com.github.spotbugs" version "2.0.1"
+    
+    // Lombok
+    id "io.freefair.lombok" version "4.1.4"
 }
 
 group 'nl.tudelft.cse.sem.template'
