@@ -8,9 +8,9 @@ import lombok.ToString;
 /**
  * Using annotation @Data will make it even easier.
  *
- *   @Data is like having implicit @Getter, @Setter, @ToString, @EqualsAndHashCode
- *   and @RequiredArgsConstructor annotations on the class (except that no constructor
- *   will be generated if any explicitly written constructors already exist).
+ * \@Data is like having implicit @Getter, @Setter, @ToString, @EqualsAndHashCode
+ * and @RequiredArgsConstructor annotations on the class (except that no constructor
+ * will be generated if any explicitly written constructors already exist).
  *
  * Check documentation: https://projectlombok.org/features/all
  *
@@ -25,9 +25,15 @@ public class LombokExample {
     @Getter @Setter int field2;
     @Getter @Setter int field3;
 
+    /**
+     * Showcases.
+     * @param args Args
+     */
+
     public static void main(String[] args) {
         // There is a constructor without argument.
         LombokExample lombok = new LombokExample();
+        System.out.println(lombok.toString());
 
         // There is a constructor with all fields.
         LombokExample lombokWithField = new LombokExample(1, 2, 3);
