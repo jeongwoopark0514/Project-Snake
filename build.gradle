@@ -32,9 +32,10 @@ test {
 
     jacoco {
         enabled = true
-        includes = ['nl.tudelft.cse.sem.*']
         excludes = []
     }
+
+    finalizedBy jacocoTestReport
 }
 
 dependencies {
@@ -45,22 +46,25 @@ dependencies {
 jacocoTestCoverageVerification {
     violationRules {
         rule {
-            enabled = true
-            element = 'CLASS'
-            includes = ['nl.tudelft.cse.sem.*']
-
+            element = 'METHOD'
             limit {
                 counter = 'LINE'
-                value = 'TOTALCOUNT'
-                maximum = 0.3
+                value = 'COVEREDRATIO'
+                minimum = 0.9
             }
+            excludes = [
+                'HelloWorld.HelloWorld()',
+                'HelloWorld.main(java.lang.String[])'
+            ]
         }
     }
 }
 
+check.dependsOn jacocoTestCoverageVerification
+
 checkstyle {
     ignoreFailures = false
-    maxWarnings = 0
+    maxWarnings = 5
     toolVersion "8.25"
 	configFile = rootProject.file('config/checkstyle/checkstyle.xml')
 }
