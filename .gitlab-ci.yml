@@ -66,5 +66,5 @@ deploy:
     - mysql:latest
   script:
     - echo deploying SQL file on the database...
-    - mysql --host=projects-db.ewi.tudelft.nl --user=pu_Snake1 --password=tHWLSWJqg57E projects_Snake1 -e ./setup.sql
+    - mysql --host=projects-db.ewi.tudelft.nl --user=pu_Snake1 --password=tHWLSWJqg57E projects_Snake1 < "setup.sql"
 
