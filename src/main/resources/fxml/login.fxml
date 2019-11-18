@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.BasicController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="1016.0" pickOnBounds="true" preserveRatio="true" />
+      <TextField layoutX="312.0" layoutY="269.0" prefHeight="31.0" prefWidth="187.0" />
+      <Text layoutX="216.0" layoutY="294.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username :" wrappingWidth="83.6708984375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="216.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="83.6708984375" />
+      <TextField layoutX="312.0" layoutY="313.0" prefHeight="31.0" prefWidth="187.0" />
+   </children>
+</AnchorPane>
