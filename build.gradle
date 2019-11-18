@@ -62,8 +62,9 @@ jacocoTestCoverageVerification {
                 'HelloWorld.HelloWorld()',
                 'HelloWorld.main(java.lang.String[])',
                 'Student.hashCode()',
-                'Main.main(String[] args)',
-                'Main.start(Stage primaryStage)'
+                    'Main.Main()',
+                'Main.main(java.lang.String[])',
+                'Main.start(javafx.stage.Stage)'
             ]
         }
     }
