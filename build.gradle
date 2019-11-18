@@ -61,8 +61,8 @@ jacocoTestCoverageVerification {
             excludes = [
                 'HelloWorld.HelloWorld()',
                 'HelloWorld.main(java.lang.String[])',
-                'Student.hashCode()'
-                'Main.main(String[] args)'
+                'Student.hashCode()',
+                'Main.main(String[] args)',
                 'Main.start(Stage primaryStage)'
             ]
         }
