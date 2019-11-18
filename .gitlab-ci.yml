@@ -62,8 +62,9 @@ test:
 deploy:
   image: mysql
   stage: deploy
+  services:
+    - mysql:latest
   script:
-    - service mysql start
     - echo deploying SQL file on the database...
     - echo "SELECT 'OK';" | mysql --host=projects-db.ewi.tudelft.nl --user=pu_Snake1 --password=tHWLSWJqg57E projects_Snake1
     - echo SELECT * from users;
