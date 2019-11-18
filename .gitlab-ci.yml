@@ -9,6 +9,8 @@ stages:
 variables:
   # Disable the Gradle daemon to ensure isolated runs of the CI pipeline.
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  MYSQL_ROOT_PASSWORD: "password"
+  MYSQL_DATABASE: "snake"
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
@@ -65,6 +67,5 @@ deploy:
   services:
     - mysql:latest
   script:
-    - echo deploying SQL file on the database...
     - mysql --host=projects-db.ewi.tudelft.nl --user=pu_Snake1 --password=tHWLSWJqg57E projects_Snake1 < "setup.sql"
 
