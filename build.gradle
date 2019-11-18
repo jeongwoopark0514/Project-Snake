@@ -17,6 +17,9 @@ plugins {
     // FindBugs / SpotBugs
     id "com.github.spotbugs" version "2.0.1"
 
+    // Lombok
+    id "io.freefair.lombok" version "4.1.4"
+
     // JavaFX
     id 'org.openjfx.javafxplugin' version '0.0.8'
 }
@@ -58,7 +61,10 @@ jacocoTestCoverageVerification {
             excludes = [
                 'HelloWorld.HelloWorld()',
                 'HelloWorld.main(java.lang.String[])',
-                'Student.hashCode()'
+                'Student.hashCode()',
+                    'Main.Main()',
+                'Main.main(java.lang.String[])',
+                'Main.start(javafx.stage.Stage)'
             ]
         }
     }
