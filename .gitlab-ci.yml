@@ -66,6 +66,6 @@ deploy:
     - mysql:latest
   script:
     - echo deploying SQL file on the database...
-    - echo "SELECT 'OK';" | mysql --host=projects-db.ewi.tudelft.nl --user=pu_Snake1 --password=tHWLSWJqg57E projects_Snake1
-    - echo SELECT * from users;
+    - mysql --host=projects-db.ewi.tudelft.nl --user=pu_Snake1 --password=tHWLSWJqg57E projects_Snake1
+    - mysql SELECT * from users;
 
