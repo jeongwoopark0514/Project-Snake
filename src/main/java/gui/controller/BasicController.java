@@ -1,9 +1,11 @@
 package gui.controller;
 
+import java.net.URL;
+
+import java.util.ResourceBundle;
+
 import javafx.fxml.Initializable;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class BasicController implements Initializable {
 
