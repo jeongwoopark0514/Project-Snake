@@ -62,6 +62,8 @@ test:
     gradle check
 
 deploy:
+  only:
+    - master
   image: mysql
   stage: deploy
   services:
