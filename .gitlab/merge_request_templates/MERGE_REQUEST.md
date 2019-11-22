@@ -8,13 +8,15 @@
 - [ ] Refactor (no functional changes to system)
 - [ ] Code style (formatting, renaming)
 
-### Checklist
-<!-- Tick all boxes before merging. -->
-- [ ] Branch builds locally.
-- [ ] New code is tested. <!-- only for feature, bug fix and refactor -->
-- [ ] Code is reviewed by at least two team members. 
-- [ ] Merge conflicts are resolved.
-
 ### Describe the contents of merge request
 
 ### Most important changes to codebase
+
+<!-- Use label to declare type of merge request. -->
+/label ~type
+<!-- Estimate the amount of hours needed to complete the feature -->
+/estimate 1h
+<!-- Set the correct milestone -->
+/milestone %sprint_1
+<!-- Set the weight (scale: 1-3; 1 is important, 3 is less important) -->
+/weight
