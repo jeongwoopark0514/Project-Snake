@@ -6,7 +6,10 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
 
-
+/**
+ * Do not delete this.
+ * Need this when I need to assign any controller for a new fxml file.
+ */
 public class BasicController implements Initializable {
 
 
