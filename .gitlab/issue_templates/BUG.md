@@ -19,7 +19,7 @@
 ### Detailed Description
 <!--- Use this to add more info if necessary. -->
 
-/label ~feature
+/label ~bug
 <!-- Assign the team members working on the feature -->
 /assign @team-member1 @team-member2
 <!-- Estimate the amount of hours needed to complete the feature -->
