@@ -38,7 +38,9 @@ test {
 
     jacoco {
         enabled = true
-        excludes = []
+        excludes = [
+                'gui.MainRunner.java'
+        ]
     }
 
     finalizedBy jacocoTestReport
@@ -48,6 +50,7 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
 }
+
 
 jacocoTestCoverageVerification {
     violationRules {
@@ -64,9 +67,13 @@ jacocoTestCoverageVerification {
                 'Student.hashCode()',
                     'Main.Main()',
                 'Main.main(java.lang.String[])',
-                'Main.start(javafx.stage.Stage)'
+                'Main.start(javafx.stage.Stage)',
+                'gui.controller.LoginController.clickRegister()',
+                    'gui.controller.LoginController.LoginController()',
+                'gui.MainRunner/**'
             ]
         }
+
     }
 }
 

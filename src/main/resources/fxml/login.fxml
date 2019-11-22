@@ -44,7 +44,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="606.0" layoutY="356.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="182.0" styleClass="button1" stylesheets="@../css/login.css">
+      <Button layoutX="606.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#clickRegister" prefHeight="45.0" prefWidth="182.0" styleClass="button1" stylesheets="@../css/login.css">
          <graphic>
             <ImageView fitHeight="57.0" fitWidth="264.0" pickOnBounds="true" preserveRatio="true">
                <image>
