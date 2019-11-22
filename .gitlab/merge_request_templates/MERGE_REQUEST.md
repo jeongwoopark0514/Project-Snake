@@ -1,13 +1,5 @@
 <!-- Use #issue-number at top to show a link to relevant issue(s) -->
 
-### Type of merge request
-<!-- Pick one -->
-- [ ] Feature
-- [ ] Bug fix
-- [ ] Documentation
-- [ ] Refactor (no functional changes to system)
-- [ ] Code style (formatting, renaming)
-
 ### Describe the contents of merge request
 
 ### Most important changes to codebase
