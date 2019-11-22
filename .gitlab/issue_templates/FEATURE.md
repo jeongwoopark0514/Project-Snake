@@ -24,4 +24,6 @@ LINES BELOW WILL SET GITLAB ISSUE PROPERTIES
 /estimate 1h
 <!-- Set the correct milestone -->
 /milestone %sprint_1
+<!-- Set the weight (scale: 1-3; 1 is important, 3 is less important) -->
+/weight
 
