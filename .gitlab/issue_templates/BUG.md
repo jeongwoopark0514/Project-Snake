@@ -19,11 +19,12 @@
 ### Detailed Description
 <!--- Use this to add more info if necessary. -->
 
-<!-- Fill in below functions -->
-<!-- estimated time to fix this bug -->
-/estimate 
-<!-- who is/are going to fix this bug -->
-/assign 
-<!-- importance of fixing this bug -->
-<!-- scale: 1-3; 1 most important and 3 least important -->
-/weight 
+/label ~feature
+<!-- Assign the team members working on the feature -->
+/assign @team-member1 @team-member2
+<!-- Estimate the amount of hours needed to complete the feature -->
+/estimate 1h
+<!-- Set the correct milestone -->
+/milestone %sprint_1
+<!-- Set the weight (scale: 1-3; 1 is important, 3 is less important) -->
+/weight
