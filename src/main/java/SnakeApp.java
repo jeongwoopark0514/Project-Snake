@@ -5,8 +5,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
-import static
-
 
 public class SnakeApp extends Application {
     public static void main(String[] args) {
