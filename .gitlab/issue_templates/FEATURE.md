@@ -1,30 +1,27 @@
-### Feature to implement
-<!-- Describe the feature. -->
+### Context / Problem to solve
 
-### Relevance to user
-<!-- Describe the importance of this feature to the user. --> 
+<!-- Describe the reason the issue was created. Describe the conditions/situation what made you think something could be improved. What problem do we solve? -->
 
-### Subproblem
-<!-- Break the problem down into smaller subproblems. -->
-<!-- Use checkboxes -->
+### Feature
 
-* [ ] Not checked.
-* [X] Checked.
+<!-- what do you propose needs to be done/created -->
 
-### Testing
-<!-- Describe a method how this feature should be tested. -->
+<!-- possible provide suggestions on solutions. If multiple solutions are possible consider listing them all -->
 
-### Done
-<!-- Describe when this feature is done -->
+<!-- list definition of done -->
 
-### Documentation (optional)
-<!-- Put documentation necessary to implement this feature (optional) -->
+### Action plan
 
-<!-- Fill in below functions -->
-<!-- estimated time to implement this feature -->
-/estimate
-<!-- who is/are going implement this feature -->
-/assign
-<!-- importance of this feature -->
-<!-- scale: 1-3; 1 most important and 3 least important -->
-/weight
+<!-- Suggest next steps -->
+
+<!---
+LINES BELOW WILL SET GITLAB ISSUE PROPERTIES
+--->
+/label ~feature
+<!-- Assign the team members working on the feature -->
+/assign @team-member1 @team-member2
+<!-- Estimate the amount of hours needed to complete the feature -->
+/estimate 1h
+<!-- Set the correct milestone -->
+/milestone %sprint_1
+
