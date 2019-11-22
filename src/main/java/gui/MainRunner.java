@@ -28,7 +28,7 @@ public class MainRunner extends Application { //NOPMD
         final URL url = new File("src/main/resources/fxml/splash.fxml").toURI().toURL();
         final Parent parent = FXMLLoader.load(url);
 
-        primaryStage.getIcons().add(new Image("image/transparent logo.png"));
+        primaryStage.getIcons().add(new Image("image/transparent_logo.png"));
         primaryStage.setTitle("Snake");
         primaryStage.setResizable(false);
         final Scene splash = new Scene(parent, 1000,600);
