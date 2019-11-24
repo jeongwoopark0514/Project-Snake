@@ -28,4 +28,36 @@ public class LoginController {
         Scene registerScene = new Scene(parentRegister);
         MainRunner.stage.setScene(registerScene);
     }
+
+    @FXML
+    public TextField username;
+    public TextField password;
+
+
+    public String getUsername() {
+        return username.getText();
+    }
+
+    public String getPassword() {
+        return password.getText();
+    }
+
+
+    public void login() {
+        try{
+        DBconnect database = new DBconnect();
+        if (database.loginData(getUsername(), getPassword())) {
+            System.out.println("LOGIN SUCCESSFUL");
+            System.out.println();
+            AlertBox.display("You are logged in!", "Success");
+        } else {
+            AlertBox.display("Wrong username/password combination. Please try again.",
+                    "Something went wrong");
+            System.out.println("LOGIN UNSUCCESSFUL");
+            System.out.println();
+        }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
 }

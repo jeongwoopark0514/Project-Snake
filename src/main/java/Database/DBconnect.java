@@ -46,6 +46,20 @@ public class DBconnect {
         }
     }
 
-    
+    public  boolean loginData(String username, String password) {
+        try {
+            if(username != null || password != null) {
+                String checkUser = "SELECT * FROM users WHERE username='" + username + "' && password='" + password + "'";
+                resultSet = statement.executeQuery(checkUser);
+                if (resultSet.next()) {
+                    return true;
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+
+    }
 
 }

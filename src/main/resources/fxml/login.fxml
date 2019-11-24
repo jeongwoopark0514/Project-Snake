@@ -31,7 +31,7 @@
             <Image url="@../image/password_t.png" />
          </image>
       </ImageView>
-      <Button layoutX="364.0" layoutY="353.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="181.0" styleClass="button1" stylesheets="@../css/login.css">
+      <Button onMouseClicked="#login" layoutX="364.0" layoutY="353.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="181.0" styleClass="button1" stylesheets="@../css/login.css">
          <graphic>
             <ImageView fitHeight="68.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -49,7 +49,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField layoutX="583.0" layoutY="218.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
-      <TextField layoutX="583.0" layoutY="284.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+      <TextField fx:id="username" layoutX="583.0" layoutY="218.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+      <TextField fx:id="password" layoutX="583.0" layoutY="284.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
    </children>
 </AnchorPane>
