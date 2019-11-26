@@ -38,7 +38,6 @@ test {
 
     jacoco {
         enabled = true
-        excludes = []
     }
 
     finalizedBy jacocoTestReport
@@ -50,6 +49,7 @@ dependencies {
 }
 
 jacocoTestCoverageVerification {
+    //To exclude: add "classname.*" (class) or "classname.methodname(parameters with types)" (methods) to the excludes arrays
     violationRules {
         rule {
             element = 'METHOD'
@@ -59,12 +59,18 @@ jacocoTestCoverageVerification {
                 minimum = 0.8
             }
             excludes = [
-                'HelloWorld.HelloWorld()',
-                'HelloWorld.main(java.lang.String[])',
-                'Student.hashCode()',
-                    'Main.Main()',
-                'Main.main(java.lang.String[])',
-                'Main.start(javafx.stage.Stage)'
+                    'Main.*'
+            ]
+        }
+        rule {
+            element = 'METHOD'
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.7
+            }
+            excludes = [
+                    'Main.*'
             ]
         }
     }
