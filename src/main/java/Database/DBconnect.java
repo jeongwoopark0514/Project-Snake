@@ -59,7 +59,26 @@ public class DBconnect {
             System.out.println(e);
         }
         return false;
+    }
 
+    public boolean registerUser(String username, String password){
+        try{
+            String usernameCheck = "SELECT * FROM users WHERE username='" + username + "'";
+            resultSet = statement.executeQuery(usernameCheck);
+            if (resultSet.next()){
+                return false;
+            }
+            String insertUser = "INSERT INTO users (username,password)  VALUES ('" + username + "','" + password + "')";
+            statement.executeUpdate(insertUser);
+            String checkUser = "SELECT * FROM users WHERE username='" + username + "' && password='" + password + "'";
+            resultSet = statement.executeQuery(checkUser);
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);;
+        }
+        return false;
     }
 
 }
