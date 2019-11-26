@@ -5,11 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class DBconnect {
 
-    private static Connection connection;
-    private static Statement statement;
-    private static ResultSet resultSet;
+    @Getter @Setter private  Connection connection;
+    @Getter @Setter private  Statement statement;
+    @Getter @Setter private  ResultSet resultSet;
 
     /**
      * Method that establishes connection to the mysql database.
@@ -92,7 +95,7 @@ public class DBconnect {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println(e);;
+            System.out.println(e);
         }
         return false;
     }
