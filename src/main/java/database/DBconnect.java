@@ -1,6 +1,9 @@
-package Database;
+package database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DBconnect {
 
@@ -46,37 +49,52 @@ public class DBconnect {
         }
     }
 
+    /**
+     *  Method used to login with the following data.
+     * @param username username of a user (not null)
+     * @param password password of a user (not null)
+     * @return
+     */
     public  boolean loginData(String username, String password) {
         try {
-            if(username != null || password != null) {
-                String checkUser = "SELECT * FROM users WHERE username='" + username + "' && password='" + password + "'";
+            if (username != null || password != null) {
+                String checkUser = "SELECT * FROM users WHERE username='"
+                    + username + "' && password='" + password + "'";
                 resultSet = statement.executeQuery(checkUser);
                 if (resultSet.next()) {
                     return true;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return false;
     }
 
-    public boolean registerUser(String username, String password){
-        try{
+    /**
+     * Register a user with the following parameters into database.
+     * @param username username of a user.
+     * @param password password of a user.
+     * @return boolean value.
+     */
+    public boolean registerUser(String username, String password) {
+        try {
             String usernameCheck = "SELECT * FROM users WHERE username='" + username + "'";
             resultSet = statement.executeQuery(usernameCheck);
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 return false;
             }
-            String insertUser = "INSERT INTO users (username,password)  VALUES ('" + username + "','" + password + "')";
+            String insertUser = "INSERT INTO users (username,password)"
+                + "  VALUES ('" + username + "','" + password + "')";
             statement.executeUpdate(insertUser);
-            String checkUser = "SELECT * FROM users WHERE username='" + username + "' && password='" + password + "'";
+            String checkUser = "SELECT * FROM users WHERE username='"
+                + username + "' && password='" + password + "'";
             resultSet = statement.executeQuery(checkUser);
             if (resultSet.next()) {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println(e);;
+            System.out.println(e);
         }
         return false;
     }
