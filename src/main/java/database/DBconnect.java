@@ -1,6 +1,9 @@
-package Database;
+package database;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DBconnect {
 
@@ -29,7 +32,6 @@ public class DBconnect {
     /**
      * Sample query method to get all the records in the user table.
      */
-
     public void getData() {
         try {
             String query = "SELECT * FROM users";
@@ -46,31 +48,45 @@ public class DBconnect {
         }
     }
 
-    public  boolean loginData(String username, String password) {
+    /**
+     * This method checks the database if the entered username and password are valid.
+     * @param username - the username
+     * @param password - the password
+     * @return - true iff login is successful
+     */
+    public boolean loginData(String username, String password) {
         try {
-            if(username != null || password != null) {
-                String checkUser = "SELECT * FROM users WHERE username='" + username + "' && password='" + password + "'";
-                resultSet = statement.executeQuery(checkUser);
-                if (resultSet.next()) {
-                    return true;
-                }
+            String checkUser = "SELECT * FROM users WHERE username='" + username
+                    + "' && password='" + password + "'";
+            resultSet = statement.executeQuery(checkUser);
+            if (resultSet.next()) {
+                return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return false;
     }
 
-    public boolean registerUser(String username, String password){
-        try{
+    /**
+     * This method checks if a username is already taken.
+     * New users are registered by adding username and password to the database.
+     * @param username - the username
+     * @param password - the password
+     * @return - true iff user is successfully registered
+     */
+    public boolean registerUser(String username, String password) {
+        try {
             String usernameCheck = "SELECT * FROM users WHERE username='" + username + "'";
             resultSet = statement.executeQuery(usernameCheck);
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 return false;
             }
-            String insertUser = "INSERT INTO users (username,password)  VALUES ('" + username + "','" + password + "')";
+            String insertUser = "INSERT INTO users (username,password) VALUES ('" + username
+                    + "','" + password + "')";
             statement.executeUpdate(insertUser);
-            String checkUser = "SELECT * FROM users WHERE username='" + username + "' && password='" + password + "'";
+            String checkUser = "SELECT * FROM users WHERE username='" + username
+                    + "' && password='" + password + "'";
             resultSet = statement.executeQuery(checkUser);
             if (resultSet.next()) {
                 return true;

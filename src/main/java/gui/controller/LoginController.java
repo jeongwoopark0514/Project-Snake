@@ -1,17 +1,16 @@
 package gui.controller;
 
-import Database.DBconnect;
+import database.DBconnect;
 import gui.AlertBox;
 import gui.MainRunner;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 
 
 public class LoginController {
@@ -37,12 +36,13 @@ public class LoginController {
     public TextField confirmpassword;
 
 
-
     public String getLoginusername() {
+
         return loginusername.getText();
     }
 
     public String getLoginpassword() {
+
         return loginpassword.getText();
     }
 
@@ -58,32 +58,42 @@ public class LoginController {
         return confirmpassword.getText();
     }
 
+    /**
+     * This method checks if the login was successful.
+     */
     public void login() {
-        try{
-        DBconnect database = new DBconnect();
-        if (database.loginData(getLoginusername(), getLoginpassword())) {
-            System.out.println("LOGIN SUCCESSFUL");
-            System.out.println();
-            AlertBox.display("You are logged in!", "Success");
-        } else {
-            AlertBox.display("Wrong username/password combination. Please try again.",
+        try {
+            DBconnect database = new DBconnect();
+            if (getLoginusername().equals("") || getLoginpassword().equals("")) {
+                System.out.println("LOGIN UNSUCCESSFUL");
+                AlertBox.display("One or multiple fields have not been filled in!",
+                        "Empty field(s)");
+            } else if (database.loginData(getLoginusername(), getLoginpassword())) {
+                System.out.println("LOGIN SUCCESSFUL");
+                AlertBox.display("You are logged in!", "Success");
+            } else {
+                AlertBox.display("Wrong username/password combination. Please try again.",
                     "Something went wrong");
-            System.out.println("LOGIN UNSUCCESSFUL");
-            System.out.println();
-        }
-        }catch (Exception e){
+                System.out.println("LOGIN UNSUCCESSFUL");
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
+    /**
+     * This method checks if the user gets registered into the database.
+     */
     public void register() {
-        try{
+        try {
             DBconnect database = new DBconnect();
             if (!getRegisterpassword().equals(getConfirmpassword())) {
                 AlertBox.display("Passwords do not match!", "Something went wrong");
                 System.out.println("REGISTRATION UNSUCCESSFUL");
-            } else if (getRegisterusername().equals("") || getRegisterpassword().equals("") || getConfirmpassword().equals("")) {
-                AlertBox.display("One or multiple fields have not been filled in!", "Empty field(s)");
+            } else if (getRegisterusername().equals("")
+                    || getRegisterpassword().equals("") || getConfirmpassword().equals("")) {
+                AlertBox.display("One or multiple fields have not been filled in!",
+                        "Empty field(s)");
                 System.out.println("REGISTRATION UNSUCCESSFUL");
             } else if (database.registerUser(getRegisterusername(), getRegisterpassword())) {
                 AlertBox.display("Successfully registered.", "Success");
@@ -92,7 +102,7 @@ public class LoginController {
                 AlertBox.display("Username already taken!", "Something went wrong");
                 System.out.println("REGISTRATION UNSUCCESSFUL");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
