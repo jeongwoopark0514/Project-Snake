@@ -75,4 +75,27 @@ public class LoginController {
             System.out.println(e);
         }
     }
+
+    public void register() {
+        try{
+            DBconnect database = new DBconnect();
+            if (!getRegisterpassword().equals(getConfirmpassword())) {
+                AlertBox.display("Passwords do not match!", "Something went wrong");
+                System.out.println("REGISTRATION UNSUCCESSFUL");
+            } else if (getRegisterusername().equals("") || getRegisterpassword().equals("") || getConfirmpassword().equals("")) {
+                AlertBox.display("One or multiple fields have not been filled in!", "Empty field(s)");
+                System.out.println("REGISTRATION UNSUCCESSFUL");
+            } else if (database.registerUser(getRegisterusername(), getRegisterpassword())) {
+                AlertBox.display("Successfully registered.", "Success");
+                System.out.println("REGISTRATION SUCCESSFUL");
+            } else {
+                AlertBox.display("Username already taken!", "Something went wrong");
+                System.out.println("REGISTRATION UNSUCCESSFUL");
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+
 }
