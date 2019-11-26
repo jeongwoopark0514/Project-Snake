@@ -30,23 +30,38 @@ public class LoginController {
     }
 
     @FXML
-    public TextField username;
-    public TextField password;
+    public TextField loginusername;
+    public TextField loginpassword;
+    public TextField registerusername;
+    public TextField registerpassword;
+    public TextField confirmpassword;
 
 
-    public String getUsername() {
-        return username.getText();
+
+    public String getLoginusername() {
+        return loginusername.getText();
     }
 
-    public String getPassword() {
-        return password.getText();
+    public String getLoginpassword() {
+        return loginpassword.getText();
     }
 
+    public String getRegisterusername() {
+        return registerusername.getText();
+    }
+
+    public String getRegisterpassword() {
+        return registerpassword.getText();
+    }
+
+    public String getConfirmpassword() {
+        return confirmpassword.getText();
+    }
 
     public void login() {
         try{
         DBconnect database = new DBconnect();
-        if (database.loginData(getUsername(), getPassword())) {
+        if (database.loginData(getLoginusername(), getLoginpassword())) {
             System.out.println("LOGIN SUCCESSFUL");
             System.out.println();
             AlertBox.display("You are logged in!", "Success");
