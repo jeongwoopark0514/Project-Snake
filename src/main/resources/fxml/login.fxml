@@ -49,7 +49,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <TextField fx:id="username" layoutX="583.0" layoutY="218.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
-      <TextField fx:id="password" layoutX="583.0" layoutY="284.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+      <TextField fx:id="loginusername" layoutX="583.0" layoutY="218.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+      <TextField fx:id="loginpassword" layoutX="583.0" layoutY="284.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
    </children>
 </AnchorPane>

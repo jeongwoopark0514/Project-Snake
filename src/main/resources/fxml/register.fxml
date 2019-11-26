@@ -35,8 +35,8 @@
                 <Image url="@../image/password_t.png" />
             </image>
         </ImageView>
-        <Button layoutX="364.0" layoutY="353.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="181.0" styleClass="button1" stylesheets="@../css/login.css" />
-        <Button layoutX="606.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#clickRegister" prefHeight="45.0" prefWidth="182.0" styleClass="button1" stylesheets="@../css/login.css">
+<!--        <Button layoutX="364.0" layoutY="353.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="181.0" styleClass="button1" stylesheets="@../css/login.css" />-->
+        <Button layoutX="606.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#register" prefHeight="45.0" prefWidth="182.0" styleClass="button1" stylesheets="@../css/login.css">
             <graphic>
                 <ImageView fitHeight="57.0" fitWidth="264.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -45,13 +45,13 @@
                 </ImageView>
             </graphic>
         </Button>
-        <TextField layoutX="592.0" layoutY="198.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
-        <TextField layoutX="593.0" layoutY="258.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+        <TextField fx:id="registerusername" layoutX="592.0" layoutY="198.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+        <TextField fx:id="registerpassword" layoutX="593.0" layoutY="258.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
       <ImageView fitHeight="54.0" fitWidth="213.0" layoutX="341.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/nickname_t.png" />
+            <Image url="@../image/password_t.png" />
          </image>
       </ImageView>
-      <TextField layoutX="593.0" layoutY="315.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+      <TextField  fx:id="confirmpassword" layoutX="593.0" layoutY="315.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
     </children>
 </AnchorPane>
