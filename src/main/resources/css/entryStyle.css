@@ -1,0 +1,14 @@
+.button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
+
+.buttonSpecial {
+    -fx-border-color: #CE9F04;
+    -fx-border-width: 0;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-background-color: #CE9F04;
+}

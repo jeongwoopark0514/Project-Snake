@@ -5,6 +5,7 @@ import gui.AlertBox;
 import gui.MainRunner;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -72,7 +73,10 @@ public class LoginController {
                         "Empty field(s)");
             } else if (database.loginData(getLoginusernametext(), getLoginpasswordtext())) {
                 System.out.println("LOGIN SUCCESSFUL");
-                AlertBox.display("You are logged in!", "Success");
+//                AlertBox.display("You are logged in!", "Success");
+                final URL url = new File("src/main/resources/fxml/entry.fxml").toURI().toURL();
+                final Parent entryParent = FXMLLoader.load(url);
+                MainRunner.stage.setScene(new Scene(entryParent, 1000, 600));
             } else {
                 AlertBox.display("Wrong username/password combination. Please try again.",
                     "Something went wrong");
@@ -109,6 +113,18 @@ public class LoginController {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    /**
+     * when you click goback button, move to login page.
+     * @throws IOException
+     */
+    public void goBackLogin() throws IOException {
+        final URL url = new File("src/main/resources/fxml/login.fxml").toURI().toURL();
+        final Parent parentRegister = FXMLLoader.load(url);
+
+        Scene loginScene = new Scene(parentRegister);
+        MainRunner.stage.setScene(loginScene);
     }
 
 
