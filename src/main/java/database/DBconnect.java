@@ -5,11 +5,14 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class DBconnect {
 
-    private static Connection connection;
-    private static Statement statement;
-    private static ResultSet resultSet;
+    @Getter @Setter private  Connection connection;
+    @Getter @Setter private  Statement statement;
+    @Getter @Setter private  ResultSet resultSet;
 
     /**
      * Method that establishes connection to the mysql database.
@@ -32,7 +35,6 @@ public class DBconnect {
     /**
      * Sample query method to get all the records in the user table.
      */
-
     public void getData() {
         try {
             String query = "SELECT * FROM users";
@@ -50,20 +52,18 @@ public class DBconnect {
     }
 
     /**
-     *  Method used to login with the following data.
-     * @param username username of a user (not null)
-     * @param password password of a user (not null)
-     * @return
+     * This method checks the database if the entered username and password are valid.
+     * @param username - the username
+     * @param password - the password
+     * @return - true iff login is successful
      */
-    public  boolean loginData(String username, String password) {
+    public boolean loginData(String username, String password) {
         try {
-            if (username != null || password != null) {
-                String checkUser = "SELECT * FROM users WHERE username='"
-                    + username + "' && password='" + password + "'";
-                resultSet = statement.executeQuery(checkUser);
-                if (resultSet.next()) {
-                    return true;
-                }
+            String checkUser = "SELECT * FROM users WHERE username='" + username
+                    + "' && password='" + password + "'";
+            resultSet = statement.executeQuery(checkUser);
+            if (resultSet.next()) {
+                return true;
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -72,10 +72,11 @@ public class DBconnect {
     }
 
     /**
-     * Register a user with the following parameters into database.
-     * @param username username of a user.
-     * @param password password of a user.
-     * @return boolean value.
+     * This method checks if a username is already taken.
+     * New users are registered by adding username and password to the database.
+     * @param username - the username
+     * @param password - the password
+     * @return - true iff user is successfully registered
      */
     public boolean registerUser(String username, String password) {
         try {
@@ -84,11 +85,11 @@ public class DBconnect {
             if (resultSet.next()) {
                 return false;
             }
-            String insertUser = "INSERT INTO users (username,password)"
-                + "  VALUES ('" + username + "','" + password + "')";
+            String insertUser = "INSERT INTO users (username,password) VALUES ('" + username
+                    + "','" + password + "')";
             statement.executeUpdate(insertUser);
-            String checkUser = "SELECT * FROM users WHERE username='"
-                + username + "' && password='" + password + "'";
+            String checkUser = "SELECT * FROM users WHERE username='" + username
+                    + "' && password='" + password + "'";
             resultSet = statement.executeQuery(checkUser);
             if (resultSet.next()) {
                 return true;
