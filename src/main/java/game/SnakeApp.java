@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 import javafx.application.Application;
 import javafx.scene.Group;
@@ -7,10 +7,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
-import static Game.Directions.LEFT;
-import static Game.GameSettings.BACKGROUND_COLOR;
-import static Game.GameSettings.HEIGHT;
-import static Game.GameSettings.WIDTH;
+import static game.Directions.DOWN;
+import static game.GameSettings.BACKGROUND_COLOR;
+import static game.GameSettings.HEIGHT;
+import static game.GameSettings.WIDTH;
 
 public class SnakeApp extends Application {
     public static void main(String[] args) {
@@ -20,20 +20,20 @@ public class SnakeApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Group root = new Group();
-        Scene s = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
+        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
+
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         root.getChildren().add(canvas);
 
-        primaryStage.setScene(s);
+        primaryStage.setScene(scene);
         primaryStage.setTitle("Snake");
         primaryStage.show();
 
-        Snake snake = new Snake(new Point(5, 5), LEFT);
-        Painter.paintSnake(gc, snake);
+        Game game = new Game(scene, gc, canvas, new Snake(new Point(10, 10), DOWN));
 
-        Painter.paintFruit(gc, new Point(8, 3));
+        game.start();
     }
 }

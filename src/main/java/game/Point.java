@@ -1,25 +1,34 @@
-package Game;
+package game;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * A point that has an x and y value.
+ * Includes some operations on points such as translate.
+ */
 @EqualsAndHashCode
 @ToString
-/**
- * Defines a single point on the grid.
- * Each point has an x and y value
- */
 public class Point {
-    @Getter @Setter private int x;
-    @Getter @Setter private int y;
+    @Getter
+    @Setter
+    private int x;
+    @Getter
+    @Setter
+    private int y;
 
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
+    /**
+     * Changes the coordinate of this point.
+     * @param dx Change in x.
+     * @param dy Change in y.
+     */
     public void translate(int dx, int dy) {
         this.x += dx;
         this.y += dy;

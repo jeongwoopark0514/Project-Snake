@@ -1,12 +1,12 @@
-package Game;
+package game;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static Game.Directions.DOWN;
-import static Game.Directions.LEFT;
-import static Game.Directions.RIGHT;
-import static Game.Directions.UP;
+import static game.Directions.DOWN;
+import static game.Directions.LEFT;
+import static game.Directions.RIGHT;
+import static game.Directions.UP;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SnakeTest {
