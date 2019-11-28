@@ -4,7 +4,7 @@ plugins {
     id 'java'
 //    id 'eclipse' // optional (to generate Eclipse project files)
 //    id 'idea' // optional (to generate IntelliJ IDEA project files)
-
+    id 'application'
     // Test coverage
     id 'jacoco'
 
@@ -38,6 +38,9 @@ test {
 
     jacoco {
         enabled = true
+        excludes = [
+                'gui.MainRunner.java'
+        ]
     }
 
     finalizedBy jacocoTestReport
@@ -46,7 +49,10 @@ test {
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
 }
+
 
 jacocoTestCoverageVerification {
     //To exclude: add "classname.*" (class) or "classname.methodname(parameters with types)" (methods) to the excludes arrays
@@ -59,7 +65,15 @@ jacocoTestCoverageVerification {
                 minimum = 0.8
             }
             excludes = [
-                    'Main.*'
+                'HelloWorld.HelloWorld()',
+                'HelloWorld.main(java.lang.String[])',
+                'Student.hashCode()',
+                    'Main.Main()',
+                'Main.main(java.lang.String[])',
+                'Main.start(javafx.stage.Stage)',
+                'gui.controller.LoginController.clickRegister()',
+                    'gui.controller.LoginController.LoginController()',
+                'gui.MainRunner/**'
             ]
         }
         rule {
@@ -70,9 +84,18 @@ jacocoTestCoverageVerification {
                 minimum = 0.7
             }
             excludes = [
-                    'Main.*'
+                    'HelloWorld.HelloWorld()',
+                'HelloWorld.main(java.lang.String[])',
+                'Student.hashCode()',
+                    'Main.Main()',
+                'Main.main(java.lang.String[])',
+                'Main.start(javafx.stage.Stage)',
+                'gui.controller.LoginController.clickRegister()',
+                    'gui.controller.LoginController.LoginController()',
+                'gui.MainRunner/**'
             ]
         }
+
     }
 }
 
@@ -111,3 +134,5 @@ javafx {
     version = "12"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
+
+mainClassName = 'gui.MainRunner'
