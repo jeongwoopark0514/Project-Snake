@@ -13,27 +13,16 @@ import javafx.scene.paint.Color;
  */
 public class Painter {
     /**
-     * Specific method to draw a snake.
+     * General method to draw something on the canvas.
      *
      * @param gc    GraphicsContext
-     * @param snake Snake
+     * @param point Coordinate
+     * @param fill  Color to fill with
      */
-    public static void paintSnake(GraphicsContext gc, Snake snake) {
-        for (Point point : snake.getBody()) {
-            paint(gc, point, SNAKE_COLOR);
-        }
-    }
-
-    /**
-     * Calls unpaint on all points in the canvas that represent that snake.
-     *
-     * @param gc    GraphicsContext
-     * @param snake Snake
-     */
-    public static void unpaintSnake(GraphicsContext gc, Snake snake) {
-        for (Point point : snake.getBody()) {
-            unpaint(gc, point);
-        }
+    private static void paint(GraphicsContext gc, Point point, Color fill) {
+        // paint the cell
+        gc.setFill(fill);
+        gc.fillRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
 
     /**
@@ -47,12 +36,37 @@ public class Painter {
     }
 
     /**
+     * Specific method to draw a snake.
+     *
+     * @param gc    GraphicsContext
+     * @param snake Snake
+     */
+    public static void paintSnake(GraphicsContext gc, Snake snake) {
+        Point point = snake.getBody().get(0);
+        paint(gc, point, SNAKE_COLOR);
+    }
+
+    /**
+     * Calls unpaint on all points in the canvas that represent that snake.
+     *
+     * @param gc    GraphicsContext
+     * @param snake Snake
+     */
+    public static void unpaintSnake(GraphicsContext gc, Snake snake) {
+        Point point = snake.getBody().get(0);
+        unpaint(gc, point);
+    }
+
+    /**
      * Specific method to draw a piece of fruit.
      *
      * @param gc    GraphicsContext
      * @param point Coordinate
      */
     public static void paintFruit(GraphicsContext gc, Point point) {
+        if (point == null) {
+            return;
+        }
         paint(gc, point, FRUIT_COLOR);
     }
 
@@ -64,18 +78,5 @@ public class Painter {
      */
     private static Point wrap(Point point) {
         return new Point(0, 0);
-    }
-
-    /**
-     * General method to draw something on the canvas.
-     *
-     * @param gc    GraphicsContext
-     * @param point Coordinate
-     * @param fill  Color to fill with
-     */
-    private static void paint(GraphicsContext gc, Point point, Color fill) {
-        // paint the cell
-        gc.setFill(fill);
-        gc.fillRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
 }

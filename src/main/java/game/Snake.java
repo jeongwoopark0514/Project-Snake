@@ -36,7 +36,7 @@ public class Snake {
      *
      * @param down Enum type of direction (UP, DOWN, LEFT or RIGHT)
      */
-    public void changeDirection(Directions down) {
+    public final void changeDirection(Directions down) {
         switch (down) {
             case UP:
                 this.directionX = 0;
@@ -63,11 +63,13 @@ public class Snake {
      * Moves snake one square into current direction.
      */
     public void move() {
-        for (Point point : body) {
-            point.translate(directionX, directionY);
-        }
+        Point point = body.get(0);
+        point.translate(directionX, directionY);
     }
 
+    /**
+     * To implement.
+     */
     public void grow() {
         this.body.add(new Point(1, 1));
     }

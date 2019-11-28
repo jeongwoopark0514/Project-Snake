@@ -10,16 +10,16 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Game {
-    private final Scene scene;
-    private final GraphicsContext gc;
-    private final Canvas canvas;
-    private final Snake snake;
-    private final Painter painter;
+    private final transient Scene scene;
+    private final transient GraphicsContext gc;
+    private final transient Canvas canvas;
+    private final transient Snake snake;
+    private final transient Painter painter;
 
-    private final ScheduledExecutorService scheduler =
+    private final transient ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
 
-    ScheduledFuture<?> gameloop;
+    private transient ScheduledFuture<?> loop;
 
     /**
      * Constructor.
@@ -55,7 +55,7 @@ public class Game {
             painter.paintSnake(gc, snake);
         };
 
-        gameloop = scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
+        loop = scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
     }
 
     private void init() {

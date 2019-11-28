@@ -6,10 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PointTest {
-    private Point point;
+    private transient Point point;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         this.point = new Point(1, 1);
     }
 

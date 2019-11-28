@@ -14,7 +14,7 @@ class SnakeTest {
     private static Snake snake;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         Point start = new Point(5, 5);
         snake = new Snake(start, LEFT);
     }
