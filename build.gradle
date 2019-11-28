@@ -72,15 +72,20 @@ jacocoTestCoverageVerification {
                 'Main.main(java.lang.String[])',
                 'Main.start(javafx.stage.Stage)',
                 'gui.controller.LoginController.clickRegister()',
-                    'gui.controller.LoginController.LoginController()',
-                'gui.MainRunner/**'
+                'gui.controller.LoginController.LoginController()',
+                'gui.MainRunner/**',
                 'Main.start(javafx.stage.Stage)',
                 'game.GameSettings.*',
                 'game.SnakeApp.*',
                 'game.Game.*',
                 'game.Painter.*',
                 'game.Point.*',
-                'game.Snake.*'
+                'game.Snake.*',
+                'database.DBconnect.*',
+                'gui.controller.LoginController.*',
+                'gui.controller.EntryController.*',
+                'gui.AlertBox.*',
+                'gui.MainRunner.*'
             ]
         }
         rule {
@@ -91,22 +96,27 @@ jacocoTestCoverageVerification {
                 minimum = 0.7
             }
             excludes = [
-                'HelloWorld.HelloWorld()',
-                'HelloWorld.main(java.lang.String[])',
-                'Student.hashCode()',
-                'Main.Main()',
-                'Main.main(java.lang.String[])',
-                'Main.start(javafx.stage.Stage)',
-                'gui.controller.LoginController.clickRegister()',
+                    'HelloWorld.HelloWorld()',
+                    'HelloWorld.main(java.lang.String[])',
+                    'Student.hashCode()',
+                    'Main.Main()',
+                    'Main.main(java.lang.String[])',
+                    'Main.start(javafx.stage.Stage)',
+                    'gui.controller.LoginController.clickRegister()',
                     'gui.controller.LoginController.LoginController()',
-                'gui.MainRunner/**',
-                'Main.start(javafx.stage.Stage)',
-                'game.GameSettings.*',
-                'game.SnakeApp.*',
-                'game.Game.*',
-                'game.Painter.*',
-                'game.Point.*',
-                'game.Snake.*'
+                    'gui.MainRunner/**',
+                    'Main.start(javafx.stage.Stage)',
+                    'game.GameSettings.*',
+                    'game.SnakeApp.*',
+                    'game.Game.*',
+                    'game.Painter.*',
+                    'game.Point.*',
+                    'game.Snake.*',
+                    'database.DBconnect.*',
+                    'gui.controller.LoginController.*',
+                    'gui.controller.EntryController.*',
+                    'gui.AlertBox.*',
+                    'gui.MainRunner.*'
             ]
         }
 
