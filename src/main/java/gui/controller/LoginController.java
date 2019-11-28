@@ -73,7 +73,6 @@ public class LoginController {
                         "Empty field(s)");
             } else if (database.loginData(getLoginusernametext(), getLoginpasswordtext())) {
                 System.out.println("LOGIN SUCCESSFUL");
-//                AlertBox.display("You are logged in!", "Success");
                 final URL url = new File("src/main/resources/fxml/entry.fxml").toURI().toURL();
                 final Parent entryParent = FXMLLoader.load(url);
                 MainRunner.stage.setScene(new Scene(entryParent, 1000, 600));
@@ -117,7 +116,7 @@ public class LoginController {
 
     /**
      * when you click goback button, move to login page.
-     * @throws IOException
+     * @throws IOException IOexception thrown for null file.
      */
     public void goBackLogin() throws IOException {
         final URL url = new File("src/main/resources/fxml/login.fxml").toURI().toURL();

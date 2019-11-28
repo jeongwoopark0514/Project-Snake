@@ -15,7 +15,7 @@
             <Image url="@../image/entryBackground.png" />
          </image>
       </ImageView>
-      <Button layoutX="305.0" layoutY="300.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="415.0" stylesheets="@../css/entryStyle.css">
+      <Button layoutX="305.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#startGame" prefHeight="71.0" prefWidth="415.0" stylesheets="@../css/entryStyle.css">
          <effect>
             <DropShadow />
          </effect>
