@@ -23,10 +23,11 @@ public class Game {
 
     /**
      * Constructor.
-     * @param scene Scene
-     * @param gc GraphicalContext
+     *
+     * @param scene  Scene
+     * @param gc     GraphicalContext
      * @param canvas Canvas
-     * @param snake Snake
+     * @param snake  Snake
      */
     public Game(Scene scene, GraphicsContext gc, Canvas canvas, Snake snake) {
         this.scene = scene;
@@ -42,11 +43,9 @@ public class Game {
     }
 
     public void stop() {
-
     }
 
     public void pauze() {
-
     }
 
     private void gameLoop() {

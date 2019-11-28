@@ -62,9 +62,15 @@ jacocoTestCoverageVerification {
                 'HelloWorld.HelloWorld()',
                 'HelloWorld.main(java.lang.String[])',
                 'Student.hashCode()',
-                    'Main.Main()',
+                'Main.Main()',
                 'Main.main(java.lang.String[])',
-                'Main.start(javafx.stage.Stage)'
+                'Main.start(javafx.stage.Stage)',
+                'GameSettings.*',
+                'SnakeApp.*',
+                'Game.*',
+                'Painter.*',
+                'Point.*',
+                    'Snake.*'
             ]
         }
     }

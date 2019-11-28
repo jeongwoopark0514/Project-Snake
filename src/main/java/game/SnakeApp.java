@@ -1,16 +1,16 @@
 package game;
 
+import static game.Directions.DOWN;
+import static game.GameSettings.BACKGROUND_COLOR;
+import static game.GameSettings.HEIGHT;
+import static game.GameSettings.WIDTH;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
-
-import static game.Directions.DOWN;
-import static game.GameSettings.BACKGROUND_COLOR;
-import static game.GameSettings.HEIGHT;
-import static game.GameSettings.WIDTH;
 
 public class SnakeApp extends Application {
     public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class SnakeApp extends Application {
 
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        final GraphicsContext gc = canvas.getGraphicsContext2D();
 
         root.getChildren().add(canvas);
 

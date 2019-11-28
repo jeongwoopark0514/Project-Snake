@@ -1,10 +1,9 @@
 package game;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.LinkedList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Snake.
@@ -38,7 +37,7 @@ public class Snake {
      * @param down Enum type of direction (UP, DOWN, LEFT or RIGHT)
      */
     public void changeDirection(Directions down) {
-        switch(down) {
+        switch (down) {
             case UP:
                 this.directionX = 0;
                 this.directionY = -1;
@@ -54,6 +53,8 @@ public class Snake {
             case RIGHT:
                 this.directionX = 1;
                 this.directionY = 0;
+                break;
+            default:
                 break;
         }
     }

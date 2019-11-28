@@ -14,9 +14,11 @@ import lombok.ToString;
 public class Point {
     @Getter
     @Setter
+    @SuppressWarnings("checkstyle:MemberName")
     private int x;
     @Getter
     @Setter
+    @SuppressWarnings("checkstyle:MemberName")
     private int y;
 
     public Point(int x, int y) {
