@@ -5,12 +5,12 @@ import gui.AlertBox;
 import gui.MainRunner;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,10 +33,10 @@ public class LoginController {
 
     @FXML
     @Getter @Setter public TextField loginusername;
-    @Getter @Setter public TextField loginpassword;
+    @Getter @Setter public PasswordField loginpassword;
     @Getter @Setter public TextField registerusername;
-    @Getter @Setter public TextField registerpassword;
-    @Getter @Setter public TextField confirmpassword;
+    @Getter @Setter public PasswordField registerpassword;
+    @Getter @Setter public PasswordField confirmpassword;
 
     public String getLoginusernametext() {
 
