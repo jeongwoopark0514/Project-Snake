@@ -35,7 +35,7 @@ public class DBconnect {
     /**
      * Sample query method to get all the records in the user table.
      */
-    public void getData() {
+    public ResultSet getData() {
         try {
             String query = "SELECT * FROM users";
             resultSet = statement.executeQuery(query);
@@ -49,6 +49,8 @@ public class DBconnect {
         } catch (Exception exception) {
             System.out.println(exception);
         }
+
+        return resultSet;
     }
 
     /**
