@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import gui.controller.HashPassword;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -59,8 +60,9 @@ public class DBconnect {
      */
     public boolean loginData(String username, String password) {
         try {
+            String hashedPassword = HashPassword.hashPassword(password);
             String checkUser = "SELECT * FROM users WHERE username='" + username
-                    + "' && password='" + password + "'";
+                    + "' && password='" + hashedPassword + "'";
             resultSet = statement.executeQuery(checkUser);
             if (resultSet.next()) {
                 return true;
@@ -85,11 +87,12 @@ public class DBconnect {
             if (resultSet.next()) {
                 return false;
             }
+            String hashedPassword = HashPassword.hashPassword(password);
             String insertUser = "INSERT INTO users (username,password) VALUES ('" + username
-                    + "','" + password + "')";
+                    + "','" + hashedPassword + "')";
             statement.executeUpdate(insertUser);
             String checkUser = "SELECT * FROM users WHERE username='" + username
-                    + "' && password='" + password + "'";
+                    + "' && password='" + hashedPassword + "'";
             resultSet = statement.executeQuery(checkUser);
             if (resultSet.next()) {
                 return true;

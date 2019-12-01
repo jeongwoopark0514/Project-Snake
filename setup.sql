@@ -7,5 +7,5 @@ drop table if exists users;
 create table users
 (
   username varchar(20) not null primary key,
-  password varchar(20) not null
+  password varchar(50) not null
 );
