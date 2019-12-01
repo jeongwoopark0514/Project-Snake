@@ -1,25 +1,29 @@
 package database;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 public class DBconnectTest {
 
-    private DBconnect dbconnect;
+    private transient DBconnect dbconnect;
     @Mock
-    private Connection connection;
+    private transient Connection connection;
     @Mock
-    private Statement statement;
+    private transient Statement statement;
     @Mock
-    private ResultSet resultSet;
+    private transient ResultSet resultSet;
+
+    private transient String defaultUser;
+    private transient String defaultPassword;
+    private transient String checkUser;
 
     @BeforeEach
     void setUp() throws SQLException {
@@ -30,6 +34,10 @@ public class DBconnectTest {
         dbconnect.setConnection(connection);
         dbconnect.setStatement(statement);
         dbconnect.setResultSet(resultSet);
+        defaultUser = "username";
+        defaultPassword = "password";
+        checkUser = "SELECT * FROM users WHERE username='" + defaultUser
+                + "' && password='" + defaultPassword + "'";
     }
 
     @Test
@@ -41,31 +49,22 @@ public class DBconnectTest {
     void getDataTest() throws SQLException {
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
 
-        String username = "username";
-        String password = "password";
-
-        Mockito.when(resultSet.getString("username")).thenReturn(username);
-        Mockito.when(resultSet.getString("password")).thenReturn(password);
+        Mockito.when(resultSet.getString(defaultUser)).thenReturn(defaultUser);
+        Mockito.when(resultSet.getString(defaultPassword)).thenReturn(defaultPassword);
         Mockito.when(statement.executeQuery("SELECT * FROM users")).thenReturn(resultSet);
 
-        ResultSet re = dbconnect.getData();
-        Assertions.assertEquals(re, resultSet);
+        Assertions.assertEquals(dbconnect.getData(), resultSet);
     }
 
     @Test
     void loginDataTestTrue() throws SQLException {
-        String username = "username";
-        String password = "password";
 
-        String checkUser = "SELECT * FROM users WHERE username='" + username
-                + "' && password='" + password + "'";
-
-        Mockito.when(resultSet.getString("username")).thenReturn(username);
-        Mockito.when(resultSet.getString("password")).thenReturn(password);
+        Mockito.when(resultSet.getString(defaultUser)).thenReturn(defaultUser);
+        Mockito.when(resultSet.getString(defaultPassword)).thenReturn(defaultPassword);
         Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
         Mockito.when(resultSet.next()).thenReturn(true);
 
-        Assertions.assertTrue(dbconnect.loginData(username,password));
+        Assertions.assertTrue(dbconnect.loginData(defaultUser,defaultPassword));
     }
 
     @Test
@@ -73,35 +72,28 @@ public class DBconnectTest {
         String username = "newuser";
         String password = "newpassword";
 
-        String checkUser = "SELECT * FROM users WHERE username='" + "username"
-                + "' && password='" + "password" + "'";
-
-        Mockito.when(resultSet.getString("username")).thenReturn(username);
-        Mockito.when(resultSet.getString("password")).thenReturn(password);
+        Mockito.when(resultSet.getString(defaultUser)).thenReturn(username);
+        Mockito.when(resultSet.getString(defaultPassword)).thenReturn(password);
         Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
         Mockito.when(resultSet.next()).thenReturn(false);
 
-        Assertions.assertFalse(dbconnect.loginData("username","password"));
+        Assertions.assertFalse(dbconnect.loginData(defaultUser,defaultPassword));
     }
 
     @Test
     void registerUserTest() throws SQLException {
-        String username = "username";
-        String password = "password";
 
-        String usernameCheck = "SELECT * FROM users WHERE username='" + username + "'";
-        String checkUser = "SELECT * FROM users WHERE username='" + username
-                + "' && password='" + password + "'";
-        String insertUser = "INSERT INTO users (username,password) VALUES ('" + username
-                + "','" + password + "')";
+        String usernameCheck = "SELECT * FROM users WHERE username='" + defaultUser + "'";
+        String insertUser = "INSERT INTO users (username,password) VALUES ('" + defaultUser
+                + "','" + defaultPassword + "')";
 
         Mockito.when(statement.executeUpdate(insertUser)).thenReturn(0);
         Mockito.when(resultSet.next()).thenReturn(false).thenReturn(true);
         Mockito.when(statement.executeQuery(usernameCheck)).thenReturn(resultSet);
         Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
 
-        Assertions.assertTrue(dbconnect.registerUser(username,password));
-        Assertions.assertFalse(dbconnect.registerUser(username,password));
+        Assertions.assertTrue(dbconnect.registerUser(defaultUser,defaultPassword));
+        Assertions.assertFalse(dbconnect.registerUser(defaultUser,defaultPassword));
     }
 
 }
