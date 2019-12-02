@@ -57,9 +57,11 @@ public class DBconnect {
      */
     public boolean loginData(String username, String password) {
         try {
-            String checkUser = "SELECT * FROM users WHERE username='" + username
-                    + "' && password='" + password + "'";
-            resultSet = statement.executeQuery(checkUser);
+            String checkUser = "SELECT * FROM users WHERE username = ? AND password = ?";
+            preparedStatement = connection.prepareStatement(checkUser);
+            preparedStatement.setString(1,username);
+            preparedStatement.setString(2,password);
+            resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
             }
