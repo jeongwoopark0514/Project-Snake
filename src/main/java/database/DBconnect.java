@@ -1,18 +1,16 @@
 package database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 import lombok.Getter;
 import lombok.Setter;
 
 public class DBconnect {
 
-    @Getter @Setter private  Connection connection;
-    @Getter @Setter private  Statement statement;
-    @Getter @Setter private  ResultSet resultSet;
+    @Getter @Setter private Connection connection;
+    @Getter @Setter private Statement statement;
+    @Getter @Setter private ResultSet resultSet;
+    @Getter @Setter private PreparedStatement preparedStatement;
 
     /**
      * Method that establishes connection to the mysql database.
