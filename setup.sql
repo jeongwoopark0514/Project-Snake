@@ -9,3 +9,5 @@ create table users
   username varchar(20) not null primary key,
   password varchar(20) not null
 );
+
+-- change

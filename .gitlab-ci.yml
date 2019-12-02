@@ -72,5 +72,6 @@ deploy:
   services:
     - mysql:latest
   script:
-    - mysql --host=projects-db.ewi.tudelft.nl --user=pu_Snake1 --password=tHWLSWJqg57E projects_Snake1 < "setup.sql"
+    - echo "test"
+#    - mysql --host=projects-db.ewi.tudelft.nl --user=pu_Snake1 --password=tHWLSWJqg57E projects_Snake1 < "setup.sql"
 
