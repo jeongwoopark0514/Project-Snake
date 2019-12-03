@@ -1,6 +1,6 @@
 package database;
 
-import gui.controller.HashPassword;
+import gui.controller.PasswordHash;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +10,7 @@ import java.sql.Statement;
 
 import lombok.Getter;
 import lombok.Setter;
+
 
 
 
@@ -65,14 +66,13 @@ public class DBconnect {
      */
     public boolean loginData(String username, String password) {
         try {
-            String checkUser = "SELECT * FROM users WHERE username = ? AND password = ?";
+            String checkUser = "SELECT password FROM users WHERE username = ?";
             preparedStatement = connection.prepareStatement(checkUser);
-            HashPassword hashPassword = new HashPassword(password);
-            String hashed = hashPassword.hashPassword();
             preparedStatement.setString(1,username);
-            preparedStatement.setString(2,hashed);
             resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            resultSet.first();
+            PasswordHash phash = new PasswordHash(password);
+            if (phash.validatePassword(resultSet.getString("password"))) {
                 return true;
             }
         } catch (Exception e) {
@@ -97,16 +97,16 @@ public class DBconnect {
             if (resultSet.next()) {
                 return false;
             }
-            HashPassword hashPassword = new HashPassword(password);
-            String hashed = hashPassword.hashPassword();
 
+            PasswordHash phash = new PasswordHash(password);
+            String hashed = phash.createHash();
             String insertUser = "INSERT INTO users (username,password) VALUES (?,?)";
             preparedStatement = connection.prepareStatement(insertUser);
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,hashed);
             preparedStatement.executeUpdate();
 
-            if (loginData(username,password)) {
+            if (phash.validatePassword(hashed)) {
                 return true;
             }
         } catch (Exception e) {
