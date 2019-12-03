@@ -45,14 +45,14 @@
                 </ImageView>
             </graphic>
         </Button>
-        <TextField fx:id="registerusername" layoutX="688.0" layoutY="198.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
-        <TextField fx:id="registerpassword" layoutX="688.0" layoutY="258.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+        <TextField fx:id="registerUsername" layoutX="688.0" layoutY="198.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+        <TextField fx:id="registerPassword" layoutX="688.0" layoutY="258.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
       <ImageView fitHeight="34.0" fitWidth="284.0" layoutX="349.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/confirm_t.png" />
          </image>
       </ImageView>
-      <TextField fx:id="confirmpassword" layoutX="688.0" layoutY="315.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+      <TextField fx:id="confirmPassword" layoutX="688.0" layoutY="315.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
       <Button layoutX="349.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#goBackLogin" stylesheets="@../css/entryStyle.css">
          <graphic>
             <ImageView fitHeight="41.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true">
