@@ -94,12 +94,7 @@ public class DBconnect {
             preparedStatement.setString(2,password);
             preparedStatement.executeUpdate();
 
-            String checkUser = "SELECT * FROM users WHERE username = ? AND password = ?";
-            preparedStatement = connection.prepareStatement(checkUser);
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2,password);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            if (loginData(username,password)) {
                 return true;
             }
         } catch (Exception e) {
