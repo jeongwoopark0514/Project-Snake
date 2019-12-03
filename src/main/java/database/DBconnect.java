@@ -1,9 +1,17 @@
 package database;
 
-import java.sql.*;
+import gui.controller.HashPassword;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import lombok.Getter;
 import lombok.Setter;
+
+
 
 public class DBconnect {
 
@@ -59,8 +67,10 @@ public class DBconnect {
         try {
             String checkUser = "SELECT * FROM users WHERE username = ? AND password = ?";
             preparedStatement = connection.prepareStatement(checkUser);
+            HashPassword hashPassword = new HashPassword(password);
+            String hashed = hashPassword.hashPassword();
             preparedStatement.setString(1,username);
-            preparedStatement.setString(2,password);
+            preparedStatement.setString(2,hashed);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -87,17 +97,19 @@ public class DBconnect {
             if (resultSet.next()) {
                 return false;
             }
+            HashPassword hashPassword = new HashPassword(password);
+            String hashed = hashPassword.hashPassword();
 
             String insertUser = "INSERT INTO users (username,password) VALUES (?,?)";
             preparedStatement = connection.prepareStatement(insertUser);
             preparedStatement.setString(1,username);
-            preparedStatement.setString(2,password);
+            preparedStatement.setString(2,hashed);
             preparedStatement.executeUpdate();
 
             String checkUser = "SELECT * FROM users WHERE username = ? AND password = ?";
             preparedStatement = connection.prepareStatement(checkUser);
             preparedStatement.setString(1,username);
-            preparedStatement.setString(2,password);
+            preparedStatement.setString(2,hashed);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
