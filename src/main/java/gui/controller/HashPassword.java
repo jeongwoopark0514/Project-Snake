@@ -19,7 +19,7 @@ public class HashPassword {
      * @return hashed password.
      * @throws NoSuchAlgorithmException when MD5 is not available.
      */
-    public String hashPassword() throws NoSuchAlgorithmException {//NOPMD
+    public String hashPassword() throws NoSuchAlgorithmException { //NOPMD
         MessageDigest mdigest = MessageDigest.getInstance("MD5");
         byte[] passBytes = getPassword().getBytes();
         mdigest.update(passBytes);

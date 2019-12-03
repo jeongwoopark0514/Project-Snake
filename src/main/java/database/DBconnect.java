@@ -106,12 +106,7 @@ public class DBconnect {
             preparedStatement.setString(2,hashed);
             preparedStatement.executeUpdate();
 
-            String checkUser = "SELECT * FROM users WHERE username = ? AND password = ?";
-            preparedStatement = connection.prepareStatement(checkUser);
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2,hashed);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            if (loginData(username,password)) {
                 return true;
             }
         } catch (Exception e) {
