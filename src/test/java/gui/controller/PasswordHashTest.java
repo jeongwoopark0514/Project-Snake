@@ -19,6 +19,25 @@ class PasswordHashTest {
         assertTrue(result, "Two same passwords are recognized as the same passwords.");
     }
 
+    @Test
+    void createHashTest2() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        String originPassword = "password134343434";
+        PasswordHash phash = new PasswordHash(originPassword);
+        String generatedHash =  phash.createHash();
+        PasswordHash testHash = new PasswordHash("password");
+        boolean result = testHash.validatePassword(generatedHash);
+        assertFalse(result, "Two same passwords are not recognized as the same passwords.");
+    }
+
+    @Test
+    void createHashTest3() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        String originPassword = "testing";
+        PasswordHash phash = new PasswordHash(originPassword);
+        String generatedHash =  phash.createHash();
+        PasswordHash testHash = new PasswordHash("testing12343434343434");
+        boolean result = testHash.validatePassword(generatedHash);
+        assertFalse(result, "Two same passwords are not recognized as the same passwords.");
+    }
 
     @Test
     void validatePasswordifPasswordisWrong()
