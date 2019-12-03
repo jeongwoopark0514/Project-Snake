@@ -45,7 +45,7 @@
                 </ImageView>
             </graphic>
         </Button>
-        <TextField fx:id="registerusername" layoutX="688.0" layoutY="198.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
+        <TextField fx:id="registerUsername" layoutX="688.0" layoutY="198.0" prefHeight="34.0" prefWidth="192.0" stylesheets="@../css/login.css" />
       <ImageView fitHeight="34.0" fitWidth="284.0" layoutX="349.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/confirm_t.png" />
@@ -60,7 +60,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <PasswordField fx:id="registerpassword" layoutX="688.0" layoutY="256.0" prefHeight="34.0" prefWidth="192.0" />
-      <PasswordField fx:id="confirmpassword" layoutX="688.0" layoutY="312.0" prefHeight="34.0" prefWidth="192.0" />
+      <PasswordField fx:id="registerPassword" layoutX="688.0" layoutY="256.0" prefHeight="34.0" prefWidth="192.0" />
+      <PasswordField fx:id="confirmPassword" layoutX="688.0" layoutY="312.0" prefHeight="34.0" prefWidth="192.0" />
     </children>
 </AnchorPane>
