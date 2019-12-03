@@ -13,17 +13,17 @@ class PasswordHashTest {
     @Test
     void createHashTest() throws InvalidKeySpecException, NoSuchAlgorithmException {
         String originPassword = "password";
-        PasswordHash phash = new PasswordHash(originPassword);
-        String generatedHash =  phash.createHash();
-        boolean result = phash.validatePassword(generatedHash);
+        PasswordHash pwdHash = new PasswordHash(originPassword);
+        String generatedHash =  pwdHash.createHash();
+        boolean result = pwdHash.validatePassword(generatedHash);
         assertTrue(result, "Two same passwords are recognized as the same passwords.");
     }
 
     @Test
     void createHashTest2() throws InvalidKeySpecException, NoSuchAlgorithmException {
         String originPassword = "password134343434";
-        PasswordHash phash = new PasswordHash(originPassword);
-        String generatedHash =  phash.createHash();
+        PasswordHash pwdHash = new PasswordHash(originPassword);
+        String generatedHash =  pwdHash.createHash();
         PasswordHash testHash = new PasswordHash("password");
         boolean result = testHash.validatePassword(generatedHash);
         assertFalse(result, "Two same passwords are not recognized as the same passwords.");
@@ -32,8 +32,8 @@ class PasswordHashTest {
     @Test
     void createHashTest3() throws InvalidKeySpecException, NoSuchAlgorithmException {
         String originPassword = "testing";
-        PasswordHash phash = new PasswordHash(originPassword);
-        String generatedHash =  phash.createHash();
+        PasswordHash pwdHash = new PasswordHash(originPassword);
+        String generatedHash =  pwdHash.createHash();
         PasswordHash testHash = new PasswordHash("testing12343434343434");
         boolean result = testHash.validatePassword(generatedHash);
         assertFalse(result, "Two same passwords are not recognized as the same passwords.");
@@ -43,10 +43,10 @@ class PasswordHashTest {
     void validatePasswordifPasswordisWrong()
         throws InvalidKeySpecException, NoSuchAlgorithmException {
         String originPassword = "password";
-        PasswordHash phash = new PasswordHash(originPassword);
-        String generatedHash =  phash.createHash();
-        PasswordHash phash2 = new PasswordHash("password1");
-        boolean result = phash2.validatePassword(generatedHash);
+        PasswordHash pwdHash = new PasswordHash(originPassword);
+        String generatedHash =  pwdHash.createHash();
+        PasswordHash pwdHash2 = new PasswordHash("password1");
+        boolean result = pwdHash2.validatePassword(generatedHash);
         assertFalse(result, "Two same passwords are recognized as the same passwords.");
     }
 }

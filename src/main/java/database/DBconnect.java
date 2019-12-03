@@ -71,8 +71,8 @@ public class DBconnect {
             preparedStatement.setString(1,username);
             resultSet = preparedStatement.executeQuery();
             resultSet.first();
-            PasswordHash phash = new PasswordHash(password);
-            if (phash.validatePassword(resultSet.getString("password"))) {
+            PasswordHash pwdHash = new PasswordHash(password);
+            if (pwdHash.validatePassword(resultSet.getString("password"))) {
                 return true;
             }
         } catch (Exception e) {
@@ -98,15 +98,15 @@ public class DBconnect {
                 return false;
             }
 
-            PasswordHash phash = new PasswordHash(password);
-            String hashed = phash.createHash();
+            PasswordHash pwdHash = new PasswordHash(password);
+            String hashed = pwdHash.createHash();
             String insertUser = "INSERT INTO users (username,password) VALUES (?,?)";
             preparedStatement = connection.prepareStatement(insertUser);
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,hashed);
             preparedStatement.executeUpdate();
 
-            if (phash.validatePassword(hashed)) {
+            if (pwdHash.validatePassword(hashed)) {
                 return true;
             }
         } catch (Exception e) {
