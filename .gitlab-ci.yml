@@ -63,7 +63,10 @@ test:
 
 deploy:
   only:
-    - master
+    refs:
+      - master
+    changes:
+      - setup.sql
   image: mysql
   stage: deploy
   services:
