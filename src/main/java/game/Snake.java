@@ -34,10 +34,10 @@ public class Snake {
      * LEFT:    x = -1      y = 0
      * RIGHT:   x = 1       y = 0
      *
-     * @param down Enum type of direction (UP, DOWN, LEFT or RIGHT)
+     * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT)
      */
-    public final void changeDirection(Directions down) {
-        switch (down) {
+    public final void changeDirection(Directions dir) {
+        switch (dir) {
             case UP:
                 this.directionX = 0;
                 this.directionY = -1;
