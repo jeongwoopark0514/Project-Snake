@@ -64,7 +64,7 @@ public class DBconnect {
      * @param password - the password
      * @return - true iff login is successful
      */
-    public boolean loginData(String username, String password) {
+    public boolean authenticate(String username, String password) {
         try {
             String checkUser = "SELECT password FROM users WHERE username = ?";
             preparedStatement = connection.prepareStatement(checkUser);
