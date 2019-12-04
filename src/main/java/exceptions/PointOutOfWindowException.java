@@ -7,7 +7,9 @@ public class PointOutOfWindowException extends Exception {
     /**
      * Constructor.
      */
-    public PointOutOfWindowException() {}
+    public PointOutOfWindowException() {
+
+    }
 
     /**
      * Constructor supplied with a message.

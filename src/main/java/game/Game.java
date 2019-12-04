@@ -48,17 +48,17 @@ public class Game {
         gameLoop();
     }
 
-    /**
-     * TODO: TO BE IMPLEMENTED.
-     * Stops the game.
-     */
+//    /**
+//     * TODO: TO BE IMPLEMENTED.
+//     * Stops the game.
+//     */
 //    public void stop() {
 //    }
 
-    /**
-     * TODO: TO BE IMPLEMENTED.
-     * Pauzes the game.
-     */
+//    /**
+//     * TODO: TO BE IMPLEMENTED.
+//     * Pauzes the game.
+//     */
 //    public void pauze() {
 //    }
 

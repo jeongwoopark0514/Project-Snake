@@ -1,5 +1,6 @@
 package game;
 
+import exceptions.PointOutOfWindowException;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
@@ -62,10 +63,15 @@ public class Snake {
 
     /**
      * Moves snake one square into its current direction.
+     * Whenever snake is outside game screen, point is set to (0,0).
      */
     public void move() {
         Point point = body.get(0);
-        point.translate(directionX, directionY);
+        try {
+            point.translate(directionX, directionY);
+        } catch (PointOutOfWindowException e) {
+            point = new Point(0,0);
+        }
     }
 
     /**

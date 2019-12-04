@@ -28,23 +28,19 @@ public class Point {
     }
 
     /**
-     * Changes the coordinate of this point.
-     * If translated point lies outside of game window, both x and y
-     * are reset to 0.
      * TODO: Current implementation only checks whether x or y are below 0.
+     * Changes the coordinate of this point.
      *
      * @param dx Change in x.
      * @param dy Change in y.
+     * @throws PointOutOfWindowException if x < 0 or y < 0
      */
-    public void translate(int dx, int dy) {
-        try {
-            this.x += dx;
-            this.y += dy;
-            // Points should be on board.
-            if (x < 0 || y < 0) throw new PointOutOfWindowException();
-        } catch (PointOutOfWindowException e) {
-            this.x = 0;
-            this.y = 0;
+    public void translate(int dx, int dy) throws PointOutOfWindowException {
+        this.x += dx;
+        this.y += dy;
+        // Points should be on board.
+        if (x < 0 || y < 0) {
+            throw new PointOutOfWindowException();
         }
     }
 }
