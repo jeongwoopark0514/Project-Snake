@@ -77,8 +77,10 @@ jacocoTestCoverageVerification {
                 'gui.controller.LoginController.LoginController()',
                 'gui.MainRunner/**',
                 'Main.start(javafx.stage.Stage)',
-                'game.GameSettings.*',
-                'game.SnakeApp.*',
+                'game.GameSettings.*', // just constants
+                'game.SnakeApp.*', // not just at the moment (consider deleting)
+                // TODO: Figure out how to test this
+                'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
                 'database.DBconnect.*',
                 'gui.controller.LoginController.*',
                 'gui.controller.EntryController.*',
@@ -104,8 +106,10 @@ jacocoTestCoverageVerification {
                     'gui.controller.LoginController.LoginController()',
                     'gui.MainRunner/**',
                     'Main.start(javafx.stage.Stage)',
-                    'game.GameSettings.*',
-                    'game.SnakeApp.*',
+                    'game.GameSettings.*', // just constants
+                    'game.SnakeApp.*', // not just at the moment (consider deleting)
+                    // TODO: Figure out how to test this
+                    'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
                     'database.DBconnect.*',
                     'gui.controller.LoginController.*',
                     'gui.controller.EntryController.*',

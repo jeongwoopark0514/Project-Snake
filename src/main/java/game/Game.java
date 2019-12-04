@@ -7,17 +7,19 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import lombok.Getter;
 
 /**
  * A game.
  * TODO: Write a better description of this class.
  */
 public class Game {
-    private final transient Scene scene;
-    private final transient Painter painter;
-    private final transient Canvas canvas;
-    private final transient Snake snake;
+    @Getter private final transient Scene scene;
+    @Getter private final transient Painter painter;
+    @Getter private final transient Canvas canvas;
+    @Getter private final transient Snake snake;
 
+    @Getter
     private final transient ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
 
@@ -50,15 +52,15 @@ public class Game {
      * TODO: TO BE IMPLEMENTED.
      * Stops the game.
      */
-    public void stop() {
-    }
+//    public void stop() {
+//    }
 
     /**
      * TODO: TO BE IMPLEMENTED.
      * Pauzes the game.
      */
-    public void pauze() {
-    }
+//    public void pauze() {
+//    }
 
     /**
      * Defines a method move that clears current position of the snake on the canvas,

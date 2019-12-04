@@ -25,4 +25,21 @@ class PointTest {
         assertEquals(new Point(0, 0), this.point);
     }
 
+    @Test
+    void translateNegativeAndPositiveNumberTest() {
+        this.point.translate(-1, 1);
+        assertEquals(new Point(0, 2), this.point);
+    }
+
+    @Test
+    void translatePositiveAndNegativeNumbersTest() {
+        this.point.translate(1, -1);
+        assertEquals(new Point(2, 0), this.point);
+    }
+
+    @Test
+    void translatePointWhereResultIsNegativeTest() {
+        assert
+    }
+
 }
