@@ -46,6 +46,8 @@ test {
     finalizedBy jacocoTestReport
 }
 
+dependencies { testCompile "org.mockito:mockito-core:2.+" }
+
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
