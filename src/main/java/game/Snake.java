@@ -70,7 +70,8 @@ public class Snake {
         try {
             point.translate(directionX, directionY);
         } catch (PointOutOfWindowException e) {
-            point = new Point(0,0);
+            point.setX(0);
+            point.setY(0);
         }
     }
 

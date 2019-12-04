@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SnakeTest {
-    private static Snake snake;
+    private Snake snake;
 
     @BeforeEach
     void setUp() {
@@ -93,5 +93,16 @@ class SnakeTest {
         assertEquals(1, snake.getBody().size());
         snake.grow();
         assertEquals(2, snake.getBody().size());
+    }
+
+    @Test
+    void snakeMovesOutOfScreenTest() {
+        snake.changeDirection(UP);
+        // move snake out of screen
+        for (int i = 0; i < 100; i++) {
+            snake.move();
+        }
+
+        assertEquals(new Point(0, 0), snake.getHead());
     }
 }
