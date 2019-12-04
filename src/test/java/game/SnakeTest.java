@@ -94,10 +94,4 @@ class SnakeTest {
         snake.grow();
         assertEquals(2, snake.getBody().size());
     }
-
-    @Test
-    void snakeMoveRightWorksWithLongerSnake() {
-
-    }
-
 }
