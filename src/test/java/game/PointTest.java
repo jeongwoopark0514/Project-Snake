@@ -39,7 +39,6 @@ class PointTest {
 
     @Test
     void translatePointWhereResultIsNegativeTest() {
-        assert
     }
 
 }
