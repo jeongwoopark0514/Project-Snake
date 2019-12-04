@@ -7,14 +7,16 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 
+/**
+ * A game.
+ * TODO: Write a better description of this class.
+ */
 public class Game {
     private final transient Scene scene;
-    private final transient GraphicsContext gc;
+    private final transient Painter painter;
     private final transient Canvas canvas;
     private final transient Snake snake;
-    private final transient Painter painter;
 
     private final transient ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
@@ -25,44 +27,66 @@ public class Game {
      * Constructor.
      *
      * @param scene  Scene
-     * @param gc     GraphicalContext
+     * @param painter Painter
      * @param canvas Canvas
      * @param snake  Snake
      */
-    public Game(Scene scene, GraphicsContext gc, Canvas canvas, Snake snake) {
+    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake) {
         this.scene = scene;
-        this.gc = gc;
         this.canvas = canvas;
         this.snake = snake;
-        this.painter = new Painter();
+        this.painter = painter;
         init();
     }
 
+    /**
+     * Starts the game.
+     */
     public void start() {
         gameLoop();
     }
 
+    /**
+     * TODO: TO BE IMPLEMENTED.
+     * Stops the game.
+     */
     public void stop() {
     }
 
+    /**
+     * TODO: TO BE IMPLEMENTED.
+     * Pauzes the game.
+     */
     public void pauze() {
     }
 
+    /**
+     * Defines a method move that clears current position of the snake on the canvas,
+     * moves the snake and than paints the new position of the snake.
+     * Move is scheduled to execute every 100 milliseconds.
+     */
     private void gameLoop() {
         Runnable move = () -> {
-            painter.unpaintSnake(gc, snake);
+            painter.unpaintSnake(snake);
             snake.move();
-            painter.paintSnake(gc, snake);
+            painter.paintSnake(snake);
         };
 
         loop = scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
     }
 
+    /**
+     * Initializes the game by setting the on-key-pressed listeners (for arrow buttons) and
+     * sets focus on canvas.
+     */
     private void init() {
         setOnKeyPressedListener();
         canvas.requestFocus();
     }
 
+    /**
+     * Adds event listeners for arrow keys.
+     */
     private void setOnKeyPressedListener() {
         canvas.setOnKeyPressed(e -> {
             switch (e.getCode()) {

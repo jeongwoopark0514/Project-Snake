@@ -7,6 +7,7 @@ import lombok.Setter;
 
 /**
  * Snake.
+ * TODO: Write a better description of this class.
  */
 public class Snake {
     @Getter private List<Point> body = new LinkedList<>();
@@ -17,8 +18,8 @@ public class Snake {
     /**
      * Constructor.
      *
-     * @param start Coordinate to initialize the snake with.
-     * @param direction Direction to initialize the snake with.
+     * @param start Initial coordinate of the snake.
+     * @param direction Initial direction of the snake.
      */
     public Snake(Point start, Directions direction) {
         this.body.add(start);
@@ -60,7 +61,7 @@ public class Snake {
     }
 
     /**
-     * Moves snake one square into current direction.
+     * Moves snake one square into its current direction.
      */
     public void move() {
         Point point = body.get(0);
@@ -68,7 +69,7 @@ public class Snake {
     }
 
     /**
-     * To implement.
+     * TODO: TO BE IMPLEMENTED.
      */
     public void grow() {
         this.body.add(new Point(1, 1));
