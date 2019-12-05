@@ -1,20 +1,12 @@
 package gui.controller;
 
 import database.DBconnect;
-import gui.AlertBox;
 import gui.Gui;
-import gui.MainRunner;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import lombok.Getter;
-import lombok.Setter;
+
+import java.io.IOException;
 
 
 public class LoginController {
@@ -23,57 +15,32 @@ public class LoginController {
      * @throws IOException IOexception thrown for null file.
      */
     public void clickRegister() throws IOException {
-        final URL url = new File("src/main/resources/fxml/register.fxml").toURI().toURL();
-        final Parent parentRegister = FXMLLoader.load(url);
-
-        Scene registerScene = new Scene(parentRegister);
-        MainRunner.stage.setScene(registerScene);
+        gui.switchScene("src/main/resources/fxml/register.fxml");
     }
 
     @FXML
-    @Getter @Setter public TextField loginUsername;
-    @Getter @Setter public PasswordField loginPassword;
-    @Getter @Setter public TextField registerUsername;
-    @Getter @Setter public PasswordField registerPassword;
-    @Getter @Setter public PasswordField confirmPassword;
+    public transient TextField loginUsername;
+    public transient PasswordField loginPassword;
+    public transient TextField registerUsername;
+    public transient PasswordField registerPassword;
+    public transient PasswordField confirmPassword;
+
     public Gui gui = new Gui();
+    private DBconnect database = new DBconnect();
 
 
-    @Getter @Setter private DBconnect database = new DBconnect();
-
-    public String getLoginUsernameText() {
-
-        return loginUsername.getText();
-    }
-
-    public String getLoginPasswordText() {
-
-        return loginPassword.getText();
-    }
-
-    public String getRegisterUsernameText() {
-        return registerUsername.getText();
-    }
-
-    public String getRegisterPasswordText() {
-        return registerPassword.getText();
-    }
-
-    public String getConfirmPasswordText() {
-        return confirmPassword.getText();
-    }
 
     /**
      * This method checks if the login was successful.
      */
     public void login() {
         try {
-            if (getLoginUsernameText().equals("") || getLoginPasswordText().equals("")) {
+            if (loginUsername.getText().equals("") || loginPassword.getText().equals("")) {
                 System.out.println("LOGIN UNSUCCESSFUL");
                 gui.showAlert("One or multiple fields have not been filled in!", "Empty field(s)");
-            } else if (database.authenticate(getLoginUsernameText(), getLoginPasswordText())) {
+            } else if (database.authenticate(loginUsername.getText(), loginPassword.getText())) {
                 System.out.println("LOGIN SUCCESSFUL");
-                gui.switchScene();
+                gui.switchScene("src/main/resources/fxml/entry.fxml");
             } else {
                 gui.showAlert("Wrong username/password combination. Please try again.",
                     "Something went wrong");
@@ -89,20 +56,20 @@ public class LoginController {
      */
     public void register() {
         try {
-            if (!getRegisterPasswordText().equals(getConfirmPasswordText())) {
-                AlertBox.display("Passwords do not match!", "Something went wrong");
+            if (!registerPassword.getText().equals(confirmPassword.getText())) {
+                gui.showAlert("Passwords do not match!", "Something went wrong");
                 System.out.println("REGISTRATION UNSUCCESSFUL");
-            } else if (getRegisterUsernameText().equals("")
-                    || getRegisterPasswordText().equals("")
-                    || getConfirmPasswordText().equals("")) {
-                AlertBox.display("One or multiple fields have not been filled in!",
+            } else if (registerUsername.getText().equals("")
+                    || registerPassword.getText().equals("")
+                    || confirmPassword.getText().equals("")) {
+                gui.showAlert("One or multiple fields have not been filled in!",
                         "Empty field(s)");
                 System.out.println("REGISTRATION UNSUCCESSFUL");
-            } else if (database.registerUser(getRegisterUsernameText(),getRegisterPasswordText())) {
-                AlertBox.display("Successfully registered.", "Success");
+            } else if (database.registerUser(registerUsername.getText(),registerPassword.getText())) {
+                gui.showAlert("Successfully registered.", "Success");
                 System.out.println("REGISTRATION SUCCESSFUL");
             } else {
-                AlertBox.display("Username already taken!", "Something went wrong");
+                gui.showAlert("Username already taken!", "Something went wrong");
                 System.out.println("REGISTRATION UNSUCCESSFUL");
             }
         } catch (Exception e) {
@@ -115,11 +82,7 @@ public class LoginController {
      * @throws IOException IOexception thrown for null file.
      */
     public void goBackLogin() throws IOException {
-        final URL url = new File("src/main/resources/fxml/login.fxml").toURI().toURL();
-        final Parent parentRegister = FXMLLoader.load(url);
-
-        Scene loginScene = new Scene(parentRegister);
-        MainRunner.stage.setScene(loginScene);
+        gui.switchScene("src/main/resources/fxml/login.fxml");
     }
 
 
