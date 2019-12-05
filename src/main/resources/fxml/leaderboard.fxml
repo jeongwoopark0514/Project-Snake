@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #7bd434;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LeaderBoardController">
+   <children>
+      <ImageView fitHeight="85.0" fitWidth="87.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@../image/transparent_logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="123.0" fitWidth="283.0" layoutX="107.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="107.0" AnchorPane.topAnchor="20.0">
+         <image>
+            <Image url="@../image/snake.png" />
+         </image>
+      </ImageView>
+      <TableView layoutX="57.0" layoutY="314.0" prefHeight="250.0" prefWidth="305.0">
+        <columns>
+          <TableColumn prefWidth="48.0" text="C1" />
+          <TableColumn prefWidth="153.0" text="C2" />
+            <TableColumn prefWidth="103.0" text="C2" />
+        </columns>
+      </TableView>
+      <TableView layoutX="543.0" layoutY="50.0" prefHeight="514.0" prefWidth="409.0">
+         <columns>
+            <TableColumn prefWidth="119.0" text="C1" />
+            <TableColumn prefWidth="135.0" text="C2" />
+            <TableColumn prefWidth="154.0" text="C3" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>
