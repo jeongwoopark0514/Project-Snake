@@ -17,8 +17,6 @@ import lombok.Setter;
 
 
 public class LoginController {
-
-
     /**
      * when you click register button, move to register page.
      * @throws IOException IOexception thrown for null file.
