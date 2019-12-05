@@ -42,12 +42,10 @@ public class LoginController {
     @Getter @Setter private DBconnect database = new DBconnect();
 
     public String getLoginUsernameText() {
-
         return loginUsername.getText();
     }
 
     public String getLoginPasswordText() {
-
         return loginPassword.getText();
     }
 
@@ -120,10 +118,7 @@ public class LoginController {
     public void goBackLogin() throws IOException {
         final URL url = new File("src/main/resources/fxml/login.fxml").toURI().toURL();
         final Parent parentRegister = FXMLLoader.load(url);
-
         Scene loginScene = new Scene(parentRegister);
         MainRunner.stage.setScene(loginScene);
     }
-
-
 }
