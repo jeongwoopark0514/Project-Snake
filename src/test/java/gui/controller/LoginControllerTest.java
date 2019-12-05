@@ -43,7 +43,7 @@ class LoginControllerTest {
         LoginController loginController = new LoginController();
         loginController.gui = gui;
         DBconnect database = Mockito.mock(DBconnect.class);
-        Mockito.when(database.authenticate("hey", "hey")).thenReturn(true);
+        Mockito.when(database.authenticate("hey", "hey", null)).thenReturn(true);
         loginController.setDatabase(database);
         Mockito.when(gui.getText(any())).thenReturn("hey");
         try {
@@ -60,7 +60,7 @@ class LoginControllerTest {
         LoginController loginController = new LoginController();
         loginController.gui = gui;
         DBconnect database = Mockito.mock(DBconnect.class);
-        Mockito.when(database.authenticate("bye", "bye")).thenReturn(false);
+        Mockito.when(database.authenticate("bye", "bye", null)).thenReturn(false);
         loginController.setDatabase(database);
         Mockito.when(gui.getText(any())).thenReturn("bye");
         try {
@@ -101,7 +101,7 @@ class LoginControllerTest {
         Mockito.when(gui.registerAndConfirm(any(), any())).thenReturn(true);
         Mockito.when(gui.threeAllCorrect(any(), any(), any())).thenReturn(false);
         Mockito.when(gui.getText(any())).thenReturn("hoi");
-        Mockito.when(database.registerUser("hoi", "hoi")).thenReturn(true);
+        Mockito.when(database.registerUser("hoi", "hoi", null)).thenReturn(true);
         loginController.setDatabase(database);
 
         Mockito.doNothing().when(gui).showAlert("congrats", "title1");
@@ -116,7 +116,7 @@ class LoginControllerTest {
         DBconnect database = Mockito.mock(DBconnect.class);
         Mockito.when(gui.registerAndConfirm(any(), any())).thenReturn(true);
         Mockito.when(gui.threeAllCorrect(any(), any(), any())).thenReturn(false);
-        Mockito.when(database.registerUser("hi", "z")).thenReturn(false);
+        Mockito.when(database.registerUser("hi", "z", null)).thenReturn(false);
         loginController.setDatabase(database);
         Mockito.doNothing().when(gui).showAlert("congrats", "title1");
         loginController.register();

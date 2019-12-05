@@ -41,7 +41,7 @@ public class LoginController {
         if (gui.loginUserOrPassEmpty(loginUsername, loginPassword)) {
             System.out.println("LOGIN UNSUCCESSFUL");
             gui.showAlert("One or multiple fields have not been filled in!", "Empty field(s)");
-        } else if (database.authenticate(gui.getText(loginUsername), gui.getText(loginPassword))) {
+        } else if (database.authenticate(gui.getText(loginUsername), gui.getText(loginPassword), null)) {
             System.out.println("LOGIN SUCCESSFUL");
             gui.switchScene("src/main/resources/fxml/entry.fxml");
         } else {
@@ -64,7 +64,7 @@ public class LoginController {
                     "Empty field(s)");
             System.out.println("REGISTRATION UNSUCCESSFUL");
         } else if (database.registerUser(gui.getText(registerUsername),
-            gui.getText(registerPassword))) {
+            gui.getText(registerPassword), null)) {
             gui.showAlert("Successfully registered.", "Success");
             System.out.println("REGISTRATION SUCCESSFUL");
         } else {
