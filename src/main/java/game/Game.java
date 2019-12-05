@@ -57,7 +57,7 @@ public class Game {
      * TODO: TO BE IMPLEMENTED.
      * Pauzes the game.
      */
-    public void pauze() {
+    public void pause() {
     }
 
     /**
