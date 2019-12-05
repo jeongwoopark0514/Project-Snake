@@ -78,7 +78,8 @@ jacocoTestCoverageVerification {
                 'gui.MainRunner/**',
                 'Main.start(javafx.stage.Stage)',
                 'game.GameSettings.*', // just constants
-                'game.SnakeApp.*', // not just at the moment (consider deleting)
+                'game.SnakeApp.*', // only used for going to game screen directly
+                'game.Painter.*', // uses final class so needs to use PowerMock
                 // TODO: Figure out how to test this
                 'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
                 // an exception class
@@ -110,7 +111,8 @@ jacocoTestCoverageVerification {
                     'gui.MainRunner/**',
                     'Main.start(javafx.stage.Stage)',
                     'game.GameSettings.*', // just constants
-                    'game.SnakeApp.*', // not just at the moment (consider deleting)
+                    'game.SnakeApp.*', // only used for going to game screen directly
+                    'game.Painter.*', // uses final class so needs to use PowerMock
                     // TODO: Figure out how to test this
                     'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
                     // an exception class
