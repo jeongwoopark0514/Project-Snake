@@ -23,10 +23,11 @@ public class DBconnect {
     public DBconnect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                "jdbc:mysql://projects-db.ewi.tudelft.nl/projects_Snake1?"
-                    + "useUnicode=true&characterEncoding=utf8&use"
-                    + "SSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC",
+            StringBuilder url = new StringBuilder();
+            url.append("jdbc:mysql://projects-db.ewi.tudelft.nl/projects_Snake1?");
+            url.append("useUnicode=true&characterEncoding=utf8&use");
+            url.append("SSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC");
+            connection = DriverManager.getConnection(url.toString(),
                 "pu_Snake1", "tHWLSWJqg57E");
             statement = connection.createStatement();
         } catch (Exception exception) {

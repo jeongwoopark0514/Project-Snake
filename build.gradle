@@ -82,7 +82,6 @@ jacocoTestCoverageVerification {
                 'game.Painter.*',
                 'game.Point.*',
                 'game.Snake.*',
-                'database.DBconnect.*',
                 'gui.controller.LoginController.*',
                 'gui.controller.EntryController.*',
                 'gui.AlertBox.*',

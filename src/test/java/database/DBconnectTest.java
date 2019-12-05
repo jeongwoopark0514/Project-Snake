@@ -18,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 
 
@@ -41,11 +42,9 @@ public class DBconnectTest {
 
     @BeforeEach
     void setUp() throws SQLException {
+        MockitoAnnotations.initMocks(this);
         System.setOut(new PrintStream(outContent));
         dbconnect = new DBconnect();
-        connection = Mockito.mock(Connection.class);
-        statement = Mockito.mock(Statement.class);
-        resultSet = Mockito.mock(ResultSet.class);
         dbconnect.setConnection(connection);
         dbconnect.setStatement(statement);
         dbconnect.setResultSet(resultSet);
