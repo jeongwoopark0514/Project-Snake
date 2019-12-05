@@ -50,6 +50,8 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    testCompile "org.testfx:testfx-core:4.0.16-alpha"
+    testCompile "org.mockito:mockito-core:2.+"
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
 }
 
@@ -82,7 +84,7 @@ jacocoTestCoverageVerification {
                 'game.Point.*',
                 'game.Snake.*',
                 'database.DBconnect.*',
-                'gui.controller.LoginController.*',
+                'gui.Gui.*',
                 'gui.controller.EntryController.*',
                 'gui.AlertBox.*',
                 'gui.MainRunner.*'
@@ -113,7 +115,7 @@ jacocoTestCoverageVerification {
                     'game.Point.*',
                     'game.Snake.*',
                     'database.DBconnect.*',
-                    'gui.controller.LoginController.*',
+                    'gui.Gui.*',
                     'gui.controller.EntryController.*',
                     'gui.AlertBox.*',
                     'gui.MainRunner.*'
