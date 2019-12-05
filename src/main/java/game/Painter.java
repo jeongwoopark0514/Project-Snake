@@ -65,6 +65,10 @@ public class Painter {
         unpaint(point);
     }
 
+    public void paintWall(Point point) {
+        paint(point, GameSettings.WALL_COLOR);
+    }
+
     /**
      * Specific method to draw a piece of fruit.
      *

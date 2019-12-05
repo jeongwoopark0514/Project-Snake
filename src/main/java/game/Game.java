@@ -2,9 +2,15 @@ package game;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import gui.MainRunner;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 
@@ -20,16 +26,15 @@ public class Game {
 
     private final transient ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
-
     private transient ScheduledFuture<?> loop;
 
     /**
      * Constructor.
      *
-     * @param scene  Scene
+     * @param scene   Scene
      * @param painter Painter
-     * @param canvas Canvas
-     * @param snake  Snake
+     * @param canvas  Canvas
+     * @param snake   Snake
      */
     public Game(Scene scene, Painter painter, Canvas canvas, Snake snake) {
         this.scene = scene;
@@ -51,6 +56,9 @@ public class Game {
      * Stops the game.
      */
     public void stop() {
+        //This is just for the prototype the actual game will not use this,
+        //therefore it needs to be suppressed.
+        System.exit(0); //NOPMD
     }
 
     /**
@@ -82,6 +90,22 @@ public class Game {
     private void init() {
         setOnKeyPressedListener();
         canvas.requestFocus();
+        paintWalls();
+    }
+
+    private void paintWalls() {
+        for (int i = 0; i < GameSettings.Y_MAX; i++) {
+            painter.paintWall(new Point(0, i));
+        }
+        for (int i = 0; i < GameSettings.X_MAX; i++) {
+            painter.paintWall(new Point(i, 0));
+        }
+        for (int i = 0; i < GameSettings.Y_MAX; i++) {
+            painter.paintWall(new Point(GameSettings.X_MAX - 1, i));
+        }
+        for (int i = 0; i < GameSettings.X_MAX; i++) {
+            painter.paintWall(new Point(i, GameSettings.Y_MAX - 1));
+        }
     }
 
     /**
