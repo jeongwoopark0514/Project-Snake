@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SnakeTest {
-    private Snake snake;
+    private transient Snake snake;
 
     @BeforeEach
     void setUp() {

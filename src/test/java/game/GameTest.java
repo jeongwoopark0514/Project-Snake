@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 class GameTest {
-    private Game game;
+    private transient Game game;
 
     @BeforeEach
     void setUp() {
