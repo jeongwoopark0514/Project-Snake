@@ -6,6 +6,7 @@ import static game.GameSettings.HEIGHT;
 import static game.GameSettings.WIDTH;
 
 import game.Game;
+import game.Painter;
 import game.Point;
 import game.Snake;
 import gui.MainRunner;
@@ -18,7 +19,8 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class EntryController {
     /**
-     * when you click start button, move to game screen.
+     * When you click start button, move to game screen.
+     *
      * @throws IOException IOexception thrown for null file.
      */
     public void startGame() throws IOException {
@@ -27,7 +29,8 @@ public class EntryController {
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
-        Game game = new Game(scene, gc, canvas, new Snake(new Point(10, 10), DOWN));
+        Painter painter = new Painter(gc);
+        Game game = new Game(scene, painter, canvas, new Snake(new Point(10, 10), DOWN));
         game.start();
         MainRunner.stage.setScene(scene);
 

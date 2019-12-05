@@ -1,18 +1,25 @@
 package database;
 
+import gui.controller.PasswordHash;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 import lombok.Getter;
 import lombok.Setter;
 
+
+
+
 public class DBconnect {
 
-    @Getter @Setter private  Connection connection;
-    @Getter @Setter private  Statement statement;
-    @Getter @Setter private  ResultSet resultSet;
+    @Getter @Setter private Connection connection;
+    @Getter @Setter private Statement statement;
+    @Getter @Setter private ResultSet resultSet;
+    @Getter @Setter private PreparedStatement preparedStatement;
 
     private transient String prefix = "Error: ";
 
@@ -62,12 +69,15 @@ public class DBconnect {
      * @param password - the password
      * @return - true iff login is successful
      */
-    public boolean loginData(String username, String password) {
+    public boolean authenticate(String username, String password) {
         try {
-            String checkUser = "SELECT * FROM users WHERE username='" + username
-                    + "' && password='" + password + "'";
-            resultSet = statement.executeQuery(checkUser);
-            if (resultSet.next()) {
+            String checkUser = "SELECT password FROM users WHERE username = ?";
+            preparedStatement = connection.prepareStatement(checkUser);
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.first();
+            PasswordHash pwdHash = new PasswordHash(password);
+            if (pwdHash.validatePassword(resultSet.getString("password"))) {
                 return true;
             }
         } catch (Exception e) {
@@ -85,18 +95,23 @@ public class DBconnect {
      */
     public boolean registerUser(String username, String password) {
         try {
-            String usernameCheck = "SELECT * FROM users WHERE username='" + username + "'";
-            resultSet = statement.executeQuery(usernameCheck);
+            String usernameCheck = "SELECT * FROM users WHERE username = ?";
+            preparedStatement = connection.prepareStatement(usernameCheck);
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return false;
             }
-            String insertUser = "INSERT INTO users (username,password) VALUES ('" + username
-                    + "','" + password + "')";
-            statement.executeUpdate(insertUser);
-            String checkUser = "SELECT * FROM users WHERE username='" + username
-                    + "' && password='" + password + "'";
-            resultSet = statement.executeQuery(checkUser);
-            if (resultSet.next()) {
+
+            PasswordHash pwdHash = new PasswordHash(password);
+            String hashed = pwdHash.createHash();
+            String insertUser = "INSERT INTO users (username,password) VALUES (?,?)";
+            preparedStatement = connection.prepareStatement(insertUser);
+            preparedStatement.setString(1,username);
+            preparedStatement.setString(2,hashed);
+            preparedStatement.executeUpdate();
+
+            if (pwdHash.validatePassword(hashed)) {
                 return true;
             }
         } catch (Exception e) {

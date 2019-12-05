@@ -5,20 +5,18 @@ import gui.AlertBox;
 import gui.MainRunner;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import lombok.Getter;
 import lombok.Setter;
 
 
 public class LoginController {
-
-
     /**
      * when you click register button, move to register page.
      * @throws IOException IOexception thrown for null file.
@@ -32,46 +30,47 @@ public class LoginController {
     }
 
     @FXML
-    @Getter @Setter public TextField loginusername;
-    @Getter @Setter public TextField loginpassword;
-    @Getter @Setter public TextField registerusername;
-    @Getter @Setter public TextField registerpassword;
-    @Getter @Setter public TextField confirmpassword;
+    @Getter @Setter public TextField loginUsername;
+    @Getter @Setter public PasswordField loginPassword;
+    @Getter @Setter public TextField registerUsername;
+    @Getter @Setter public PasswordField registerPassword;
+    @Getter @Setter public PasswordField confirmPassword;
 
-    public String getLoginusernametext() {
 
-        return loginusername.getText();
+    @Getter @Setter private DBconnect database = new DBconnect();
+
+    public String getLoginUsernameText() {
+
+        return loginUsername.getText();
     }
 
-    public String getLoginpasswordtext() {
+    public String getLoginPasswordText() {
 
-        return loginpassword.getText();
+        return loginPassword.getText();
     }
 
-    public String getRegisterusernametext() {
-        return registerusername.getText();
+    public String getRegisterUsernameText() {
+        return registerUsername.getText();
     }
 
-    public String getRegisterpasswordtext() {
-        return registerpassword.getText();
+    public String getRegisterPasswordText() {
+        return registerPassword.getText();
     }
 
-    public String getConfirmpasswordtext() {
-        return confirmpassword.getText();
+    public String getConfirmPasswordText() {
+        return confirmPassword.getText();
     }
 
     /**
      * This method checks if the login was successful.
      */
-    @SuppressWarnings("PMD")
     public void login() {
         try {
-            DBconnect database = new DBconnect();
-            if (getLoginusernametext().equals("") || getLoginpasswordtext().equals("")) {
+            if (getLoginUsernameText().equals("") || getLoginPasswordText().equals("")) {
                 System.out.println("LOGIN UNSUCCESSFUL");
                 AlertBox.display("One or multiple fields have not been filled in!",
                         "Empty field(s)");
-            } else if (database.loginData(getLoginusernametext(), getLoginpasswordtext())) {
+            } else if (database.authenticate(getLoginUsernameText(), getLoginPasswordText())) {
                 System.out.println("LOGIN SUCCESSFUL");
                 final URL url = new File("src/main/resources/fxml/entry.fxml").toURI().toURL();
                 final Parent entryParent = FXMLLoader.load(url);
@@ -89,20 +88,18 @@ public class LoginController {
     /**
      * This method checks if the user gets registered into the database.
      */
-    @SuppressWarnings("PMD")
     public void register() {
         try {
-            DBconnect database = new DBconnect();
-            if (!getRegisterpasswordtext().equals(getConfirmpasswordtext())) {
+            if (!getRegisterPasswordText().equals(getConfirmPasswordText())) {
                 AlertBox.display("Passwords do not match!", "Something went wrong");
                 System.out.println("REGISTRATION UNSUCCESSFUL");
-            } else if (getRegisterusernametext().equals("")
-                    || getRegisterpasswordtext().equals("")
-                    || getConfirmpasswordtext().equals("")) {
+            } else if (getRegisterUsernameText().equals("")
+                    || getRegisterPasswordText().equals("")
+                    || getConfirmPasswordText().equals("")) {
                 AlertBox.display("One or multiple fields have not been filled in!",
                         "Empty field(s)");
                 System.out.println("REGISTRATION UNSUCCESSFUL");
-            } else if (database.registerUser(getRegisterusernametext(),getRegisterpasswordtext())) {
+            } else if (database.registerUser(getRegisterUsernameText(),getRegisterPasswordText())) {
                 AlertBox.display("Successfully registered.", "Success");
                 System.out.println("REGISTRATION SUCCESSFUL");
             } else {

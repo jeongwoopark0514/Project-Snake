@@ -6,20 +6,31 @@ import static game.GameSettings.SNAKE_COLOR;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
  * Used for painting shapes on a canvas.
  */
 public class Painter {
+    @Getter @Setter private GraphicsContext gc;
+
+    /**
+     * Constructor.
+     * @param gc GraphicalContext for this Painter object.
+     */
+    public Painter(GraphicsContext gc) {
+        this.gc = gc;
+    }
+
     /**
      * General method to draw something on the canvas.
      *
-     * @param gc    GraphicsContext
      * @param point Coordinate
      * @param fill  Color to fill with
      */
-    private static void paint(GraphicsContext gc, Point point, Color fill) {
+    private void paint(Point point, Color fill) {
         // paint the cell
         gc.setFill(fill);
         gc.fillRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -28,55 +39,52 @@ public class Painter {
     /**
      * Removes color from point in grid at coordinate point.
      *
-     * @param gc    GraphicsContext
      * @param point Coordinate
      */
-    private static void unpaint(GraphicsContext gc, Point point) {
+    private void unpaint(Point point) {
         gc.clearRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
 
     /**
      * Specific method to draw a snake.
      *
-     * @param gc    GraphicsContext
      * @param snake Snake
      */
-    public static void paintSnake(GraphicsContext gc, Snake snake) {
+    public void paintSnake(Snake snake) {
         Point point = snake.getBody().get(0);
-        paint(gc, point, SNAKE_COLOR);
+        paint(point, SNAKE_COLOR);
     }
 
     /**
      * Calls unpaint on all points in the canvas that represent that snake.
      *
-     * @param gc    GraphicsContext
      * @param snake Snake
      */
-    public static void unpaintSnake(GraphicsContext gc, Snake snake) {
+    public void unpaintSnake(Snake snake) {
         Point point = snake.getBody().get(0);
-        unpaint(gc, point);
+        unpaint(point);
     }
 
     /**
      * Specific method to draw a piece of fruit.
      *
-     * @param gc    GraphicsContext
      * @param point Coordinate
      */
-    public static void paintFruit(GraphicsContext gc, Point point) {
+    public void paintFruit(Point point) {
         if (point == null) {
             return;
         }
-        paint(gc, point, FRUIT_COLOR);
+        paint(point, FRUIT_COLOR);
     }
 
     /**
+     * TODO: TO BE IMPLEMENTED
      * Corrects points that are outside of the dimensions of the field.
      *
      * @param point Point.
-     * @return
+     * @return A wrapped point.
      */
-    private static Point wrap(Point point) {
+    private Point wrap(Point point) {
         return new Point(0, 0);
     }
 }
