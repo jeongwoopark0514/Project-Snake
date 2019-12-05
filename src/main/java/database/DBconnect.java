@@ -20,7 +20,6 @@ public class DBconnect {
     @Getter @Setter private Statement statement;
     @Getter @Setter private ResultSet resultSet;
     @Getter @Setter private PreparedStatement preparedStatement;
-
     private transient String prefix = "Error: ";
 
     /**
@@ -69,14 +68,18 @@ public class DBconnect {
      * @param password - the password
      * @return - true iff login is successful
      */
-    public boolean authenticate(String username, String password) {
+    public boolean authenticate(String username, String password, PasswordHash pwdHash) {
+
+        if (pwdHash == null) {
+            pwdHash = new PasswordHash(password);
+        }
+
         try {
             String checkUser = "SELECT password FROM users WHERE username = ?";
             preparedStatement = connection.prepareStatement(checkUser);
             preparedStatement.setString(1,username);
             resultSet = preparedStatement.executeQuery();
             resultSet.first();
-            PasswordHash pwdHash = new PasswordHash(password);
             if (pwdHash.validatePassword(resultSet.getString("password"))) {
                 return true;
             }
@@ -93,7 +96,12 @@ public class DBconnect {
      * @param password - the password
      * @return - true iff user is successfully registered
      */
-    public boolean registerUser(String username, String password) {
+    public boolean registerUser(String username, String password, PasswordHash pwdHash) {
+
+        if (pwdHash == null) {
+            pwdHash = new PasswordHash(password);
+        }
+
         try {
             String usernameCheck = "SELECT * FROM users WHERE username = ?";
             preparedStatement = connection.prepareStatement(usernameCheck);
@@ -102,8 +110,6 @@ public class DBconnect {
             if (resultSet.next()) {
                 return false;
             }
-
-            PasswordHash pwdHash = new PasswordHash(password);
             String hashed = pwdHash.createHash();
             String insertUser = "INSERT INTO users (username,password) VALUES (?,?)";
             preparedStatement = connection.prepareStatement(insertUser);

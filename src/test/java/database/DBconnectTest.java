@@ -5,9 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import gui.controller.PasswordHash;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,27 +36,29 @@ public class DBconnectTest {
     private transient Statement statement;
     @Mock
     private transient ResultSet resultSet;
+    @Mock
+    private transient PreparedStatement preparedStatement;
+    @Mock
+    private transient PasswordHash pwdHash;
 
     private transient String defaultUser;
     private transient String defaultPassword;
-    private transient String checkUser;
 
     private transient ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private transient PrintStream originalOut = System.out;
     private transient String error = "Error";
 
     @BeforeEach
-    void setUp() throws SQLException {
+    void setUp() {
         MockitoAnnotations.initMocks(this);
         System.setOut(new PrintStream(outContent));
         dbconnect = new DBconnect();
         dbconnect.setConnection(connection);
         dbconnect.setStatement(statement);
         dbconnect.setResultSet(resultSet);
+        dbconnect.setPreparedStatement(preparedStatement);
         defaultUser = "username";
         defaultPassword = "password";
-        checkUser = "SELECT * FROM users WHERE username='" + defaultUser
-                + "' && password='" + defaultPassword + "'";
     }
 
     @AfterEach
@@ -78,7 +85,7 @@ public class DBconnectTest {
 
         Mockito.when(resultSet.getString(defaultUser)).thenReturn(defaultUser);
         Mockito.when(resultSet.getString(defaultPassword)).thenReturn(defaultPassword);
-        Mockito.when(statement.executeQuery("SELECT * FROM users")).thenReturn(resultSet);
+        Mockito.when(statement.executeQuery(Mockito.anyString())).thenReturn(resultSet);
 
         assertEquals(dbconnect.getData(), resultSet);
     }
@@ -86,73 +93,96 @@ public class DBconnectTest {
     @Test
     void loginDataError() throws SQLException {
         Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
-        dbconnect.loginData(defaultUser, defaultPassword);
+        dbconnect.authenticate(defaultUser, defaultPassword, pwdHash);
         boolean contains = outContent.toString().contains(error);
         assertTrue(contains);
     }
 
     @Test
-    void loginDataTestTrue() throws SQLException {
+    void authenticateTestTrue() throws InvalidKeySpecException,
+            NoSuchAlgorithmException, SQLException {
 
-        Mockito.when(resultSet.getString(defaultUser)).thenReturn(defaultUser);
-        Mockito.when(resultSet.getString(defaultPassword)).thenReturn(defaultPassword);
-        Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
-        Mockito.when(resultSet.next()).thenReturn(true);
-
-        assertTrue(dbconnect.loginData(defaultUser,defaultPassword));
+        Mockito.when(connection.prepareStatement(Mockito.anyString()))
+                .thenReturn(preparedStatement);
+        Mockito.when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        Mockito.when(resultSet.first()).thenReturn(true);
+        Mockito.when(resultSet.getString(Mockito.anyString())).thenReturn(defaultPassword);
+        Mockito.when(pwdHash.validatePassword(Mockito.anyString())).thenReturn(true);
+        assertTrue(dbconnect.authenticate(defaultUser,defaultPassword, pwdHash));
     }
 
     @Test
-    void loginDataTestFalse() throws SQLException {
-        String username = "newuser";
-        String password = "newpassword";
+    void authenticateTestFalse() throws InvalidKeySpecException,
+            NoSuchAlgorithmException, SQLException {
 
-        Mockito.when(resultSet.getString(defaultUser)).thenReturn(username);
-        Mockito.when(resultSet.getString(defaultPassword)).thenReturn(password);
-        Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
-        Mockito.when(resultSet.next()).thenReturn(false);
+        Mockito.when(connection.prepareStatement(Mockito.anyString()))
+                .thenReturn(preparedStatement);
+        Mockito.when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        Mockito.when(resultSet.first()).thenReturn(true);
+        Mockito.when(resultSet.getString(Mockito.anyString())).thenReturn(defaultPassword);
+        Mockito.when(pwdHash.validatePassword(Mockito.anyString())).thenReturn(false);
 
-        assertFalse(dbconnect.loginData(defaultUser,defaultPassword));
+        assertFalse(dbconnect.authenticate(defaultUser,defaultPassword, pwdHash));
+        assertFalse(dbconnect.authenticate(defaultUser,defaultPassword, null));
     }
 
     @Test
     void registerUserError() throws SQLException {
         Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
-        dbconnect.registerUser(defaultUser, defaultPassword);
+        dbconnect.registerUser(defaultUser, defaultPassword, pwdHash);
         boolean contains = outContent.toString().contains(error);
         assertTrue(contains);
     }
 
     @Test
-    void registerUserTest() throws SQLException {
+    void registerUserInvalidPasswordTest() throws InvalidKeySpecException,
+            NoSuchAlgorithmException {
 
-        String usernameCheck = "SELECT * FROM users WHERE username='" + defaultUser + "'";
-        String insertUser = "INSERT INTO users (username,password) VALUES ('" + defaultUser
-                + "','" + defaultPassword + "')";
+        Mockito.when(pwdHash.validatePassword(Mockito.anyString())).thenReturn(false);
 
-        Mockito.when(statement.executeUpdate(insertUser)).thenReturn(0);
-        Mockito.when(resultSet.next()).thenReturn(false).thenReturn(true);
-        Mockito.when(statement.executeQuery(usernameCheck)).thenReturn(resultSet);
-        Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
-
-        assertTrue(dbconnect.registerUser(defaultUser,defaultPassword));
-        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword));
+        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword, pwdHash));
+        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword, null));
     }
 
     @Test
-    void registerUserTestBothFalse() throws SQLException {
+    void registerUserAlreadyExistsTest() throws SQLException {
 
-        String usernameCheck = "SELECT * FROM users WHERE username='" + defaultUser + "'";
-        String insertUser = "INSERT INTO users (username,password) VALUES ('" + defaultUser
-                + "','" + defaultPassword + "')";
-
-        Mockito.when(statement.executeUpdate(insertUser)).thenReturn(0);
-        Mockito.when(resultSet.next()).thenReturn(false).thenReturn(false);
-        Mockito.when(statement.executeQuery(usernameCheck)).thenReturn(resultSet);
-        Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
-
-        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword));
-        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword));
+        Mockito.when(connection.prepareStatement(Mockito.anyString()))
+                .thenReturn(preparedStatement);
+        Mockito.when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        Mockito.when(resultSet.next()).thenReturn(true);
+        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword, pwdHash));
     }
 
+    @Test
+    void registerUserSuccessfulTest() throws SQLException,
+            InvalidKeySpecException, NoSuchAlgorithmException {
+
+        Mockito.when(connection.prepareStatement(Mockito.anyString()))
+                .thenReturn(preparedStatement);
+        Mockito.when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        Mockito.when(resultSet.next()).thenReturn(false);
+        Mockito.when(pwdHash.createHash()).thenReturn(defaultPassword);
+        Mockito.when(connection.prepareStatement(Mockito.anyString()))
+                .thenReturn(preparedStatement);
+        Mockito.when(pwdHash.validatePassword(Mockito.anyString())).thenReturn(true);
+
+        assertTrue(dbconnect.registerUser(defaultUser,defaultPassword, pwdHash));
+    }
+
+    @Test
+    void registerUserBadHashTest() throws SQLException,
+            InvalidKeySpecException, NoSuchAlgorithmException {
+
+        Mockito.when(connection.prepareStatement(Mockito.anyString()))
+                .thenReturn(preparedStatement);
+        Mockito.when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        Mockito.when(resultSet.next()).thenReturn(false);
+        Mockito.when(pwdHash.createHash()).thenReturn(defaultPassword);
+        Mockito.when(connection.prepareStatement(Mockito.anyString()))
+                .thenReturn(preparedStatement);
+        Mockito.when(pwdHash.validatePassword(Mockito.anyString())).thenReturn(false);
+
+        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword, pwdHash));
+    }
 }

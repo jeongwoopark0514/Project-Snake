@@ -70,7 +70,7 @@ public class LoginController {
                 System.out.println("LOGIN UNSUCCESSFUL");
                 AlertBox.display("One or multiple fields have not been filled in!",
                         "Empty field(s)");
-            } else if (database.authenticate(getLoginUsernameText(), getLoginPasswordText())) {
+            } else if (database.authenticate(getLoginUsernameText(), getLoginPasswordText(),null)) {
                 System.out.println("LOGIN SUCCESSFUL");
                 final URL url = new File("src/main/resources/fxml/entry.fxml").toURI().toURL();
                 final Parent entryParent = FXMLLoader.load(url);
@@ -99,7 +99,7 @@ public class LoginController {
                 AlertBox.display("One or multiple fields have not been filled in!",
                         "Empty field(s)");
                 System.out.println("REGISTRATION UNSUCCESSFUL");
-            } else if (database.registerUser(getRegisterUsernameText(),getRegisterPasswordText())) {
+            } else if (database.registerUser(getRegisterUsernameText(),getRegisterPasswordText(),null)) {
                 AlertBox.display("Successfully registered.", "Success");
                 System.out.println("REGISTRATION SUCCESSFUL");
             } else {
