@@ -14,10 +14,13 @@ import lombok.Setter;
  * Used for painting shapes on a canvas.
  */
 public class Painter {
-    @Getter @Setter private GraphicsContext gc;
+    @Getter
+    @Setter
+    private GraphicsContext gc;
 
     /**
      * Constructor.
+     *
      * @param gc GraphicalContext for this Painter object.
      */
     public Painter(GraphicsContext gc) {
@@ -77,14 +80,14 @@ public class Painter {
         paint(point, FRUIT_COLOR);
     }
 
-    /**
-     * TODO: TO BE IMPLEMENTED
-     * Corrects points that are outside of the dimensions of the field.
-     *
-     * @param point Point.
-     * @return A wrapped point.
-     */
-    private Point wrap(Point point) {
-        return new Point(0, 0);
-    }
+//    /**
+//     * TODO: TO BE IMPLEMENTED
+//     * Corrects points that are outside of the dimensions of the field.
+//     *
+//     * @param point Point.
+//     * @return A wrapped point.
+//     */
+//    private Point wrap(Point point) {
+//        return new Point(0, 0);
+//    }
 }
