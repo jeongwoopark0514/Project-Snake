@@ -66,6 +66,7 @@ public class DBconnect {
      * This method checks the database if the entered username and password are valid.
      * @param username - the username
      * @param password - the password
+     * @param pwdHash - the hash of the password, if it already exists
      * @return - true iff login is successful
      */
     public boolean authenticate(String username, String password, PasswordHash pwdHash) {
@@ -94,6 +95,7 @@ public class DBconnect {
      * New users are registered by adding username and password to the database.
      * @param username - the username
      * @param password - the password
+     * @param pwdHash - the hash of the password, if it already exists
      * @return - true iff user is successfully registered
      */
     public boolean registerUser(String username, String password, PasswordHash pwdHash) {
