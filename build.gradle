@@ -84,6 +84,7 @@ jacocoTestCoverageVerification {
                 'database.DBconnect.*',
                 'gui.controller.LoginController.*',
                 'gui.controller.EntryController.*',
+                'gui.controller.LeaderBoardController.*',
                 'gui.AlertBox.*',
                 'gui.MainRunner.*'
             ]
@@ -115,6 +116,7 @@ jacocoTestCoverageVerification {
                     'database.DBconnect.*',
                     'gui.controller.LoginController.*',
                     'gui.controller.EntryController.*',
+                    'gui.controller.LeaderBoardController.*',
                     'gui.AlertBox.*',
                     'gui.MainRunner.*'
             ]
