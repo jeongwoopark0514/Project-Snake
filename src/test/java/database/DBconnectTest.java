@@ -1,5 +1,10 @@
 package database;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.sql.Connection;
@@ -8,11 +13,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+
 
 public class DBconnectTest {
 
@@ -54,16 +61,8 @@ public class DBconnectTest {
     }
 
     @Test
-    void connectionErrorError() throws SQLException {
-        Mockito.when(connection.createStatement()).thenThrow(SQLException.class);
-        dbconnect.loginData(defaultUser, defaultPassword);
-        boolean contains = outContent.toString().contains(error);
-        Assertions.assertTrue(contains);
-    }
-
-    @Test
     void connectionTest() {
-        Assertions.assertNotNull(dbconnect);
+        assertNotNull(dbconnect);
     }
 
     @Test
@@ -71,7 +70,7 @@ public class DBconnectTest {
         Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
         dbconnect.getData();
         boolean contains = outContent.toString().contains(error);
-        Assertions.assertTrue(contains);
+        assertTrue(contains);
     }
 
     @Test
@@ -82,7 +81,7 @@ public class DBconnectTest {
         Mockito.when(resultSet.getString(defaultPassword)).thenReturn(defaultPassword);
         Mockito.when(statement.executeQuery("SELECT * FROM users")).thenReturn(resultSet);
 
-        Assertions.assertEquals(dbconnect.getData(), resultSet);
+        assertEquals(dbconnect.getData(), resultSet);
     }
 
     @Test
@@ -90,7 +89,7 @@ public class DBconnectTest {
         Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
         dbconnect.loginData(defaultUser, defaultPassword);
         boolean contains = outContent.toString().contains(error);
-        Assertions.assertTrue(contains);
+        assertTrue(contains);
     }
 
     @Test
@@ -101,7 +100,7 @@ public class DBconnectTest {
         Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
         Mockito.when(resultSet.next()).thenReturn(true);
 
-        Assertions.assertTrue(dbconnect.loginData(defaultUser,defaultPassword));
+        assertTrue(dbconnect.loginData(defaultUser,defaultPassword));
     }
 
     @Test
@@ -114,7 +113,7 @@ public class DBconnectTest {
         Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
         Mockito.when(resultSet.next()).thenReturn(false);
 
-        Assertions.assertFalse(dbconnect.loginData(defaultUser,defaultPassword));
+        assertFalse(dbconnect.loginData(defaultUser,defaultPassword));
     }
 
     @Test
@@ -122,7 +121,7 @@ public class DBconnectTest {
         Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
         dbconnect.registerUser(defaultUser, defaultPassword);
         boolean contains = outContent.toString().contains(error);
-        Assertions.assertTrue(contains);
+        assertTrue(contains);
     }
 
     @Test
@@ -137,8 +136,24 @@ public class DBconnectTest {
         Mockito.when(statement.executeQuery(usernameCheck)).thenReturn(resultSet);
         Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
 
-        Assertions.assertTrue(dbconnect.registerUser(defaultUser,defaultPassword));
-        Assertions.assertFalse(dbconnect.registerUser(defaultUser,defaultPassword));
+        assertTrue(dbconnect.registerUser(defaultUser,defaultPassword));
+        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword));
+    }
+
+    @Test
+    void registerUserTestBothFalse() throws SQLException {
+
+        String usernameCheck = "SELECT * FROM users WHERE username='" + defaultUser + "'";
+        String insertUser = "INSERT INTO users (username,password) VALUES ('" + defaultUser
+                + "','" + defaultPassword + "')";
+
+        Mockito.when(statement.executeUpdate(insertUser)).thenReturn(0);
+        Mockito.when(resultSet.next()).thenReturn(false).thenReturn(false);
+        Mockito.when(statement.executeQuery(usernameCheck)).thenReturn(resultSet);
+        Mockito.when(statement.executeQuery(checkUser)).thenReturn(resultSet);
+
+        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword));
+        assertFalse(dbconnect.registerUser(defaultUser,defaultPassword));
     }
 
 }
