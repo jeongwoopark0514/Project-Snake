@@ -1,10 +1,13 @@
 package database;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,8 +28,13 @@ public class DBconnectTest {
     private transient String defaultPassword;
     private transient String checkUser;
 
+    private transient ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private transient PrintStream originalOut = System.out;
+    private transient String error = "Error";
+
     @BeforeEach
     void setUp() throws SQLException {
+        System.setOut(new PrintStream(outContent));
         dbconnect = new DBconnect();
         connection = Mockito.mock(Connection.class);
         statement = Mockito.mock(Statement.class);
@@ -40,13 +48,34 @@ public class DBconnectTest {
                 + "' && password='" + defaultPassword + "'";
     }
 
+    @AfterEach
+    void cleanUp() {
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void connectionErrorError() throws SQLException {
+        Mockito.when(connection.createStatement()).thenThrow(SQLException.class);
+        dbconnect.loginData(defaultUser, defaultPassword);
+        boolean contains = outContent.toString().contains(error);
+        Assertions.assertTrue(contains);
+    }
+
     @Test
     void connectionTest() {
         Assertions.assertNotNull(dbconnect);
     }
 
     @Test
-    void getDataTest() throws SQLException {
+    void getDataError() throws SQLException {
+        Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
+        dbconnect.getData();
+        boolean contains = outContent.toString().contains(error);
+        Assertions.assertTrue(contains);
+    }
+
+    @Test
+    void getDataTest() throws Exception {
         Mockito.when(resultSet.next()).thenReturn(true).thenReturn(false);
 
         Mockito.when(resultSet.getString(defaultUser)).thenReturn(defaultUser);
@@ -54,6 +83,14 @@ public class DBconnectTest {
         Mockito.when(statement.executeQuery("SELECT * FROM users")).thenReturn(resultSet);
 
         Assertions.assertEquals(dbconnect.getData(), resultSet);
+    }
+
+    @Test
+    void loginDataError() throws SQLException {
+        Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
+        dbconnect.loginData(defaultUser, defaultPassword);
+        boolean contains = outContent.toString().contains(error);
+        Assertions.assertTrue(contains);
     }
 
     @Test
@@ -78,6 +115,14 @@ public class DBconnectTest {
         Mockito.when(resultSet.next()).thenReturn(false);
 
         Assertions.assertFalse(dbconnect.loginData(defaultUser,defaultPassword));
+    }
+
+    @Test
+    void registerUserError() throws SQLException {
+        Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
+        dbconnect.registerUser(defaultUser, defaultPassword);
+        boolean contains = outContent.toString().contains(error);
+        Assertions.assertTrue(contains);
     }
 
     @Test

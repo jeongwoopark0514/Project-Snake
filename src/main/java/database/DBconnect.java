@@ -14,6 +14,8 @@ public class DBconnect {
     @Getter @Setter private  Statement statement;
     @Getter @Setter private  ResultSet resultSet;
 
+    private transient String prefix = "Error: ";
+
     /**
      * Method that establishes connection to the mysql database.
      */
@@ -28,7 +30,7 @@ public class DBconnect {
                 "pu_Snake1", "tHWLSWJqg57E");
             statement = connection.createStatement();
         } catch (Exception exception) {
-            System.out.println("Error: " + exception);
+            System.out.println(prefix + exception);
         }
     }
 
@@ -47,7 +49,7 @@ public class DBconnect {
             }
 
         } catch (Exception exception) {
-            System.out.println(exception);
+            System.out.println(prefix + exception);
         }
 
         return resultSet;
@@ -68,7 +70,7 @@ public class DBconnect {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(prefix + e);
         }
         return false;
     }
@@ -97,7 +99,7 @@ public class DBconnect {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(prefix + e);
         }
         return false;
     }
