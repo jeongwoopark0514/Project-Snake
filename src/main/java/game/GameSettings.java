@@ -10,6 +10,8 @@ public class GameSettings {
     public static final int WIDTH = 1000;
     public static final int HEIGHT = 500;
     public static final int CELL_SIZE = 25;
+    public static final int X_MAX = WIDTH / CELL_SIZE;
+    public static final int Y_MAX = HEIGHT / CELL_SIZE;
 
     public static final Color BACKGROUND_COLOR = Color.BLACK;
     public static final Color SNAKE_COLOR = Color.GREEN;
