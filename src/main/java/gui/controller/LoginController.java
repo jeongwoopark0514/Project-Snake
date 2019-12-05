@@ -2,6 +2,7 @@ package gui.controller;
 
 import database.DBconnect;
 import gui.AlertBox;
+import gui.Gui;
 import gui.MainRunner;
 import java.io.File;
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class LoginController {
     @Getter @Setter public TextField registerUsername;
     @Getter @Setter public PasswordField registerPassword;
     @Getter @Setter public PasswordField confirmPassword;
+    public Gui gui = new Gui();
 
 
     @Getter @Setter private DBconnect database = new DBconnect();
@@ -68,15 +70,12 @@ public class LoginController {
         try {
             if (getLoginUsernameText().equals("") || getLoginPasswordText().equals("")) {
                 System.out.println("LOGIN UNSUCCESSFUL");
-                AlertBox.display("One or multiple fields have not been filled in!",
-                        "Empty field(s)");
+                gui.showAlert("One or multiple fields have not been filled in!", "Empty field(s)");
             } else if (database.authenticate(getLoginUsernameText(), getLoginPasswordText())) {
                 System.out.println("LOGIN SUCCESSFUL");
-                final URL url = new File("src/main/resources/fxml/entry.fxml").toURI().toURL();
-                final Parent entryParent = FXMLLoader.load(url);
-                MainRunner.stage.setScene(new Scene(entryParent, 1000, 600));
+                gui.switchScene();
             } else {
-                AlertBox.display("Wrong username/password combination. Please try again.",
+                gui.showAlert("Wrong username/password combination. Please try again.",
                     "Something went wrong");
                 System.out.println("LOGIN UNSUCCESSFUL");
             }
