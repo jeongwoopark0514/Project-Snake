@@ -52,6 +52,8 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    testCompile "org.testfx:testfx-core:4.0.16-alpha"
+    testCompile "org.mockito:mockito-core:2.+"
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
 }
 
@@ -73,8 +75,6 @@ jacocoTestCoverageVerification {
                 'Main.Main()',
                 'Main.main(java.lang.String[])',
                 'Main.start(javafx.stage.Stage)',
-                'gui.controller.LoginController.clickRegister()',
-                'gui.controller.LoginController.LoginController()',
                 'gui.MainRunner/**',
                 'Main.start(javafx.stage.Stage)',
                 'game.GameSettings.*', // just constants
@@ -89,7 +89,8 @@ jacocoTestCoverageVerification {
                 'gui.controller.LoginController.*',
                 'gui.controller.EntryController.*',
                 'gui.AlertBox.*',
-                'gui.MainRunner.*'
+                'gui.MainRunner.*',
+                'gui.controller.EntryController.*'
             ]
         }
         rule {
@@ -106,8 +107,6 @@ jacocoTestCoverageVerification {
                     'Main.Main()',
                     'Main.main(java.lang.String[])',
                     'Main.start(javafx.stage.Stage)',
-                    'gui.controller.LoginController.clickRegister()',
-                    'gui.controller.LoginController.LoginController()',
                     'gui.MainRunner/**',
                     'Main.start(javafx.stage.Stage)',
                     'game.GameSettings.*', // just constants
@@ -122,7 +121,8 @@ jacocoTestCoverageVerification {
                     'gui.controller.LoginController.*',
                     'gui.controller.EntryController.*',
                     'gui.AlertBox.*',
-                    'gui.MainRunner.*'
+                    'gui.MainRunner.*',
+                    'gui.controller.EntryController.*'
             ]
         }
 

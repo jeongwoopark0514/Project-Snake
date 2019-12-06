@@ -16,7 +16,10 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
-
+/**
+ * This class does not need to be tested.
+ * This is all GUI class.
+ */
 public class EntryController {
     /**
      * When you click start button, move to game screen.

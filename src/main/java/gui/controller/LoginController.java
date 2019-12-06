@@ -1,114 +1,77 @@
 package gui.controller;
 
 import database.DBconnect;
-import gui.AlertBox;
-import gui.MainRunner;
-import java.io.File;
+import gui.Gui;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import lombok.Getter;
 import lombok.Setter;
 
 
+
 public class LoginController {
+
+    @FXML
+    public transient TextField loginUsername;
+    public transient PasswordField loginPassword;
+    public transient TextField registerUsername;
+    public transient PasswordField registerPassword;
+    public transient PasswordField confirmPassword;
+
+    public transient Gui gui = new Gui();
+
+    @Getter @Setter
+    private DBconnect database = new DBconnect();
+
     /**
      * when you click register button, move to register page.
      * @throws IOException IOexception thrown for null file.
      */
     public void clickRegister() throws IOException {
-        final URL url = new File("src/main/resources/fxml/register.fxml").toURI().toURL();
-        final Parent parentRegister = FXMLLoader.load(url);
-
-        Scene registerScene = new Scene(parentRegister);
-        MainRunner.stage.setScene(registerScene);
+        gui.switchScene("src/main/resources/fxml/register.fxml");
     }
 
-    @FXML
-    @Getter @Setter public TextField loginusername;
-    @Getter @Setter public TextField loginpassword;
-    @Getter @Setter public TextField registerusername;
-    @Getter @Setter public TextField registerpassword;
-    @Getter @Setter public TextField confirmpassword;
-
-    public String getLoginusernametext() {
-
-        return loginusername.getText();
-    }
-
-    public String getLoginpasswordtext() {
-
-        return loginpassword.getText();
-    }
-
-    public String getRegisterusernametext() {
-        return registerusername.getText();
-    }
-
-    public String getRegisterpasswordtext() {
-        return registerpassword.getText();
-    }
-
-    public String getConfirmpasswordtext() {
-        return confirmpassword.getText();
-    }
 
     /**
      * This method checks if the login was successful.
      */
-    @SuppressWarnings("PMD")
-    public void login() {
-        try {
-            DBconnect database = new DBconnect();
-            if (getLoginusernametext().equals("") || getLoginpasswordtext().equals("")) {
-                System.out.println("LOGIN UNSUCCESSFUL");
-                AlertBox.display("One or multiple fields have not been filled in!",
-                        "Empty field(s)");
-            } else if (database.loginData(getLoginusernametext(), getLoginpasswordtext())) {
-                System.out.println("LOGIN SUCCESSFUL");
-                final URL url = new File("src/main/resources/fxml/entry.fxml").toURI().toURL();
-                final Parent entryParent = FXMLLoader.load(url);
-                MainRunner.stage.setScene(new Scene(entryParent, 1000, 600));
-            } else {
-                AlertBox.display("Wrong username/password combination. Please try again.",
-                    "Something went wrong");
-                System.out.println("LOGIN UNSUCCESSFUL");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+    public void login() throws IOException {
+        if (gui.getText(loginUsername).equals("") || gui.getText(loginPassword).equals("")) {
+            System.out.println("LOGIN UNSUCCESSFUL");
+            gui.showAlert("One or multiple fields have not been filled in!", "Empty field(s)");
+        } else if (database.authenticate(gui.getText(loginUsername),
+            gui.getText(loginPassword), null)) {
+            System.out.println("LOGIN SUCCESSFUL");
+            gui.switchScene("src/main/resources/fxml/entry.fxml");
+        } else {
+            gui.showAlert("Wrong username/password combination. Please try again.",
+                "Something went wrong");
+            System.out.println("LOGIN UNSUCCESSFUL");
         }
     }
 
     /**
      * This method checks if the user gets registered into the database.
      */
-    @SuppressWarnings("PMD")
     public void register() {
-        try {
-            DBconnect database = new DBconnect();
-            if (!getRegisterpasswordtext().equals(getConfirmpasswordtext())) {
-                AlertBox.display("Passwords do not match!", "Something went wrong");
-                System.out.println("REGISTRATION UNSUCCESSFUL");
-            } else if (getRegisterusernametext().equals("")
-                    || getRegisterpasswordtext().equals("")
-                    || getConfirmpasswordtext().equals("")) {
-                AlertBox.display("One or multiple fields have not been filled in!",
-                        "Empty field(s)");
-                System.out.println("REGISTRATION UNSUCCESSFUL");
-            } else if (database.registerUser(getRegisterusernametext(),getRegisterpasswordtext())) {
-                AlertBox.display("Successfully registered.", "Success");
-                System.out.println("REGISTRATION SUCCESSFUL");
-            } else {
-                AlertBox.display("Username already taken!", "Something went wrong");
-                System.out.println("REGISTRATION UNSUCCESSFUL");
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        if (!gui.getText(registerPassword).equals(gui.getText(confirmPassword))) {
+            gui.showAlert("Passwords do not match!", "Something went wrong");
+            System.out.println("REGISTRATION UNSUCCESSFUL");
+        } else if (gui.getText(registerUsername).equals("")
+            || gui.getText(registerPassword).equals("")
+            || gui.getText(registerPassword).equals("")) {
+            gui.showAlert("One or multiple fields have not been filled in!",
+                    "Empty field(s)");
+            System.out.println("REGISTRATION UNSUCCESSFUL");
+        } else if (database.registerUser(gui.getText(registerUsername),
+            gui.getText(registerPassword), null)) {
+            gui.showAlert("Successfully registered.", "Success");
+            System.out.println("REGISTRATION SUCCESSFUL");
+        } else {
+            gui.showAlert("Username already taken!", "Something went wrong");
+            System.out.println("REGISTRATION UNSUCCESSFUL");
         }
     }
 
@@ -117,11 +80,7 @@ public class LoginController {
      * @throws IOException IOexception thrown for null file.
      */
     public void goBackLogin() throws IOException {
-        final URL url = new File("src/main/resources/fxml/login.fxml").toURI().toURL();
-        final Parent parentRegister = FXMLLoader.load(url);
-
-        Scene loginScene = new Scene(parentRegister);
-        MainRunner.stage.setScene(loginScene);
+        gui.switchScene("src/main/resources/fxml/login.fxml");
     }
 
 
