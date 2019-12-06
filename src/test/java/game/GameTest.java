@@ -58,14 +58,14 @@ class GameTest {
 
     // TODO: TO BE IMPLEMENTED
     //@Test
-    //void gamePauzeTest() {
+    //void gamePauseTest() {
     //}
 
     //@Test
     //void verifyOnKeyPressedListenersWereSet() {
-        // implicitly verifies init is called in constructor
-        //verify(game.getCanvas()).setOnKeyPressed(Mockito.any());
-        //verify(game.getCanvas()).requestFocus(); // TODO: Interchanging these two lines causes
+    // implicitly verifies init is called in constructor
+    //verify(game.getCanvas()).setOnKeyPressed(Mockito.any());
+    //verify(game.getCanvas()).requestFocus(); // TODO: Interchanging these two lines causes
     // error
     //}
 }
