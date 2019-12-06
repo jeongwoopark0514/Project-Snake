@@ -7,16 +7,22 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import lombok.Getter;
 
 /**
  * Main game control class.
  */
 public class Game {
+    @Getter
     private final transient Scene scene;
+    @Getter
     private final transient Painter painter;
+    @Getter
     private final transient Canvas canvas;
+    @Getter
     private final transient Snake snake;
 
+    @Getter
     private final transient ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
     private transient ScheduledFuture<?> loop;
@@ -24,10 +30,10 @@ public class Game {
     /**
      * Constructor.
      *
-     * @param scene   Scene
-     * @param painter Painter
-     * @param canvas  Canvas
-     * @param snake   Snake
+     * @param scene   Scene related to the game
+     * @param painter Painter class that paints all the objects on the screen
+     * @param canvas  Canvas canvas to paint on
+     * @param snake   Snake the actual snake that moves trough the game
      */
     public Game(Scene scene, Painter painter, Canvas canvas, Snake snake) {
         this.scene = scene;
@@ -54,12 +60,12 @@ public class Game {
         System.exit(0); //NOPMD
     }
 
-    /**
-     * TODO: TO BE IMPLEMENTED.
-     * Pauses the game.
-     */
-    public void pause() {
-    }
+    ///**
+    // * TODO: TO BE IMPLEMENTED.
+    // * Pauzes the game.
+    // */
+    //public void pause() {
+    //}
 
     /**
      * Defines a method move that clears current position of the snake on the canvas,

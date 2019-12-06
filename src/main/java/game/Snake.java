@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Main class of the snake, contains it's method to control the snake and it's behavior.
+ * An object that represents the Hero of the game, Snake.
+ * Snake has a direction in which it moves, and a method that moves the snake one square
+ * in its current direction.
  */
 public class Snake {
     @Getter
@@ -86,14 +88,6 @@ public class Snake {
     }
 
     /**
-     * Make the snake grow.
-     * TODO: TO BE IMPLEMENTED.
-     */
-    public void grow() {
-        this.body.add(new Point(1, 1));
-    }
-
-    /**
      * Method to check if a given point is a wall.
      * TODO: Extend this to properly check wall collision instead of just checking border walls
      *
@@ -135,4 +129,11 @@ public class Snake {
                 break;
         }
     }
+
+    ///**
+    // * TODO: TO BE IMPLEMENTED.
+    // */
+    //public void grow() {
+    //    this.body.add(new Point(1, 1));
+    //}
 }
