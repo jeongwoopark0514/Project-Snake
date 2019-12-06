@@ -46,37 +46,5 @@ public class Gui {
         return any.getText();
     }
 
-    /**
-     * Test if the items are null.
-     * @param any1 first string to check
-     * @param any2 second string to check
-     * @param any3 third string to check
-     * @return boolean result
-     */
-    public boolean threeAllCorrect(TextField any1, TextField any2, TextField any3) {
-        return getText(any1).equals("")
-            || getText(any2).equals("")
-            || getText(any3).equals("");
-    }
-
-    /**
-     * Test if the items are equal.
-     * @param any1 first string to check
-     * @param any2 second string to check
-     * @return boolean result
-     */
-    public boolean registerAndConfirm(TextField any1, TextField any2) {
-        return getText(any1).equals(getText(any2));
-    }
-
-    /**
-     * Check if either of them are null or not.
-     * @param any1 first textfield to check
-     * @param any2 second textfield to check
-     * @return boolean result
-     */
-    public boolean loginUserOrPassEmpty(TextField any1, TextField any2) {
-        return getText(any1).equals("") || getText(any2).equals("");
-    }
 }
 

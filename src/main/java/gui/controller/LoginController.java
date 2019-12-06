@@ -38,7 +38,7 @@ public class LoginController {
      * This method checks if the login was successful.
      */
     public void login() throws IOException {
-        if (gui.loginUserOrPassEmpty(loginUsername, loginPassword)) {
+        if (gui.getText(loginUsername).equals("") || gui.getText(loginPassword).equals("")) {
             System.out.println("LOGIN UNSUCCESSFUL");
             gui.showAlert("One or multiple fields have not been filled in!", "Empty field(s)");
         } else if (database.authenticate(gui.getText(loginUsername),
@@ -56,11 +56,12 @@ public class LoginController {
      * This method checks if the user gets registered into the database.
      */
     public void register() {
-        if (!gui.registerAndConfirm(registerPassword, confirmPassword)) {
+        if (!gui.getText(registerPassword).equals(gui.getText(confirmPassword))) {
             gui.showAlert("Passwords do not match!", "Something went wrong");
             System.out.println("REGISTRATION UNSUCCESSFUL");
-        } else if (gui.threeAllCorrect(registerUsername,
-            registerPassword, confirmPassword)) {
+        } else if (gui.getText(registerUsername).equals("")
+            || gui.getText(registerPassword).equals("")
+            || gui.getText(registerPassword).equals("")) {
             gui.showAlert("One or multiple fields have not been filled in!",
                     "Empty field(s)");
             System.out.println("REGISTRATION UNSUCCESSFUL");
