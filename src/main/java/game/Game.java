@@ -12,18 +12,23 @@ import java.util.logging.Logger;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import lombok.NonNull;
+import lombok.Getter;
 
 /**
  * A game.
  * TODO: Write a better description of this class.
  */
 public class Game {
+    @Getter
     private final transient Scene scene;
+    @Getter
     private final transient Painter painter;
+    @Getter
     private final transient Canvas canvas;
+    @Getter
     private final transient Snake snake;
     private transient Point fruit;
-
+    @Getter
     private final transient ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
 
@@ -32,10 +37,10 @@ public class Game {
     /**
      * Constructor.
      *
-     * @param scene  Scene
+     * @param scene   Scene
      * @param painter Painter
-     * @param canvas Canvas
-     * @param snake  Snake
+     * @param canvas  Canvas
+     * @param snake   Snake
      */
     public Game(Scene scene, Painter painter, Canvas canvas, Snake snake) {
         this.scene = scene;
@@ -54,19 +59,19 @@ public class Game {
         gameLoop();
     }
 
-    /**
-     * TODO: TO BE IMPLEMENTED.
-     * Stops the game.
-     */
-    public void stop() {
-    }
+    ///**
+    //* TODO: TO BE IMPLEMENTED.
+    //* Stops the game.
+    //*/
+    // public void stop() {
+    //}
 
-    /**
-     * TODO: TO BE IMPLEMENTED.
-     * Pauses the game.
-     */
-    public void pause() {
-    }
+    ///**
+    // * TODO: TO BE IMPLEMENTED.
+    // * Pauzes the game.
+    // */
+    //public void pauze() {
+    //}
 
     /**
      * Defines a method move that clears current position of the snake on the canvas,

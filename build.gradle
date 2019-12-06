@@ -46,6 +46,8 @@ test {
     finalizedBy jacocoTestReport
 }
 
+dependencies { testCompile "org.mockito:mockito-core:2.+" }
+
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
@@ -75,12 +77,14 @@ jacocoTestCoverageVerification {
                 'gui.controller.LoginController.LoginController()',
                 'gui.MainRunner/**',
                 'Main.start(javafx.stage.Stage)',
-                'game.GameSettings.*',
-                'game.SnakeApp.*',
-                'game.Game.*',
-                'game.Painter.*',
-                'game.Point.*',
-                'game.Snake.*',
+                'game.GameSettings.*', // just constants
+                'game.SnakeApp.*', // only used for going to game screen directly
+                'game.Painter.*', // uses final class so needs to use PowerMock
+                // TODO: Figure out how to test this
+                'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
+                // an exception class
+                'exception.PointOutOfWindowException.*',
+                'exceptions.PointOutOfWindowException.PointOutOfWindowException(java.lang.String)',
                 'database.DBconnect.*',
                 'gui.controller.LoginController.*',
                 'gui.controller.EntryController.*',
@@ -106,12 +110,14 @@ jacocoTestCoverageVerification {
                     'gui.controller.LoginController.LoginController()',
                     'gui.MainRunner/**',
                     'Main.start(javafx.stage.Stage)',
-                    'game.GameSettings.*',
-                    'game.SnakeApp.*',
-                    'game.Game.*',
-                    'game.Painter.*',
-                    'game.Point.*',
-                    'game.Snake.*',
+                    'game.GameSettings.*', // just constants
+                    'game.SnakeApp.*', // only used for going to game screen directly
+                    'game.Painter.*', // uses final class so needs to use PowerMock
+                    // TODO: Figure out how to test this
+                    'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
+                    // an exception class
+                    'exception.PointOutOfWindowException.*',
+                    'exceptions.PointOutOfWindowException.PointOutOfWindowException(java.lang.String)',
                     'database.DBconnect.*',
                     'gui.controller.LoginController.*',
                     'gui.controller.EntryController.*',
