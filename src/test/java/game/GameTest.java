@@ -50,14 +50,14 @@ class GameTest {
     }
 
     // TODO: TO BE IMPLEMENTED
-//    @Test
-//    void gameStopTest() {
-//    }
+    //@Test
+    //void gameStopTest() {
+    //}
 
     // TODO: TO BE IMPLEMENTED
-//    @Test
-//    void gamePauzeTest() {
-//    }
+    //@Test
+    //void gamePauzeTest() {
+    //}
 
     @Test
     void verifyOnKeyPressedListenersWereSet() {

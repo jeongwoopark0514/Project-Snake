@@ -7,19 +7,27 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Snake.
- * TODO: Write a better description of this class.
+ * An object that represents the Hero of the game, Snake.
+ * Snake has a direction in which it moves, and a method that moves the snake one square
+ * in its current direction.
  */
 public class Snake {
-    @Getter private List<Point> body = new LinkedList<>();
-    @Getter @Setter private int directionX;
-    @Getter @Setter private int directionY;
-    @Getter @Setter private Point head;
+    @Getter
+    private List<Point> body = new LinkedList<>();
+    @Getter
+    @Setter
+    private int directionX;
+    @Getter
+    @Setter
+    private int directionY;
+    @Getter
+    @Setter
+    private Point head;
 
     /**
      * Constructor.
      *
-     * @param start Initial coordinate of the snake.
+     * @param start     Initial coordinate of the snake.
      * @param direction Initial direction of the snake.
      */
     public Snake(Point start, Directions direction) {
@@ -75,10 +83,10 @@ public class Snake {
         }
     }
 
-    /**
-     * TODO: TO BE IMPLEMENTED.
-     */
-    public void grow() {
-        this.body.add(new Point(1, 1));
-    }
+    ///**
+    // * TODO: TO BE IMPLEMENTED.
+    // */
+    //public void grow() {
+    //    this.body.add(new Point(1, 1));
+    //}
 }
