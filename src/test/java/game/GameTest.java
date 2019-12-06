@@ -1,6 +1,7 @@
 package game;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -41,12 +42,13 @@ class GameTest {
     }
 
     @Test
-    void gameStartTest() {
+    void gameStartTest() throws InterruptedException {
         game.start();
+        Thread.sleep(1000);
         assertNotNull(game.getScheduler());
-        verify(game.getPainter()).unpaintSnake(game.getSnake());
-        verify(game.getPainter()).paintSnake(game.getSnake());
-        verify(game.getSnake()).move();
+        verify(game.getPainter(), atLeastOnce()).unpaintSnake(game.getSnake());
+        verify(game.getPainter(), atLeastOnce()).paintSnake(game.getSnake());
+        verify(game.getSnake(), atLeastOnce()).move();
     }
 
     // TODO: TO BE IMPLEMENTED
