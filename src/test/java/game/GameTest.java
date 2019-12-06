@@ -41,8 +41,9 @@ class GameTest {
     }
 
     @Test
-    void gameStartTest() {
+    void gameStartTest() throws InterruptedException {
         game.start();
+        Thread.sleep(1000);
         assertNotNull(game.getScheduler());
     }
 
