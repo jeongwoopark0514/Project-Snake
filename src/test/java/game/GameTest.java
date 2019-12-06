@@ -45,9 +45,6 @@ class GameTest {
         game.start();
         Thread.sleep(1000);
         assertNotNull(game.getScheduler());
-        verify(game.getPainter(), atLeastOnce()).unpaintSnake(game.getSnake());
-        verify(game.getPainter(), atLeastOnce()).paintSnake(game.getSnake());
-        verify(game.getSnake(), atLeastOnce()).move();
     }
 
     // TODO: TO BE IMPLEMENTED
