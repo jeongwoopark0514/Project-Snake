@@ -11,8 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import lombok.NonNull;
 import lombok.Getter;
+import lombok.NonNull;
 
 /**
  * A game.
@@ -115,6 +115,7 @@ public class Game {
     /**
      * Checks whether two points collide with each other. This is
      * equivalent to check if two points are equal.
+     *
      * @param p1 Point 1
      * @param p2 Point 2
      * @return True if two points are equal.

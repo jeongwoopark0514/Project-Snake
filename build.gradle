@@ -67,29 +67,29 @@ jacocoTestCoverageVerification {
                 minimum = 0.8
             }
             excludes = [
-                'HelloWorld.HelloWorld()',
-                'HelloWorld.main(java.lang.String[])',
-                'Student.hashCode()',
-                'Main.Main()',
-                'Main.main(java.lang.String[])',
-                'Main.start(javafx.stage.Stage)',
-                'gui.controller.LoginController.clickRegister()',
-                'gui.controller.LoginController.LoginController()',
-                'gui.MainRunner/**',
-                'Main.start(javafx.stage.Stage)',
-                'game.GameSettings.*', // just constants
-                'game.SnakeApp.*', // only used for going to game screen directly
-                'game.Painter.*', // uses final class so needs to use PowerMock
-                // TODO: Figure out how to test this
-                'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
-                // an exception class
-                'exception.PointOutOfWindowException.*',
-                'exceptions.PointOutOfWindowException.PointOutOfWindowException(java.lang.String)',
-                'database.DBconnect.*',
-                'gui.controller.LoginController.*',
-                'gui.controller.EntryController.*',
-                'gui.AlertBox.*',
-                'gui.MainRunner.*'
+                    'HelloWorld.HelloWorld()',
+                    'HelloWorld.main(java.lang.String[])',
+                    'Student.hashCode()',
+                    'Main.Main()',
+                    'Main.main(java.lang.String[])',
+                    'Main.start(javafx.stage.Stage)',
+                    'gui.controller.LoginController.clickRegister()',
+                    'gui.controller.LoginController.LoginController()',
+                    'gui.MainRunner/**',
+                    'Main.start(javafx.stage.Stage)',
+                    'game.GameSettings.*', // just constants
+                    'game.SnakeApp.*', // only used for going to game screen directly during development
+                    'game.Painter.*', // uses final class so needs to use PowerMock
+                    'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)', //private method
+                    'exception.PointOutOfWindowException.*', // an exception class
+                    'exceptions.PointOutOfWindowException.PointOutOfWindowException(java.lang.String)',
+                    'database.DBconnect.*',
+                    'gui.controller.LoginController.*',
+                    'gui.controller.EntryController.*',
+                    'gui.AlertBox.*',
+                    'gui.MainRunner.*',
+                    'game.Game.lambda$gameLoop$0()', //private method
+                    'game.Game.collides(game.Point, game.Point)' //private method
             ]
         }
         rule {
@@ -111,18 +111,18 @@ jacocoTestCoverageVerification {
                     'gui.MainRunner/**',
                     'Main.start(javafx.stage.Stage)',
                     'game.GameSettings.*', // just constants
-                    'game.SnakeApp.*', // only used for going to game screen directly
+                    'game.SnakeApp.*', // only used for going to game screen directly during development
                     'game.Painter.*', // uses final class so needs to use PowerMock
-                    // TODO: Figure out how to test this
-                    'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
-                    // an exception class
-                    'exception.PointOutOfWindowException.*',
+                    'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)', //private method
+                    'exception.PointOutOfWindowException.*', // an exception class
                     'exceptions.PointOutOfWindowException.PointOutOfWindowException(java.lang.String)',
                     'database.DBconnect.*',
                     'gui.controller.LoginController.*',
                     'gui.controller.EntryController.*',
                     'gui.AlertBox.*',
-                    'gui.MainRunner.*'
+                    'gui.MainRunner.*',
+                    'game.Game.lambda$gameLoop$0()', //private method
+                    'game.Game.collides(game.Point, game.Point)' //private method
             ]
         }
 
