@@ -89,12 +89,12 @@ class SnakeTest {
     }
 
     //TODO: Grow still needs implementation
-//    @Test
-//    void growSnakeAddsOnePointToBodyTest() {
-//        assertEquals(1, snake.getBody().size());
-//        snake.grow();
-//        assertEquals(2, snake.getBody().size());
-//    }
+    //@Test
+    //void growSnakeAddsOnePointToBodyTest() {
+    //assertEquals(1, snake.getBody().size());
+    //snake.grow();
+    //assertEquals(2, snake.getBody().size());
+    //}
 
     @Test
     void snakeMovesOutOfScreenTest() {

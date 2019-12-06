@@ -67,16 +67,6 @@ jacocoTestCoverageVerification {
                 minimum = 0.8
             }
             excludes = [
-                'HelloWorld.HelloWorld()',
-                'HelloWorld.main(java.lang.String[])',
-                'Student.hashCode()',
-                'Main.Main()',
-                'Main.main(java.lang.String[])',
-                'Main.start(javafx.stage.Stage)',
-                'gui.controller.LoginController.clickRegister()',
-                'gui.controller.LoginController.LoginController()',
-                'gui.MainRunner/**',
-                'Main.start(javafx.stage.Stage)',
                 'game.GameSettings.*', // just constants
                 'game.SnakeApp.*', // only used for going to game screen directly
                 'game.Painter.*', // uses final class so needs to use PowerMock
@@ -85,11 +75,12 @@ jacocoTestCoverageVerification {
                 // an exception class
                 'exception.PointOutOfWindowException.*',
                 'exceptions.PointOutOfWindowException.PointOutOfWindowException(java.lang.String)',
-                'database.DBconnect.*',
-                'gui.controller.LoginController.*',
-                'gui.controller.EntryController.*',
+                'gui.Gui.*',
                 'gui.AlertBox.*',
-                'gui.MainRunner.*'
+                'gui.MainRunner.*',
+                'gui.controller.EntryController.*',
+                'database.DBconnect.*', //include in dev branch
+                'gui.controller.LoginController.*' //include in dev branch
             ]
         }
         rule {
@@ -100,16 +91,6 @@ jacocoTestCoverageVerification {
                 minimum = 0.7
             }
             excludes = [
-                    'HelloWorld.HelloWorld()',
-                    'HelloWorld.main(java.lang.String[])',
-                    'Student.hashCode()',
-                    'Main.Main()',
-                    'Main.main(java.lang.String[])',
-                    'Main.start(javafx.stage.Stage)',
-                    'gui.controller.LoginController.clickRegister()',
-                    'gui.controller.LoginController.LoginController()',
-                    'gui.MainRunner/**',
-                    'Main.start(javafx.stage.Stage)',
                     'game.GameSettings.*', // just constants
                     'game.SnakeApp.*', // only used for going to game screen directly
                     'game.Painter.*', // uses final class so needs to use PowerMock
@@ -118,11 +99,12 @@ jacocoTestCoverageVerification {
                     // an exception class
                     'exception.PointOutOfWindowException.*',
                     'exceptions.PointOutOfWindowException.PointOutOfWindowException(java.lang.String)',
-                    'database.DBconnect.*',
-                    'gui.controller.LoginController.*',
-                    'gui.controller.EntryController.*',
+                    'gui.Gui.*',
                     'gui.AlertBox.*',
-                    'gui.MainRunner.*'
+                    'gui.MainRunner.*',
+                    'gui.controller.EntryController.*',
+                    'database.DBconnect.*', //include in dev branch
+                    'gui.controller.LoginController.*' //include in dev branch
             ]
         }
 
