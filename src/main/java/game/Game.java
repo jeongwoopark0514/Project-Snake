@@ -2,21 +2,14 @@ package game;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
-import gui.MainRunner;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 
 /**
- * A game.
- * TODO: Write a better description of this class.
+ * Main game control class.
  */
 public class Game {
     private final transient Scene scene;
@@ -63,7 +56,7 @@ public class Game {
 
     /**
      * TODO: TO BE IMPLEMENTED.
-     * Pauzes the game.
+     * Pauses the game.
      */
     public void pause() {
     }
@@ -93,6 +86,9 @@ public class Game {
         paintWalls();
     }
 
+    /**
+     * Simple method to paint walls on the borders of the map.
+     */
     private void paintWalls() {
         for (int i = 0; i < GameSettings.Y_MAX; i++) {
             painter.paintWall(new Point(0, i));

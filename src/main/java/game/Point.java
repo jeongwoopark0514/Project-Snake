@@ -21,6 +21,12 @@ public class Point {
     @SuppressWarnings("checkstyle:MemberName")
     private int y;
 
+    /**
+     * Simple constructor for the point class.
+     *
+     * @param x the x coordinate of the point.
+     * @param y the y coordinate of the point.
+     */
     public Point(int x, int y) {
         this.x = x;
         this.y = y;

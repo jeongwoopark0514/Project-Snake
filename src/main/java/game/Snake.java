@@ -1,14 +1,12 @@
 package game;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Snake.
- * TODO: Write a better description of this class.
+ * Main class of the snake, contains it's method to control the snake and it's behavior.
  */
 public class Snake {
     @Getter
@@ -88,6 +86,7 @@ public class Snake {
     }
 
     /**
+     * Make the snake grow.
      * TODO: TO BE IMPLEMENTED.
      */
     public void grow() {

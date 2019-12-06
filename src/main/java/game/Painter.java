@@ -14,10 +14,13 @@ import lombok.Setter;
  * Used for painting shapes on a canvas.
  */
 public class Painter {
-    @Getter @Setter private GraphicsContext gc;
+    @Getter
+    @Setter
+    private GraphicsContext gc;
 
     /**
      * Constructor.
+     *
      * @param gc GraphicalContext for this Painter object.
      */
     public Painter(GraphicsContext gc) {
@@ -65,6 +68,11 @@ public class Painter {
         unpaint(point);
     }
 
+    /**
+     * Paint a wall on a given point.
+     *
+     * @param point point to paint wall on.
+     */
     public void paintWall(Point point) {
         paint(point, GameSettings.WALL_COLOR);
     }
