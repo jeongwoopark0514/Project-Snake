@@ -2,12 +2,15 @@ package gui.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import database.DBconnect;
 import gui.Gui;
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 
 
@@ -20,10 +23,10 @@ class LoginControllerTest {
     @Test
     void clickRegisterTest() {
         try {
-            Gui gui = Mockito.mock(Gui.class);
+            Gui gui = mock(Gui.class);
             LoginController loginController = new LoginController();
             loginController.gui = gui;
-            Mockito.doNothing().when(gui).switchScene("whatever");
+            doNothing().when(gui).switchScene("whatever");
             loginController.clickRegister();
         } catch (IOException e) {
             e.printStackTrace();
@@ -32,46 +35,46 @@ class LoginControllerTest {
 
     @Test
     void loginNamePassEmpty() throws IOException {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("");
+        when(gui.getText(any())).thenReturn("");
         loginController.login();
-        Mockito.verify(gui).showAlert(any(), eq(empty));
+        verify(gui).showAlert(any(), eq(empty));
     }
 
 
     @Test
     void loginNameTruePassFalse() throws IOException {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("").thenReturn(" ");
+        when(gui.getText(any())).thenReturn("").thenReturn(" ");
         loginController.login();
-        Mockito.verify(gui).showAlert(any(), eq(empty));
+        verify(gui).showAlert(any(), eq(empty));
     }
 
     @Test
     void loginNameFalsePassTrue() throws IOException {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn(" ").thenReturn("");
+        when(gui.getText(any())).thenReturn(" ").thenReturn("");
         loginController.login();
-        Mockito.verify(gui).showAlert(any(), eq(empty));
+        verify(gui).showAlert(any(), eq(empty));
     }
 
     @Test
     void loginDatabaseTrue() throws IOException {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        DBconnect database = Mockito.mock(DBconnect.class);
-        Mockito.when(database.authenticate("hey", "hey", null)).thenReturn(true);
+        DBconnect database = mock(DBconnect.class);
+        when(database.authenticate("hey", "hey", null)).thenReturn(true);
         loginController.setDatabase(database);
-        Mockito.when(gui.getText(any())).thenReturn("hey");
+        when(gui.getText(any())).thenReturn("hey");
         try {
-            Mockito.doNothing().when(gui).switchScene("message");
+            doNothing().when(gui).switchScene("message");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,15 +83,15 @@ class LoginControllerTest {
 
     @Test
     void loginDatabaseFalse() throws IOException {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        DBconnect database = Mockito.mock(DBconnect.class);
-        Mockito.when(database.authenticate("bye", "bye", null)).thenReturn(false);
+        DBconnect database = mock(DBconnect.class);
+        when(database.authenticate("bye", "bye", null)).thenReturn(false);
         loginController.setDatabase(database);
-        Mockito.when(gui.getText(any())).thenReturn("bye");
+        when(gui.getText(any())).thenReturn("bye");
         try {
-            Mockito.doNothing().when(gui).switchScene("file");
+            doNothing().when(gui).switchScene("file");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,24 +100,24 @@ class LoginControllerTest {
 
     @Test
     void registerEqualsFalse() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("").thenReturn(" ");
-        Mockito.doNothing().when(gui).showAlert("message", "title");
+        when(gui.getText(any())).thenReturn("").thenReturn(" ");
+        doNothing().when(gui).showAlert("message", "title");
         loginController.register();
     }
 
     //1 tff
     @Test
     void registerThreeEqualsTrueFalseFalse() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("k")
+        when(gui.getText(any())).thenReturn("k")
             .thenReturn("k").thenReturn("").thenReturn(" ").thenReturn(" ");
         loginController.register();
-        Mockito.verify(gui).showAlert(multiple,
+        verify(gui).showAlert(multiple,
             empty);
 
     }
@@ -122,121 +125,121 @@ class LoginControllerTest {
     //2 fff
     @Test
     void registerThreeEqualsFalseFalseFalse() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("k")
+        when(gui.getText(any())).thenReturn("k")
             .thenReturn("k").thenReturn("y").thenReturn("y").thenReturn("y");
-        DBconnect database = Mockito.mock(DBconnect.class);
-        Mockito.when(gui.getText(any())).thenReturn("Kk").thenReturn("Kk");
-        Mockito.when(database.registerUser(gui.getText(any()),
+        DBconnect database = mock(DBconnect.class);
+        when(gui.getText(any())).thenReturn("Kk").thenReturn("Kk");
+        when(database.registerUser(gui.getText(any()),
             gui.getText(any()), null)).thenReturn(true);
         loginController.setDatabase(database);
         loginController.register();
-        Mockito.verify(gui).showAlert("Successfully registered.", "Success");
+        verify(gui).showAlert("Successfully registered.", "Success");
     }
 
     @Test
     void registerThreeEqualsFalseFalseFalse2() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("k").thenReturn("k")
+        when(gui.getText(any())).thenReturn("k").thenReturn("k")
             .thenReturn("y").thenReturn("y").thenReturn("y");
-        DBconnect database = Mockito.mock(DBconnect.class);
-        Mockito.when(gui.getText(any())).thenReturn("Kk").thenReturn("Kk");
-        Mockito.when(database.registerUser(gui.getText(any()),
+        DBconnect database = mock(DBconnect.class);
+        when(gui.getText(any())).thenReturn("Kk").thenReturn("Kk");
+        when(database.registerUser(gui.getText(any()),
             gui.getText(any()), null)).thenReturn(false);
         loginController.setDatabase(database);
         loginController.register();
-        Mockito.verify(gui).showAlert("Username already taken!", "Something went wrong");
+        verify(gui).showAlert("Username already taken!", "Something went wrong");
     }
 
     //3 ftf
     @Test
     void registerThreeEqualsFalseTrueFalse() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("k").thenReturn("k")
+        when(gui.getText(any())).thenReturn("k").thenReturn("k")
             .thenReturn("y").thenReturn("").thenReturn("y");
         loginController.register();
-        Mockito.verify(gui).showAlert(multiple,
+        verify(gui).showAlert(multiple,
             empty);
     }
 
     //4 ftf
     @Test
     void registerThreeEqualsTrueTrueFalse() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("q").thenReturn("q").thenReturn("")
+        when(gui.getText(any())).thenReturn("q").thenReturn("q").thenReturn("")
             .thenReturn("").thenReturn("y");
         loginController.register();
-        Mockito.verify(gui).showAlert(multiple,
+        verify(gui).showAlert(multiple,
             empty);
     }
 
     //5 ttt
     @Test
     void registerThreeEqualsTrueTrueTrue() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("q").thenReturn("q")
+        when(gui.getText(any())).thenReturn("q").thenReturn("q")
             .thenReturn("").thenReturn("").thenReturn("");
         loginController.register();
-        Mockito.verify(gui).showAlert(multiple,
+        verify(gui).showAlert(multiple,
             empty);
     }
 
     //6 ftt
     @Test
     void registerThreeEqualsFalseTrueTrue() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("a")
+        when(gui.getText(any())).thenReturn("a")
             .thenReturn("a").thenReturn("x").thenReturn("").thenReturn("");
         loginController.register();
-        Mockito.verify(gui).showAlert(multiple,
+        verify(gui).showAlert(multiple,
             empty);
     }
 
     //7 tft
     @Test
     void registerThreeEqualsTrueFalseTrue() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("l")
+        when(gui.getText(any())).thenReturn("l")
             .thenReturn("l").thenReturn("").thenReturn("f").thenReturn("");
         loginController.register();
-        Mockito.verify(gui).showAlert(multiple,
+        verify(gui).showAlert(multiple,
             empty);
     }
 
     //8 fft
     @Test
     void registerThreeEqualsFalseFalseTrue() {
-        Gui gui = Mockito.mock(Gui.class);
+        Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
-        Mockito.when(gui.getText(any())).thenReturn("v")
+        when(gui.getText(any())).thenReturn("v")
             .thenReturn("v").thenReturn("q").thenReturn("f").thenReturn("");
         loginController.register();
-        Mockito.verify(gui).showAlert(multiple,
+        verify(gui).showAlert(multiple,
             empty);
     }
 
     @Test
     void goBackLoginTest() {
         try {
-            Gui gui = Mockito.mock(Gui.class);
+            Gui gui = mock(Gui.class);
             LoginController loginController = new LoginController();
             loginController.gui = gui;
-            Mockito.doNothing().when(gui).switchScene("whatever");
+            doNothing().when(gui).switchScene("whatever");
             loginController.goBackLogin();
         } catch (IOException e) {
             e.printStackTrace();
