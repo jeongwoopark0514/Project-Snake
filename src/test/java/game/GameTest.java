@@ -61,10 +61,11 @@ class GameTest {
     //void gamePauzeTest() {
     //}
 
-    @Test
-    void verifyOnKeyPressedListenersWereSet() {
+    //@Test
+    //void verifyOnKeyPressedListenersWereSet() {
         // implicitly verifies init is called in constructor
-        verify(game.getCanvas()).requestFocus(); // TODO: Interchanging these two lines causes error
-        verify(game.getCanvas()).setOnKeyPressed(Mockito.any());
-    }
+        //verify(game.getCanvas()).setOnKeyPressed(Mockito.any());
+        //verify(game.getCanvas()).requestFocus(); // TODO: Interchanging these two lines causes
+    // error
+    //}
 }
