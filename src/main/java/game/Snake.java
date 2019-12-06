@@ -1,5 +1,6 @@
 package game;
 
+import exceptions.PointOutOfWindowException;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
@@ -84,7 +85,11 @@ public class Snake {
     public void move() {
         Point point = body.get(0);
         checkWall(point);
-        point.translate(directionX, directionY);
+        try {
+            point.translate(directionX, directionY);
+        } catch (PointOutOfWindowException e) {
+            System.out.println("Needs refactor for the snake class");
+        }
     }
 
     /**

@@ -6,6 +6,7 @@ import static game.Directions.RIGHT;
 import static game.Directions.UP;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -176,4 +177,18 @@ class SnakeTest {
         snake.checkWall(snake.getBody().get(0));
         assertEquals("Hit right", outContent.toString());
     }
+
+    @Test
+    void snakeMovesOutOfScreenTest() {
+        snake = new Snake(new Point(6, 1), UP);
+        snake.setGame(game);
+        snake.changeDirection(UP);
+        // move snake out of screen (not actually used anymore but will
+        for (int i = 0; i < 2; i++) {
+            snake.move();
+        }
+        boolean temp = outContent.toString().contains("Hit upper");
+        assertTrue(temp);
+    }
+
 }

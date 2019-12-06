@@ -81,7 +81,8 @@ jacocoTestCoverageVerification {
                 'gui.MainRunner.*',
                 'gui.controller.EntryController.*',
                 'database.DBconnect.*', //include in dev branch
-                'gui.controller.LoginController.*' //include in dev branch
+                'gui.controller.LoginController.*', //include in dev branch
+                'game.Game.stop()' //Impossible to test system.exit (which will get replaced after the prototype)
             ]
         }
         rule {
