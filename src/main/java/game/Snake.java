@@ -1,24 +1,43 @@
 package game;
 
+import exceptions.PointOutOfWindowException;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Snake.
+ * An object that represents the Hero of the game, Snake.
+ * Snake has a direction in which it moves, and a method that moves the snake one square
+ * in its current direction.
  */
 public class Snake {
-    @Getter private List<Point> body = new LinkedList<>();
-    @Getter @Setter private int directionX;
-    @Getter @Setter private int directionY;
-    @Getter @Setter private Point head;
+    @Getter
+    private List<Point> body = new LinkedList<>();
+    @Getter
+    @Setter
+    private int directionX;
+    @Getter
+    @Setter
+    private int directionY;
+    @Getter
+    @Setter
+    private Point head;
+    @Getter
+    @Setter
+    private Directions direction;
+    @Getter
+    @Setter
+    private Game game;
+
+    private static int BORDER_START = 1;
+    private transient String miss = "Miss";
 
     /**
      * Constructor.
      *
-     * @param start Coordinate to initialize the snake with.
-     * @param direction Direction to initialize the snake with.
+     * @param start     Initial coordinate of the snake.
+     * @param direction Initial direction of the snake.
      */
     public Snake(Point start, Directions direction) {
         this.body.add(start);
@@ -34,10 +53,11 @@ public class Snake {
      * LEFT:    x = -1      y = 0
      * RIGHT:   x = 1       y = 0
      *
-     * @param down Enum type of direction (UP, DOWN, LEFT or RIGHT)
+     * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT)
      */
-    public final void changeDirection(Directions down) {
-        switch (down) {
+    public final void changeDirection(Directions dir) {
+        this.direction = dir;
+        switch (dir) {
             case UP:
                 this.directionX = 0;
                 this.directionY = -1;
@@ -60,17 +80,65 @@ public class Snake {
     }
 
     /**
-     * Moves snake one square into current direction.
+     * Moves snake one square into its current direction.
      */
     public void move() {
         Point point = body.get(0);
-        point.translate(directionX, directionY);
+        checkWall(point);
+        try {
+            point.translate(directionX, directionY);
+        } catch (PointOutOfWindowException e) {
+            System.out.println("Needs refactor for the snake class");
+        }
     }
 
     /**
-     * To implement.
+     * Method to check if a given point is a wall.
+     * TODO: Extend this to properly check wall collision instead of just checking border walls
+     *
+     * @param location the location to check for a wall.
      */
-    public void grow() {
-        this.body.add(new Point(1, 1));
+    void checkWall(Point location) {
+        switch (direction) {
+            case UP:
+                if (location.getY() == BORDER_START) { //Upper border
+                    System.out.print("Hit upper");
+                    game.stop();
+                } else {
+                    System.out.print(miss);
+                }
+                break;
+            case DOWN:
+                if (location.getY() + 2 == GameSettings.Y_MAX) { //Bottom border
+                    System.out.print("Hit bottom");
+                    game.stop();
+                } else {
+                    System.out.print(miss);
+                }
+                break;
+            case LEFT:
+                if (location.getX() == BORDER_START) { //Left border
+                    System.out.print("Hit left");
+                    game.stop();
+                } else {
+                    System.out.print(miss);
+                }
+                break;
+            default:
+                if (location.getX() + 2 == GameSettings.X_MAX) { //Right border
+                    System.out.print("Hit right");
+                    game.stop();
+                } else {
+                    System.out.print(miss);
+                }
+                break;
+        }
     }
+
+    ///**
+    // * TODO: TO BE IMPLEMENTED.
+    // */
+    //public void grow() {
+    //    this.body.add(new Point(1, 1));
+    //}
 }

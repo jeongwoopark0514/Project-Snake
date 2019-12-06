@@ -46,10 +46,13 @@ test {
     finalizedBy jacocoTestReport
 }
 
+dependencies { testCompile "org.mockito:mockito-core:2.+" }
+
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    testCompile "org.mockito:mockito-core:2.+"
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
 }
 
@@ -65,27 +68,21 @@ jacocoTestCoverageVerification {
                 minimum = 0.8
             }
             excludes = [
-                'HelloWorld.HelloWorld()',
-                'HelloWorld.main(java.lang.String[])',
-                'Student.hashCode()',
-                'Main.Main()',
-                'Main.main(java.lang.String[])',
-                'Main.start(javafx.stage.Stage)',
-                'gui.controller.LoginController.clickRegister()',
-                'gui.controller.LoginController.LoginController()',
-                'gui.MainRunner/**',
-                'Main.start(javafx.stage.Stage)',
-                'game.GameSettings.*',
-                'game.SnakeApp.*',
-                'game.Game.*',
-                'game.Painter.*',
-                'game.Point.*',
-                'game.Snake.*',
-                'database.DBconnect.*',
-                'gui.controller.LoginController.*',
-                'gui.controller.EntryController.*',
+                'game.GameSettings.*', // just constants
+                'game.SnakeApp.*', // only used for going to game screen directly
+                'game.Painter.*', // uses final class so needs to use PowerMock
+                // TODO: Figure out how to test this
+                'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
+                // an exception class
+                'exception.PointOutOfWindowException.*',
+                'exceptions.PointOutOfWindowException.PointOutOfWindowException(java.lang.String)',
+                'gui.Gui.*',
                 'gui.AlertBox.*',
-                'gui.MainRunner.*'
+                'gui.MainRunner.*',
+                'gui.controller.EntryController.*',
+                'game.Game.collides(game.Point, game.Point)',
+                'game.Game.lambda$gameLoop$0()',
+                'game.Game.stop()' //Impossible to test system.exit (which will get replaced after the prototype)
             ]
         }
         rule {
@@ -96,27 +93,19 @@ jacocoTestCoverageVerification {
                 minimum = 0.7
             }
             excludes = [
-                    'HelloWorld.HelloWorld()',
-                    'HelloWorld.main(java.lang.String[])',
-                    'Student.hashCode()',
-                    'Main.Main()',
-                    'Main.main(java.lang.String[])',
-                    'Main.start(javafx.stage.Stage)',
-                    'gui.controller.LoginController.clickRegister()',
-                    'gui.controller.LoginController.LoginController()',
-                    'gui.MainRunner/**',
-                    'Main.start(javafx.stage.Stage)',
-                    'game.GameSettings.*',
-                    'game.SnakeApp.*',
-                    'game.Game.*',
-                    'game.Painter.*',
-                    'game.Point.*',
-                    'game.Snake.*',
-                    'database.DBconnect.*',
-                    'gui.controller.LoginController.*',
-                    'gui.controller.EntryController.*',
+                    'game.GameSettings.*', // just constants
+                    'game.SnakeApp.*', // only used for going to game screen directly during development
+                    'game.Painter.*', // uses final class so needs to use PowerMock
+                    'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)', //private method
+                    'exception.PointOutOfWindowException.*', // an exception class
+                    'exceptions.PointOutOfWindowException.PointOutOfWindowException(java.lang.String)',
+                    'gui.Gui.*',
                     'gui.AlertBox.*',
-                    'gui.MainRunner.*'
+                    'gui.MainRunner.*',
+                    'gui.controller.EntryController.*',
+                    'game.Game.collides(game.Point, game.Point)',
+                    'game.Game.lambda$gameLoop$0()',
+                    'game.Game.stop()' //Impossible to test system.exit (which will get replaced after the prototype)
             ]
         }
 
