@@ -80,7 +80,6 @@ jacocoTestCoverageVerification {
                 'gui.AlertBox.*',
                 'gui.MainRunner.*',
                 'gui.controller.EntryController.*',
-                'database.DBconnect.*', //include in dev branch
                 'game.Game.stop()' //Impossible to test system.exit (which will get replaced after the prototype)
             ]
         }
@@ -104,7 +103,6 @@ jacocoTestCoverageVerification {
                     'gui.AlertBox.*',
                     'gui.MainRunner.*',
                     'gui.controller.EntryController.*',
-                    'database.DBconnect.*', //include in dev branch
                     'game.Game.stop()' //Impossible to test system.exit (which will get replaced after the prototype)
             ]
         }
