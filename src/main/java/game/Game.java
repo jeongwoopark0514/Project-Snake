@@ -126,8 +126,8 @@ public class Game {
      * Draws a piece of fruit on the game window.
      */
     private void drawFruit() {
-        int x = ThreadLocalRandom.current().nextInt(0, X_MAX - 1);
-        int y = ThreadLocalRandom.current().nextInt(0, Y_MAX - 1);
+        int x = ThreadLocalRandom.current().nextInt(1, X_MAX - 2);
+        int y = ThreadLocalRandom.current().nextInt(1, Y_MAX - 2);
 
         painter.paintFruit(fruit = new Point(x, y));
     }
