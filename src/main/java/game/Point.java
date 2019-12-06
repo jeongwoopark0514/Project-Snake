@@ -1,5 +1,6 @@
 package game;
 
+import exceptions.PointOutOfWindowException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,14 +28,19 @@ public class Point {
     }
 
     /**
+     * TODO: Current implementation only checks whether x or y are below 0.
      * Changes the coordinate of this point.
+     *
      * @param dx Change in x.
      * @param dy Change in y.
+     * @throws PointOutOfWindowException if x < 0 or y < 0
      */
-    public void translate(int dx, int dy) {
+    public void translate(int dx, int dy) throws PointOutOfWindowException {
         this.x += dx;
         this.y += dy;
         // Points should be on board.
-        assert x >= 0 && y >= 0;
+        if (x < 0 || y < 0) {
+            throw new PointOutOfWindowException();
+        }
     }
 }
