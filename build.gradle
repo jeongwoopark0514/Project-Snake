@@ -52,6 +52,7 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.7.1'
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    testCompile "org.mockito:mockito-core:2.+"
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
 }
 
@@ -79,8 +80,9 @@ jacocoTestCoverageVerification {
                 'gui.AlertBox.*',
                 'gui.MainRunner.*',
                 'gui.controller.EntryController.*',
-                'game.Game.collides(game.Point, game.Point)', 
-                'game.Game.lambda$gameLoop$0()'
+                'game.Game.collides(game.Point, game.Point)',
+                'game.Game.lambda$gameLoop$0()',
+                'game.Game.stop()' //Impossible to test system.exit (which will get replaced after the prototype)
             ]
         }
         rule {
@@ -102,7 +104,8 @@ jacocoTestCoverageVerification {
                     'gui.MainRunner.*',
                     'gui.controller.EntryController.*',
                     'game.Game.collides(game.Point, game.Point)',
-                    'game.Game.lambda$gameLoop$0()'
+                    'game.Game.lambda$gameLoop$0()',
+                    'game.Game.stop()' //Impossible to test system.exit (which will get replaced after the prototype)
             ]
         }
 

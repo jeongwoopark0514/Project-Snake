@@ -15,8 +15,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 /**
- * A game.
- * TODO: Write a better description of this class.
+ * Main game control class.
  */
 public class Game {
     @Getter
@@ -31,16 +30,15 @@ public class Game {
     @Getter
     private final transient ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
-
     private transient ScheduledFuture<?> loop;
 
     /**
      * Constructor.
      *
-     * @param scene   Scene
-     * @param painter Painter
-     * @param canvas  Canvas
-     * @param snake   Snake
+     * @param scene   Scene related to the game
+     * @param painter Painter class that paints all the objects on the screen
+     * @param canvas  Canvas canvas to paint on
+     * @param snake   Snake the actual snake that moves trough the game
      */
     public Game(Scene scene, Painter painter, Canvas canvas, Snake snake) {
         this.scene = scene;
@@ -59,18 +57,21 @@ public class Game {
         gameLoop();
     }
 
-    ///**
-    //* TODO: TO BE IMPLEMENTED.
-    //* Stops the game.
-    //*/
-    // public void stop() {
-    //}
+    /**
+     * TODO: TO BE IMPLEMENTED.
+     * Stops the game.
+     */
+    public void stop() {
+        //This is just for the prototype the actual game will not use this,
+        //therefore it needs to be suppressed.
+        System.exit(0); //NOPMD
+    }
 
     ///**
     // * TODO: TO BE IMPLEMENTED.
     // * Pauzes the game.
     // */
-    //public void pauze() {
+    //public void pause() {
     //}
 
     /**
@@ -100,6 +101,25 @@ public class Game {
     private void init() {
         setOnKeyPressedListener();
         canvas.requestFocus();
+        paintWalls();
+    }
+
+    /**
+     * Simple method to paint walls on the borders of the map.
+     */
+    private void paintWalls() {
+        for (int i = 0; i < GameSettings.Y_MAX; i++) {
+            painter.paintWall(new Point(0, i));
+        }
+        for (int i = 0; i < GameSettings.X_MAX; i++) {
+            painter.paintWall(new Point(i, 0));
+        }
+        for (int i = 0; i < GameSettings.Y_MAX; i++) {
+            painter.paintWall(new Point(GameSettings.X_MAX - 1, i));
+        }
+        for (int i = 0; i < GameSettings.X_MAX; i++) {
+            painter.paintWall(new Point(i, GameSettings.Y_MAX - 1));
+        }
     }
 
     /**

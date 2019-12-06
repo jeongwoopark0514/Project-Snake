@@ -21,8 +21,12 @@ public class SnakeApp extends Application {
         launch(args);
     }
 
+    /**
+     * Method to start the game directly without starting screen.
+     * @param primaryStage stage to use.
+     */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         Group root = new Group();
         Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
@@ -35,9 +39,10 @@ public class SnakeApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Snake");
         primaryStage.show();
-
         Painter painter = new Painter(gc);
-        Game game = new Game(scene, painter, canvas, new Snake(new Point(10, 10), DOWN));
+        Snake snake = new Snake(new Point(10, 10), DOWN);
+        Game game = new Game(scene, painter, canvas, snake);
+        snake.setGame(game);
 
         game.start();
     }

@@ -70,6 +70,15 @@ public class Painter {
     }
 
     /**
+     * Paint a wall on a given point.
+     *
+     * @param point point to paint wall on.
+     */
+    public void paintWall(Point point) {
+        paint(point, GameSettings.WALL_COLOR);
+    }
+
+    /**
      * Specific method to draw a piece of fruit.
      *
      * @param point Coordinate

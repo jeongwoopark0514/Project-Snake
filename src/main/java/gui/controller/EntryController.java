@@ -33,7 +33,9 @@ public class EntryController {
         final GraphicsContext gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
         Painter painter = new Painter(gc);
-        Game game = new Game(scene, painter, canvas, new Snake(new Point(10, 10), DOWN));
+        Snake snake = new Snake(new Point(10, 10), DOWN);
+        Game game = new Game(scene, painter, canvas, snake);
+        snake.setGame(game);
         game.start();
         MainRunner.stage.setScene(scene);
 

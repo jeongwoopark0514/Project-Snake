@@ -23,6 +23,15 @@ public class Snake {
     @Getter
     @Setter
     private Point head;
+    @Getter
+    @Setter
+    private Directions direction;
+    @Getter
+    @Setter
+    private Game game;
+
+    private static int BORDER_START = 1;
+    private transient String miss = "Miss";
 
     /**
      * Constructor.
@@ -47,6 +56,7 @@ public class Snake {
      * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT)
      */
     public final void changeDirection(Directions dir) {
+        this.direction = dir;
         switch (dir) {
             case UP:
                 this.directionX = 0;
@@ -71,15 +81,57 @@ public class Snake {
 
     /**
      * Moves snake one square into its current direction.
-     * Whenever snake is outside game screen, point is set to (0,0).
      */
     public void move() {
         Point point = body.get(0);
+        checkWall(point);
         try {
             point.translate(directionX, directionY);
         } catch (PointOutOfWindowException e) {
-            point.setX(0);
-            point.setY(0);
+            System.out.println("Needs refactor for the snake class");
+        }
+    }
+
+    /**
+     * Method to check if a given point is a wall.
+     * TODO: Extend this to properly check wall collision instead of just checking border walls
+     *
+     * @param location the location to check for a wall.
+     */
+    void checkWall(Point location) {
+        switch (direction) {
+            case UP:
+                if (location.getY() == BORDER_START) { //Upper border
+                    System.out.print("Hit upper");
+                    game.stop();
+                } else {
+                    System.out.print(miss);
+                }
+                break;
+            case DOWN:
+                if (location.getY() + 2 == GameSettings.Y_MAX) { //Bottom border
+                    System.out.print("Hit bottom");
+                    game.stop();
+                } else {
+                    System.out.print(miss);
+                }
+                break;
+            case LEFT:
+                if (location.getX() == BORDER_START) { //Left border
+                    System.out.print("Hit left");
+                    game.stop();
+                } else {
+                    System.out.print(miss);
+                }
+                break;
+            default:
+                if (location.getX() + 2 == GameSettings.X_MAX) { //Right border
+                    System.out.print("Hit right");
+                    game.stop();
+                } else {
+                    System.out.print(miss);
+                }
+                break;
         }
     }
 

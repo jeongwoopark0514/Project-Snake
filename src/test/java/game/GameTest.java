@@ -45,6 +45,9 @@ class GameTest {
         game.start();
         Thread.sleep(1000);
         assertNotNull(game.getScheduler());
+        verify(game.getPainter(), atLeastOnce()).unpaintSnake(game.getSnake());
+        verify(game.getPainter(), atLeastOnce()).paintSnake(game.getSnake());
+        verify(game.getSnake(), atLeastOnce()).move();
     }
 
     // TODO: TO BE IMPLEMENTED
@@ -54,6 +57,14 @@ class GameTest {
 
     // TODO: TO BE IMPLEMENTED
     //@Test
-    //void gamePauzeTest() {
+    //void gamePauseTest() {
+    //}
+
+    //@Test
+    //void verifyOnKeyPressedListenersWereSet() {
+    // implicitly verifies init is called in constructor
+    //verify(game.getCanvas()).setOnKeyPressed(Mockito.any());
+    //verify(game.getCanvas()).requestFocus(); // TODO: Interchanging these two lines causes
+    // error
     //}
 }
