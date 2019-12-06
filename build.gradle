@@ -73,8 +73,6 @@ jacocoTestCoverageVerification {
                 'Main.Main()',
                 'Main.main(java.lang.String[])',
                 'Main.start(javafx.stage.Stage)',
-                'gui.controller.LoginController.clickRegister()',
-                'gui.controller.LoginController.LoginController()',
                 'gui.MainRunner/**',
                 'Main.start(javafx.stage.Stage)',
                 'game.GameSettings.*',
@@ -83,11 +81,10 @@ jacocoTestCoverageVerification {
                 'game.Painter.*',
                 'game.Point.*',
                 'game.Snake.*',
-                'database.DBconnect.*',
                 'gui.Gui.*',
-                'gui.controller.EntryController.*',
                 'gui.AlertBox.*',
-                'gui.MainRunner.*'
+                'gui.MainRunner.*',
+                'gui.controller.EntryController.*'
             ]
         }
         rule {
@@ -104,8 +101,6 @@ jacocoTestCoverageVerification {
                     'Main.Main()',
                     'Main.main(java.lang.String[])',
                     'Main.start(javafx.stage.Stage)',
-                    'gui.controller.LoginController.clickRegister()',
-                    'gui.controller.LoginController.LoginController()',
                     'gui.MainRunner/**',
                     'Main.start(javafx.stage.Stage)',
                     'game.GameSettings.*',
@@ -114,11 +109,10 @@ jacocoTestCoverageVerification {
                     'game.Painter.*',
                     'game.Point.*',
                     'game.Snake.*',
-                    'database.DBconnect.*',
                     'gui.Gui.*',
-                    'gui.controller.EntryController.*',
                     'gui.AlertBox.*',
-                    'gui.MainRunner.*'
+                    'gui.MainRunner.*',
+                    'gui.controller.EntryController.*'
             ]
         }
 
