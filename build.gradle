@@ -79,8 +79,8 @@ jacocoTestCoverageVerification {
                 'gui.AlertBox.*',
                 'gui.MainRunner.*',
                 'gui.controller.EntryController.*',
-                'database.DBconnect.*', //include in dev branch
-                'gui.controller.LoginController.*' //include in dev branch
+                'game.Game.collides(game.Point, game.Point)', 
+                'game.Game.lambda$gameLoop$0()'
             ]
         }
         rule {
@@ -101,8 +101,8 @@ jacocoTestCoverageVerification {
                     'gui.AlertBox.*',
                     'gui.MainRunner.*',
                     'gui.controller.EntryController.*',
-                    'database.DBconnect.*', //include in dev branch
-                    'gui.controller.LoginController.*' //include in dev branch
+                    'game.Game.collides(game.Point, game.Point)',
+                    'game.Game.lambda$gameLoop$0()'
             ]
         }
 
