@@ -10,7 +10,6 @@ import javafx.scene.canvas.Canvas;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class GameTest {
     private transient Game game;
@@ -46,9 +45,6 @@ class GameTest {
         game.start();
         Thread.sleep(1000);
         assertNotNull(game.getScheduler());
-        verify(game.getPainter(), atLeastOnce()).unpaintSnake(game.getSnake());
-        verify(game.getPainter(), atLeastOnce()).paintSnake(game.getSnake());
-        verify(game.getSnake(), atLeastOnce()).move();
     }
 
     // TODO: TO BE IMPLEMENTED

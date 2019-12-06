@@ -13,7 +13,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
 /**
- * This class is for debugging purposes so not actual production code.
+ * This class is only used for testing purposes. This way we can directly go
+ * to the game screen and we do not have to click through splash and register screen.
  */
 public class SnakeApp extends Application {
     public static void main(String[] args) {

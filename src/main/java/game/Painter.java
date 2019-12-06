@@ -7,6 +7,7 @@ import static game.GameSettings.SNAKE_COLOR;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 
@@ -23,7 +24,7 @@ public class Painter {
      *
      * @param gc GraphicalContext for this Painter object.
      */
-    public Painter(GraphicsContext gc) {
+    public Painter(@NonNull GraphicsContext gc) {
         this.gc = gc;
     }
 
@@ -33,7 +34,7 @@ public class Painter {
      * @param point Coordinate
      * @param fill  Color to fill with
      */
-    private void paint(Point point, Color fill) {
+    private void paint(@NonNull Point point, Color fill) {
         // paint the cell
         gc.setFill(fill);
         gc.fillRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -44,7 +45,7 @@ public class Painter {
      *
      * @param point Coordinate
      */
-    private void unpaint(Point point) {
+    private void unpaint(@NonNull Point point) {
         gc.clearRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
 
@@ -53,7 +54,7 @@ public class Painter {
      *
      * @param snake Snake
      */
-    public void paintSnake(Snake snake) {
+    public void paintSnake(@NonNull Snake snake) {
         Point point = snake.getBody().get(0);
         paint(point, SNAKE_COLOR);
     }
@@ -63,7 +64,7 @@ public class Painter {
      *
      * @param snake Snake
      */
-    public void unpaintSnake(Snake snake) {
+    public void unpaintSnake(@NonNull Snake snake) {
         Point point = snake.getBody().get(0);
         unpaint(point);
     }
@@ -82,10 +83,7 @@ public class Painter {
      *
      * @param point Coordinate
      */
-    public void paintFruit(Point point) {
-        if (point == null) {
-            return;
-        }
+    public void paintFruit(@NonNull Point point) {
         paint(point, FRUIT_COLOR);
     }
 
