@@ -40,7 +40,7 @@ public class SnakeApp extends Application {
         primaryStage.setTitle("Snake");
         primaryStage.show();
         Painter painter = new Painter(gc);
-        Snake snake = new Snake(new Point(10, 10), DOWN);
+        Snake snake = new Snake(new BodyPart(10, 10, GameSettings.SNAKE_COLOR, null), DOWN);
         Game game = new Game(scene, painter, canvas, snake);
         snake.setGame(game);
 
