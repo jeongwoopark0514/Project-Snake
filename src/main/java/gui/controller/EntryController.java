@@ -30,13 +30,8 @@ public class EntryController {
      * When you click start button, move to game screen.
      */
     public void startGame() {
-        Group root = new Group();
-        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
-        root.getChildren().add(canvas);
-        Painter painter = new Painter(gc);
-        Snake snake = new Snake(new BodyPart(10, 10, GameSettings.SNAKE_COLOR, null), DOWN);
 
         // Creates a score node that is added to the scene.
         final Text score = new Text();
@@ -46,12 +41,18 @@ public class EntryController {
         score.setY(130);
         score.setText("Score: 0");
 
+        Group root = new Group();
+        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
+
+        root.getChildren().add(canvas);
         root.getChildren().add(score);
+
+        Painter painter = new Painter(gc);
+        Snake snake = new Snake(new BodyPart(10, 10, GameSettings.SNAKE_COLOR, null), DOWN);
 
         Game game = new Game(scene, painter, canvas, snake, score);
         snake.setGame(game);
         game.start();
         MainRunner.stage.setScene(scene);
-
     }
 }

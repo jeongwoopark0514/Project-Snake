@@ -35,8 +35,8 @@ public class Game {
     private transient List<Tile> fruits;
     @Getter
     private transient List<Tile> walls;
-    private int score;
-    private Text scoreText;
+    private transient int score;
+    private transient Text scoreText;
 
 
     /**

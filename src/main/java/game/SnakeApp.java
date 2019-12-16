@@ -34,9 +34,6 @@ public class SnakeApp extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-        Group root = new Group();
-        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
-
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -47,6 +44,9 @@ public class SnakeApp extends Application {
         score.setX(860);
         score.setY(60);
         score.setText("Score: 0");
+
+        Group root = new Group();
+        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         root.getChildren().add(canvas);
         root.getChildren().add(score);
