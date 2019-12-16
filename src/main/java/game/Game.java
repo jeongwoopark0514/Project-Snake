@@ -12,6 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.text.Text;
 import lombok.Getter;
 
 /**
@@ -34,6 +35,9 @@ public class Game {
     private transient List<Tile> fruits;
     @Getter
     private transient List<Tile> walls;
+    private int score;
+    private Text scoreText;
+
 
     /**
      * Constructor.
@@ -43,12 +47,14 @@ public class Game {
      * @param canvas  Canvas canvas to paint on
      * @param snake   Snake the actual snake that moves trough the game
      */
-    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake) {
+    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText) {
         this.scene = scene;
         this.canvas = canvas;
         this.snake = snake;
         this.painter = painter;
         this.fruits = new ArrayList<>();
+        this.scoreText = scoreText;
+        this.score = 0;
         init();
     }
 
@@ -105,6 +111,8 @@ public class Game {
         for (int i = 0; i < fruits.size(); i++) {
             Fruit fruit = (Fruit) fruits.get(i);
             if (snake.getHead().checkSameCoords(fruit)) {
+                score += 1;
+                scoreText.setText("Score: " + score);
                 fruits.remove(i);
                 painter.unPaint(fruit);
                 Logger.getLogger("Collision detected.");
