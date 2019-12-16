@@ -23,7 +23,7 @@ public class Fruit extends Tile {
      * @param sprite the sprite of the fruit (optional).
      * @param value the value of this fruit tile.
      */
-    public Fruit(int x, int y, Color color, Image sprite, int value) {
+    public Fruit(int x, int y, Color color, String sprite, int value) {
         super(x, y, color, sprite);
         this.value = value;
     }

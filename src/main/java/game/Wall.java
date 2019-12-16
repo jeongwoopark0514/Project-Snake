@@ -15,7 +15,7 @@ public class Wall extends Tile {
      * @param color the color of the wall
      * @param sprite the sprite of the wall (optional)
      */
-    public Wall(int x, int y, Color color, Image sprite) {
+    public Wall(int x, int y, Color color, String sprite) {
         super(x, y, color, sprite);
     }
 }

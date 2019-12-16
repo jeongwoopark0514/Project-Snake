@@ -1,14 +1,14 @@
 package game;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A part of the snake, which has a direction in which it needs to move.
+ * A BodyPart is actually just a specific implementation of Tile
+ */
 public class BodyPart extends Tile {
-    @Getter
-    @Setter
-    private Directions lastMove;
     @Getter
     @Setter
     private int directionX;
@@ -16,7 +16,15 @@ public class BodyPart extends Tile {
     @Setter
     private int directionY;
 
-    public BodyPart(int x, int y, Color color, Image sprite) {
+    /**
+     * Default constructor of a BodyPart.
+     *
+     * @param x      x coordinate on the board
+     * @param y      y coordinate on the board
+     * @param color  color of the part
+     * @param sprite sprite of the part (optional)
+     */
+    public BodyPart(int x, int y, Color color, String sprite) {
         super(x, y, color, sprite);
     }
 
@@ -51,6 +59,5 @@ public class BodyPart extends Tile {
             default:
                 break;
         }
-        this.lastMove = dir;
     }
 }
