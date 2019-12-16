@@ -4,15 +4,15 @@ import static game.GameSettings.X_MAX;
 import static game.GameSettings.Y_MAX;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import lombok.Getter;
-import lombok.NonNull;
 
 /**
  * Main game control class.
@@ -26,11 +26,14 @@ public class Game {
     private final transient Canvas canvas;
     @Getter
     private final transient Snake snake;
-    private transient Point fruit;
     @Getter
     private final transient ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
-    private transient ScheduledFuture<?> loop;
+    //Made the fruits a list to provide the option to add multiple fruits.
+    @Getter
+    private transient List<Tile> fruits;
+    @Getter
+    private transient List<Tile> walls;
 
     /**
      * Constructor.
@@ -45,6 +48,7 @@ public class Game {
         this.canvas = canvas;
         this.snake = snake;
         this.painter = painter;
+        this.fruits = new ArrayList<>();
         init();
     }
 
@@ -53,7 +57,7 @@ public class Game {
      * Draws a fruit on random place in the game window and then starts the game loop.
      */
     public void start() {
-        drawFruit();
+        createFruit();
         gameLoop();
     }
 
@@ -82,66 +86,89 @@ public class Game {
      */
     private void gameLoop() {
         Runnable move = () -> {
-            painter.unpaintSnake(snake);
+            painter.unPaint(snake.getBody());
             snake.move();
-            if (collides(snake.getHead(), fruit)) {
-                drawFruit();
-                Logger.getLogger("Collision detected.");
-            }
-            painter.paintSnake(snake);
+            manageFruits();
+            checkWalls();
+            painter.paint(snake.getBody());
         };
 
-        loop = scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
+        scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
+    }
+
+    /**
+     * Test collision of the snake with all fruits on the map.
+     * If the fruit was hit, make sure it gets removed.
+     * Make sure there is always a fruit on the map and repaint all fruits on the map.
+     */
+    private void manageFruits() {
+        for (int i = 0; i < fruits.size(); i++) {
+            Fruit fruit = (Fruit) fruits.get(i);
+            if (snake.getHead().checkSameCoords(fruit)) {
+                fruits.remove(i);
+                painter.unPaint(fruit);
+                Logger.getLogger("Collision detected.");
+                break;
+            }
+        }
+        if (fruits.size() < GameSettings.MIN_PELLETS) {
+            createFruit();
+        }
+        painter.paint(fruits);
+    }
+
+    /**
+     * Method that check collision of the snake with all walls on the map,
+     * calls the stop method if a wall was hit.
+     */
+    private void checkWalls() {
+        for (Tile wall : walls) {
+            if (snake.getHead().checkSameCoords(wall)) {
+                stop();
+            }
+        }
     }
 
     /**
      * Initializes the game by setting the on-key-pressed listeners (for arrow buttons) and
      * sets focus on canvas.
+     * Also draws the walls on the board.
      */
     private void init() {
         setOnKeyPressedListener();
         canvas.requestFocus();
-        paintWalls();
+        createWalls();
+        painter.paint(walls);
     }
 
     /**
-     * Simple method to paint walls on the borders of the map.
+     * Simple method to create walls objects to be put onto the map.
      */
-    private void paintWalls() {
+    private void createWalls() {
+        walls = new ArrayList<>();
         for (int i = 0; i < GameSettings.Y_MAX; i++) {
-            painter.paintWall(new Point(0, i));
+            walls.add(new Wall(0, i, GameSettings.WALL_COLOR, null));
         }
         for (int i = 0; i < GameSettings.X_MAX; i++) {
-            painter.paintWall(new Point(i, 0));
+            walls.add(new Wall(i, 0, GameSettings.WALL_COLOR, null));
         }
         for (int i = 0; i < GameSettings.Y_MAX; i++) {
-            painter.paintWall(new Point(GameSettings.X_MAX - 1, i));
+            walls.add(new Wall(GameSettings.X_MAX - 1, i, GameSettings.WALL_COLOR, null));
         }
         for (int i = 0; i < GameSettings.X_MAX; i++) {
-            painter.paintWall(new Point(i, GameSettings.Y_MAX - 1));
+            walls.add(new Wall(i, GameSettings.Y_MAX - 1, GameSettings.WALL_COLOR, null));
         }
     }
 
     /**
-     * Draws a piece of fruit on the game window.
+     * Create a piece of fruit to be put onto the map.
      */
-    private void drawFruit() {
+    private void createFruit() {
+        //Image sprite = new Image("/image/apple_pellet.png");
         int x = ThreadLocalRandom.current().nextInt(1, X_MAX - 2);
         int y = ThreadLocalRandom.current().nextInt(1, Y_MAX - 2);
-
-        painter.paintFruit(fruit = new Point(x, y));
-    }
-
-    /**
-     * Checks whether two points collide with each other. This is
-     * equivalent to check if two points are equal.
-     *
-     * @param p1 Point 1
-     * @param p2 Point 2
-     * @return True if two points are equal.
-     */
-    private boolean collides(@NonNull Point p1, @NonNull Point p2) {
-        return p1.equals(p2);
+        Fruit fruit = new Fruit(x, y, GameSettings.FRUIT_COLOR, null, 10);
+        fruits.add(fruit);
     }
 
     /**

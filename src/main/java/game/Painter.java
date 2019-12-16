@@ -1,15 +1,13 @@
 package game;
 
 import static game.GameSettings.CELL_SIZE;
-import static game.GameSettings.FRUIT_COLOR;
-import static game.GameSettings.SNAKE_COLOR;
 
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-
 
 /**
  * Used for painting shapes on a canvas, which usually represents the game screen.
@@ -29,62 +27,55 @@ public class Painter {
     }
 
     /**
-     * General method to draw something on the canvas.
+     * General method to draw a Tile on the canvas.
      *
-     * @param point Coordinate
-     * @param fill  Color to fill with
+     * @param tile Coordinate
      */
-    private void paint(@NonNull Point point, Color fill) {
+    void paint(@NonNull Tile tile) {
         // paint the cell
-        gc.setFill(fill);
-        gc.fillRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        if (tile.getSprite() == null) {
+            gc.setFill(tile.getColor());
+            gc.fillRect(tile.getX() * CELL_SIZE, tile.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        } else {
+            Image sprite = tile.getSprite();
+            double height = sprite.getHeight();
+            double width = sprite.getWidth();
+            int positionX = tile.getX() * CELL_SIZE;
+            int positionY = tile.getY() * CELL_SIZE;
+            gc.drawImage(sprite, 0, 0, width, height, positionX, positionY, CELL_SIZE, CELL_SIZE);
+        }
+
     }
 
     /**
-     * Removes color from point in grid at coordinate point.
+     * Paint multiple tiles on the board.
      *
-     * @param point Coordinate
+     * @param tiles the list of tiles to paint.
      */
-    private void unpaint(@NonNull Point point) {
-        gc.clearRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    void paint(@NonNull List<Tile> tiles) {
+        for (Tile tile : tiles) {
+            paint(tile);
+        }
     }
 
     /**
-     * Specific method to draw a snake.
+     * Removes the sprite/color from a Tile on the board.
      *
-     * @param snake Snake
+     * @param tile Coordinate
      */
-    public void paintSnake(@NonNull Snake snake) {
-        Point point = snake.getBody().get(0);
-        paint(point, SNAKE_COLOR);
+    void unPaint(@NonNull Tile tile) {
+        gc.clearRect(tile.getX() * CELL_SIZE, tile.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
 
     /**
-     * Calls unpaint on all points in the canvas that represent that snake.
+     * Remove the sprite/color from all the tiles in a list of tiles.
      *
-     * @param snake Snake
+     * @param tiles the list of tiles to clear.
      */
-    public void unpaintSnake(@NonNull Snake snake) {
-        Point point = snake.getBody().get(0);
-        unpaint(point);
-    }
-
-    /**
-     * Paint a wall on a given point.
-     *
-     * @param point point to paint wall on.
-     */
-    public void paintWall(Point point) {
-        paint(point, GameSettings.WALL_COLOR);
-    }
-
-    /**
-     * Specific method to draw a piece of fruit.
-     *
-     * @param point Coordinate
-     */
-    public void paintFruit(@NonNull Point point) {
-        paint(point, FRUIT_COLOR);
+    void unPaint(@NonNull List<Tile> tiles) {
+        for (Tile tile : tiles) {
+            unPaint(tile);
+        }
     }
 
     ///**

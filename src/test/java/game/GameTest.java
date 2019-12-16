@@ -1,9 +1,7 @@
 package game;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
