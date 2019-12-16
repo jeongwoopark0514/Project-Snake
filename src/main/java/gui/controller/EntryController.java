@@ -5,29 +5,35 @@ import static game.GameSettings.BACKGROUND_COLOR;
 import static game.GameSettings.HEIGHT;
 import static game.GameSettings.WIDTH;
 
+import game.BodyPart;
 import game.Game;
-import game.Point;
+import game.GameSettings;
+import game.Painter;
 import game.Snake;
 import gui.MainRunner;
-import java.io.IOException;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
-
+/**
+ * This class does not need to be tested.
+ * This is all GUI class.
+ */
 public class EntryController {
     /**
-     * when you click start button, move to game screen.
-     * @throws IOException IOexception thrown for null file.
+     * When you click start button, move to game screen.
      */
-    public void startGame() throws IOException {
+    public void startGame() {
         Group root = new Group();
         Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
         root.getChildren().add(canvas);
-        Game game = new Game(scene, gc, canvas, new Snake(new Point(10, 10), DOWN));
+        Painter painter = new Painter(gc);
+        Snake snake = new Snake(new BodyPart(10, 10, GameSettings.SNAKE_COLOR, null), DOWN);
+        Game game = new Game(scene, painter, canvas, snake);
+        snake.setGame(game);
         game.start();
         MainRunner.stage.setScene(scene);
 

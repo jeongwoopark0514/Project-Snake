@@ -1,82 +1,91 @@
 package game;
 
 import static game.GameSettings.CELL_SIZE;
-import static game.GameSettings.FRUIT_COLOR;
-import static game.GameSettings.SNAKE_COLOR;
 
+import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
-
+import javafx.scene.image.Image;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 /**
- * Used for painting shapes on a canvas.
+ * Used for painting shapes on a canvas, which usually represents the game screen.
  */
 public class Painter {
+    @Getter
+    @Setter
+    private GraphicsContext gc;
+
     /**
-     * General method to draw something on the canvas.
+     * Constructor.
      *
-     * @param gc    GraphicsContext
-     * @param point Coordinate
-     * @param fill  Color to fill with
+     * @param gc GraphicalContext for this Painter object.
      */
-    private static void paint(GraphicsContext gc, Point point, Color fill) {
+    public Painter(@NonNull GraphicsContext gc) {
+        this.gc = gc;
+    }
+
+    /**
+     * General method to draw a Tile on the canvas.
+     *
+     * @param tile Coordinate
+     */
+    void paint(@NonNull Tile tile) {
         // paint the cell
-        gc.setFill(fill);
-        gc.fillRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-    }
-
-    /**
-     * Removes color from point in grid at coordinate point.
-     *
-     * @param gc    GraphicsContext
-     * @param point Coordinate
-     */
-    private static void unpaint(GraphicsContext gc, Point point) {
-        gc.clearRect(point.getX() * CELL_SIZE, point.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-    }
-
-    /**
-     * Specific method to draw a snake.
-     *
-     * @param gc    GraphicsContext
-     * @param snake Snake
-     */
-    public static void paintSnake(GraphicsContext gc, Snake snake) {
-        Point point = snake.getBody().get(0);
-        paint(gc, point, SNAKE_COLOR);
-    }
-
-    /**
-     * Calls unpaint on all points in the canvas that represent that snake.
-     *
-     * @param gc    GraphicsContext
-     * @param snake Snake
-     */
-    public static void unpaintSnake(GraphicsContext gc, Snake snake) {
-        Point point = snake.getBody().get(0);
-        unpaint(gc, point);
-    }
-
-    /**
-     * Specific method to draw a piece of fruit.
-     *
-     * @param gc    GraphicsContext
-     * @param point Coordinate
-     */
-    public static void paintFruit(GraphicsContext gc, Point point) {
-        if (point == null) {
-            return;
+        if (tile.getSprite() == null) {
+            gc.setFill(tile.getColor());
+            gc.fillRect(tile.getX() * CELL_SIZE, tile.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+        } else {
+            Image sprite = tile.getSprite();
+            double height = sprite.getHeight();
+            double width = sprite.getWidth();
+            int positionX = tile.getX() * CELL_SIZE;
+            int positionY = tile.getY() * CELL_SIZE;
+            gc.drawImage(sprite, 0, 0, width, height, positionX, positionY, CELL_SIZE, CELL_SIZE);
         }
-        paint(gc, point, FRUIT_COLOR);
+
     }
 
     /**
-     * Corrects points that are outside of the dimensions of the field.
+     * Paint multiple tiles on the board.
      *
-     * @param point Point.
-     * @return
+     * @param tiles the list of tiles to paint.
      */
-    private static Point wrap(Point point) {
-        return new Point(0, 0);
+    void paint(@NonNull List<Tile> tiles) {
+        for (Tile tile : tiles) {
+            paint(tile);
+        }
     }
+
+    /**
+     * Removes the sprite/color from a Tile on the board.
+     *
+     * @param tile Coordinate
+     */
+    void unPaint(@NonNull Tile tile) {
+        gc.clearRect(tile.getX() * CELL_SIZE, tile.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+    }
+
+    /**
+     * Remove the sprite/color from all the tiles in a list of tiles.
+     *
+     * @param tiles the list of tiles to clear.
+     */
+    void unPaint(@NonNull List<Tile> tiles) {
+        for (Tile tile : tiles) {
+            unPaint(tile);
+        }
+    }
+
+    ///**
+    //* TODO: TO BE IMPLEMENTED
+    //* Corrects points that are outside of the dimensions of the field.
+    //*
+    //* @param point Point.
+    //* @return A wrapped point.
+    //*/
+    //private Point wrap(Point point) {
+    //    return new Point(0, 0);
+    //}
 }

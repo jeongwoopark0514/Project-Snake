@@ -6,71 +6,65 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Snake.
+ * An object that represents the Hero of the game, Snake.
+ * Snake has a direction in which it moves, and a method that moves the snake one square
+ * in its current direction.
  */
 public class Snake {
-    @Getter private List<Point> body = new LinkedList<>();
-    @Getter @Setter private int directionX;
-    @Getter @Setter private int directionY;
-    @Getter @Setter private Point head;
+    @Getter
+    private List<Tile> body = new LinkedList<>();
+    @Getter
+    @Setter
+    private BodyPart head;
+    @Getter
+    @Setter
+    private Directions direction;
+    @Getter
+    @Setter
+    private Game game;
 
     /**
      * Constructor.
      *
-     * @param start Coordinate to initialize the snake with.
-     * @param direction Direction to initialize the snake with.
+     * @param start     Initial coordinate of the snake.
+     * @param direction Initial direction of the snake.
      */
-    public Snake(Point start, Directions direction) {
+    public Snake(BodyPart start, Directions direction) {
         this.body.add(start);
-        this.changeDirection(direction);
         this.head = start;
+        head.setLastMove(direction);
+        head.setDirection(direction);
     }
 
     /**
-     * Changes fields directionX and directionY according to the
-     * given parameter.
-     * UP:      x = 0       y = -1
-     * DOWN:    x = 0       y = 1
-     * LEFT:    x = -1      y = 0
-     * RIGHT:   x = 1       y = 0
+     * Changes the direction of the snake by setting the direction it's head moves to.
      *
-     * @param down Enum type of direction (UP, DOWN, LEFT or RIGHT)
+     * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT)
      */
-    public final void changeDirection(Directions down) {
-        switch (down) {
-            case UP:
-                this.directionX = 0;
-                this.directionY = -1;
-                break;
-            case DOWN:
-                this.directionX = 0;
-                this.directionY = 1;
-                break;
-            case LEFT:
-                this.directionX = -1;
-                this.directionY = 0;
-                break;
-            case RIGHT:
-                this.directionX = 1;
-                this.directionY = 0;
-                break;
-            default:
-                break;
+    public final void changeDirection(Directions dir) {
+        head.setDirection(dir);
+    }
+
+    /**
+     * Moves snake one square into its current direction.
+     */
+    public void move() {
+        //This should be changed when the snake gets proper grow methods,
+        //body part n should move into the direction part n - 1 moved in the last move.
+        //So if the head first goes up and now goes left, the part directly after the head
+        //should move up. (The BodyPart's "lastMove" property can be used to implement this.
+
+        for (Tile tile : body) {
+            BodyPart part = (BodyPart) tile;
+            part.translate(part.getDirectionX(), part.getDirectionY());
         }
     }
 
-    /**
-     * Moves snake one square into current direction.
-     */
-    public void move() {
-        Point point = body.get(0);
-        point.translate(directionX, directionY);
-    }
 
-    /**
-     * To implement.
-     */
-    public void grow() {
-        this.body.add(new Point(1, 1));
-    }
+    ///**
+    // * TODO: TO BE IMPLEMENTED.
+    // */
+    //public void grow() {
+    //    this.body.add(new Point(1, 1));
+    //}
 }

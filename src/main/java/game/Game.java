@@ -1,68 +1,179 @@
 package game;
 
+import static game.GameSettings.X_MAX;
+import static game.GameSettings.Y_MAX;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Logger;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import lombok.Getter;
 
+/**
+ * Main game control class.
+ */
 public class Game {
+    @Getter
     private final transient Scene scene;
-    private final transient GraphicsContext gc;
-    private final transient Canvas canvas;
-    private final transient Snake snake;
+    @Getter
     private final transient Painter painter;
-
+    @Getter
+    private final transient Canvas canvas;
+    @Getter
+    private final transient Snake snake;
+    @Getter
     private final transient ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
-
-    private transient ScheduledFuture<?> loop;
+    //Made the fruits a list to provide the option to add multiple fruits.
+    @Getter
+    private transient List<Tile> fruits;
+    @Getter
+    private transient List<Tile> walls;
 
     /**
      * Constructor.
      *
-     * @param scene  Scene
-     * @param gc     GraphicalContext
-     * @param canvas Canvas
-     * @param snake  Snake
+     * @param scene   Scene related to the game
+     * @param painter Painter class that paints all the objects on the screen
+     * @param canvas  Canvas canvas to paint on
+     * @param snake   Snake the actual snake that moves trough the game
      */
-    public Game(Scene scene, GraphicsContext gc, Canvas canvas, Snake snake) {
+    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake) {
         this.scene = scene;
-        this.gc = gc;
         this.canvas = canvas;
         this.snake = snake;
-        this.painter = new Painter();
+        this.painter = painter;
+        this.fruits = new ArrayList<>();
         init();
     }
 
+    /**
+     * Starts the game.
+     * Draws a fruit on random place in the game window and then starts the game loop.
+     */
     public void start() {
+        createFruit();
         gameLoop();
     }
 
+    /**
+     * TODO: TO BE IMPLEMENTED.
+     * Stops the game.
+     */
     public void stop() {
+        //This is just for the prototype the actual game will not use this,
+        //therefore it needs to be suppressed.
+        System.exit(0); //NOPMD
     }
 
-    public void pauze() {
-    }
+    ///**
+    // * TODO: TO BE IMPLEMENTED.
+    // * Pauzes the game.
+    // */
+    //public void pause() {
+    //}
 
+    /**
+     * Defines a method move that clears current position of the snake on the canvas,
+     * moves the snake and than paints the new position of the snake. Also checks if new
+     * snake collides with the fruit.
+     * Move is scheduled to execute every 100 milliseconds.
+     */
     private void gameLoop() {
         Runnable move = () -> {
-            painter.unpaintSnake(gc, snake);
+            painter.unPaint(snake.getBody());
             snake.move();
-            painter.paintSnake(gc, snake);
+            manageFruits();
+            checkWalls();
+            painter.paint(snake.getBody());
         };
 
-        loop = scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
+        scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
     }
 
+    /**
+     * Test collision of the snake with all fruits on the map.
+     * If the fruit was hit, make sure it gets removed.
+     * Make sure there is always a fruit on the map and repaint all fruits on the map.
+     */
+    private void manageFruits() {
+        for (int i = 0; i < fruits.size(); i++) {
+            Fruit fruit = (Fruit) fruits.get(i);
+            if (snake.getHead().checkSameCoords(fruit)) {
+                fruits.remove(i);
+                painter.unPaint(fruit);
+                Logger.getLogger("Collision detected.");
+                break;
+            }
+        }
+        if (fruits.size() < GameSettings.MIN_PELLETS) {
+            createFruit();
+        }
+        painter.paint(fruits);
+    }
+
+    /**
+     * Method that check collision of the snake with all walls on the map,
+     * calls the stop method if a wall was hit.
+     */
+    private void checkWalls() {
+        for (Tile wall : walls) {
+            if (snake.getHead().checkSameCoords(wall)) {
+                stop();
+            }
+        }
+    }
+
+    /**
+     * Initializes the game by setting the on-key-pressed listeners (for arrow buttons) and
+     * sets focus on canvas.
+     * Also draws the walls on the board.
+     */
     private void init() {
         setOnKeyPressedListener();
         canvas.requestFocus();
+        createWalls();
+        painter.paint(walls);
     }
 
+    /**
+     * Simple method to create walls objects to be put onto the map.
+     */
+    private void createWalls() {
+        walls = new ArrayList<>();
+        for (int i = 0; i < GameSettings.Y_MAX; i++) {
+            walls.add(new Wall(0, i, GameSettings.WALL_COLOR, null));
+        }
+        for (int i = 0; i < GameSettings.X_MAX; i++) {
+            walls.add(new Wall(i, 0, GameSettings.WALL_COLOR, null));
+        }
+        for (int i = 0; i < GameSettings.Y_MAX; i++) {
+            walls.add(new Wall(GameSettings.X_MAX - 1, i, GameSettings.WALL_COLOR, null));
+        }
+        for (int i = 0; i < GameSettings.X_MAX; i++) {
+            walls.add(new Wall(i, GameSettings.Y_MAX - 1, GameSettings.WALL_COLOR, null));
+        }
+    }
+
+    /**
+     * Create a piece of fruit to be put onto the map.
+     */
+    private void createFruit() {
+        //Image sprite = new Image("/image/apple_pellet.png");
+        int x = ThreadLocalRandom.current().nextInt(1, X_MAX - 2);
+        int y = ThreadLocalRandom.current().nextInt(1, Y_MAX - 2);
+        Fruit fruit = new Fruit(x, y, GameSettings.FRUIT_COLOR, null, 10);
+        fruits.add(fruit);
+    }
+
+    /**
+     * Adds event listeners for arrow keys.
+     */
     private void setOnKeyPressedListener() {
         canvas.setOnKeyPressed(e -> {
             switch (e.getCode()) {

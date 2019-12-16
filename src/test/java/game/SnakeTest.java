@@ -1,103 +1,58 @@
 package game;
 
-import static game.Directions.DOWN;
 import static game.Directions.LEFT;
 import static game.Directions.RIGHT;
-import static game.Directions.UP;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import javafx.scene.paint.Color;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 
 class SnakeTest {
-    private static Snake snake;
+    private transient Snake snake;
+    private transient ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private transient PrintStream originalOut = System.out;
+    private transient String miss = "Miss";
+    @Mock
+    private transient Game game;
+
 
     @BeforeEach
     void setUp() {
-        Point start = new Point(5, 5);
+        MockitoAnnotations.initMocks(this);
+        System.setOut(new PrintStream(outContent));
+        BodyPart start = new BodyPart(5, 5, Color.GREEN, null);
         snake = new Snake(start, LEFT);
     }
 
-    @Test
-    void snakeDirectionCorrectlyInitializedTest() {
-        assertEquals(-1, snake.getDirectionX());
-        assertEquals(0, snake.getDirectionY());
+    @AfterEach
+    void cleanUp() {
+        System.setOut(originalOut);
     }
 
     @Test
-    void snakeChangeDirectionDownTest() {
-        assertNotEquals(0, snake.getDirectionX());
-        assertNotEquals(-1, snake.getDirectionY());
-        snake.changeDirection(DOWN);
-        assertEquals(0, snake.getDirectionX());
-        assertEquals(1, snake.getDirectionY());
+    void constructorHeadSet() {
+        assertTrue(new BodyPart(5, 5, Color.GREEN, null).checkSameCoords(snake.getHead()));
     }
 
     @Test
-    void snakeChangeDirectionUpTest() {
-        snake.changeDirection(UP);
-        assertEquals(0, snake.getDirectionX());
-        assertEquals(-1, snake.getDirectionY());
-    }
-
-    @Test
-    void snakeChangeDirectionLeftTest() {
-        snake.changeDirection(UP);
-        snake.changeDirection(LEFT);
-        assertEquals(-1, snake.getDirectionX());
-        assertEquals(0, snake.getDirectionY());
-    }
-
-    @Test
-    void snakeChangeDirectionRightTest() {
+    void changeDirectionTest() {
         snake.changeDirection(RIGHT);
-        assertEquals(1, snake.getDirectionX());
-        assertEquals(0, snake.getDirectionY());
+        assertEquals(1, snake.getHead().getDirectionX());
+        assertEquals(0, snake.getHead().getDirectionY());
     }
 
     @Test
-    void snakeMoveLeftChangesPositionOfSnakeTest() {
-        snake.changeDirection(LEFT);
-        assertEquals(new Point(5, 5), snake.getBody().get(0));
+    void moveTest() {
         snake.move();
-        assertEquals(new Point(4, 5), snake.getBody().get(0));
+        assertEquals(4, snake.getHead().getX());
+        assertEquals(5, snake.getHead().getY());
     }
-
-    @Test
-    void snakeMoveRightChangesPositionOfSnakeTest() {
-        snake.changeDirection(RIGHT);
-        assertEquals(new Point(5, 5), snake.getBody().get(0));
-        snake.move();
-        assertEquals(new Point(6, 5), snake.getBody().get(0));
-    }
-
-    @Test
-    void snakeMoveUpChangesPositionOfSnakeTest() {
-        snake.changeDirection(UP);
-        assertEquals(new Point(5, 5), snake.getBody().get(0));
-        snake.move();
-        assertEquals(new Point(5, 4), snake.getBody().get(0));
-    }
-
-    @Test
-    void snakeMoveDownChangesPositionOfSnakeTest() {
-        snake.changeDirection(DOWN);
-        assertEquals(new Point(5, 5), snake.getBody().get(0));
-        snake.move();
-        assertEquals(new Point(5, 6), snake.getBody().get(0));
-    }
-
-    @Test
-    void growSnakeAddsOnePointToBodyTest() {
-        assertEquals(1, snake.getBody().size());
-        snake.grow();
-        assertEquals(2, snake.getBody().size());
-    }
-
-    @Test
-    void snakeMoveRightWorksWithLongerSnake() {
-
-    }
-
 }
