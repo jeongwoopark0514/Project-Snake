@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #573723;" stylesheets="@../css/score.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ScoreController">
+   <children>
+      <ImageView fitHeight="206.0" fitWidth="173.0" layoutX="414.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/transparent_logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="273.0" layoutY="330.0" prefHeight="154.0" prefWidth="469.0" />
+      <ImageView fitHeight="76.0" fitWidth="432.0" layoutX="315.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/yourscore.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="56.0" fitWidth="40.0" layoutX="786.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <image>
+            <Image url="@../image/exit.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
