@@ -135,9 +135,10 @@ public class Game {
      * Method that check collision of the snake with its own body,
      * calls the stop method if a wall was hit.
      */
-    private void checkBody(){
-        for(Tile bp : snake.getBody()){
-            if(!bp.equals(snake.getHead())&&!bp.equals(snake.getBody().get(1))&&snake.getHead().checkSameCoords(bp)){
+    private void checkBody() {
+        for (Tile bp : snake.getBody() ) {
+            if (!bp.equals(snake.getHead() ) && !bp.equals(snake.getBody().get(1))
+                    && snake.getHead().checkSameCoords(bp)) {
                 stop();
             }
         }

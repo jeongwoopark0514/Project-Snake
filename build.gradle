@@ -80,7 +80,8 @@ jacocoTestCoverageVerification {
                 'game.Game.lambda$gameLoop$0()',
                 'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
                 'game.Game.manageFruits()',
-                'game.Game.checkWalls()'
+                'game.Game.checkWalls()',
+                'game.Game.checkBody()'
             ]
         }
         rule {
@@ -102,7 +103,8 @@ jacocoTestCoverageVerification {
                     'game.Game.lambda$gameLoop$0()',
                     'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
                     'game.Game.manageFruits()',
-                    'game.Game.checkWalls()'
+                    'game.Game.checkWalls()',
+                    'game.Game.checkBody()'
             ]
         }
 
