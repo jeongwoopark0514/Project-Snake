@@ -28,7 +28,7 @@ class SnakeTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         System.setOut(new PrintStream(outContent));
-        BodyPart start = new BodyPart(5, 5, Color.GREEN, null);
+        BodyPart start = new BodyPart(5, 5, Color.GREEN, GameSettings.SNAKE_HEAD);
         snake = new Snake(start, LEFT);
     }
 
@@ -50,9 +50,48 @@ class SnakeTest {
     }
 
     @Test
-    void moveTest() {
+    void moveSizeOneTest() {
         snake.move();
         assertEquals(4, snake.getHead().getX());
         assertEquals(5, snake.getHead().getY());
     }
+
+    @Test
+    void moveSizeTwoTest() {
+        BodyPart newPart = new BodyPart(6, 5, Color.GREEN, null);
+        snake.getBody().add(newPart);
+        snake.move();
+        BodyPart first = (BodyPart) snake.getBody().get(0);
+        BodyPart second = (BodyPart) snake.getBody().get(1);
+        assertEquals(4, first.getX());
+        assertEquals(5, first.getY());
+        assertEquals(5, second.getX());
+        assertEquals(5, second.getY());
+    }
+
+    @Test
+    void growTest() {
+        snake.grow();
+        assertEquals(2, snake.getBody().size());
+    }
+
+    @Test
+    void setSpritesHeadTest() {
+        snake.setSprites();
+        assertEquals(GameSettings.SNAKE_HEAD, snake.getHead().getSprite());
+    }
+
+    @Test
+    void setSpritesTailTest() {
+        snake.grow();
+        assertEquals(GameSettings.SNAKE_TAIL, snake.getBody().get(1).getSprite());
+    }
+
+    @Test
+    void setSpritesBodyTest() {
+        snake.grow();
+        snake.grow();
+        assertEquals(GameSettings.SNAKE_BODY, snake.getBody().get(1).getSprite());
+    }
+
 }

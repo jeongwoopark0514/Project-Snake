@@ -107,6 +107,7 @@ public class Game {
             if (snake.getHead().checkSameCoords(fruit)) {
                 fruits.remove(i);
                 painter.unPaint(fruit);
+                snake.grow();
                 Logger.getLogger("Collision detected.");
                 break;
             }

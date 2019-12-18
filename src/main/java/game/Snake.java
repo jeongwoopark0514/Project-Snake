@@ -22,6 +22,7 @@ public class Snake {
     @Getter
     @Setter
     private Game game;
+    private transient int minSize = 1; //minimal size the snake has to be to have a body
 
     /**
      * Constructor.
@@ -32,8 +33,21 @@ public class Snake {
     public Snake(BodyPart start, Directions direction) {
         this.body.add(start);
         this.head = start;
-        head.setLastMove(direction);
         head.setDirection(direction);
+    }
+
+    /**
+     * Set the sprite of the different parts of the snake.
+     * TODO: account for rotation and direction.
+     */
+    public void setSprites() {
+        body.get(0).setSprite(GameSettings.SNAKE_HEAD);
+        if (body.size() > minSize) {
+            for (int i = 1; i < body.size() - 1; i++) {
+                body.get(i).setSprite(GameSettings.SNAKE_BODY);
+            }
+            body.get(body.size() - 1).setSprite(GameSettings.SNAKE_TAIL);
+        }
     }
 
     /**
@@ -49,22 +63,23 @@ public class Snake {
      * Moves snake one square into its current direction.
      */
     public void move() {
-        //This should be changed when the snake gets proper grow methods,
-        //body part n should move into the direction part n - 1 moved in the last move.
-        //So if the head first goes up and now goes left, the part directly after the head
-        //should move up. (The BodyPart's "lastMove" property can be used to implement this.
-
-        for (Tile tile : body) {
-            BodyPart part = (BodyPart) tile;
-            part.translate(part.getDirectionX(), part.getDirectionY());
+        for (int i = body.size() - 1; i > 0; i--) {
+            BodyPart part = (BodyPart) body.get(i);
+            BodyPart previous = (BodyPart) body.get(i - 1);
+            part.setX(previous.getX());
+            part.setY(previous.getY());
         }
+        head.translate(head.getDirectionX(), head.getDirectionY());
     }
 
-
-    ///**
-    // * TODO: TO BE IMPLEMENTED.
-    // */
-    //public void grow() {
-    //    this.body.add(new Point(1, 1));
-    //}
+    /**
+     * Grow the snake when it eats a pellet.
+     */
+    public void grow() {
+        BodyPart curTail = (BodyPart) body.get(body.size() - 1);
+        BodyPart newTail = new BodyPart(curTail.getX(), curTail.getY(),
+            GameSettings.SNAKE_COLOR, null);
+        body.add(newTail);
+        setSprites();
+    }
 }
