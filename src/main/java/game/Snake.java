@@ -51,7 +51,7 @@ public class Snake {
     }
 
     /**
-     * Changes the direction of the snake by setting the direction it's head moves to.
+     * Changes the direction of the snake by setting the direction its head moves to.
      *
      * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT)
      */

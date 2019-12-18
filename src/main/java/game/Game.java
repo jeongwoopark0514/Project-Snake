@@ -90,6 +90,7 @@ public class Game {
             snake.move();
             manageFruits();
             checkWalls();
+            checkBody();
             painter.paint(snake.getBody());
         };
 
@@ -125,6 +126,18 @@ public class Game {
     private void checkWalls() {
         for (Tile wall : walls) {
             if (snake.getHead().checkSameCoords(wall)) {
+                stop();
+            }
+        }
+    }
+
+    /**
+     * Method that check collision of the snake with its own body,
+     * calls the stop method if a wall was hit.
+     */
+    private void checkBody(){
+        for(Tile bp : snake.getBody()){
+            if(!bp.equals(snake.getHead())&&!bp.equals(snake.getBody().get(1))&&snake.getHead().checkSameCoords(bp)){
                 stop();
             }
         }
