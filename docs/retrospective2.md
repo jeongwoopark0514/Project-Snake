@@ -1,6 +1,6 @@
 ## Sprint retrospective, Iteration #2
 
-![table](table2.png)
+![table](table2.PNG)
 
 Project: Snake
 
