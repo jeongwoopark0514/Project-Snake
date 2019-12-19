@@ -96,6 +96,7 @@ public class Game {
             snake.move();
             manageFruits();
             checkWalls();
+            checkBody();
             painter.paint(snake.getBody());
         };
 
@@ -139,13 +140,26 @@ public class Game {
     }
 
     /**
+     * Method that check collision of the snake with its own body,
+     * calls the stop method if a wall was hit.
+     */
+    private void checkBody() {
+        for (Tile bp : snake.getBody()) {
+            if (!bp.equals(snake.getHead()) && !bp.equals(snake.getBody().get(1))
+                    && snake.getHead().checkSameCoords(bp)) {
+                stop();
+            }
+        }
+    }
+
+    /**
      * Initializes the game by setting the on-key-pressed listeners (for arrow buttons) and
      * sets focus on canvas.
      * Also draws the walls on the board.
      */
     private void init() {
-        setOnKeyPressedListener();
         canvas.requestFocus();
+        setOnKeyPressedListener();
         createWalls();
         painter.paint(walls);
     }
@@ -188,15 +202,19 @@ public class Game {
             switch (e.getCode()) {
                 case LEFT:
                     snake.changeDirection(Directions.LEFT);
+                    this.snake.setDirection(Directions.LEFT);
                     break;
                 case RIGHT:
                     snake.changeDirection(Directions.RIGHT);
+                    this.snake.setDirection(Directions.RIGHT);
                     break;
                 case UP:
                     snake.changeDirection(Directions.UP);
+                    this.snake.setDirection(Directions.UP);
                     break;
                 case DOWN:
                     snake.changeDirection(Directions.DOWN);
+                    this.snake.setDirection(Directions.DOWN);
                     break;
                 default:
                     break;
