@@ -4,6 +4,10 @@ import gui.Gui;
 
 import java.io.IOException;
 
+/**
+ * This is the controller of LeaderBoard.
+ * This controller class is in progress.
+ */
 public class LeaderBoardController {
 
     public transient Gui gui = new Gui();

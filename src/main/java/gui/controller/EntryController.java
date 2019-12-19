@@ -5,8 +5,8 @@ import gui.Gui;
 import java.io.IOException;
 
 /**
- * This class does not need to be tested.
- * This is all GUI class.
+ * This is 'EntryController' class. It controls the entry page after login page.
+ * This class calls methods from Gui class which contains only GUI logic.
  */
 public class EntryController {
 
