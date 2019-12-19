@@ -1,0 +1,12 @@
+.label {
+    -fx-background-color: #a6a2a2;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+}
+
+.button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+}
