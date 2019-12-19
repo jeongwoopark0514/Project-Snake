@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.media.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #8ac967;" stylesheets="@../css/leaderboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LeaderBoardController">
+   <children>
+      <ImageView fitHeight="171.0" fitWidth="167.0" layoutX="70.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="60.0">
+         <image>
+            <Image url="@../image/transparent_logo.png" />
+         </image>
+      </ImageView>
+      <TableView layoutX="63.0" layoutY="304.0" prefHeight="256.0" prefWidth="360.0">
+        <columns>
+          <TableColumn prefWidth="56.0" text="Rank" />
+          <TableColumn prefWidth="168.0" text="Score" />
+            <TableColumn prefWidth="117.0" text="Date" />
+        </columns>
+      </TableView>
+      <TableView layoutX="485.0" layoutY="145.0" prefHeight="415.0" prefWidth="437.0">
+         <columns>
+            <TableColumn prefWidth="83.0" text="Rank" />
+            <TableColumn prefWidth="158.0" text="Username" />
+            <TableColumn prefWidth="167.0" text="Point" />
+         </columns>
+      </TableView>
+      <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="927.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+         <image>
+            <Image url="@../image/exit.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="78.0" fitWidth="277.0" layoutX="577.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/global.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="126.0" fitWidth="306.0" layoutX="70.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/my-record.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBackMain" styleClass="button1">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>

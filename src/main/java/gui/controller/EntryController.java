@@ -1,60 +1,29 @@
 package gui.controller;
 
-import static game.Directions.DOWN;
-import static game.GameSettings.BACKGROUND_COLOR;
-import static game.GameSettings.HEIGHT;
-import static game.GameSettings.TEXT_COLOR;
-import static game.GameSettings.WIDTH;
+import gui.Gui;
 
-import game.BodyPart;
-import game.Game;
-import game.GameSettings;
-import game.Painter;
-import game.Snake;
-import gui.MainRunner;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
+import java.io.IOException;
+
 
 /**
- * This class does not need to be tested.
- * This is all GUI class.
+ * This is 'EntryController' class. It controls the entry page after login page.
+ * This class calls methods from Gui class which contains only GUI logic.
  */
 public class EntryController {
+
+    public transient Gui gui = new Gui();
+
     /**
      * When you click start button, move to game screen.
      */
     public void startGame() {
-        final Canvas canvas = new Canvas(WIDTH, HEIGHT);
-        final GraphicsContext gc = canvas.getGraphicsContext2D();
+        gui.startSnakeGame();
+    }
 
-        // Creates a score node that is added to the scene.
-        final Text score = new Text();
-        score.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        score.setFill(TEXT_COLOR);
-        score.setX(50);
-        score.setY(130);
-        score.setText("Score: 0");
-
-        Group root = new Group();
-        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
-
-        root.getChildren().add(canvas);
-        root.getChildren().add(score);
-
-        Painter painter = new Painter(gc);
-
-        Snake snake = new Snake(new BodyPart(10, 10,
-            GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        Game game = new Game(scene, painter, canvas, snake, score);
-
-        snake.setGame(game);
-        game.start();
-        MainRunner.stage.setScene(scene);
+    /**
+     * When you click, leaderboard button, move the page to leaderboard.
+     */
+    public void changeToLeaderBoard() throws IOException {
+        gui.switchScene("src/main/resources/fxml/leaderboard.fxml");
     }
 }

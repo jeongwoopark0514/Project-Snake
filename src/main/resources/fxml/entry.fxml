@@ -27,7 +27,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="405.0" layoutY="386.0" mnemonicParsing="false" stylesheets="@../css/entryStyle.css">
+      <Button layoutX="405.0" layoutY="386.0" mnemonicParsing="false" onMouseClicked="#changeToLeaderBoard" stylesheets="@../css/entryStyle.css">
          <graphic>
             <ImageView fitHeight="62.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,9 +39,14 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fitHeight="150.0" fitWidth="399.0" layoutX="305.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="399.0" layoutX="307.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/snake.png" />
+            <Image url="@../image/snakeTitle.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="44.0" layoutX="936.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/exit.png" />
          </image>
       </ImageView>
    </children>
