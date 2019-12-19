@@ -4,10 +4,11 @@ import static game.Directions.DOWN;
 import static game.Directions.LEFT;
 import static game.Directions.RIGHT;
 import static game.Directions.UP;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 public class DirectionsTest {
 
