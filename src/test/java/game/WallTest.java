@@ -21,28 +21,28 @@ class WallTest {
     }
 
     @Test
-    void translatePositiveNumbersTest() {
+    void translatePosXPosYTest() {
         this.tile.translate(1, 1);
         assertEquals(2, tile.getX());
         assertEquals(2, tile.getY());
     }
 
     @Test
-    void translateNegativeNumbersTest() {
+    void translateNegXNegYTest() {
         this.tile.translate(-1, -1);
         assertEquals(0, tile.getX());
         assertEquals(0, tile.getY());
     }
 
     @Test
-    void translateNegativeAndPositiveNumberTest() {
+    void translateNegXPosYTest() {
         this.tile.translate(-1, 1);
         assertEquals(0, tile.getX());
         assertEquals(2, tile.getY());
     }
 
     @Test
-    void translatePositiveAndNegativeNumbersTest() {
+    void translatePosXNegYTest() {
         this.tile.translate(1, -1);
         assertEquals(2, tile.getX());
         assertEquals(0, tile.getY());

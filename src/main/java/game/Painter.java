@@ -38,7 +38,7 @@ public class Painter {
             gc.setFill(tile.getColor());
             gc.fillRect(tile.getX() * CELL_SIZE, tile.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
         } else {
-            Image sprite = tile.getSprite();
+            Image sprite = new Image(tile.getSprite());
             double height = sprite.getHeight();
             double width = sprite.getWidth();
             int positionX = tile.getX() * CELL_SIZE;

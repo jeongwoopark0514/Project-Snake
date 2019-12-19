@@ -115,6 +115,7 @@ public class Game {
                 scoreText.setText("Score: " + score);
                 fruits.remove(i);
                 painter.unPaint(fruit);
+                snake.grow();
                 Logger.getLogger("Collision detected.");
                 break;
             }
