@@ -26,7 +26,7 @@ public abstract class Tile {
     private Color color;
     @Getter
     @Setter
-    private Image sprite;
+    private String sprite;
 
     /**
      * Default constructor for all the tile objects.
@@ -36,7 +36,7 @@ public abstract class Tile {
      * @param color  the color of the tile (default fallback)
      * @param sprite the sprite of the file (optional)
      */
-    Tile(int x, int y, Color color, Image sprite) {
+    Tile(int x, int y, Color color, String sprite) {
         this.x = x;
         this.y = y;
         this.color = color;

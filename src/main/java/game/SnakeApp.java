@@ -23,6 +23,7 @@ public class SnakeApp extends Application {
 
     /**
      * Method to start the game directly without starting screen.
+     *
      * @param primaryStage stage to use.
      */
     @Override
@@ -40,7 +41,8 @@ public class SnakeApp extends Application {
         primaryStage.setTitle("Snake");
         primaryStage.show();
         Painter painter = new Painter(gc);
-        Snake snake = new Snake(new BodyPart(10, 10, GameSettings.SNAKE_COLOR, null), DOWN);
+        Snake snake = new Snake(new BodyPart(10, 10,
+            GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
         Game game = new Game(scene, painter, canvas, snake);
         snake.setGame(game);
 
