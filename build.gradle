@@ -76,7 +76,6 @@ jacocoTestCoverageVerification {
                 'gui.Gui.*',
                 'gui.AlertBox.*',
                 'gui.MainRunner.*',
-                'gui.controller.EntryController.*',
                 'game.Game.lambda$gameLoop$0()',
                 'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
                 'game.Game.manageFruits()',
@@ -100,7 +99,6 @@ jacocoTestCoverageVerification {
                     'gui.Gui.*',
                     'gui.AlertBox.*',
                     'gui.MainRunner.*',
-                    'gui.controller.EntryController.*',
                     'game.Game.lambda$gameLoop$0()',
                     'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
                     'game.Game.manageFruits()',

@@ -27,6 +27,14 @@
     -fx-text-fill: white;
 }
 
+.button1{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+}
+
 /*.list-cell:odd {*/
     /*-fx-cell-hover-color: #0093ff;*/
     /*-fx-background-color: white;*/

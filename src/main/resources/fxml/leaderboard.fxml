@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #8ac967;" stylesheets="@../css/leaderboard.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.LeaderBoardController">
    <children>
-      <ImageView fitHeight="171.0" fitWidth="167.0" layoutX="63.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="44.0">
+      <ImageView fitHeight="171.0" fitWidth="167.0" layoutX="70.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="60.0">
          <image>
             <Image url="@../image/transparent_logo.png" />
          </image>
@@ -44,5 +44,14 @@
             <Image url="@../image/my-record.png" />
          </image>
       </ImageView>
+      <Button layoutX="14.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#goBackMain" styleClass="button1">
+         <graphic>
+            <ImageView fitHeight="32.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

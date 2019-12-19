@@ -1,12 +1,26 @@
 package gui;
 
+import static game.Directions.DOWN;
+import static game.GameSettings.BACKGROUND_COLOR;
+import static game.GameSettings.HEIGHT;
+import static game.GameSettings.WIDTH;
+
+import game.BodyPart;
+import game.Game;
+import game.GameSettings;
+import game.Painter;
+import game.Snake;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TextField;
 
 /**
@@ -46,5 +60,21 @@ public class Gui {
         return any.getText();
     }
 
+    /**
+     * Make GUI Scene for the snake game.
+     */
+    public void startSnakeGame() {
+        Group root = new Group();
+        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
+        final Canvas canvas = new Canvas(WIDTH, HEIGHT);
+        final GraphicsContext gc = canvas.getGraphicsContext2D();
+        root.getChildren().add(canvas);
+        Painter painter = new Painter(gc);
+        Snake snake = new Snake(new BodyPart(10, 10, GameSettings.SNAKE_COLOR, null), DOWN);
+        Game game = new Game(scene, painter, canvas, snake);
+        snake.setGame(game);
+        game.start();
+        MainRunner.stage.setScene(scene);
+    }
 }
 

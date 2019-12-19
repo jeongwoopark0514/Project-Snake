@@ -27,7 +27,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="405.0" layoutY="386.0" mnemonicParsing="false" stylesheets="@../css/entryStyle.css">
+      <Button layoutX="405.0" layoutY="386.0" mnemonicParsing="false" onMouseClicked="#changeToLeaderBoard" stylesheets="@../css/entryStyle.css">
          <graphic>
             <ImageView fitHeight="62.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
                <image>
