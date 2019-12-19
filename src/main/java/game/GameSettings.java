@@ -18,6 +18,7 @@ public class GameSettings {
     public static final Color SNAKE_COLOR = Color.GREEN;
     public static final Color FRUIT_COLOR = Color.YELLOW;
     public static final Color WALL_COLOR = Color.GRAY;
+    public static final Color TEXT_COLOR = Color.WHITE;
 
     public static final String SNAKE_HEAD = "/image/snake_head.png";
     public static final String SNAKE_BODY = "/image/snake_body.png";
