@@ -5,6 +5,7 @@ import static game.GameSettings.CELL_SIZE;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
