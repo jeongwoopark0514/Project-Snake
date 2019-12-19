@@ -111,7 +111,7 @@ public class Game {
         for (int i = 0; i < fruits.size(); i++) {
             Fruit fruit = (Fruit) fruits.get(i);
             if (snake.getHead().checkSameCoords(fruit)) {
-                score += 1;
+                score += fruit.getValue();
                 scoreText.setText("Score: " + score);
                 fruits.remove(i);
                 painter.unPaint(fruit);
