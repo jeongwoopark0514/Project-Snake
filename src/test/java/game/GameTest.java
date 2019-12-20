@@ -1,12 +1,11 @@
 package game;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.text.Text;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,9 @@ class GameTest {
 
         Snake snake = mock(Snake.class);
 
-        game = new Game(scene, painter, canvas, snake);
+        Text score = mock(Text.class);
+
+        game = new Game(scene, painter, canvas, snake, score);
     }
 
     @AfterEach

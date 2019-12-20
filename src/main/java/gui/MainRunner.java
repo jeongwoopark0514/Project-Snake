@@ -17,16 +17,16 @@ import javafx.util.Duration;
 /**
  * MainRunner class that starts the application.
  */
-public class MainRunner extends Application { //NOPMD
+public class MainRunner extends Application {
 
     public static Stage stage;
 
-    public static void main(String[] args) { //NOPMD
+    public static void main(String[] args) {
         Application.launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException { //NOPMD
+    public void start(Stage primaryStage) throws IOException {
         stage = primaryStage;
         final URL url = new File("src/main/resources/fxml/splash.fxml").toURI().toURL();
         final Parent parent = FXMLLoader.load(url);

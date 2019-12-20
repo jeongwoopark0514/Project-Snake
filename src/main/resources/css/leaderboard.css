@@ -1,0 +1,46 @@
+.table-view {
+    -fx-background-color: #efefef;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler,
+.table-view .column-header .label {
+    -fx-background-color: rgb(184, 223, 132);
+    -fx-pref-height: 30px ;
+    -fx-text-fill: black;
+}
+
+
+
+.table-view {
+    -fx-base: #efefef;
+    -fx-control-inner-background: #efefef;
+    -fx-background-color: #efefef;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-padding: 5;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.button1{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+
+}
+
+/*.list-cell:odd {*/
+    /*-fx-cell-hover-color: #0093ff;*/
+    /*-fx-background-color: white;*/
+/*}*/
+
+/*.list-cell:filled:hover {*/
+    /*-fx-cell-hover-color: #0093ff;*/
+    /*-fx-text-fill: white;*/
+/*}*/
