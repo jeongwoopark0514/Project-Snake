@@ -17,6 +17,7 @@ Group: 1
 ### What went less good?
 - The refactoring of the game core didn’t go exactly as planned. Since our class diagram didn’t really fit well to our actual implementation. So some classes are slightly different from the diagram.
 - Refactoring the CI was hard, but ended up being a really simple fix. 
+- Working with JavaFX tables for the leaderboard was quite difficult and work on that should have started earlier in the sprint.
 - Finished too close to the deadline.
 - Using a development branch is not that useful. We merged everything to development with good descriptions in the merge requests. In the end we merged development 
 
