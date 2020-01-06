@@ -45,6 +45,17 @@ public class Gui {
     }
 
     /**
+     * This method pops up a warning alert box that gives notifications.
+     *
+     * @param message - message of the alert box (about warning)
+     * @param title   - title of the alert
+     */
+    public void showWarningAlert(String message, String title) {
+        AlertBox.displayWarning(message, title);
+    }
+
+
+    /**
      * This method changes the url for the respective scenes.
      *
      * @param path - the url for the scene
