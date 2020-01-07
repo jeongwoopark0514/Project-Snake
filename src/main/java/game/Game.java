@@ -134,7 +134,7 @@ public class Game {
             painter.paint(snake.getBody());
         };
 
-        scheduler.scheduleAtFixedRate(move, 0, 300, MILLISECONDS);
+        scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
     }
 
     /**
