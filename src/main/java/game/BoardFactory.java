@@ -11,8 +11,8 @@ import java.util.List;
  */
 class BoardFactory {
 
-    private String background;
-    private List<Tile> elements;
+    private transient String background;
+    private transient List<Tile> elements;
 
     /**
      * Constructor for the BoardFactory.
