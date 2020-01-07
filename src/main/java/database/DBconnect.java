@@ -1,17 +1,10 @@
 package database;
 
 import gui.controller.PasswordHash;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 import lombok.Getter;
 import lombok.Setter;
 
-
+import java.sql.*;
 
 
 public class DBconnect {
@@ -125,11 +118,7 @@ public class DBconnect {
         }
 
         try {
-            String usernameCheck = "SELECT * FROM users WHERE username = ?";
-            preparedStatement = connection.prepareStatement(usernameCheck);
-            preparedStatement.setString(1,username);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            if(usernameCheck(username)){
                 return false;
             }
             String hashed = pwdHash.createHash();
@@ -147,5 +136,65 @@ public class DBconnect {
         }
         return false;
     }
+
+    /**
+     * This method checks if the score of this game is the players highscore.
+     * @param username - username of the player
+     * @param score - score of the game
+     * @return - return true iff the current score is the new highscore else false
+     */
+    public boolean checkScore(String username, int score){
+        try{
+           String scoreCheck = "SELECT score FROM scores WHERE username = ?";
+            preparedStatement = connection.prepareStatement(scoreCheck);
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int highScore = resultSet.getInt("score");
+                if (score > highScore) {
+                    return true;
+                }
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    /**
+     * This method saves the highscore of the user when the game ends.
+     * @param username - the username of the player
+     * @param score - the highscore of the user
+     */
+    public void saveHighScore(String username, int score){
+        try{
+            if(usernameCheck(username) && checkScore(username,score)){
+                String insertScore = "UPDATE scores SET score = ? WHERE username = ?";
+                preparedStatement = connection.prepareStatement(insertScore);
+                preparedStatement.setInt(1,score);
+                preparedStatement.setString(2,username);
+                preparedStatement.executeUpdate();
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    /**
+     * This method gets the username and highscores of each user and sorts it in descending order of score.
+     * @return - returns a result set
+     */
+    public ResultSet getScores() {
+        try {
+            String highScores = "SELECT * FROM scores ORDER BY score DESC";
+            preparedStatement = connection.prepareStatement(highScores);
+            resultSet = preparedStatement.executeQuery();
+        } catch (Exception e){
+            System.out.println(e);
+        }
+
+        return resultSet;
+    }
+
 
 }
