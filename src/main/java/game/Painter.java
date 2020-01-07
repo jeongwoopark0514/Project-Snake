@@ -53,9 +53,10 @@ public class Painter {
      *
      * @param tiles the list of tiles to paint.
      */
-    void paint(@NonNull List<Tile> tiles) {
-        for (Tile tile : tiles) {
-            paint(tile);
+    void paint(@NonNull List tiles) {
+        for (Object tile : tiles) {
+            assert tile instanceof Tile;
+            paint((Tile) tile);
         }
     }
 
@@ -73,9 +74,10 @@ public class Painter {
      *
      * @param tiles the list of tiles to clear.
      */
-    void unPaint(@NonNull List<Tile> tiles) {
-        for (Tile tile : tiles) {
-            unPaint(tile);
+    void unPaint(@NonNull List tiles) {
+        for (Object tile : tiles) {
+            assert tile instanceof Tile;
+            unPaint((Tile) tile);
         }
     }
 

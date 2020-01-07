@@ -32,11 +32,13 @@ public class Game {
         Executors.newScheduledThreadPool(1);
     //Made the fruits a list to provide the option to add multiple fruits.
     @Getter
-    private transient List<Tile> fruits;
+    private transient List<Fruit> fruits;
     @Getter
-    private transient List<Tile> walls;
+    private transient List<Wall> walls;
     private transient int score;
     private transient Text scoreText;
+    private transient Board board;
+    private transient BoardFactory factory;
 
 
     /**
@@ -55,6 +57,8 @@ public class Game {
         this.fruits = new ArrayList<>();
         this.scoreText = scoreText;
         this.score = 0;
+        this.factory = new BoardFactory("/image/background.png");
+        factory.addSnake(snake);
         init();
     }
 
@@ -64,6 +68,9 @@ public class Game {
      */
     public void start() {
         createFruit();
+        factory.addFruit(fruits.get(0));
+        board = factory.createBoard(X_MAX, Y_MAX);
+        System.out.println(board.board.get(0).get(0));
         gameLoop();
     }
 
@@ -132,7 +139,7 @@ public class Game {
      * calls the stop method if a wall was hit.
      */
     private void checkWalls() {
-        for (Tile wall : walls) {
+        for (Wall wall : walls) {
             if (snake.getHead().checkSameCoords(wall)) {
                 stop();
             }
@@ -161,6 +168,7 @@ public class Game {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();
+        factory.addWalls(walls);
         painter.paint(walls);
     }
 
