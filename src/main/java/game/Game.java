@@ -10,6 +10,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
+
+import database.DBconnect;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
@@ -35,9 +37,12 @@ public class Game {
     private transient List<Tile> fruits;
     @Getter
     private transient List<Tile> walls;
-    private transient int score;
+    @Getter
+    public int score;
     private transient Text scoreText;
 
+
+    public DBconnect database = new DBconnect();
 
     /**
      * Constructor.
@@ -74,7 +79,15 @@ public class Game {
     public void stop() {
         //This is just for the prototype the actual game will not use this,
         //therefore it needs to be suppressed.
+        try {
+            database.saveHighScore("test", score);
+        }catch (Exception e){
+            System.out.println(e);
+            System.out.println(score);
+        }
+
         System.exit(0); //NOPMD
+
     }
 
     ///**
