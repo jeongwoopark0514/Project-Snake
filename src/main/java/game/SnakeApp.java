@@ -41,16 +41,16 @@ public class SnakeApp extends Application {
         final Text score = new Text();
         score.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         score.setFill(TEXT_COLOR);
-        score.setX(860);
+        score.setX(1060);
         score.setY(60);
 
         Button startButton = new Button("start");
-        startButton.setLayoutX(868);
+        startButton.setLayoutX(1068);
         startButton.setLayoutY(350);
         startButton.setPrefSize(70,40);
 
         Button stopButton = new Button("stop");
-        stopButton.setLayoutX(868);
+        stopButton.setLayoutX(1068);
         stopButton.setLayoutY(420);
         stopButton.setPrefSize(70,40);
 
