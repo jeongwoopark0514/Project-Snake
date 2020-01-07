@@ -2,56 +2,77 @@ package game;
 
 import java.util.ArrayList;
 import java.util.List;
-public class BoardFactory {
+
+/**
+ * A factory to create instances of the board class.
+ * Given the supplied elements for the board and the parameters,
+ * this factory will construct a board that can be used to implement proper collision
+ * and multiple levels.
+ */
+class BoardFactory {
 
     private String background;
-    private List<Wall> walls;
-    private Snake snake;
-    private Fruit fruit;
+    private List<Tile> elements;
 
+    /**
+     * Constructor for the BoardFactory.
+     *
+     * @param background the background that the level needs to have.
+     */
     BoardFactory(String background) {
         this.background = background;
+        elements = new ArrayList<>();
     }
 
-    public Board createBoard(int x, int y) {
-        assert x > 3 && y > 3;
+    /**
+     * Create a board, given the parameters supplied.
+     * This factory method will create a new instance of the Board class.
+     *
+     * @param width  the width of the board.
+     * @param height the height of the board.
+     * @return the created board with all elements added.
+     */
+    Board createBoard(int width, int height) {
+        assert width > 3 && height > 3;
 
-        ArrayList<ArrayList<Tile>> grid = new ArrayList<>(y);
-        for (int i = 0; i < y; i++) {
+        ArrayList<ArrayList<Tile>> grid = new ArrayList<>(height);
+        for (int i = 0; i < height; i++) {
             ArrayList<Tile> row = new ArrayList<>();
-            for(int j = 0; j < x; j++) {
+            for (int j = 0; j < width; j++) {
                 row.add(null);
             }
             grid.add(row);
         }
 
-        assert walls != null;
+        for (Tile tile : elements) {
+            int x = tile.getX();
+            int y = tile.getY();
+            assert grid.get(y).get(x) == null;
+            grid.get(y).set(x, tile);
 
-        for (Tile wall : walls) {
-            grid.get(wall.getY()).set(wall.getX(), wall);
         }
-
-        assert fruit != null;
-        assert grid.get(fruit.getY()).get(fruit.getX()) == null;
-        grid.get(fruit.getY()).set(fruit.getX(), fruit);
-
-        assert snake != null;
-        assert grid.get(snake.getHead().getY()).get(snake.getHead().getX()) == null;
-        grid.get(snake.getHead().getY()).set(snake.getHead().getX(), snake.getHead());
-
         return new Board(grid, background);
     }
 
-    public void addWalls(List<Wall> walls) {
-        this.walls = walls;
+    /**
+     * Add a list of tiles to the factory, which will be added ot the board.
+     * This can be any type of Tile.
+     *
+     * @param tiles the list of tiles that should be added.
+     */
+    void addTiles(List tiles) {
+        for (Object tile : tiles) {
+            assert tile instanceof Tile;
+            elements.add((Tile) tile);
+        }
     }
 
-    public void addSnake(Snake snake) {
-        this.snake = snake;
+    /**
+     * Add just a single Tile to the board.
+     *
+     * @param tile the object of type tile to add.
+     */
+    void addTile(Tile tile) {
+        elements.add(tile);
     }
-
-    public void addFruit(Fruit fruit) {
-        this.fruit = fruit;
-    }
-
 }

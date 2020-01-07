@@ -58,7 +58,7 @@ public class Game {
         this.scoreText = scoreText;
         this.score = 0;
         this.factory = new BoardFactory("/image/background.png");
-        factory.addSnake(snake);
+        factory.addTile(snake.getHead());
         init();
     }
 
@@ -68,9 +68,8 @@ public class Game {
      */
     public void start() {
         createFruit();
-        factory.addFruit(fruits.get(0));
+        factory.addTile(fruits.get(0));
         board = factory.createBoard(X_MAX, Y_MAX);
-        System.out.println(board.board.get(0).get(0));
         gameLoop();
     }
 
@@ -168,7 +167,7 @@ public class Game {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();
-        factory.addWalls(walls);
+        factory.addTiles(walls);
         painter.paint(walls);
     }
 
