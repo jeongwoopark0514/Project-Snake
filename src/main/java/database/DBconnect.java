@@ -91,6 +91,26 @@ public class DBconnect {
     }
 
     /**
+     * Checks if the user exists.
+     * @param username - username of the player
+     * @return - true iff user exists else false
+     */
+    public boolean usernameCheck (String username){
+        try{
+            String usernameCheck = "SELECT username FROM users WHERE username = ?";
+            preparedStatement = connection.prepareStatement(usernameCheck);
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return false;
+    }
+
+    /**
      * This method checks if a username is already taken.
      * New users are registered by adding username and password to the database.
      * @param username - the username
