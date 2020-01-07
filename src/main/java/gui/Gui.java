@@ -22,6 +22,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -91,11 +92,24 @@ public class Gui {
         score.setY(130);
         score.setText("Score: 0");
 
+        Button startButton = new Button("start");
+        startButton.setLayoutX(868);
+        startButton.setLayoutY(350);
+        startButton.setPrefSize(70,40);
+
+        Button stopButton = new Button("stop");
+        stopButton.setLayoutX(868);
+        stopButton.setLayoutY(420);
+        stopButton.setPrefSize(70,40);
+
         Group root = new Group();
         Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         root.getChildren().add(canvas);
         root.getChildren().add(score);
+        root.getChildren().add(startButton);
+        root.getChildren().add(stopButton);
+        root.getStylesheets().add("/css/GameButton.css");
 
         Painter painter = new Painter(gc);
 

@@ -1,0 +1,8 @@
+.button {
+    -fx-background-color: green;
+    -fx-font-family: "verdana";
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
