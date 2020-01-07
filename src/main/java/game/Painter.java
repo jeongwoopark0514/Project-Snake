@@ -5,7 +5,6 @@ import static game.GameSettings.CELL_SIZE;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -45,7 +44,6 @@ public class Painter {
             int positionY = tile.getY() * CELL_SIZE;
             gc.drawImage(sprite, 0, 0, width, height, positionX, positionY, CELL_SIZE, CELL_SIZE);
         }
-
     }
 
     /**
@@ -57,6 +55,23 @@ public class Painter {
         for (Object tile : tiles) {
             assert tile instanceof Tile;
             paint((Tile) tile);
+        }
+    }
+
+    /**
+     * Paint the initial board, so all standard game elements will be drawn.
+     *
+     * @param board the board to paint all the elements from.
+     */
+    void paintBoard(Board board) {
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
+                Tile tile = board.getTile(j, i);
+                if (tile == null) {
+                    continue;
+                }
+                paint(tile);
+            }
         }
     }
 

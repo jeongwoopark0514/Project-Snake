@@ -3,32 +3,81 @@ package game;
 import java.util.ArrayList;
 import lombok.Getter;
 
-public class Board {
-    public final ArrayList<ArrayList<Tile>> board;
+/**
+ * Board representing the back structure of the game.
+ * The board is used to paint all the textures,
+ * add game elements like walls, pellets and the snake,
+ * and is used for collision.
+ * Each entry on the board can be retrieved
+ * and updated to stay up to date with the dynamics of the game.
+ */
+class Board {
+    private transient ArrayList<ArrayList<Tile>> grid;
     @Getter
     private transient String background;
 
+    /**
+     * Constructor for the board class, this will create an instance of a board.
+     *
+     * @param grid       the grid which actually represents the board.
+     * @param background the background this board gets.
+     */
     Board(ArrayList<ArrayList<Tile>> grid, String background) {
         assert grid != null;
-        this.board = grid;
+        this.grid = grid;
         this.background = background;
     }
 
-    public int getWidth() {
-        return board.size();
+    /**
+     * Get the height of the board.
+     *
+     * @return the height.
+     */
+    int getHeight() {
+        return grid.size();
     }
 
-    public int getHeight() {
-        return board.get(0).size();
+    /**
+     * Get the width of the board.
+     *
+     * @return the width.
+     */
+    int getWidth() {
+        return grid.get(0).size();
     }
 
-    public Tile tileAt(int x, int y) {
+    /**
+     * Get a tile from the board.
+     *
+     * @param x the x coordinate of the tile to get.
+     * @param y the y coordinate of the tile to get.
+     * @return the tile retrieved from the location on the board.
+     */
+    Tile getTile(int x, int y) {
         assert onBoard(x, y);
-        Tile tile = board.get(x).get(y);
-        return tile;
+        return grid.get(y).get(x);
     }
 
-    public boolean onBoard(int x, int y) {
+    /**
+     * Update a given tile, this gives the ability to change the type of Tile.
+     *
+     * @param x    the x coordinate of the tile.
+     * @param y    the y coordinate of the tile.
+     * @param tile the tile to change the tile on the board to.
+     */
+    void updateTile(int x, int y, Tile tile) {
+        assert onBoard(x, y);
+        grid.get(y).set(x, tile);
+    }
+
+    /**
+     * Check if a tile is actually on the board.
+     *
+     * @param x the x coordinate of the location to check.
+     * @param y the y coordinate of the location to check.
+     * @return true if the location is within the board and false if not.
+     */
+    boolean onBoard(int x, int y) {
         return x >= 0 && x < getWidth() && y >= 0 && y < getHeight();
     }
 }
