@@ -119,7 +119,9 @@ public class Game {
      * The loop will e executed on scheduled intervals to make sure the game keeps running.
      */
     private void gameLoop() {
-        Runnable move = () -> {
+        // PMD sees this as a DU-Anomaly, this would mean that move is undefined when leaving scope.
+        // But this is not actually the case since it is used in the scheduler.
+        Runnable move = () -> { //NOPMD
             painter.unPaint(snake.getBody());
             Tile tail = snake.getTail();
             board.updateTile(tail.getX(), tail.getY(), null);
