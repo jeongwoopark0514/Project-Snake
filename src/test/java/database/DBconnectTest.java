@@ -71,8 +71,6 @@ public class DBconnectTest {
         assertNotNull(dbconnect);
     }
 
-    // Actually want to use == comparator here, since we want to check if variable refer to same
-    // instance.
     @Test
     void getInstanceReturnsReferenceToSameInstance() {
         DBconnect dbconnect2 = DBconnect.getInstance();
