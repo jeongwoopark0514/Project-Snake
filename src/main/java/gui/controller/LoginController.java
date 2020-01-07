@@ -23,7 +23,7 @@ public class LoginController {
     public transient Gui gui = new Gui();
 
     @Getter @Setter
-    private DBconnect database = new DBconnect();
+    private DBconnect database = DBconnect.getInstance();
 
     /**
      * when you click register button, move to register page.

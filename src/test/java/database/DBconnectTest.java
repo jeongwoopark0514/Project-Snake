@@ -52,7 +52,7 @@ public class DBconnectTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
         System.setOut(new PrintStream(outContent));
-        dbconnect = new DBconnect();
+        dbconnect = DBconnect.getInstance();
         dbconnect.setConnection(connection);
         dbconnect.setStatement(statement);
         dbconnect.setResultSet(resultSet);
@@ -69,6 +69,14 @@ public class DBconnectTest {
     @Test
     void connectionTest() {
         assertNotNull(dbconnect);
+    }
+
+    // Actually want to use == comparator here, since we want to check if variable refer to same
+    // instance.
+    @Test
+    void getInstanceReturnsReferenceToSameInstance() {
+        DBconnect dbconnect2 = DBconnect.getInstance();
+        assertEquals(dbconnect2, dbconnect);
     }
 
     @Test
