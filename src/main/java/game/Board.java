@@ -23,7 +23,9 @@ class Board {
      * @param background the background this board gets.
      */
     Board(ArrayList<ArrayList<Tile>> grid, String background) {
-        assert grid != null;
+        if (grid == null) {
+            throw new NullPointerException();
+        }
         this.grid = grid;
         this.background = background;
     }
@@ -54,7 +56,9 @@ class Board {
      * @return the tile retrieved from the location on the board.
      */
     Tile getTile(int x, int y) {
-        assert onBoard(x, y);
+        if (!onBoard(x, y)) {
+            throw new IndexOutOfBoundsException();
+        }
         return grid.get(y).get(x);
     }
 
@@ -66,7 +70,9 @@ class Board {
      * @param tile the tile to change the tile on the board to.
      */
     void updateTile(int x, int y, Tile tile) {
-        assert onBoard(x, y);
+        if (!onBoard(x, y)) {
+            throw new IndexOutOfBoundsException();
+        }
         grid.get(y).set(x, tile);
     }
 
