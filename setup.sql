@@ -12,7 +12,9 @@ create table users
 
 create table scores
 (
-    username varchar(20) not null primary key,
+    score_id int not null auto_increment primary key,
+    username varchar(20) not null,
     score int not null,
+    nickname varchar(20) not null,
     foreign key (username) references users(username)
 );
