@@ -137,42 +137,20 @@ public class DBconnect {
         return false;
     }
 
-    /**
-     * This method checks if the score of this game is the players highscore.
-     * @param username - username of the player
-     * @param score - score of the game
-     * @return - return true iff the current score is the new highscore else false
-     */
-    public boolean checkScore(String username, int score){
-        try{
-           String scoreCheck = "SELECT score FROM scores WHERE username = ?";
-            preparedStatement = connection.prepareStatement(scoreCheck);
-            preparedStatement.setString(1,username);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int highScore = resultSet.getInt("score");
-                if (score > highScore) {
-                    return true;
-                }
-            }
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        return false;
-    }
 
     /**
      * This method saves the highscore of the user when the game ends.
      * @param username - the username of the player
      * @param score - the highscore of the user
      */
-    public void saveHighScore(String username, int score){
+    public void saveScore(String username, int score, String nickname){
         try{
-            if(usernameCheck(username) && checkScore(username,score)){
-                String insertScore = "UPDATE scores SET score = ? WHERE username = ?";
+            if(usernameCheck(username)){
+                String insertScore = "INSERT INTO scores (username,score,nickname) VALUES (?,?,?)";
                 preparedStatement = connection.prepareStatement(insertScore);
-                preparedStatement.setInt(1,score);
-                preparedStatement.setString(2,username);
+                preparedStatement.setString(1,username);
+                preparedStatement.setInt(2,score);
+                preparedStatement.setString(3,nickname);
                 preparedStatement.executeUpdate();
             }
         }catch (Exception e){
