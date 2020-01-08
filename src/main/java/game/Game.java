@@ -12,6 +12,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
 import database.DBconnect;
+import gui.controller.LoginController;
+import gui.controller.ScoreController;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
@@ -42,7 +44,7 @@ public class Game {
     private transient Text scoreText;
 
 
-    public DBconnect database = new DBconnect();
+    public ScoreController scoreController = new ScoreController();
 
     /**
      * Constructor.
@@ -80,7 +82,7 @@ public class Game {
         //This is just for the prototype the actual game will not use this,
         //therefore it needs to be suppressed.
         try {
-            database.saveHighScore("test", score);
+            scoreController.scoreSave(score);
         }catch (Exception e){
             System.out.println(e);
             System.out.println(score);
