@@ -66,7 +66,9 @@ public class Game {
         this.score = 0;
         this.factory = factory;
         this.factory.addTile(snake.getHead());
-        init();
+        //This would only be an error if we had subclasses extending from the game class,
+        //but since this is not the case this doesn't actually pose a risk.
+        init();//NOPMD
     }
 
     /**
@@ -178,7 +180,7 @@ public class Game {
      * Create a piece of fruit to be put onto the map.
      * The method makes sure that the place the fruits spawns is actually empty.
      */
-    final Fruit createFruit() {
+    Fruit createFruit() {
         int x = ThreadLocalRandom.current().nextInt(1, X_MAX - 2);
         int y = ThreadLocalRandom.current().nextInt(1, Y_MAX - 2);
         if (board.getTile(x, y) != null) {

@@ -142,4 +142,4 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-mainClassName = 'game.SnakeApp'
+mainClassName = 'gui.MainRunner'
