@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
 /**
  * A factory to create instances of the board class.
@@ -12,6 +13,7 @@ import java.util.List;
 public class BoardFactory {
 
     private transient String background;
+    @Getter
     private transient List<Tile> elements;
 
     /**
@@ -21,7 +23,7 @@ public class BoardFactory {
      */
     public BoardFactory(String background) {
         this.background = background;
-        elements = new ArrayList<>();
+        this.elements = new ArrayList<>();
     }
 
     /**
@@ -30,10 +32,12 @@ public class BoardFactory {
      *
      * @param width  the width of the board.
      * @param height the height of the board.
-     * @return the created board with all elements added.
+     * @return the created board with all elements added or null.
      */
     Board createBoard(int width, int height) {
-        assert width > 3 && height > 3;
+        if (width < 3 || height < 3) {
+            return null;
+        }
 
         ArrayList<ArrayList<Tile>> grid = new ArrayList<>(height);
         for (int i = 0; i < height; i++) {
@@ -47,9 +51,9 @@ public class BoardFactory {
         for (Tile tile : elements) {
             int x = tile.getX();
             int y = tile.getY();
-            assert grid.get(y).get(x) == null;
-            grid.get(y).set(x, tile);
-
+            if (grid.get(y).get(x) == null) {
+                grid.get(y).set(x, tile);
+            }
         }
         return new Board(grid, background);
     }
@@ -62,8 +66,9 @@ public class BoardFactory {
      */
     void addTiles(List tiles) {
         for (Object tile : tiles) {
-            assert tile instanceof Tile;
-            elements.add((Tile) tile);
+            if (tile instanceof Tile) {
+                elements.add((Tile) tile);
+            }
         }
     }
 
