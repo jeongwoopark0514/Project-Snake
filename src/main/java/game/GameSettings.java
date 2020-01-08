@@ -10,7 +10,7 @@ public class GameSettings {
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 500;
     static final int CELL_SIZE = 25;
-    static final int X_MAX = (WIDTH-200) / CELL_SIZE;
+    static final int X_MAX = (WIDTH - 200) / CELL_SIZE;
     static final int Y_MAX = HEIGHT / CELL_SIZE;
     static final int MIN_PELLETS = 1;
 

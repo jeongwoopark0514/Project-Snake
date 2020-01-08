@@ -22,4 +22,11 @@ public class LeaderBoardController {
         gui.switchScene("src/main/resources/fxml/entry.fxml");
     }
 
+    /**
+     * No testing required because impossible to test system.exit.
+     */
+    public void quitButton() {
+        gui.quit();
+    }
+
 }

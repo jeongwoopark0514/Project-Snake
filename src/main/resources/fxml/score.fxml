@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -26,7 +25,7 @@
                </image></ImageView>
          </graphic>
       </Button>
-      <Button layoutX="683.0" layoutY="466.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="155.0">
+      <Button layoutX="683.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#quitButton" prefHeight="53.0" prefWidth="155.0">
          <graphic>
             <ImageView fitHeight="49.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -40,5 +39,13 @@
          </image>
       </ImageView>
       <TextField layoutX="487.0" layoutY="356.0" prefHeight="37.0" prefWidth="281.0" />
+      <Button layoutX="403.0" layoutY="473.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="158.0">
+         <graphic>
+            <ImageView fitHeight="49.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/save.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
    </children>
 </AnchorPane>

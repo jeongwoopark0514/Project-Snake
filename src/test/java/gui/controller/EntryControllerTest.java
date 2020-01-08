@@ -30,4 +30,17 @@ class EntryControllerTest {
         doNothing().when(gui).startSnakeGame();
         entryController.startGame();
     }
+
+    @Test
+    void changeToLoginTest() {
+        try {
+            Gui gui = mock(Gui.class);
+            EntryController entryController = new EntryController();
+            entryController.gui = gui;
+            doNothing().when(gui).switchScene("whatever");
+            entryController.changeToLogin();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -121,6 +121,12 @@ public class Gui {
         MainRunner.stage.setScene(scene);
     }
 
-    
+    /**
+     * Quit the game by closing the window.
+     */
+    public void quit() {
+        AlertBox.displayQuit("Do you really want to quit? ", "Game over");
+    }
+
 }
 

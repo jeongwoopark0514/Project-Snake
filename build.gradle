@@ -81,7 +81,9 @@ jacocoTestCoverageVerification {
                 'game.Game.manageFruits()',
                 'game.Game.checkWalls()',
                 'game.Game.checkBody()',
-                'gui.controller.ScoreController.*' //delete this when the implementation and test is ready
+                'gui.controller.ScoreController.*', //delete this when the implementation and test is ready
+                'gui.controller.EntryController.quitButton()', //Impossible to test system.exit 
+                'gui.controller.LeaderBoardController.quitButton()'
             ]
         }
         rule {
@@ -104,7 +106,9 @@ jacocoTestCoverageVerification {
                     'game.Game.manageFruits()',
                     'game.Game.checkWalls()',
                     'game.Game.checkBody()',
-                    'gui.controller.ScoreController.*' //delete this when implementation and test is ready
+                    'gui.controller.ScoreController.*', //delete this when implementation and test is ready
+                    'gui.controller.EntryController.quitButton()',
+                    'gui.controller.LeaderBoardController.quitButton()'
             ]
         }
 
