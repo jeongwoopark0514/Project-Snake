@@ -9,7 +9,7 @@ import java.util.List;
  * this factory will construct a board that can be used to implement proper collision
  * and multiple levels.
  */
-class BoardFactory {
+public class BoardFactory {
 
     private transient String background;
     private transient List<Tile> elements;
@@ -19,7 +19,7 @@ class BoardFactory {
      *
      * @param background the background that the level needs to have.
      */
-    BoardFactory(String background) {
+    public BoardFactory(String background) {
         this.background = background;
         elements = new ArrayList<>();
     }

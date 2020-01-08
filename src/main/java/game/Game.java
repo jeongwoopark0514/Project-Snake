@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Main game control class.
@@ -32,8 +33,10 @@ public class Game {
         Executors.newScheduledThreadPool(1);
     //Made the fruits a list to provide the option to add multiple fruits.
     @Getter
+    @Setter
     private transient List<Fruit> fruits;
     private transient List<Wall> walls;
+    @Getter
     private transient int score;
     private transient Text scoreText;
     private transient Board board;
@@ -50,8 +53,10 @@ public class Game {
      * @param canvas    the canvas to paint on.
      * @param snake     the snake that represents the player on the board.
      * @param scoreText the element representing the player score.
+     * @param factory   the factory associated with this game.
      */
-    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText) {
+    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText,
+                BoardFactory factory) {
         this.scene = scene;
         this.canvas = canvas;
         this.snake = snake;
@@ -59,8 +64,8 @@ public class Game {
         this.fruits = new ArrayList<>();
         this.scoreText = scoreText;
         this.score = 0;
-        this.factory = new BoardFactory("/image/background.png");
-        factory.addTile(snake.getHead());
+        this.factory = factory;
+        this.factory.addTile(snake.getHead());
         init();
     }
 
@@ -78,15 +83,18 @@ public class Game {
         createWalls();
         factory.addTiles(walls);
         board = factory.createBoard(X_MAX, Y_MAX);
+        checkFruits();
+        collisionManager = new CollisionManager(board, snake, this);
+        painter.paintBoard(board);
+    }
+
+    void checkFruits() {
         if (fruits.size() < MIN_PELLETS) {
             Fruit newFruit = createFruit();
             fruits.add(newFruit);
             board.updateTile(newFruit.getX(), newFruit.getY(), newFruit);
         }
-        collisionManager = new CollisionManager(board, snake, this);
-        painter.paintBoard(board);
     }
-
 
     /**
      * Starts the game, meaning it will start running the game loop.
@@ -129,6 +137,7 @@ public class Game {
             if (collisionManager.check()) {
                 return;
             }
+            painter.writeScore(scoreText, score);
             Tile head = snake.getHead();
             board.updateTile(head.getX(), head.getY(), head);
             painter.paint(snake.getBody());
@@ -144,7 +153,6 @@ public class Game {
      */
     void increaseScore(int value) {
         score += value;
-        scoreText.setText("Score: " + score);
     }
 
     /**

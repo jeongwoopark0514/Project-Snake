@@ -5,6 +5,7 @@ import static game.GameSettings.CELL_SIZE;
 import java.util.List;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -94,6 +95,10 @@ public class Painter {
             assert tile instanceof Tile;
             unPaint((Tile) tile);
         }
+    }
+
+    void writeScore(Text scoreText, int value) {
+        scoreText.setText("Score: " + value);
     }
 
     ///**

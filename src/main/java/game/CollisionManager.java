@@ -20,7 +20,7 @@ class CollisionManager {
      *
      * @param board the board on which the current level takes place.
      * @param snake the snake in the current game.
-     * @param game the game that is running.
+     * @param game  the game that is running.
      */
     CollisionManager(Board board, Snake snake, Game game) {
         this.board = board;

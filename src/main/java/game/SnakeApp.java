@@ -6,7 +6,6 @@ import static game.GameSettings.HEIGHT;
 import static game.GameSettings.TEXT_COLOR;
 import static game.GameSettings.WIDTH;
 
-import java.awt.Color;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -59,7 +58,8 @@ public class SnakeApp extends Application {
 
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        Game game = new Game(scene, painter, canvas, snake, score);
+        BoardFactory factory = new BoardFactory("/image/background.png");
+        Game game = new Game(scene, painter, canvas, snake, score, factory);
 
         snake.setGame(game);
 

@@ -6,16 +6,15 @@ import static game.GameSettings.HEIGHT;
 import static game.GameSettings.TEXT_COLOR;
 import static game.GameSettings.WIDTH;
 
+import game.BoardFactory;
 import game.BodyPart;
 import game.Game;
 import game.GameSettings;
 import game.Painter;
 import game.Snake;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -90,7 +89,8 @@ public class Gui {
 
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        Game game = new Game(scene, painter, canvas, snake, score);
+        BoardFactory factory = new BoardFactory("/image/background.png");
+        Game game = new Game(scene, painter, canvas, snake, score, factory);
 
         snake.setGame(game);
         game.start();
