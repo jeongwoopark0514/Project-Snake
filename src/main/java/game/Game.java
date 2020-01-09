@@ -79,7 +79,6 @@ public class Game {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();
-        checkFruits();
 
         // collect all tile elements in ArrayList
         List<Tile> elements = new ArrayList<>();
@@ -93,7 +92,7 @@ public class Game {
             .withElements(elements)
             .build();
 
-
+        checkFruits();
         collisionManager = new CollisionManager(board, snake, this);
         painter.paintBoard(board);
     }

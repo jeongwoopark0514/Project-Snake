@@ -26,9 +26,7 @@ class GameTest {
         Scene scene = mock(Scene.class);
         Snake snake = mock(Snake.class);
         BoardFactory factory = mock(BoardFactory.class);
-        board = mock(Board.class);
-        when(factory.createBoard(anyInt(), anyInt())).thenReturn(board);
-        game = new Game(scene, painter, canvas, snake, mock(Text.class), factory);
+        game = new Game(scene, painter, canvas, snake, mock(Text.class));
     }
 
     @AfterEach

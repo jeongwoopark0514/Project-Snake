@@ -89,8 +89,7 @@ public class Gui {
 
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        BoardFactory factory = new BoardFactory("/image/background.png");
-        Game game = new Game(scene, painter, canvas, snake, score, factory);
+        Game game = new Game(scene, painter, canvas, snake, score);
 
         snake.setGame(game);
         game.start();
