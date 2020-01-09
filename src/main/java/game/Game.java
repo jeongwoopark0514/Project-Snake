@@ -40,7 +40,6 @@ public class Game {
     private transient int score;
     private transient Text scoreText;
     private transient Board board;
-    private transient BoardFactory factory;
     private transient CollisionManager collisionManager;
 
     /**
@@ -53,10 +52,8 @@ public class Game {
      * @param canvas    the canvas to paint on.
      * @param snake     the snake that represents the player on the board.
      * @param scoreText the element representing the player score.
-     * @param factory   the factory associated with this game.
      */
-    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText,
-                BoardFactory factory) {
+    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText) {
         this.scene = scene;
         this.canvas = canvas;
         this.snake = snake;
@@ -64,8 +61,7 @@ public class Game {
         this.fruits = new ArrayList<>();
         this.scoreText = scoreText;
         this.score = 0;
-        this.factory = factory;
-        this.factory.addTile(snake.getHead());
+
         //This would only be an error if we had subclasses extending from the game class,
         //but since this is not the case this doesn't actually pose a risk.
         init();//NOPMD
@@ -83,9 +79,21 @@ public class Game {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();
-        factory.addTiles(walls);
-        board = factory.createBoard(X_MAX, Y_MAX);
         checkFruits();
+
+        // collect all tile elements in ArrayList
+        List<Tile> elements = new ArrayList<>();
+        elements.addAll(fruits);
+        elements.addAll(walls);
+        elements.add(snake.getHead());
+        // build the board
+        this.board = new BoardBuilder()
+            .withDimensions(X_MAX, Y_MAX)
+            .withBackground("image/background.png")
+            .withElements(elements)
+            .build();
+
+
         collisionManager = new CollisionManager(board, snake, this);
         painter.paintBoard(board);
     }
