@@ -6,7 +6,6 @@ import static game.GameSettings.HEIGHT;
 import static game.GameSettings.TEXT_COLOR;
 import static game.GameSettings.WIDTH;
 
-import game.BoardFactory;
 import game.BodyPart;
 import game.Game;
 import game.GameSettings;
