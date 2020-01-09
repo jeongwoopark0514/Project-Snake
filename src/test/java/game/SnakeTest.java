@@ -89,6 +89,22 @@ class SnakeTest {
     }
 
     @Test
+    void changeDirectionNull() {
+        snake.setDirection(RIGHT);
+        snake.changeDirection(null);
+        assertEquals(RIGHT, snake.getDirection());
+    }
+
+    @Test
+    void changeAllDirections() {
+        snake.changeDirection(LEFT);
+        snake.changeDirection(UP);
+        snake.changeDirection(RIGHT);
+        snake.changeDirection(DOWN);
+        assertEquals(DOWN, snake.getDirection());
+    }
+
+    @Test
     void moveSizeOneTest() {
         snake.move();
         assertEquals(6, snake.getHead().getX());
@@ -134,6 +150,13 @@ class SnakeTest {
         snake.move();
         snake.grow();
         assertEquals(GameSettings.SNAKE_BODY, snake.getBody().get(1).getSprite());
+    }
+
+    @Test
+    void setSpritesSmallSnake() {
+        snake.changeDirection(LEFT);
+        snake.setSprites();
+        assertEquals("image/green_snake_head_LEFT.png", snake.getBody().get(0).getSprite());
     }
 
 }

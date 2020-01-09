@@ -68,14 +68,17 @@ public class Snake {
      * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT)
      */
     public void changeDirection(Directions dir) {
-        if (this.body.size() <= minSize) {
-            this.head.setDirection(dir);
-            this.setDirection(dir);
-        } else {
-            if (this.direction != null && dir != this.direction.opposite()
-                && dir != this.direction) {
+        if (dir != null) {
+            if (this.body.size() <= minSize) {
                 this.head.setDirection(dir);
                 this.setDirection(dir);
+            } else {
+                if (dir != this.direction.opposite()) {
+                    if (dir != this.direction) {
+                        this.head.setDirection(dir);
+                        this.setDirection(dir);
+                    }
+                }
             }
         }
     }
