@@ -2,8 +2,12 @@ package game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -60,9 +64,15 @@ class GameTest {
     }
 
     @Test
-    void fruitTileNotNull() {
-        when(board.getTile(anyInt(), anyInt())).thenReturn(mock(Tile.class)).thenReturn(null);
-        assertEquals("game.Fruit", game.createFruit().getClass().getName());
+    void locationNewFruitNotOccupiedTest() {
+        when(board.getTile(anyInt(), anyInt())).thenReturn(null);
+        assertNotNull(game.createFruit());
+    }
+
+    @Test
+    void locationNewFruitOccupiedTest() {
+        when(board.getTile(anyInt(), anyInt())).thenReturn(mock(Fruit.class)).thenReturn(null);
+        assertNotNull(game.createFruit());
     }
 
     @Test
@@ -70,24 +80,7 @@ class GameTest {
         assertEquals(0, game.getScore());
         game.increaseScore(10);
         assertEquals(10, game.getScore());
-
     }
 
-    // TODO: TO BE IMPLEMENTED
-    //@Test
-    //void gameStopTest() {
-    //}
 
-    // TODO: TO BE IMPLEMENTED
-    //@Test
-    //void gamePauseTest() {
-    //}
-
-    //@Test
-    //void verifyOnKeyPressedListenersWereSet() {
-    // implicitly verifies init is called in constructor
-    //verify(game.getCanvas()).setOnKeyPressed(Mockito.any());
-    //verify(game.getCanvas()).requestFocus(); // TODO: Interchanging these two lines causes
-    // error
-    //}
 }

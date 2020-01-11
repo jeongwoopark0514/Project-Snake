@@ -8,8 +8,8 @@ import java.util.List;
  * Implements the Builder pattern.
  */
 public class BoardBuilder {
-    private int width;
-    private int height;
+    private transient int width;
+    private transient int height;
     private transient String background;
     private transient List<Tile> elements;
 

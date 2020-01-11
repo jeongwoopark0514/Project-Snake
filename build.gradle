@@ -78,7 +78,8 @@ jacocoTestCoverageVerification {
                 'gui.Gui.*',
                 'gui.AlertBox.*',
                 'gui.MainRunner.*',
-                'gui.controller.ScoreController.*' //delete this when the implementation and test is ready
+                'gui.controller.ScoreController.*', //delete this when the implementation and test is ready
+                'game.Game.createFruit()' // uses random element which is hard and unnecessary to test
             ]
         }
         rule {
@@ -98,7 +99,8 @@ jacocoTestCoverageVerification {
                     'gui.Gui.*',
                     'gui.AlertBox.*',
                     'gui.MainRunner.*',
-                    'gui.controller.ScoreController.*' //delete this when implementation and test is ready
+                    'gui.controller.ScoreController.*', //delete this when implementation and test is ready
+                    'game.Game.createFruit()' // uses random element which is hard and unnecessary to test
             ]
         }
 

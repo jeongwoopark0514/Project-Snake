@@ -108,27 +108,4 @@ class Board {
             }
         }
     }
-
-    /**
-     * Add a list of tiles to the factory, which will be added ot the board.
-     * This can be any type of Tile.
-     *
-     * @param tiles the list of tiles that should be added.
-     */
-    public void addTiles(List tiles) {
-        for (Object tile : tiles) {
-            if (tile instanceof Tile) {
-                elements.add((Tile) tile);
-            }
-        }
-    }
-
-    /**
-     * Add just a single Tile to the board.
-     *
-     * @param tile the object of type tile to add.
-     */
-    public void addTile(Tile tile) {
-        elements.add(tile);
-    }
 }

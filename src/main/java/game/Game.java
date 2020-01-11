@@ -187,10 +187,11 @@ public class Game {
      * Create a piece of fruit to be put onto the map.
      * The method makes sure that the place the fruits spawns is actually empty.
      */
-    Fruit createFruit() {
+    public Fruit createFruit() {
         int x = ThreadLocalRandom.current().nextInt(1, X_MAX - 2);
         int y = ThreadLocalRandom.current().nextInt(1, Y_MAX - 2);
-        if (board.getTile(x, y) != null) {
+        Tile tile = board.getTile(x, y);
+        if (tile != null) {
             return createFruit();
         } else {
             return new Fruit(x, y, GameSettings.FRUIT_COLOR, null, 10);
