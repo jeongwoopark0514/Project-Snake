@@ -27,10 +27,10 @@ class Board {
     /**
      * Constructor for the board class, this will create an instance of a board.
      *
-     * @param width
-     * @param height
-     * @param background the background this board gets.
-     * @param elements
+     * @param width         number of cells on x-axis
+     * @param height        number of cells on y-axis
+     * @param background    the background this board gets.
+     * @param elements      list of Wall, Fruit and Bodypart objects belonging to this board
      */
     public Board(int width, int height, String background, List<Tile> elements) {
         this.width = width;
