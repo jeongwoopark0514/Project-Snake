@@ -25,6 +25,7 @@ class GameTest {
         Painter painter = mock(Painter.class);
         Scene scene = mock(Scene.class);
         Snake snake = mock(Snake.class);
+        board = mock(Board.class);
         game = new Game(scene, painter, canvas, snake, mock(Text.class));
     }
 

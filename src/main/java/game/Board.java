@@ -98,6 +98,9 @@ class Board {
         }
 
         for (Tile tile : elements) {
+            if (tile == null) {
+                continue;
+            }
             int x = tile.getX();
             int y = tile.getY();
             if (grid.get(y).get(x) == null) {
