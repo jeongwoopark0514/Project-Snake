@@ -40,4 +40,11 @@ public class EntryController {
     public void changeToLogin() throws IOException {
         gui.switchScene("src/main/resources/fxml/login.fxml");
     }
+
+    /**
+     *
+     */
+    public void changeToSettings() throws IOException {
+        gui.switchScene("src/main/resources/fxml/setting.fxml");
+    }
 }
