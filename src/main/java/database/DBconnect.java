@@ -131,17 +131,19 @@ public class DBconnect {
             if (pwdHash.validatePassword(hashed)) {
                 return true;
             }
+
         } catch (Exception e) {
             System.out.println(prefix + e);
         }
+
         return false;
     }
 
 
     /**
-     * This method saves the highscore of the user when the game ends.
+     * This method saves the score of the user when the game ends.
      * @param username - the username of the player
-     * @param score - the highscore of the user
+     * @param score - the score of the user for that game
      */
     public void saveScore(String username, int score, String nickname){
         try{
@@ -162,16 +164,18 @@ public class DBconnect {
      * This method gets the username and highscores of each user and sorts it in descending order of score.
      * @return - returns a result set
      */
-    public ResultSet getScores() {
+    public ResultSet getGlobalScores() {
         try {
             String highScores = "SELECT * FROM scores ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(highScores);
             resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                return resultSet;
+            }
         } catch (Exception e){
             System.out.println(e);
         }
-
-        return resultSet;
+        return null;
     }
 
 
