@@ -18,6 +18,11 @@ public class ScoreController {
     public String username = "Rohan";
     public String nickname = "nickname";
 
+    /**
+     * Method that saves the nickname and score of a users game.
+     * @param score - the score of the current game
+     * @throws IOException
+     */
     public void scoreSave(int score) throws IOException {
         if (nickname.equals("")) {
             System.out.println("SCORE NOT SAVED");
