@@ -103,14 +103,6 @@ public class DBconnect {
             }
         } catch (Exception e) {
             System.out.println(prefix + e);
-        } finally {
-            try {
-                resultSet.close();
-                preparedStatement.close();
-                connection.close();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
         }
         return false;
     }
@@ -149,14 +141,6 @@ public class DBconnect {
             }
         } catch (Exception e) {
             System.out.println(prefix + e);
-        } finally {
-            try {
-                resultSet.close();
-                preparedStatement.close();
-                connection.close();
-            } catch (Exception e) {
-                System.out.println(e);
-            }
         }
         return false;
     }
