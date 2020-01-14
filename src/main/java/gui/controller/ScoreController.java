@@ -21,16 +21,16 @@ public class ScoreController {
     /**
      * Method that saves the nickname and score of a users game.
      * @param score - the score of the current game
-     * @throws IOException
+     * @throws IOException - exception
      */
     public void scoreSave(int score) throws IOException {
         if (nickname.equals("")) {
             System.out.println("SCORE NOT SAVED");
             gui.showAlert("Enter a nickname", "Empty field(s)");
-        }else if(database.usernameCheck(username) != true){
+        } else if (database.usernameCheck(username) != true) {
             System.out.println("SCORE NOT SAVED");
             gui.showAlert("Please enter the correct username", "Error!");
-        }else {
+        } else {
             database.saveScore(username, score, nickname);
             System.out.println("Score Saved");
             gui.showAlert("Your score was saved", "Success!");

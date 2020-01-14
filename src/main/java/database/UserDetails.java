@@ -9,7 +9,13 @@ public class UserDetails {
     private SimpleStringProperty username;
     private SimpleIntegerProperty score;
 
-    public UserDetails(Integer rank, String username, Integer score){
+    /**
+     * Constructor for POJO class.
+     * @param rank - the rank of players highscore
+     * @param username - username of player
+     * @param score - score of the player
+     */
+    public UserDetails(Integer rank, String username, Integer score) {
         this.rank = new SimpleIntegerProperty(rank);
         this.username = new SimpleStringProperty(username);
         this.score = new SimpleIntegerProperty(score);

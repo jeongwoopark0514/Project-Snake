@@ -3,19 +3,18 @@ package gui.controller;
 import database.DBconnect;
 import database.UserDetails;
 import gui.Gui;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lombok.SneakyThrows;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
+
 
 /**
  * This is the controller of LeaderBoard.
@@ -37,7 +36,7 @@ public class LeaderBoardController implements Initializable {
     private TableColumn<UserDetails, Integer> score;
 
     private ObservableList<UserDetails> scores;
-    private DBconnect dBconnect = new DBconnect();
+    private DBconnect database = new DBconnect();
 
     private int position = 1;
 
@@ -53,14 +52,18 @@ public class LeaderBoardController implements Initializable {
         gui.startSnakeGame();
     }
 
-    public void globalLeaderboard () {
+
+    /**
+     * loads the global leaderboard scores to table.
+     */
+    public void globalLeaderboard() {
         try {
             gui.switchScene("src/main/resources/fxml/leaderboard.fxml");
             scores = FXCollections.observableArrayList(
                     new UserDetails(
                             position,
-                            dBconnect.getGlobalScores().getString("username"),
-                            dBconnect.getGlobalScores().getInt("score") )
+                            database.getGlobalScores().getString("username"),
+                            database.getGlobalScores().getInt("score"))
             );
             rank.setCellValueFactory(new PropertyValueFactory<>("Rank"));
             username.setCellValueFactory(new PropertyValueFactory<>("Username"));

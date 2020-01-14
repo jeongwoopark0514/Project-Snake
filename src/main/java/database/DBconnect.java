@@ -1,10 +1,11 @@
 package database;
 
+import java.sql.*;
 import gui.controller.PasswordHash;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.*;
+
 
 
 public class DBconnect {
@@ -88,8 +89,8 @@ public class DBconnect {
      * @param username - username of the player
      * @return - true iff user exists else false
      */
-    public boolean usernameCheck (String username){
-        try{
+    public boolean usernameCheck(String username) {
+        try {
             String usernameCheck = "SELECT username FROM users WHERE username = ?";
             preparedStatement = connection.prepareStatement(usernameCheck);
             preparedStatement.setString(1,username);
@@ -97,7 +98,7 @@ public class DBconnect {
             if (resultSet.next()) {
                 return true;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return false;
@@ -118,7 +119,7 @@ public class DBconnect {
         }
 
         try {
-            if(usernameCheck(username)){
+            if (usernameCheck(username)) {
                 return false;
             }
             String hashed = pwdHash.createHash();
@@ -145,9 +146,9 @@ public class DBconnect {
      * @param username - the username of the player
      * @param score - the score of the user for that game
      */
-    public void saveScore(String username, int score, String nickname){
-        try{
-            if(usernameCheck(username)){
+    public void saveScore(String username, int score, String nickname) {
+        try {
+            if (usernameCheck(username)) {
                 String insertScore = "INSERT INTO scores (username,score,nickname) VALUES (?,?,?)";
                 preparedStatement = connection.prepareStatement(insertScore);
                 preparedStatement.setString(1,username);
@@ -155,13 +156,14 @@ public class DBconnect {
                 preparedStatement.setString(3,nickname);
                 preparedStatement.executeUpdate();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
     /**
-     * This method gets the username and highscores of each user and sorts it in descending order of score.
+     * This method gets the username and highscores.
+     * It sorts the scores in descending order.
      * @return - returns a result set
      */
     public ResultSet getGlobalScores() {
@@ -169,10 +171,10 @@ public class DBconnect {
             String highScores = "SELECT * FROM scores ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(highScores);
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 return resultSet;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         return null;
