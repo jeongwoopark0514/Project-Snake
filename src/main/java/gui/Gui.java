@@ -11,11 +11,9 @@ import game.Game;
 import game.GameSettings;
 import game.Painter;
 import game.Snake;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;

@@ -6,7 +6,6 @@ import static game.GameSettings.HEIGHT;
 import static game.GameSettings.TEXT_COLOR;
 import static game.GameSettings.WIDTH;
 
-import java.awt.Color;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;

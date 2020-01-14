@@ -17,6 +17,8 @@ public class Snake {
     @Setter
     private BodyPart head;
     @Getter
+    private BodyPart tail;
+    @Getter
     @Setter
     private Directions direction;
     @Getter
@@ -31,6 +33,7 @@ public class Snake {
      * @param direction Initial direction of the snake.
      */
     public Snake(BodyPart start, Directions direction) {
+        this.tail = start;
         this.body.add(start);
         this.head = start;
         head.setDirection(direction);
@@ -46,7 +49,7 @@ public class Snake {
             for (int i = 1; i < body.size() - 1; i++) {
                 body.get(i).setSprite(GameSettings.SNAKE_BODY);
             }
-            body.get(body.size() - 1).setSprite(GameSettings.SNAKE_TAIL);
+            tail.setSprite(GameSettings.SNAKE_TAIL);
         }
     }
 
@@ -60,7 +63,7 @@ public class Snake {
             this.head.setDirection(dir);
         } else {
             if (this.direction != null && dir != this.direction.opposite()
-                    && dir != this.direction) {
+                && dir != this.direction) {
                 this.head.setDirection(dir);
             }
         }
@@ -83,10 +86,10 @@ public class Snake {
      * Grow the snake when it eats a pellet.
      */
     public void grow() {
-        BodyPart curTail = (BodyPart) body.get(body.size() - 1);
-        BodyPart newTail = new BodyPart(curTail.getX(), curTail.getY(),
+        BodyPart newTail = new BodyPart(tail.getX(), tail.getY(),
             GameSettings.SNAKE_COLOR, null);
         body.add(newTail);
+        tail = newTail;
         setSprites();
     }
 }
