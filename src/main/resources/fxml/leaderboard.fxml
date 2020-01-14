@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.media.*?>
 <?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -29,7 +25,7 @@
             <TableColumn prefWidth="167.0" text="Point" />
          </columns>
       </TableView>
-      <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="927.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+      <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="927.0" layoutY="542.0" onMouseClicked="#quitButton" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
          <image>
             <Image url="@../image/exit.png" />
          </image>
