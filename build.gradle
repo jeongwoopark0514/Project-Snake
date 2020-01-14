@@ -150,3 +150,6 @@ javafx {
 }
 
 mainClassName = 'gui.MainRunner'
+
+//uncomment this if you want to run SnakeApp (testing purpose)
+//mainClassName='game.SnakeApp'
