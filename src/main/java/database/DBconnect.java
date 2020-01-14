@@ -22,10 +22,27 @@ public class DBconnect {
     @Getter @Setter private PreparedStatement preparedStatement;
     private transient String prefix = "Error: ";
 
+    private static DBconnect INSTANCE;
+
+    /**
+     * First time this method is called an instance of DBconnect will be created. Subsequent
+     * times reference to this instance will be returned.
+     * Implements the Singleton design pattern.
+     *
+     * @return Reference to database.
+     */
+    public static DBconnect getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new DBconnect();
+            return INSTANCE;
+        } else {
+            return INSTANCE;
+        }
+    }
+
     /**
      * Method that establishes connection to the mysql database.
      */
-
     public DBconnect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
