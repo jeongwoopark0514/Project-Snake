@@ -3,6 +3,7 @@ package game;
 import java.util.LinkedList;
 import java.util.List;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 /**
@@ -41,16 +42,14 @@ public class Snake {
     }
 
     /**
-     * Set the sprite of the different parts of the snake.
+     * Sets the sprite of the different parts of the snake.
      */
     public void setSprites() {
-
-        Directions dir = this.getDirection();
-        if (dir == null) {
+        if (direction == null) {
             head.setSprite(GameSettings.SNAKE_HEAD);
             return;
         }
-        String newSpriteHead = "image/green_snake_head_" + dir + ".png";
+        String newSpriteHead = "image/green_snake_head_" + direction + ".png";
         head.setSprite(newSpriteHead);
         if (body.size() > minSize) {
             for (int i = 1; i < body.size() - 1; i++) {
@@ -65,21 +64,16 @@ public class Snake {
     /**
      * Changes the direction of the snake by setting the direction its head moves to.
      *
-     * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT)
+     * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT).
+     * @throws NullPointerException if dir is null
      */
-    public void changeDirection(Directions dir) {
-        if (dir != null) {
-            if (this.body.size() <= minSize) {
-                this.head.setDirection(dir);
-                this.setDirection(dir);
-            } else {
-                if (dir != this.direction.opposite()) {
-                    if (dir != this.direction) {
-                        this.head.setDirection(dir);
-                        this.setDirection(dir);
-                    }
-                }
-            }
+    public void changeDirection(@NonNull Directions dir) throws NullPointerException {
+        if (this.body.size() <= minSize) {
+            this.head.setDirection(dir);
+            this.setDirection(dir);
+        } else if (dir != this.direction.opposite() && dir != this.direction) {
+            this.head.setDirection(dir);
+            this.setDirection(dir);
         }
     }
 
@@ -88,7 +82,7 @@ public class Snake {
      */
     public void move() {
         for (int i = body.size() - 1; i > 0; i--) {
-            BodyPart part =  body.get(i);
+            BodyPart part = body.get(i);
             BodyPart previous = body.get(i - 1);
             part.setX(previous.getX());
             part.setY(previous.getY());
@@ -99,7 +93,7 @@ public class Snake {
     }
 
     /**
-     * Grow the snake when it eats a pellet.
+     * Adds one bodypart to the snake body.
      */
     public void grow() {
         BodyPart newTail = new BodyPart(tail.getX(), tail.getY(),

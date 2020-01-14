@@ -6,6 +6,7 @@ import static game.Directions.RIGHT;
 import static game.Directions.UP;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
@@ -90,9 +91,7 @@ class SnakeTest {
 
     @Test
     void changeDirectionNull() {
-        snake.setDirection(RIGHT);
-        snake.changeDirection(null);
-        assertEquals(RIGHT, snake.getDirection());
+        assertThrows(NullPointerException.class, () -> snake.changeDirection(null));
     }
 
     @Test
