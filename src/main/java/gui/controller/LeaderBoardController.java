@@ -3,9 +3,6 @@ package gui.controller;
 import database.DBconnect;
 import database.UserDetails;
 import gui.Gui;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,7 +11,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * This is the controller of LeaderBoard.
@@ -27,22 +27,22 @@ public class LeaderBoardController implements Initializable {
     public transient Gui gui = new Gui();
 
     @FXML
-    private TableView<UserDetails> globalTable;
+    private TableView<UserDetails> globalTable = new TableView<>();
     @FXML
-    private TableColumn<UserDetails, Integer> rank;
+    private TableColumn<UserDetails, Integer> col_rank;
     @FXML
-    private TableColumn<UserDetails, String> username;
+    private TableColumn<UserDetails, String> col_username;
     @FXML
-    private TableColumn<UserDetails, Integer> score;
+    private TableColumn<UserDetails, Integer> col_score;
 
     private ObservableList<UserDetails> scores;
+    private ArrayList<UserDetails> list = new ArrayList<>();
     private DBconnect database = new DBconnect();
 
-    private int position = 1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        populateTable();
     }
 
     /**
@@ -52,26 +52,28 @@ public class LeaderBoardController implements Initializable {
         gui.startSnakeGame();
     }
 
+    /**
+     * When leaderboard button is clicked, move to leaderboard screen.
+     * @throws IOException - Exception if the file does not exist.
+     */
+    public void globalLeaderboard() throws IOException {
+        gui.switchScene("src/main/resources/fxml/leaderboard.fxml");
+    }
 
     /**
-     * loads the global leaderboard scores to table.
+     * Fill in global highscore table.
      */
-    public void globalLeaderboard() {
+    public void populateTable() {
         try {
-            gui.switchScene("src/main/resources/fxml/leaderboard.fxml");
-            scores = FXCollections.observableArrayList(
-                    new UserDetails(
-                            position,
-                            database.getGlobalScores().getString("username"),
-                            database.getGlobalScores().getInt("score"))
-            );
-            rank.setCellValueFactory(new PropertyValueFactory<>("Rank"));
-            username.setCellValueFactory(new PropertyValueFactory<>("Username"));
-            score.setCellValueFactory(new PropertyValueFactory<>("Score"));
+            database.getGlobalScores(list);
+            scores = FXCollections.observableArrayList(list);
+            col_rank.setCellValueFactory(new PropertyValueFactory<>("rank"));
+            col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
+            col_score.setCellValueFactory(new PropertyValueFactory<>("score"));
+            globalTable.setEditable(true);
             globalTable.setItems(scores);
-            position += 1;
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("populateTable" + e);
         }
     }
 

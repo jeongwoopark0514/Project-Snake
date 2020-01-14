@@ -1,11 +1,11 @@
 package database;
 
-import java.sql.*;
 import gui.controller.PasswordHash;
 import lombok.Getter;
 import lombok.Setter;
 
-
+import java.sql.*;
+import java.util.ArrayList;
 
 
 public class DBconnect {
@@ -14,7 +14,6 @@ public class DBconnect {
     @Getter @Setter private Statement statement;
     @Getter @Setter private ResultSet resultSet;
     @Getter @Setter private PreparedStatement preparedStatement;
-    private transient String prefix = "Error: ";
 
     /**
      * Method that establishes connection to the mysql database.
@@ -31,8 +30,19 @@ public class DBconnect {
                 "pu_Snake1", "tHWLSWJqg57E");
             statement = connection.createStatement();
         } catch (Exception exception) {
-            System.out.println(prefix + exception);
+            System.out.println("DBconnect" + exception);
         }
+    }
+
+    /**
+     * This method closes connections with database
+     */
+    public void closeConnections (){
+        try { resultSet.close(); } catch (Exception e) {
+            System.out.println("closeConnections" + e);
+        }
+        try { preparedStatement.close(); } catch (Exception e) {}
+        try { connection.close(); } catch (Exception e) {}
     }
 
     /**
@@ -41,7 +51,7 @@ public class DBconnect {
     public ResultSet getData() {
         try {
             String query = "SELECT * FROM users";
-            resultSet = statement.executeQuery(query);
+            resultSet = preparedStatement.executeQuery(query);
             System.out.println("Records:");
             while (resultSet.next()) {
                 String username = resultSet.getString("username");
@@ -50,9 +60,10 @@ public class DBconnect {
             }
 
         } catch (Exception exception) {
-            System.out.println(prefix + exception);
+            System.out.println("getData" + exception);
+        } finally {
+            closeConnections();
         }
-
         return resultSet;
     }
 
@@ -64,11 +75,9 @@ public class DBconnect {
      * @return - true iff login is successful
      */
     public boolean authenticate(String username, String password, PasswordHash pwdHash) {
-
         if (pwdHash == null) {
             pwdHash = new PasswordHash(password);
         }
-
         try {
             String checkUser = "SELECT password FROM users WHERE username = ?";
             preparedStatement = connection.prepareStatement(checkUser);
@@ -79,7 +88,9 @@ public class DBconnect {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println(prefix + e);
+            System.out.println("authenticate" + e);
+        } finally {
+            closeConnections();
         }
         return false;
     }
@@ -99,7 +110,9 @@ public class DBconnect {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("usernameCheck" + e);
+        } finally {
+            closeConnections();
         }
         return false;
     }
@@ -117,7 +130,6 @@ public class DBconnect {
         if (pwdHash == null) {
             pwdHash = new PasswordHash(password);
         }
-
         try {
             if (usernameCheck(username)) {
                 return false;
@@ -128,15 +140,14 @@ public class DBconnect {
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,hashed);
             preparedStatement.executeUpdate();
-
             if (pwdHash.validatePassword(hashed)) {
                 return true;
             }
-
         } catch (Exception e) {
-            System.out.println(prefix + e);
+            System.out.println("registerUser" + e);
+        } finally {
+            closeConnections();
         }
-
         return false;
     }
 
@@ -157,7 +168,9 @@ public class DBconnect {
                 preparedStatement.executeUpdate();
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println("saveScore" + e);
+        } finally {
+            closeConnections();
         }
     }
 
@@ -166,19 +179,24 @@ public class DBconnect {
      * It sorts the scores in descending order.
      * @return - returns a result set
      */
-    public ResultSet getGlobalScores() {
+    public void getGlobalScores(ArrayList<UserDetails> list) {
         try {
+            int position = 1;
             String highScores = "SELECT * FROM scores ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(highScores);
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                return resultSet;
+            while (resultSet.next()){
+                list.add(new UserDetails(
+                        position,
+                        resultSet.getString("username"),
+                        resultSet.getInt("score")));
+                position += 1;
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception e){
+            System.out.println("getGlobalScores" + e);
+        } finally {
+            closeConnections();
         }
-        return null;
     }
-
 
 }

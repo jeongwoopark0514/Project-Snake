@@ -10,6 +10,8 @@ import static org.mockito.Mockito.when;
 import database.DBconnect;
 import gui.Gui;
 import java.io.IOException;
+import java.sql.SQLException;
+
 import org.junit.jupiter.api.Test;
 
 
@@ -65,7 +67,7 @@ class LoginControllerTest {
     }
 
     @Test
-    void loginDatabaseTrue() throws IOException {
+    void loginDatabaseTrue() throws IOException, SQLException {
         Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
@@ -79,10 +81,11 @@ class LoginControllerTest {
             e.printStackTrace();
         }
         loginController.login();
+        database.getConnection().close();
     }
 
     @Test
-    void loginDatabaseFalse() throws IOException {
+    void loginDatabaseFalse() throws IOException, SQLException {
         Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
@@ -96,6 +99,7 @@ class LoginControllerTest {
             e.printStackTrace();
         }
         loginController.login();
+        database.getConnection().close();
     }
 
     @Test
@@ -124,7 +128,7 @@ class LoginControllerTest {
 
     //2 fff
     @Test
-    void registerThreeEqualsFalseFalseFalse() {
+    void registerThreeEqualsFalseFalseFalse() throws SQLException {
         Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
@@ -137,10 +141,11 @@ class LoginControllerTest {
         loginController.setDatabase(database);
         loginController.register();
         verify(gui).showAlert("Successfully registered.", "Success");
+        database.getConnection().close();
     }
 
     @Test
-    void registerThreeEqualsFalseFalseFalse2() {
+    void registerThreeEqualsFalseFalseFalse2() throws SQLException {
         Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
@@ -153,6 +158,7 @@ class LoginControllerTest {
         loginController.setDatabase(database);
         loginController.register();
         verify(gui).showAlert("Username already taken!", "Something went wrong");
+        database.getConnection().close();
     }
 
     //3 ftf
