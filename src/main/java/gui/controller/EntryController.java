@@ -42,7 +42,7 @@ public class EntryController {
     }
 
     /**
-     *
+     * Change the scene to settings.
      */
     public void changeToSettings() throws IOException {
         gui.switchScene("src/main/resources/fxml/setting.fxml");

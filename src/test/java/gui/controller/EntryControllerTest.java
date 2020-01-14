@@ -43,4 +43,17 @@ class EntryControllerTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void changeToSettingTest() {
+        try {
+            Gui gui = mock(Gui.class);
+            EntryController entryController = new EntryController();
+            entryController.gui = gui;
+            doNothing().when(gui).switchScene("setting");
+            entryController.changeToSettings();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
