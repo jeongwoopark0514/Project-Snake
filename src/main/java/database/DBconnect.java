@@ -1,10 +1,12 @@
 package database;
 
 import gui.controller.PasswordHash;
+import javafx.collections.ObservableList;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class DBconnect {
@@ -164,18 +166,19 @@ public class DBconnect {
      * This method gets the username and highscores of each user and sorts it in descending order of score.
      * @return - returns a result set
      */
-    public ResultSet getGlobalScores() {
+    public void getGlobalScores(ArrayList<UserDetails> list) {
         try {
             String highScores = "SELECT * FROM scores ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(highScores);
             resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()){
-                return resultSet;
+                list.add(new UserDetails(resultSet.getInt("score_id"), resultSet.getString("username"), resultSet.getInt("score")));
             }
+
         } catch (Exception e){
             System.out.println(e);
         }
-        return null;
     }
 
 

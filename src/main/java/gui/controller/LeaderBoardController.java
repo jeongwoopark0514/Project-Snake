@@ -5,16 +5,15 @@ import database.UserDetails;
 import gui.Gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import lombok.SneakyThrows;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -28,22 +27,23 @@ public class LeaderBoardController implements Initializable {
     public transient Gui gui = new Gui();
 
     @FXML
-    private TableView<UserDetails> globalTable;
+    private TableView<UserDetails> globalTable = new TableView<>();
     @FXML
-    private TableColumn<UserDetails, Integer> rank;
+    private TableColumn<UserDetails, Integer> col_rank;
     @FXML
-    private TableColumn<UserDetails, String> username;
+    private TableColumn<UserDetails, String> col_username;
     @FXML
-    private TableColumn<UserDetails, Integer> score;
+    private TableColumn<UserDetails, Integer> col_score;
 
     private ObservableList<UserDetails> scores;
+    private ArrayList<UserDetails> list = new ArrayList<>();
     private DBconnect dBconnect = new DBconnect();
 
     private int position = 1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        populateTable();
     }
 
     /**
@@ -53,20 +53,23 @@ public class LeaderBoardController implements Initializable {
         gui.startSnakeGame();
     }
 
-    public void globalLeaderboard () {
+    public void globalLeaderboard() {
         try {
             gui.switchScene("src/main/resources/fxml/leaderboard.fxml");
-            scores = FXCollections.observableArrayList(
-                    new UserDetails(
-                            position,
-                            dBconnect.getGlobalScores().getString("username"),
-                            dBconnect.getGlobalScores().getInt("score") )
-            );
-            rank.setCellValueFactory(new PropertyValueFactory<>("Rank"));
-            username.setCellValueFactory(new PropertyValueFactory<>("Username"));
-            score.setCellValueFactory(new PropertyValueFactory<>("Score"));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void populateTable() {
+        try {
+            dBconnect.getGlobalScores(list);
+            scores = FXCollections.observableArrayList(list);
+            col_rank.setCellValueFactory(new PropertyValueFactory<>("rank"));
+            col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
+            col_score.setCellValueFactory(new PropertyValueFactory<>("score"));
+            globalTable.setEditable(true);
             globalTable.setItems(scores);
-            position += 1;
         } catch (Exception e) {
             System.out.println(e);
         }
