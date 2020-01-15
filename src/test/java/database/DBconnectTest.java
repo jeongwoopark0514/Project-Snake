@@ -127,6 +127,32 @@ public class DBconnectTest {
     }
 
     @Test
+    void usernameCheckError() throws SQLException {
+        Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
+        dbconnect.usernameCheck(defaultUser);
+        boolean contains = outContent.toString().contains(error);
+        assertTrue(contains);
+    }
+
+    @Test
+    void usernameCheckTrue() throws SQLException {
+        Mockito.when(connection.prepareStatement(Mockito.anyString()))
+                .thenReturn(preparedStatement);
+        Mockito.when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        Mockito.when(resultSet.next()).thenReturn(true);
+        assertTrue(dbconnect.usernameCheck(defaultUser));
+    }
+
+    @Test
+    void usernameCheckFalse() throws SQLException {
+        Mockito.when(connection.prepareStatement(Mockito.anyString()))
+                .thenReturn(preparedStatement);
+        Mockito.when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        Mockito.when(!resultSet.next()).thenReturn(false);
+        assertFalse(dbconnect.usernameCheck(defaultUser));
+    }
+
+    @Test
     void registerUserError() throws SQLException {
         Mockito.when(statement.executeQuery(Mockito.anyString())).thenThrow(SQLException.class);
         dbconnect.registerUser(defaultUser, defaultPassword, pwdHash);
@@ -185,4 +211,10 @@ public class DBconnectTest {
 
         assertFalse(dbconnect.registerUser(defaultUser,defaultPassword, pwdHash));
     }
+
+    @Test
+    void saveScoreSuccessfulTest() throws SQLException{
+
+    }
+
 }
