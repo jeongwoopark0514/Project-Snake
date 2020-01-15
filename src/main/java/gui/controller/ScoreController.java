@@ -27,9 +27,6 @@ public class ScoreController {
         if (nickname.equals("")) {
             System.out.println("SCORE NOT SAVED");
             gui.showAlert("Enter a nickname", "Empty field(s)");
-        } else if (database.usernameCheck(username) != true) {
-            System.out.println("SCORE NOT SAVED");
-            gui.showAlert("Please enter the correct username", "Error!");
         } else {
             database.saveScore(username, score, nickname);
             System.out.println("Score Saved");

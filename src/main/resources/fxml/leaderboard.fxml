@@ -10,18 +10,18 @@
             <Image url="@../image/transparent_logo.png" />
          </image>
       </ImageView>
-      <TableView layoutX="63.0" layoutY="304.0" prefHeight="256.0" prefWidth="360.0">
+      <TableView fx:id="personalTable" layoutX="63.0" layoutY="304.0" prefHeight="256.0" prefWidth="360.0">
         <columns>
-          <TableColumn prefWidth="56.0" text="Rank" />
-          <TableColumn prefWidth="168.0" text="Score" />
-            <TableColumn prefWidth="117.0" text="Date" />
+          <TableColumn fx:id="personal_rank" prefWidth="56.0" text="Rank" />
+          <TableColumn  fx:id="personal_score" prefWidth="168.0" text="Score" />
+            <TableColumn  fx:id="nickname" prefWidth="117.0" text="Nickname" />
         </columns>
       </TableView>
       <TableView fx:id="globalTable" layoutX="485.0" layoutY="145.0" prefHeight="415.0" prefWidth="437.0">
          <columns>
-            <TableColumn fx:id="col_rank" prefWidth="83.0" text="Rank" />
-            <TableColumn fx:id="col_username" prefWidth="158.0" text="Username" />
-            <TableColumn fx:id="col_score" prefWidth="167.0" text="Score" />
+            <TableColumn fx:id="global_rank" prefWidth="83.0" text="Rank" />
+            <TableColumn fx:id="username" prefWidth="158.0" text="Username" />
+            <TableColumn fx:id="global_score" prefWidth="167.0" text="Score" />
          </columns>
       </TableView>
       <ImageView fitHeight="40.0" fitWidth="39.0" layoutX="927.0" layoutY="542.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">

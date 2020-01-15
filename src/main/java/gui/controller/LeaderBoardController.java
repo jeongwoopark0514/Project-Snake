@@ -1,7 +1,8 @@
 package gui.controller;
 
 import database.DBconnect;
-import database.UserDetails;
+import database.GlobalDetails;
+import database.PersonalDetails;
 import gui.Gui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,22 +28,34 @@ public class LeaderBoardController implements Initializable {
     public transient Gui gui = new Gui();
 
     @FXML
-    private TableView<UserDetails> globalTable = new TableView<>();
+    private TableView<GlobalDetails> globalTable = new TableView<>();
     @FXML
-    private TableColumn<UserDetails, Integer> col_rank;
+    private TableView<PersonalDetails> personalTable = new TableView<>();
     @FXML
-    private TableColumn<UserDetails, String> col_username;
+    private TableColumn<GlobalDetails, Integer> global_rank;
     @FXML
-    private TableColumn<UserDetails, Integer> col_score;
+    private TableColumn<PersonalDetails, Integer> personal_rank;
+    @FXML
+    private TableColumn<GlobalDetails, String> username;
+    @FXML
+    private TableColumn<PersonalDetails, String> nickname;
+    @FXML
+    private TableColumn<GlobalDetails, Integer> global_score;
+    @FXML
+    private TableColumn<PersonalDetails, Integer> personal_score;
 
-    private ObservableList<UserDetails> scores;
-    private ArrayList<UserDetails> list = new ArrayList<>();
+    private ObservableList<GlobalDetails> globalScores;
+
+    private ObservableList<PersonalDetails> personalScores;
+
+    private ArrayList<GlobalDetails> list = new ArrayList<>();
+    private ArrayList<PersonalDetails> list2 = new ArrayList<>();
+
     private DBconnect database = new DBconnect();
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        populateTable();
+        populateLeaderboards();
     }
 
     /**
@@ -56,22 +69,29 @@ public class LeaderBoardController implements Initializable {
      * When leaderboard button is clicked, move to leaderboard screen.
      * @throws IOException - Exception if the file does not exist.
      */
-    public void globalLeaderboard() throws IOException {
+    public void changeToLeaderBoard() throws IOException {
         gui.switchScene("src/main/resources/fxml/leaderboard.fxml");
     }
 
     /**
      * Fill in global highscore table.
      */
-    public void populateTable() {
+    public void populateLeaderboards() {
         try {
             database.getGlobalScores(list);
-            scores = FXCollections.observableArrayList(list);
-            col_rank.setCellValueFactory(new PropertyValueFactory<>("rank"));
-            col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
-            col_score.setCellValueFactory(new PropertyValueFactory<>("score"));
+            database.getPersonalScores(list2,"Rohan");
+            globalScores = FXCollections.observableArrayList(list);
+            personalScores = FXCollections.observableArrayList(list2);
+            global_rank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
+            username.setCellValueFactory(new PropertyValueFactory<>("username"));
+            global_score.setCellValueFactory(new PropertyValueFactory<>("globalScore"));
+            personal_rank.setCellValueFactory(new PropertyValueFactory<>("personalRank"));
+            personal_score.setCellValueFactory(new PropertyValueFactory<>("personalScore"));
+            nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
             globalTable.setEditable(true);
-            globalTable.setItems(scores);
+            personalTable.setEditable(true);
+            globalTable.setItems(globalScores);
+            personalTable.setItems(personalScores);
         } catch (Exception e) {
             System.out.println("populateTable" + e);
         }
