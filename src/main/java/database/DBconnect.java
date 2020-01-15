@@ -179,14 +179,14 @@ public class DBconnect {
      * It sorts the scores in descending order.
      * @return - returns a result set
      */
-    public void getGlobalScores(ArrayList<UserDetails> list) {
+    public void getGlobalScores(ArrayList<GlobalDetails> list) {
         try {
             int position = 1;
-            String highScores = "SELECT * FROM scores ORDER BY score DESC";
+            String highScores = "SELECT username,score FROM scores ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(highScores);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                list.add(new UserDetails(
+                list.add(new GlobalDetails(
                         position,
                         resultSet.getString("username"),
                         resultSet.getInt("score")));
@@ -195,8 +195,31 @@ public class DBconnect {
         } catch (Exception e){
             System.out.println("getGlobalScores" + e);
         } finally {
-            closeConnections();
+//            closeConnections();
         }
     }
+
+    public void getPersonalScores(ArrayList<PersonalDetails> list2, String username) {
+        try{
+            int position = 1;
+            String personalScores = "SELECT nickname,score FROM scores WHERE username = ? ORDER BY score DESC";
+            preparedStatement = connection.prepareStatement(personalScores);
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                list2.add(new PersonalDetails(
+                        position,
+                        resultSet.getInt("score"),
+                        resultSet.getString("nickname")));
+                position += 1;
+            }
+        } catch (Exception e){
+            System.out.println("getPersonalScores " + e);
+        } finally {
+//            closeConnections();
+        }
+    }
+
+
 
 }
