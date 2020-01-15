@@ -65,18 +65,18 @@ public class SessionManager {
     }
 
     /**
-     * Retrieve a previously created cookie from the database.
+     * Retrieve user data from the database using a previously created cookie.
      * This will read the cookie value from the file and send this to the database,
      * there the value will be checked and if there is an entry there exists a session.
      *
      * @param reader the reader that reads the file and provides the data.
      * @return the username if found or null if there was no session or error.
      */
-    public String retrieveCookie(BufferedReader reader) {
+    public String retrieveUserData(BufferedReader reader) {
         try {
             String cookie = reader.readLine();
             reader.close();
-            String username = dbconnect.getCookie(cookie);
+            String username = dbconnect.getUsername(cookie);
             this.username = username;
             return username;
         } catch (Exception e) {

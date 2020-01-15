@@ -209,7 +209,7 @@ public class DBconnectTest {
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(true);
         when(resultSet.getString("username")).thenReturn("name");
-        assertEquals("name", dbconnect.getCookie("chocolate-chip"));
+        assertEquals("name", dbconnect.getUsername("chocolate-chip"));
     }
 
     @Test
@@ -217,12 +217,12 @@ public class DBconnectTest {
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(false);
-        assertNull(dbconnect.getCookie("chocolate-chip"));
+        assertNull(dbconnect.getUsername("chocolate-chip"));
     }
 
     @Test
     void getCookieTestError() {
-        dbconnect.getCookie("dry-cookie");
+        dbconnect.getUsername("dry-cookie");
         boolean contains = outContent.toString().contains(error);
         assertTrue(contains);
     }

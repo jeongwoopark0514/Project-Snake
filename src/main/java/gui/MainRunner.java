@@ -46,7 +46,7 @@ public class MainRunner extends Application {
         // since the reader is actually closed inside the SessionManger class.
         BufferedReader reader = new BufferedReader(new FileReader("cookie.txt")); //NOPMD
 
-        if (SessionManager.getInstance().retrieveCookie(reader) != null) {
+        if (SessionManager.getInstance().retrieveUserData(reader) != null) {
             url2 = new File("src/main/resources/fxml/entry.fxml").toURI().toURL();
             entry = FXMLLoader.load(url2);
         } else {

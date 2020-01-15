@@ -69,9 +69,9 @@ class SessionManagerTest {
     void retrieveCookieTest() throws IOException {
         //This is a mock so no actual reading is going on.
         BufferedReader reader = mock(BufferedReader.class); //NOPMD
-        when(dbconnect.getCookie(anyString())).thenReturn("username");
+        when(dbconnect.getUsername(anyString())).thenReturn("username");
         when(reader.readLine()).thenReturn("cookie-dish");
-        assertEquals("username", manager.retrieveCookie(reader));
+        assertEquals("username", manager.retrieveUserData(reader));
         reader.close();
     }
 
@@ -80,6 +80,6 @@ class SessionManagerTest {
         //This is a mock so no actual reading is going on.
         BufferedReader reader = mock(BufferedReader.class); //NOPMD
         doThrow(FileNotFoundException.class).when(reader).readLine();
-        assertNull(manager.retrieveCookie(reader));
+        assertNull(manager.retrieveUserData(reader));
     }
 }

@@ -177,7 +177,7 @@ public class DBconnect {
      * @param cookie the cookie to retrieve the username with.
      * @return returns the username if found or null of not.
      */
-    public String getCookie(String cookie) {
+    public String getUsername(String cookie) {
         try {
             String getCookie = "SELECT username FROM sessions WHERE cookie = ?";
             preparedStatement = connection.prepareStatement(getCookie);
