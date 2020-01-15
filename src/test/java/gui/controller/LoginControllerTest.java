@@ -41,7 +41,7 @@ class LoginControllerTest {
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("");
         loginController.login();
-        verify(gui).showAlert(any(), eq(empty));
+        verify(gui).showWarningAlert(any(), eq(empty));
     }
 
 
@@ -52,7 +52,7 @@ class LoginControllerTest {
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("").thenReturn(" ");
         loginController.login();
-        verify(gui).showAlert(any(), eq(empty));
+        verify(gui).showWarningAlert(any(), eq(empty));
     }
 
     @Test
@@ -62,7 +62,7 @@ class LoginControllerTest {
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn(" ").thenReturn("");
         loginController.login();
-        verify(gui).showAlert(any(), eq(empty));
+        verify(gui).showWarningAlert(any(), eq(empty));
     }
 
     @Test
@@ -106,7 +106,7 @@ class LoginControllerTest {
         LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("").thenReturn(" ");
-        doNothing().when(gui).showAlert("message", "title");
+        doNothing().when(gui).showWarningAlert("message", "title");
         loginController.register();
     }
 
@@ -119,7 +119,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("k")
             .thenReturn("k").thenReturn("").thenReturn(" ").thenReturn(" ");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
 
     }
@@ -154,7 +154,7 @@ class LoginControllerTest {
             gui.getText(any()), null)).thenReturn(false);
         loginController.setDatabase(database);
         loginController.register();
-        verify(gui).showAlert("Username already taken!", "Something went wrong");
+        verify(gui).showWarningAlert("Username already taken!", "Something went wrong");
     }
 
     //3 ftf
@@ -166,7 +166,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("k").thenReturn("k")
             .thenReturn("y").thenReturn("").thenReturn("y");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -179,7 +179,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("q").thenReturn("q").thenReturn("")
             .thenReturn("").thenReturn("y");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -192,7 +192,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("q").thenReturn("q")
             .thenReturn("").thenReturn("").thenReturn("");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -205,7 +205,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("a")
             .thenReturn("a").thenReturn("x").thenReturn("").thenReturn("");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -218,7 +218,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("l")
             .thenReturn("l").thenReturn("").thenReturn("f").thenReturn("");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -231,7 +231,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("v")
             .thenReturn("v").thenReturn("q").thenReturn("f").thenReturn("");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 

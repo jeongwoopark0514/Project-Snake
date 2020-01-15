@@ -20,6 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -41,6 +42,17 @@ public class Gui {
     public void showAlert(String message, String title) {
         AlertBox.display(message, title);
     }
+
+    /**
+     * This method pops up a warning alert box that gives notifications.
+     *
+     * @param message - message of the alert box (about warning)
+     * @param title   - title of the alert
+     */
+    public void showWarningAlert(String message, String title) {
+        AlertBox.displayWarning(message, title);
+    }
+
 
     /**
      * This method changes the url for the respective scenes.
@@ -74,15 +86,27 @@ public class Gui {
         final Text score = new Text();
         score.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         score.setFill(TEXT_COLOR);
-        score.setX(50);
-        score.setY(130);
-        score.setText("Score: 0");
+        score.setX(1060);
+        score.setY(60);
+
+        Button startButton = new Button("start");
+        startButton.setLayoutX(1068);
+        startButton.setLayoutY(350);
+        startButton.setPrefSize(70,40);
+
+        Button stopButton = new Button("stop");
+        stopButton.setLayoutX(1068);
+        stopButton.setLayoutY(420);
+        stopButton.setPrefSize(70,40);
 
         Group root = new Group();
         Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         root.getChildren().add(canvas);
         root.getChildren().add(score);
+        root.getChildren().add(startButton);
+        root.getChildren().add(stopButton);
+        root.getStylesheets().add("/css/GameButton.css");
 
         Painter painter = new Painter(gc);
 
@@ -94,5 +118,13 @@ public class Gui {
         game.start();
         MainRunner.stage.setScene(scene);
     }
+
+    /**
+     * Quit the game by closing the window.
+     */
+    public void quit() {
+        AlertBox.displayQuit("Do you really want to quit? ", "Game over");
+    }
+
 }
 

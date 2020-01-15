@@ -79,7 +79,10 @@ jacocoTestCoverageVerification {
                 'gui.AlertBox.*',
                 'gui.MainRunner.*',
                 'gui.controller.ScoreController.*', //delete this when the implementation and test is ready
-                'game.Game.createFruit()' // uses random element which is hard and unnecessary to test
+                'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
+                'gui.controller.EntryController.quitButton()', //impossible to test System.exit
+                'gui.controller.LeaderBoardController.quitButton()' //impossible to test System.exit
+
             ]
         }
         rule {
@@ -100,7 +103,9 @@ jacocoTestCoverageVerification {
                     'gui.AlertBox.*',
                     'gui.MainRunner.*',
                     'gui.controller.ScoreController.*', //delete this when implementation and test is ready
-                    'game.Game.createFruit()' // uses random element which is hard and unnecessary to test
+                    'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
+                    'gui.controller.EntryController.quitButton()', //impossible to test System.exit
+                    'gui.controller.LeaderBoardController.quitButton()' //impossible to test System.exit
             ]
         }
 
@@ -145,3 +150,6 @@ javafx {
 }
 
 mainClassName = 'gui.MainRunner'
+
+//uncomment this if you want to run SnakeApp (testing purpose)
+//mainClassName='game.SnakeApp'
