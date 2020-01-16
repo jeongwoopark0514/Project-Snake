@@ -20,6 +20,8 @@ class CollisionManager {
     private transient Snake snake;
     private transient Game game;
     private transient Painter painter;
+
+    //Sound effects obtained from https://www.zapsplat.com“
     @Getter @Setter
     private Sound sound = new Sound("music/pellet.wav");
 
