@@ -5,6 +5,7 @@ import static game.GameSettings.X_MAX;
 import static game.GameSettings.Y_MAX;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import database.DBconnect;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -113,13 +114,10 @@ public class Game {
     }
 
     /**
-     * TODO: TO BE IMPLEMENTED.
-     * Stops the game.
+     * Used for stopping a game.
      */
     public void stop() {
-        //This is just for the prototype the actual game will not use this,
-        //therefore it needs to be suppressed.
-        System.exit(0); //NOPMD
+        scheduler.shutdown();
     }
 
     ///**
@@ -152,7 +150,7 @@ public class Game {
             painter.paint(snake.getBody());
         };
 
-        scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
+        scheduler.scheduleAtFixedRate(move, 0, 1000, MILLISECONDS);
     }
 
     /**

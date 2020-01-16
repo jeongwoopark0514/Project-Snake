@@ -31,8 +31,6 @@ import javafx.scene.text.Text;
  * Contains all the methods needed for controller logic.
  */
 public class Gui {
-
-
     /**
      * This method pops up an alert box that gives notifications.
      *
@@ -113,6 +111,16 @@ public class Gui {
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
         Game game = new Game(scene, painter, canvas, snake, score);
+
+        stopButton.setOnAction((event) -> {
+            System.out.println("Clicked on stop button.");
+            game.stop();
+            try {
+                this.switchScene("src/main/resources/fxml/login.fxml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         snake.setGame(game);
         game.start();
