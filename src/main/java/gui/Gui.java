@@ -1,21 +1,6 @@
 package gui;
 
-import static game.Directions.DOWN;
-import static game.GameSettings.BACKGROUND_COLOR;
-import static game.GameSettings.HEIGHT;
-import static game.GameSettings.TEXT_COLOR;
-import static game.GameSettings.WIDTH;
-
-import game.BodyPart;
-import game.Game;
-import game.GameSettings;
-import game.Painter;
-import game.Snake;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
+import game.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -27,6 +12,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+import static game.Directions.DOWN;
+import static game.GameSettings.*;
 
 /**
  * Contains all the methods needed for controller logic.
@@ -96,5 +88,7 @@ public class Gui {
         game.start();
         MainRunner.stage.setScene(scene);
     }
+
+
 }
 

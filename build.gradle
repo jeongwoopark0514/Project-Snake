@@ -80,7 +80,8 @@ jacocoTestCoverageVerification {
                 'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
                 'game.Game.manageFruits()',
                 'game.Game.checkWalls()',
-                'gui.controller.ScoreController.*' //delete this when the implementation and test is ready
+                'gui.controller.ScoreController.*',
+                'gui.controller.LeaderBoardController.*',//delete this when the implementation and test is ready
             ]
         }
         rule {

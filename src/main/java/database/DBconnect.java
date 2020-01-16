@@ -235,7 +235,7 @@ public class DBconnect {
         } catch (Exception e) {
             System.out.println("getPersonalScores " + e);
         } finally {
-        //    closeConnections();
+            closeConnections();
         }
     }
 

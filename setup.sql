@@ -1,7 +1,8 @@
 -- SEM Snake database setup script.
 
 -- Delete any old data
-drop table if exists users,scores;
+drop table if exists scores;
+drop table if exists users;
 
 -- Create the table
 create table users
