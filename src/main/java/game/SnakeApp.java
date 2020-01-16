@@ -35,7 +35,7 @@ public class SnakeApp extends Application {
      * @param primaryStage stage to use.
      */
     @Override
-    public void start(Stage primaryStage) throws LineUnavailableException {
+    public void start(Stage primaryStage) {
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -73,10 +73,14 @@ public class SnakeApp extends Application {
 
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        Game game = new Game(scene, painter, canvas, snake, score);
 
-        snake.setGame(game);
+        try {
+            Game game = new Game(scene, painter, canvas, snake, score);
+            snake.setGame(game);
+            game.start();
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
 
-        game.start();
     }
 }

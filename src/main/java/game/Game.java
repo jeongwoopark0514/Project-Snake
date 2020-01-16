@@ -153,13 +153,10 @@ public class Game {
                 if (collisionManager.check()) {
                     return;
                 }
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
+
             painter.writeScore(scoreText, score);
             Tile head = snake.getHead();
             board.updateTile(head.getX(), head.getY(), head);
