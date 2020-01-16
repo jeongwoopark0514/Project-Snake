@@ -83,6 +83,7 @@ jacocoTestCoverageVerification {
                 'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                 'gui.controller.EntryController.quitButton()', //impossible to test System.exit
                 'gui.controller.LeaderBoardController.quitButton()', //impossible to test System.exit
+                    'game.Sound.*' //uses static class
 
             ]
         }
@@ -107,7 +108,8 @@ jacocoTestCoverageVerification {
                     'gui.controller.ScoreController.*', //delete this when implementation and test is ready
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                    'gui.controller.LeaderBoardController.quitButton()' //impossible to test System.exit
+                    'gui.controller.LeaderBoardController.quitButton()', //impossible to test System.exit
+                    'game.Sound.*' //uses static class
             ]
         }
 

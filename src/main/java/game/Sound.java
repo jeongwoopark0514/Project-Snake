@@ -6,6 +6,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import lombok.Getter;
+import lombok.Setter;
+
 
 /**
  * This class is for making sound. If you put a correct fileName for the parameter,
@@ -14,10 +17,10 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 @SuppressWarnings("PMD.BeanMembersShouldSerialize") //no transient
 public class Sound {
-
+    @Getter @Setter
     private File clap;
-
-    public static Clip clip;
+    @Getter @Setter
+    private Clip clip;
 
 
     public Sound(String fileName) {
