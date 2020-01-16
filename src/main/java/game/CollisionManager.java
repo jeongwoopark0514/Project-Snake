@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+
+import lombok.Getter;
 import lombok.Setter;
 
 /**
@@ -18,6 +20,7 @@ class CollisionManager {
     private transient Snake snake;
     private transient Game game;
     private transient Painter painter;
+    @Getter @Setter
     private Sound sound = new Sound("music/pellet.wav");
 
     /**

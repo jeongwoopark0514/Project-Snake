@@ -33,7 +33,6 @@ public class Sound {
      * @throws UnsupportedAudioFileException If the audio file is not supported.
      */
     public void play() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-
         clip = AudioSystem.getClip();
         clip.setFramePosition(0);
         clip.open(AudioSystem.getAudioInputStream(clap));

@@ -36,11 +36,18 @@ class CollisionManagerTest {
     @Test
     void checkFruitTileTest() throws UnsupportedAudioFileException, IOException,
         LineUnavailableException {
+        Board board2 = mock(Board.class);
+        Snake snake2 = mock(Snake.class);
+        when(snake2.getHead()).thenReturn(mock(BodyPart.class));
+        Game game2 = mock(Game.class);
+        when(game2.getPainter()).thenReturn(mock(Painter.class));
+        CollisionManager fruitManager = new CollisionManager(board2, snake2, game2);
         Sound sound = mock(Sound.class);
+        fruitManager.setSound(sound);
         doNothing().when(sound).play();
-        when(board.getTile(anyInt(), anyInt())).thenReturn(mock(Fruit.class));
-        when(game.createFruit()).thenReturn(mock(Fruit.class));
-        assertTrue(collisionManager.check());
+        when(board2.getTile(anyInt(), anyInt())).thenReturn(mock(Fruit.class));
+        when(game2.createFruit()).thenReturn(mock(Fruit.class));
+        assertTrue(fruitManager.check());
     }
 
     @Test
