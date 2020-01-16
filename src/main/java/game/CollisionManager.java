@@ -1,6 +1,9 @@
 package game;
 
+import java.io.IOException;
 import java.util.List;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import lombok.Setter;
 
 /**
@@ -8,12 +11,14 @@ import lombok.Setter;
  * It will check if the head of the snake collides with another elements on the board,
  * if it does collide it executes actions accordingly.
  */
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 class CollisionManager {
     private transient Board board;
     @Setter
     private transient Snake snake;
     private transient Game game;
     private transient Painter painter;
+    private Sound sound = new Sound("../pellet.wav");
 
     /**
      * Constructor for the collision manager.
@@ -40,7 +45,7 @@ class CollisionManager {
      *
      * @return false if there was no collision and true if there is a collision.
      */
-    boolean check() {
+    boolean check() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
         BodyPart head = snake.getHead();
         int x = head.getX();
         int y = head.getY();
@@ -48,6 +53,7 @@ class CollisionManager {
         if (tile == null) {
             return false;
         } else if (tile instanceof Fruit) {
+            sound.play();
             manageFruits((Fruit) tile);
             board.updateTile(x, y, head);
             System.out.println("Collision with fruit");

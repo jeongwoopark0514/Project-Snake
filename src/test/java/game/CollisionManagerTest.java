@@ -8,6 +8,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,20 +30,23 @@ class CollisionManagerTest {
     }
 
     @Test
-    void checkEmptyTileTest() {
+    void checkEmptyTileTest() throws UnsupportedAudioFileException, IOException,
+        LineUnavailableException {
         when(board.getTile(anyInt(), anyInt())).thenReturn(null);
         assertFalse(collisionManager.check());
     }
 
     @Test
-    void checkFruitTileTest() {
+    void checkFruitTileTest() throws UnsupportedAudioFileException, IOException,
+        LineUnavailableException {
         when(board.getTile(anyInt(), anyInt())).thenReturn(mock(Fruit.class));
         when(game.createFruit()).thenReturn(mock(Fruit.class));
         assertTrue(collisionManager.check());
     }
 
     @Test
-    void checkOtherTileTest() {
+    void checkOtherTileTest() throws UnsupportedAudioFileException, IOException,
+        LineUnavailableException {
         when(board.getTile(anyInt(), anyInt())).thenReturn(mock(Wall.class));
         verify(game, times(0)).createFruit();
         assertTrue(collisionManager.check());

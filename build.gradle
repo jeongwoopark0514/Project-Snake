@@ -75,13 +75,14 @@ jacocoTestCoverageVerification {
                 'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
                 'game.Game.lambda$gameLoop$0()', //TODO Is this testable?
                 'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
+                'game.Sound.closeClip()', // Impossible to test static.
                 'gui.Gui.*',
                 'gui.AlertBox.*',
                 'gui.MainRunner.*',
                 'gui.controller.ScoreController.*', //delete this when the implementation and test is ready
                 'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                 'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                'gui.controller.LeaderBoardController.quitButton()' //impossible to test System.exit
+                'gui.controller.LeaderBoardController.quitButton()', //impossible to test System.exit
 
             ]
         }
@@ -99,6 +100,7 @@ jacocoTestCoverageVerification {
                     'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)', //private method
                     'game.Game.lambda$gameLoop$0()', //TODO Is this testable?
                     'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
+                    'game.Sound.closeClip()', // Impossible to test static.
                     'gui.Gui.*',
                     'gui.AlertBox.*',
                     'gui.MainRunner.*',
@@ -149,7 +151,7 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-mainClassName = 'gui.MainRunner'
+//mainClassName = 'gui.MainRunner'
 
 //uncomment this if you want to run SnakeApp (testing purpose)
-//mainClassName='game.SnakeApp'
+mainClassName='game.SnakeApp'
