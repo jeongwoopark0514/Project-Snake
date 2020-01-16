@@ -1,9 +1,8 @@
 package gui.controller;
 
 import gui.Gui;
-
-import javax.sound.sampled.LineUnavailableException;
 import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
 
 
 /**

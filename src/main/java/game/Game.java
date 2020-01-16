@@ -124,7 +124,6 @@ public class Game {
     public void stop() {
         //This is just for the prototype the actual game will not use this,
         //therefore it needs to be suppressed.
-        Sound.closeClip();
         System.exit(0); //NOPMD
     }
 

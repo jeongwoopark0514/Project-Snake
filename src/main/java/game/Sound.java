@@ -38,8 +38,4 @@ public class Sound {
         clip.open(AudioSystem.getAudioInputStream(clap));
         clip.start();
     }
-
-    public static void closeClip() {
-        clip.close();
-    }
 }
