@@ -31,8 +31,6 @@ import javafx.scene.text.Text;
  * Contains all the methods needed for controller logic.
  */
 public class Gui {
-
-
     /**
      * This method pops up an alert box that gives notifications.
      *
@@ -82,40 +80,58 @@ public class Gui {
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        // Creates a score node that is added to the scene.
+        // Text element to show score.
         final Text score = new Text();
         score.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
         score.setFill(TEXT_COLOR);
         score.setX(1060);
         score.setY(60);
 
-        Button startButton = new Button("start");
-        startButton.setLayoutX(1068);
-        startButton.setLayoutY(350);
-        startButton.setPrefSize(70,40);
+        // Text element to show score.
+        final Text pauseText = new Text();
+        pauseText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        pauseText.setFill(TEXT_COLOR);
+        pauseText.setX(1060);
+        pauseText.setY(120);
 
+        // Pause button
+        Button pauseButton = new Button("Pause");
+        pauseButton.setLayoutX(1068);
+        pauseButton.setLayoutY(350);
+        pauseButton.setPrefSize(70,40);
+
+        // Stop button
         Button stopButton = new Button("stop");
         stopButton.setLayoutX(1068);
         stopButton.setLayoutY(420);
         stopButton.setPrefSize(70,40);
 
+        // Add elements to scene
         Group root = new Group();
-        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
-
         root.getChildren().add(canvas);
         root.getChildren().add(score);
-        root.getChildren().add(startButton);
+        root.getChildren().add(pauseButton);
         root.getChildren().add(stopButton);
+        root.getChildren().add(pauseText);
         root.getStylesheets().add("/css/GameButton.css");
+
+        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         Painter painter = new Painter(gc);
 
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        Game game = new Game(scene, painter, canvas, snake, score);
+        Game game = new Game(scene, painter, canvas, snake, score, pauseText);
+
+        // Add action listener to pause button.
+        pauseButton.setOnAction(event -> {
+            game.pause();
+        });
 
         snake.setGame(game);
+
         game.start();
+
         MainRunner.stage.setScene(scene);
     }
 

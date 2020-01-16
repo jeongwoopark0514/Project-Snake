@@ -3,13 +3,13 @@ package game;
 import static game.GameSettings.MIN_PELLETS;
 import static game.GameSettings.X_MAX;
 import static game.GameSettings.Y_MAX;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
+import javafx.animation.AnimationTimer;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
@@ -28,9 +28,6 @@ public class Game {
     private final transient Canvas canvas;
     @Getter
     private final transient Snake snake;
-    @Getter
-    private final transient ScheduledExecutorService scheduler =
-        Executors.newScheduledThreadPool(1);
     //Made the fruits a list to provide the option to add multiple fruits.
     @Getter
     @Setter
@@ -41,6 +38,13 @@ public class Game {
     private transient Text scoreText;
     private transient Board board;
     private transient CollisionManager collisionManager;
+    @Getter
+    @Setter
+    private boolean isPaused;
+    private transient Text pauseText;
+    @Getter
+    @Setter
+    private AnimationTimer timer;
 
     /**
      * The constructor of the game object.
@@ -53,7 +57,8 @@ public class Game {
      * @param snake     the snake that represents the player on the board.
      * @param scoreText the element representing the player score.
      */
-    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText) {
+    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText,
+                Text pauseText) {
         this.scene = scene;
         this.canvas = canvas;
         this.snake = snake;
@@ -61,6 +66,8 @@ public class Game {
         this.fruits = new ArrayList<>();
         this.scoreText = scoreText;
         this.score = 0;
+        this.pauseText = pauseText;
+        this.isPaused = false;
 
         //This would only be an error if we had subclasses extending from the game class,
         //but since this is not the case this doesn't actually pose a risk.
@@ -122,12 +129,18 @@ public class Game {
         System.exit(0); //NOPMD
     }
 
-    ///**
-    // * TODO: TO BE IMPLEMENTED.
-    // * Pauses the game.
-    // */
-    //public void pause() {
-    //}
+    /**
+     * Pauses the game. If game is in paused state the game will start running again.
+     */
+    public void pause() {
+        if (!isPaused) {
+            timer.stop();
+        } else {
+            timer.start();
+        }
+        isPaused = !isPaused;
+        canvas.requestFocus();
+    }
 
     /**
      * This is the main loop of the game.
@@ -136,23 +149,31 @@ public class Game {
      * The loop will e executed on scheduled intervals to make sure the game keeps running.
      */
     private void gameLoop() {
-        // PMD sees this as a DU-Anomaly, this would mean that move is undefined when leaving scope.
-        // But this is not actually the case since it is used in the scheduler.
-        Runnable move = () -> { //NOPMD
-            painter.unPaint(snake.getBody());
-            Tile tail = snake.getTail();
-            board.updateTile(tail.getX(), tail.getY(), null);
-            snake.move();
-            if (collisionManager.check()) {
-                return;
+        final LongProperty lastUpdateTime = new SimpleLongProperty(0);
+        final LongProperty frameCount = new SimpleLongProperty(0);
+        this.timer = new AnimationTimer() {
+            @Override
+            public void handle(long timestamp) {
+                if (frameCount.get() % 7 == 0) {
+                    if (lastUpdateTime.get() > 0) {
+                        painter.unPaint(snake.getBody());
+                        Tile tail = snake.getTail();
+                        board.updateTile(tail.getX(), tail.getY(), null);
+                        snake.move();
+                        if (collisionManager.check()) {
+                            return;
+                        }
+                        painter.writeScore(scoreText, score);
+                        Tile head = snake.getHead();
+                        board.updateTile(head.getX(), head.getY(), head);
+                        painter.paint(snake.getBody());
+                    }
+                }
+                frameCount.setValue(frameCount.get() + 1);
+                lastUpdateTime.set(timestamp);
             }
-            painter.writeScore(scoreText, score);
-            Tile head = snake.getHead();
-            board.updateTile(head.getX(), head.getY(), head);
-            painter.paint(snake.getBody());
         };
-
-        scheduler.scheduleAtFixedRate(move, 0, 100, MILLISECONDS);
+        timer.start();
     }
 
     /**
