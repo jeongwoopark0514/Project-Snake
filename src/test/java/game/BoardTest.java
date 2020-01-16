@@ -17,7 +17,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class BoardTest {
-    private transient Board board;
+    private Board board;
 
     @BeforeEach
     void setUp() {

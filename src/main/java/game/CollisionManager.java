@@ -9,11 +9,11 @@ import lombok.Setter;
  * if it does collide it executes actions accordingly.
  */
 class CollisionManager {
-    private transient Board board;
+    private Board board;
     @Setter
-    private transient Snake snake;
-    private transient Game game;
-    private transient Painter painter;
+    private Snake snake;
+    private Game game;
+    private Painter painter;
 
     /**
      * Constructor for the collision manager.

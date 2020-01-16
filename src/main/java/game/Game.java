@@ -6,7 +6,6 @@ import static game.GameSettings.Y_MAX;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -22,26 +21,26 @@ import lombok.Setter;
  */
 public class Game {
     @Getter
-    private final transient Scene scene;
+    private final Scene scene;
     @Getter
-    private final transient Painter painter;
+    private final Painter painter;
     @Getter
-    private final transient Canvas canvas;
+    private final Canvas canvas;
     @Getter
-    private final transient Snake snake;
+    private final Snake snake;
     @Getter
-    private final transient ScheduledExecutorService scheduler =
+    private final ScheduledExecutorService scheduler =
         Executors.newScheduledThreadPool(1);
     //Made the fruits a list to provide the option to add multiple fruits.
     @Getter
     @Setter
-    private transient List<Fruit> fruits;
-    private transient List<Wall> walls;
+    private List<Fruit> fruits;
+    private List<Wall> walls;
     @Getter
-    private transient int score;
-    private transient Text scoreText;
-    private transient Board board;
-    private transient CollisionManager collisionManager;
+    private int score;
+    private Text scoreText;
+    private Board board;
+    private CollisionManager collisionManager;
 
     /**
      * The constructor of the game object.

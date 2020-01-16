@@ -23,7 +23,7 @@ public class PasswordHash {
     public static final int SALT_INDEX = 1;
     public static final int PBKDF2_INDEX = 2;
 
-    private transient String password;
+    private String password;
     private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
 
     public PasswordHash(String password) {

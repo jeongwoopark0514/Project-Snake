@@ -8,10 +8,10 @@ import java.util.List;
  * Implements the Builder pattern.
  */
 public class BoardBuilder {
-    private transient int width;
-    private transient int height;
-    private transient String background;
-    private transient List<Tile> elements;
+    private int width;
+    private int height;
+    private String background;
+    private List<Tile> elements;
 
     /**
      * Sets the dimensions of the board (width and height).
