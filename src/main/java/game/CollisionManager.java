@@ -53,7 +53,7 @@ class CollisionManager {
         if (tile == null) {
             return false;
         } else if (tile instanceof Fruit) {
-//            sound.play();
+            sound.play();
             manageFruits((Fruit) tile);
             board.updateTile(x, y, head);
             System.out.println("Collision with fruit");
