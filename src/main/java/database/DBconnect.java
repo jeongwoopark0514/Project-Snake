@@ -54,26 +54,6 @@ public class DBconnect {
         }
     }
 
-    /**
-     * This method closes connections with the database.
-     */
-    public void closeConnections() {
-        try {
-            resultSet.close();
-        } catch (Exception e) {
-            System.out.println("closeConnections" + e);
-        }
-        try {
-            preparedStatement.close();
-        } catch (Exception e) {
-            System.out.println("closeConnections" + e);
-        }
-        try {
-            connection.close();
-        } catch (Exception e) {
-            System.out.println("closeConnections" + e);
-        }
-    }
 
     /**
      * Sample query method to get all the records in the user table.
@@ -91,8 +71,6 @@ public class DBconnect {
 
         } catch (Exception exception) {
             System.out.println("getData" + exception);
-        } finally {
-            closeConnections();
         }
 
         return resultSet;
@@ -122,8 +100,6 @@ public class DBconnect {
             }
         } catch (Exception e) {
             System.out.println("authenticate" + e);
-        } finally {
-            closeConnections();
         }
         return false;
     }
@@ -144,8 +120,6 @@ public class DBconnect {
             }
         } catch (Exception e) {
             System.out.println("usernameCheck" + e);
-        } finally {
-            closeConnections();
         }
         return false;
     }
@@ -179,8 +153,6 @@ public class DBconnect {
             }
         } catch (Exception e) {
             System.out.println("registerUser" + e);
-        } finally {
-            closeConnections();
         }
         return false;
     }
@@ -245,8 +217,6 @@ public class DBconnect {
             }
         } catch (Exception e) {
             System.out.println("saveScore" + e);
-        } finally {
-            closeConnections();
         }
     }
 
@@ -270,8 +240,6 @@ public class DBconnect {
             }
         } catch (Exception e) {
             System.out.println("getGlobalScores" + e);
-        } finally {
-        //    closeConnections();
         }
     }
 
@@ -298,8 +266,6 @@ public class DBconnect {
             }
         } catch (Exception e) {
             System.out.println("getPersonalScores " + e);
-        } finally {
-            closeConnections();
         }
     }
 

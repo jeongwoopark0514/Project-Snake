@@ -3,6 +3,7 @@ package gui.controller;
 import database.DBconnect;
 import database.GlobalDetails;
 import database.PersonalDetails;
+import database.SessionManager;
 import gui.Gui;
 import java.io.IOException;
 import java.net.URL;
@@ -46,7 +47,6 @@ public class LeaderBoardController implements Initializable {
     private ArrayList<GlobalDetails> list = new ArrayList<>();
     private ArrayList<PersonalDetails> list2 = new ArrayList<>();
 
-    private DBconnect database = new DBconnect();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,8 +58,8 @@ public class LeaderBoardController implements Initializable {
      */
     public void populateLeaderboards() {
         try {
-            database.getGlobalScores(list);
-            database.getPersonalScores(list2,"Rohan");
+            DBconnect.getInstance().getGlobalScores(list);
+            DBconnect.getInstance().getPersonalScores(list2, SessionManager.getInstance().getUsername());
             globalScores = FXCollections.observableArrayList(list);
             personalScores = FXCollections.observableArrayList(list2);
             globalRank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
