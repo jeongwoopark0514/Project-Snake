@@ -4,18 +4,19 @@ import database.DBconnect;
 import database.GlobalDetails;
 import database.PersonalDetails;
 import gui.Gui;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+
 
 /**
  * This is the controller of LeaderBoard.
@@ -27,25 +28,19 @@ public class LeaderBoardController implements Initializable {
 
     public transient Gui gui = new Gui();
 
-    @FXML
-    private TableView<GlobalDetails> globalTable = new TableView<>();
-    @FXML
-    private TableView<PersonalDetails> personalTable = new TableView<>();
-    @FXML
-    private TableColumn<GlobalDetails, Integer> global_rank;
-    @FXML
-    private TableColumn<PersonalDetails, Integer> personal_rank;
-    @FXML
-    private TableColumn<GlobalDetails, String> username;
-    @FXML
-    private TableColumn<PersonalDetails, String> nickname;
-    @FXML
-    private TableColumn<GlobalDetails, Integer> global_score;
-    @FXML
-    private TableColumn<PersonalDetails, Integer> personal_score;
+    public transient TableView<GlobalDetails> globalTable = new TableView<>();
+    public transient TableView<PersonalDetails> personalTable = new TableView<>();
+
+    public transient TableColumn<GlobalDetails, Integer> globalRank;
+    public transient TableColumn<PersonalDetails, Integer> personalRank;
+
+    public transient TableColumn<GlobalDetails, String> username;
+    public transient TableColumn<PersonalDetails, String> nickname;
+
+    public transient TableColumn<GlobalDetails, Integer> globalScore;
+    public transient TableColumn<PersonalDetails, Integer> personalScore;
 
     private ObservableList<GlobalDetails> globalScores;
-
     private ObservableList<PersonalDetails> personalScores;
 
     private ArrayList<GlobalDetails> list = new ArrayList<>();
@@ -59,22 +54,7 @@ public class LeaderBoardController implements Initializable {
     }
 
     /**
-     * When you click start button, move to game screen.
-     */
-    public void startGame() {
-        gui.startSnakeGame();
-    }
-
-    /**
-     * When leaderboard button is clicked, move to leaderboard screen.
-     * @throws IOException - Exception if the file does not exist.
-     */
-    public void changeToLeaderBoard() throws IOException {
-        gui.switchScene("src/main/resources/fxml/leaderboard.fxml");
-    }
-
-    /**
-     * Fill in global highscore table.
+     * Fill in leaderboard information.
      */
     public void populateLeaderboards() {
         try {
@@ -82,11 +62,11 @@ public class LeaderBoardController implements Initializable {
             database.getPersonalScores(list2,"Rohan");
             globalScores = FXCollections.observableArrayList(list);
             personalScores = FXCollections.observableArrayList(list2);
-            global_rank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
+            globalRank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
             username.setCellValueFactory(new PropertyValueFactory<>("username"));
-            global_score.setCellValueFactory(new PropertyValueFactory<>("globalScore"));
-            personal_rank.setCellValueFactory(new PropertyValueFactory<>("personalRank"));
-            personal_score.setCellValueFactory(new PropertyValueFactory<>("personalScore"));
+            globalScore.setCellValueFactory(new PropertyValueFactory<>("globalScore"));
+            personalRank.setCellValueFactory(new PropertyValueFactory<>("personalRank"));
+            personalScore.setCellValueFactory(new PropertyValueFactory<>("personalScore"));
             nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
             globalTable.setEditable(true);
             personalTable.setEditable(true);
@@ -99,7 +79,6 @@ public class LeaderBoardController implements Initializable {
 
     /**
      * This methods go back to the entry page when you click goBack button.
-     * @throws IOException Exception if the file does not exist.
      */
     public void goBackMain() throws IOException {
         gui.switchScene("src/main/resources/fxml/entry.fxml");

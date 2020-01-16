@@ -1,9 +1,6 @@
 package game;
 
-import static game.GameSettings.X_MAX;
-import static game.GameSettings.Y_MAX;
-import static java.util.concurrent.TimeUnit.MILLISECONDS;
-
+import gui.controller.ScoreController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -11,13 +8,14 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
-import database.DBconnect;
-import gui.controller.LoginController;
-import gui.controller.ScoreController;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
 import lombok.Getter;
+
+import static game.GameSettings.X_MAX;
+import static game.GameSettings.Y_MAX;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
  * Main game control class.
@@ -83,7 +81,7 @@ public class Game {
         //therefore it needs to be suppressed.
         try {
             scoreController.scoreSave(score);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             System.out.println(score);
         }

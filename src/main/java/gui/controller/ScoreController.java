@@ -11,8 +11,7 @@ import java.io.IOException;
  */
 public class ScoreController {
 
-    private transient Gui gui = new Gui();
-    private LoginController loginController = new LoginController();
+    public transient Gui gui = new Gui();
     private DBconnect database = new DBconnect();
 
     public String username = "Rohan";

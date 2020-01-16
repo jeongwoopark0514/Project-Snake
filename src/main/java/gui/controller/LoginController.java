@@ -3,7 +3,6 @@ package gui.controller;
 import database.DBconnect;
 import gui.Gui;
 import java.io.IOException;
-import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import lombok.Getter;
@@ -13,7 +12,6 @@ import lombok.Setter;
 
 public class LoginController {
 
-    @FXML
     public transient TextField loginUsername;
     public transient PasswordField loginPassword;
     public transient TextField registerUsername;

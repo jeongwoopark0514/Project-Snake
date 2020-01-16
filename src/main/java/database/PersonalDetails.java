@@ -9,6 +9,12 @@ public class PersonalDetails {
     private SimpleIntegerProperty personalScore;
     private SimpleStringProperty nickname;
 
+    /**
+     * This is the constructor for Personal Leaderboard POJO class.
+     * @param personalRank - ranks of personal highest scores
+     * @param personalScore - scores of current user
+     * @param nickname - nicknames added for each game
+     */
     public PersonalDetails(Integer personalRank, Integer personalScore, String nickname) {
         this.personalRank = new SimpleIntegerProperty(personalRank);
         this.personalScore = new SimpleIntegerProperty(personalScore);

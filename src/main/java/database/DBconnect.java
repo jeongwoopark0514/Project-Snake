@@ -1,11 +1,13 @@
 package database;
 
 import gui.controller.PasswordHash;
+import java.sql.*;
+import java.util.ArrayList;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.*;
-import java.util.ArrayList;
+
 
 
 public class DBconnect {
@@ -35,14 +37,24 @@ public class DBconnect {
     }
 
     /**
-     * This method closes connections with database
+     * This method closes connections with the database.
      */
-    public void closeConnections (){
-        try { resultSet.close(); } catch (Exception e) {
+    public void closeConnections() {
+        try {
+            resultSet.close();
+        } catch (Exception e) {
             System.out.println("closeConnections" + e);
         }
-        try { preparedStatement.close(); } catch (Exception e) {}
-        try { connection.close(); } catch (Exception e) {}
+        try {
+            preparedStatement.close();
+        } catch (Exception e) {
+            System.out.println("closeConnections" + e);
+        }
+        try {
+            connection.close();
+        } catch (Exception e) {
+            System.out.println("closeConnections" + e);
+        }
     }
 
     /**
@@ -175,9 +187,9 @@ public class DBconnect {
     }
 
     /**
-     * This method gets the username and highscores.
-     * It sorts the scores in descending order.
-     * @return - returns a result set
+     * This method returns the scores in descending order.
+     * It also returns the usernames associated to it.
+     * @param list - arraylist of usernames and scores.
      */
     public void getGlobalScores(ArrayList<GlobalDetails> list) {
         try {
@@ -185,38 +197,45 @@ public class DBconnect {
             String highScores = "SELECT username,score FROM scores ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(highScores);
             resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 list.add(new GlobalDetails(
                         position,
                         resultSet.getString("username"),
                         resultSet.getInt("score")));
                 position += 1;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("getGlobalScores" + e);
         } finally {
-//            closeConnections();
+        //    closeConnections();
         }
     }
 
+    /**
+     * Returns the highest scores of the current user in descending order.
+     * Also returns the nicknames associated to the score.
+     * @param list2 - list of personal scores and nicknames.
+     * @param username - username of the current user.
+     */
     public void getPersonalScores(ArrayList<PersonalDetails> list2, String username) {
-        try{
+        try {
             int position = 1;
-            String personalScores = "SELECT nickname,score FROM scores WHERE username = ? ORDER BY score DESC";
+            String personalScores = "SELECT nickname,score FROM scores WHERE username = ? "
+                    + "ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(personalScores);
             preparedStatement.setString(1,username);
             resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 list2.add(new PersonalDetails(
                         position,
                         resultSet.getInt("score"),
                         resultSet.getString("nickname")));
                 position += 1;
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("getPersonalScores " + e);
         } finally {
-//            closeConnections();
+        //    closeConnections();
         }
     }
 
