@@ -3,10 +3,7 @@ package game;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
@@ -39,6 +36,8 @@ class CollisionManagerTest {
     @Test
     void checkFruitTileTest() throws UnsupportedAudioFileException, IOException,
         LineUnavailableException {
+        Sound sound = mock(Sound.class);
+        doNothing().when(sound).play();
         when(board.getTile(anyInt(), anyInt())).thenReturn(mock(Fruit.class));
         when(game.createFruit()).thenReturn(mock(Fruit.class));
         assertTrue(collisionManager.check());
