@@ -6,8 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import gui.controller.PasswordHash;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -25,32 +28,36 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class DBconnectTest {
 
-    private transient DBconnect dbconnect;
+    private DBconnect dbconnect;
     @Mock
-    private transient Connection connection;
+    private Connection connection;
     @Mock
-    private transient Statement statement;
+    private Statement statement;
     @Mock
-    private transient ResultSet resultSet;
+    private ResultSet resultSet;
     @Mock
-    private transient PreparedStatement preparedStatement;
+    private PreparedStatement preparedStatement;
     @Mock
-    private transient PasswordHash pwdHash;
+    private PasswordHash pwdHash;
+    @Mock
+    private MysqlDataSource ds;
 
-    private transient String defaultUser;
-    private transient String defaultPassword;
+    private String defaultUser;
+    private String defaultPassword;
 
-    private transient ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private transient PrintStream originalOut = System.out;
-    private transient String error = "Error";
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private PrintStream originalOut = System.out;
+    private String error = "Error";
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
         System.setOut(new PrintStream(outContent));
         dbconnect = DBconnect.getInstance();
+        dbconnect.setDs(ds);
         dbconnect.setConnection(connection);
         dbconnect.setStatement(statement);
         dbconnect.setResultSet(resultSet);
@@ -223,6 +230,34 @@ public class DBconnectTest {
     @Test
     void getCookieTestError() {
         dbconnect.getUsername("dry-cookie");
+        boolean contains = outContent.toString().contains(error);
+        assertTrue(contains);
+    }
+
+    @Test
+    void openConnectionTest() throws SQLException {
+        dbconnect.openConnection();
+        verify(ds).getConnection();
+    }
+
+    @Test
+    void openConnectionTestFail() throws SQLException {
+        doThrow(SQLException.class).when(ds).getConnection();
+        dbconnect.openConnection();
+        boolean contains = outContent.toString().contains(error);
+        assertTrue(contains);
+    }
+
+    @Test
+    void closeConnectionTest() throws SQLException {
+        dbconnect.closeConnection();
+        verify(connection).close();
+    }
+
+    @Test
+    void closeConnectionTestFail() throws SQLException {
+        doThrow(SQLException.class).when(connection).close();
+        dbconnect.closeConnection();
         boolean contains = outContent.toString().contains(error);
         assertTrue(contains);
     }

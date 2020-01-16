@@ -1,15 +1,20 @@
 package database;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import gui.controller.PasswordHash;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.SQLException;
+
 import java.util.ArrayList;
 
 import lombok.Getter;
 import lombok.Setter;
 
-
-
-
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class DBconnect {
 
     @Getter @Setter private Connection connection;
@@ -18,6 +23,8 @@ public class DBconnect {
     @Getter @Setter private PreparedStatement preparedStatement;
 
     private static DBconnect INSTANCE;
+    @Setter
+    private MysqlDataSource ds;
 
     /**
      * First time this method is called an instance of DBconnect will be created. Subsequent
@@ -36,9 +43,8 @@ public class DBconnect {
     }
 
     /**
-     * Method that establishes connection to the mysql database.
+     * Instantiate the datasource which can be used to create a connection.
      */
-
     public DBconnect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -50,10 +56,9 @@ public class DBconnect {
                 "pu_Snake1", "tHWLSWJqg57E");
             statement = connection.createStatement();
         } catch (Exception exception) {
-            System.out.println("DBconnect" + exception);
+            System.out.println(prefix + exception);
         }
     }
-
 
     /**
      * Sample query method to get all the records in the user table.
@@ -77,10 +82,32 @@ public class DBconnect {
     }
 
     /**
+     * Open the connection of the set datasource.
+     */
+    public void openConnection() {
+        try {
+            connection = ds.getConnection();
+        } catch (SQLException e) {
+            System.out.println("openConnection" + e);
+        }
+    }
+
+    /**
+     * Close the connection with the database.
+     */
+    public void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("closeConnection" + e);
+        }
+    }
+
+    /**
      * This method checks the database if the entered username and password are valid.
      * @param username - the username
      * @param password - the password
-     * @param pwdHash - the hash of the password, if it already exists
+     * @param pwdHash  - the hash of the password, if it already exists
      * @return - true iff login is successful
      */
     public boolean authenticate(String username, String password, PasswordHash pwdHash) {
@@ -92,7 +119,7 @@ public class DBconnect {
         try {
             String checkUser = "SELECT password FROM users WHERE username = ?";
             preparedStatement = connection.prepareStatement(checkUser);
-            preparedStatement.setString(1,username);
+            preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
             resultSet.first();
             if (pwdHash.validatePassword(resultSet.getString("password"))) {
@@ -127,9 +154,10 @@ public class DBconnect {
     /**
      * This method checks if a username is already taken.
      * New users are registered by adding username and password to the database.
+     *
      * @param username - the username
      * @param password - the password
-     * @param pwdHash - the hash of the password, if it already exists
+     * @param pwdHash  - the hash of the password, if it already exists
      * @return - true iff user is successfully registered
      */
     public boolean registerUser(String username, String password, PasswordHash pwdHash) {
@@ -145,9 +173,10 @@ public class DBconnect {
             String hashed = pwdHash.createHash();
             String insertUser = "INSERT INTO users (username,password) VALUES (?,?)";
             preparedStatement = connection.prepareStatement(insertUser);
-            preparedStatement.setString(1,username);
-            preparedStatement.setString(2,hashed);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, hashed);
             preparedStatement.executeUpdate();
+
             if (pwdHash.validatePassword(hashed)) {
                 return true;
             }

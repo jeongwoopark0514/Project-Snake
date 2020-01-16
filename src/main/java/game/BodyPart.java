@@ -16,6 +16,9 @@ public class BodyPart extends Tile {
     @Setter
     private int directionY;
 
+    @Getter
+    private Directions direction;
+
     /**
      * Default constructor of a BodyPart.
      *
@@ -39,6 +42,7 @@ public class BodyPart extends Tile {
      * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT)
      */
     public void setDirection(Directions dir) {
+        this.direction = dir;
         switch (dir) {
             case UP:
                 this.directionX = 0;
