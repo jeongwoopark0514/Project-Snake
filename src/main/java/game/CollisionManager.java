@@ -18,7 +18,7 @@ class CollisionManager {
     private transient Snake snake;
     private transient Game game;
     private transient Painter painter;
-    private Sound sound = new Sound("../pellet.wav");
+    private Sound sound = new Sound("music/pellet.wav");
 
     /**
      * Constructor for the collision manager.

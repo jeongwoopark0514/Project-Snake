@@ -151,7 +151,7 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
-mainClassName = 'gui.MainRunner'
+//mainClassName = 'gui.MainRunner'
 
 //uncomment this if you want to run SnakeApp (testing purpose)
-//mainClassName='game.SnakeApp'
+mainClassName='game.SnakeApp'
