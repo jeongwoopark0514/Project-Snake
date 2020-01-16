@@ -52,12 +52,9 @@ public class Snake {
         String newSpriteHead = "image/green_snake_head_" + direction + ".png";
         head.setSprite(newSpriteHead);
         if (body.size() > minSize) {
-            for (int i = 1; i < body.size() - 1; i++) {
+            for (int i = 1; i <= body.size() - 1; i++) {
                 body.get(i).setSprite(GameSettings.SNAKE_BODY);
             }
-            Directions direction = body.get(body.size() - 2).getDirection().opposite();
-            String newSpriteTail = "image/green_snake_tail_" + direction + ".png";
-            tail.setSprite(newSpriteTail);
         }
     }
 
