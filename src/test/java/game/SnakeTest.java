@@ -1,7 +1,10 @@
 package game;
 
+import static game.Directions.DOWN;
 import static game.Directions.LEFT;
 import static game.Directions.RIGHT;
+import static game.Directions.UP;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -48,6 +51,47 @@ class SnakeTest {
         assertEquals(1, snake.getHead().getDirectionX());
         assertEquals(0, snake.getHead().getDirectionY());
     }
+
+    @Test
+    void changeDirectionBiggerSnakeTest() {
+        snake.grow();
+        snake.setDirection(LEFT);
+        snake.changeDirection(UP);
+        assertEquals(0, snake.getHead().getDirectionX());
+        assertEquals(-1, snake.getHead().getDirectionY());
+        snake.grow();
+        snake.grow();
+        snake.changeDirection(DOWN);
+        assertEquals(0, snake.getHead().getDirectionX());
+        assertEquals(1, snake.getHead().getDirectionY());
+        snake.changeDirection(DOWN);
+        assertEquals(0, snake.getHead().getDirectionX());
+        assertEquals(1, snake.getHead().getDirectionY());
+        snake.setDirection(null);
+        snake.changeDirection(DOWN);
+        assertEquals(0, snake.getHead().getDirectionX());
+        assertEquals(1, snake.getHead().getDirectionY());
+    }
+
+    @Test
+    void changeSameDirection() {
+        snake.grow();
+        snake.setDirection(LEFT);
+        snake.changeDirection(LEFT);
+        assertEquals(-1, snake.getHead().getDirectionX());
+        assertEquals(0, snake.getHead().getDirectionY());
+    }
+
+    @Test
+    void changeOppositeDirection() {
+        snake.grow();
+        snake.setDirection(LEFT);
+        snake.changeDirection(RIGHT);
+        assertEquals(-1, snake.getHead().getDirectionX());
+        assertEquals(0, snake.getHead().getDirectionY());
+    }
+
+
 
     @Test
     void moveSizeOneTest() {

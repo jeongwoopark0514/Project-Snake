@@ -47,8 +47,8 @@ public abstract class Tile {
      * TODO: Current implementation only checks whether x or y are below 0.
      * Changes the coordinate of this point.
      *
-     * @param dx Change in x.
-     * @param dy Change in y.
+     * @param dx    change in x
+     * @param dy    change in y
      */
     public void translate(int dx, int dy) {
         this.x += dx;

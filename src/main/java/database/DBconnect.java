@@ -17,6 +17,24 @@ public class DBconnect {
     @Getter @Setter private ResultSet resultSet;
     @Getter @Setter private PreparedStatement preparedStatement;
 
+    private static DBconnect INSTANCE;
+
+    /**
+     * First time this method is called an instance of DBconnect will be created. Subsequent
+     * times reference to this instance will be returned.
+     * Implements the Singleton design pattern.
+     *
+     * @return Reference to database.
+     */
+    public static DBconnect getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new DBconnect();
+            return INSTANCE;
+        } else {
+            return INSTANCE;
+        }
+    }
+
     /**
      * Method that establishes connection to the mysql database.
      */
@@ -76,6 +94,7 @@ public class DBconnect {
         } finally {
             closeConnections();
         }
+
         return resultSet;
     }
 
@@ -87,9 +106,11 @@ public class DBconnect {
      * @return - true iff login is successful
      */
     public boolean authenticate(String username, String password, PasswordHash pwdHash) {
+
         if (pwdHash == null) {
             pwdHash = new PasswordHash(password);
         }
+
         try {
             String checkUser = "SELECT password FROM users WHERE username = ?";
             preparedStatement = connection.prepareStatement(checkUser);
@@ -142,6 +163,7 @@ public class DBconnect {
         if (pwdHash == null) {
             pwdHash = new PasswordHash(password);
         }
+
         try {
             if (usernameCheck(username)) {
                 return false;
@@ -161,6 +183,48 @@ public class DBconnect {
             closeConnections();
         }
         return false;
+    }
+
+    /**
+     * Store a created cookie in the database, together with the username.
+     *
+     * @param username the username of the user.
+     * @param cookie   the actual cookie that needs to be stored.
+     * @return true if successfully stored, false if not.
+     */
+    public boolean storeCookie(String username, String cookie) {
+        try {
+            String insertCookie = "INSERT INTO sessions (cookie, username) VALUES (?,?)";
+            preparedStatement = connection.prepareStatement(insertCookie);
+            preparedStatement.setString(1, cookie);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println("storeCookie" + e);
+            return false;
+        }
+    }
+
+    /**
+     * Get the username from the database, given a specific cookie.
+     *
+     * @param cookie the cookie to retrieve the username with.
+     * @return returns the username if found or null of not.
+     */
+    public String getUsername(String cookie) {
+        try {
+            String getCookie = "SELECT username FROM sessions WHERE cookie = ?";
+            preparedStatement = connection.prepareStatement(getCookie);
+            preparedStatement.setString(1, cookie);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("username");
+            }
+        } catch (Exception e) {
+            System.out.println("getUsername" + e);
+        }
+        return null;
     }
 
 

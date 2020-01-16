@@ -1,8 +1,10 @@
 package gui.controller;
 
 import database.DBconnect;
+import database.SessionManager;
 import gui.Gui;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import lombok.Getter;
@@ -20,8 +22,12 @@ public class LoginController {
 
     public transient Gui gui = new Gui();
 
-    @Getter @Setter
-    private DBconnect database = new DBconnect();
+    @Getter
+    @Setter
+    private DBconnect database = DBconnect.getInstance();
+    @Getter
+    @Setter
+    private SessionManager manager = SessionManager.getInstance();
 
     /**
      * when you click register button, move to register page.
@@ -38,13 +44,17 @@ public class LoginController {
     public void login() throws IOException {
         if (gui.getText(loginUsername).equals("") || gui.getText(loginPassword).equals("")) {
             System.out.println("LOGIN UNSUCCESSFUL");
-            gui.showAlert("One or multiple fields have not been filled in!", "Empty field(s)");
+            gui.showWarningAlert("One or multiple fields have not been filled in!",
+                "Empty field(s)");
         } else if (database.authenticate(gui.getText(loginUsername),
             gui.getText(loginPassword), null)) {
             System.out.println("LOGIN SUCCESSFUL");
+            //This is actually closed in the SessionsManager but PMD does not register this.
+            PrintWriter writer = new PrintWriter("cookie.txt"); //NOPMD
+            manager.saveCookie(writer, gui.getText(loginUsername));
             gui.switchScene("src/main/resources/fxml/entry.fxml");
         } else {
-            gui.showAlert("Wrong username/password combination. Please try again.",
+            gui.showWarningAlert("Wrong username/password combination. Please try again.",
                 "Something went wrong");
             System.out.println("LOGIN UNSUCCESSFUL");
         }
@@ -55,12 +65,12 @@ public class LoginController {
      */
     public void register() {
         if (!gui.getText(registerPassword).equals(gui.getText(confirmPassword))) {
-            gui.showAlert("Passwords do not match!", "Something went wrong");
+            gui.showWarningAlert("Passwords do not match!", "Something went wrong");
             System.out.println("REGISTRATION UNSUCCESSFUL");
         } else if (gui.getText(registerUsername).equals("")
             || gui.getText(registerPassword).equals("")
             || gui.getText(registerPassword).equals("")) {
-            gui.showAlert("One or multiple fields have not been filled in!",
+            gui.showWarningAlert("One or multiple fields have not been filled in!",
                     "Empty field(s)");
             System.out.println("REGISTRATION UNSUCCESSFUL");
         } else if (database.registerUser(gui.getText(registerUsername),
@@ -68,7 +78,7 @@ public class LoginController {
             gui.showAlert("Successfully registered.", "Success");
             System.out.println("REGISTRATION SUCCESSFUL");
         } else {
-            gui.showAlert("Username already taken!", "Something went wrong");
+            gui.showWarningAlert("Username already taken!", "Something went wrong");
             System.out.println("REGISTRATION UNSUCCESSFUL");
         }
     }

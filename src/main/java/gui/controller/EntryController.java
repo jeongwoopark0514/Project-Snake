@@ -26,4 +26,25 @@ public class EntryController {
     public void changeToLeaderBoard() throws IOException {
         gui.switchScene("src/main/resources/fxml/leaderboard.fxml");
     }
+
+    /**
+     * No testing required because impossible to test system.exit.
+     */
+    public void quitButton() {
+        gui.quit();
+    }
+
+    /**
+     *  Sign out the game and go back to login page.
+     */
+    public void changeToLogin() throws IOException {
+        gui.switchScene("src/main/resources/fxml/login.fxml");
+    }
+
+    /**
+     * Change the scene to settings.
+     */
+    public void changeToSettings() throws IOException {
+        gui.switchScene("src/main/resources/fxml/setting.fxml");
+    }
 }

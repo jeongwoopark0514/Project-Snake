@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #6e6d6a;" stylesheets="@../css/score.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.ScoreController">
    <children>
-      <ImageView fitHeight="76.0" fitWidth="432.0" layoutX="321.0" layoutY="111.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="76.0" fitWidth="432.0" layoutX="321.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/yourscore.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="169.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="696.6708984375">
+      <Text fill="WHITE" layoutX="169.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="696.6708984375">
          <font>
             <Font name="Goudy Stout" size="45.0" />
          </font>
       </Text>
-      <Button layoutX="167.0" layoutY="411.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0">
+      <Button layoutX="97.0" layoutY="466.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -26,11 +25,25 @@
                </image></ImageView>
          </graphic>
       </Button>
-      <Button layoutX="647.0" layoutY="416.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="155.0">
+      <Button layoutX="683.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#quitButton" prefHeight="53.0" prefWidth="155.0">
          <graphic>
             <ImageView fitHeight="49.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/quit.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <ImageView fitHeight="62.0" fitWidth="248.0" layoutX="187.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/nickname.png" />
+         </image>
+      </ImageView>
+      <TextField layoutX="487.0" layoutY="356.0" prefHeight="37.0" prefWidth="281.0" />
+      <Button layoutX="403.0" layoutY="473.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="158.0">
+         <graphic>
+            <ImageView fitHeight="49.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/save.png" />
                </image>
             </ImageView>
          </graphic></Button>

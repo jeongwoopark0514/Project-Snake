@@ -8,10 +8,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import database.DBconnect;
+import database.SessionManager;
 import gui.Gui;
 import java.io.IOException;
-import java.sql.SQLException;
-
 import org.junit.jupiter.api.Test;
 
 
@@ -42,7 +41,7 @@ class LoginControllerTest {
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("");
         loginController.login();
-        verify(gui).showAlert(any(), eq(empty));
+        verify(gui).showWarningAlert(any(), eq(empty));
     }
 
 
@@ -53,7 +52,7 @@ class LoginControllerTest {
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("").thenReturn(" ");
         loginController.login();
-        verify(gui).showAlert(any(), eq(empty));
+        verify(gui).showWarningAlert(any(), eq(empty));
     }
 
     @Test
@@ -63,13 +62,14 @@ class LoginControllerTest {
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn(" ").thenReturn("");
         loginController.login();
-        verify(gui).showAlert(any(), eq(empty));
+        verify(gui).showWarningAlert(any(), eq(empty));
     }
 
     @Test
-    void loginDatabaseTrue() throws IOException, SQLException {
+    void loginDatabaseTrue() throws IOException {
         Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
+        loginController.setManager(mock(SessionManager.class));
         loginController.gui = gui;
         DBconnect database = mock(DBconnect.class);
         when(database.authenticate("hey", "hey", null)).thenReturn(true);
@@ -81,11 +81,10 @@ class LoginControllerTest {
             e.printStackTrace();
         }
         loginController.login();
-        database.getConnection().close();
     }
 
     @Test
-    void loginDatabaseFalse() throws IOException, SQLException {
+    void loginDatabaseFalse() throws IOException {
         Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
@@ -99,7 +98,6 @@ class LoginControllerTest {
             e.printStackTrace();
         }
         loginController.login();
-        database.getConnection().close();
     }
 
     @Test
@@ -108,7 +106,7 @@ class LoginControllerTest {
         LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("").thenReturn(" ");
-        doNothing().when(gui).showAlert("message", "title");
+        doNothing().when(gui).showWarningAlert("message", "title");
         loginController.register();
     }
 
@@ -121,14 +119,14 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("k")
             .thenReturn("k").thenReturn("").thenReturn(" ").thenReturn(" ");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
 
     }
 
     //2 fff
     @Test
-    void registerThreeEqualsFalseFalseFalse() throws SQLException {
+    void registerThreeEqualsFalseFalseFalse() {
         Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
@@ -141,11 +139,10 @@ class LoginControllerTest {
         loginController.setDatabase(database);
         loginController.register();
         verify(gui).showAlert("Successfully registered.", "Success");
-        database.getConnection().close();
     }
 
     @Test
-    void registerThreeEqualsFalseFalseFalse2() throws SQLException {
+    void registerThreeEqualsFalseFalseFalse2() {
         Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
         loginController.gui = gui;
@@ -157,8 +154,7 @@ class LoginControllerTest {
             gui.getText(any()), null)).thenReturn(false);
         loginController.setDatabase(database);
         loginController.register();
-        verify(gui).showAlert("Username already taken!", "Something went wrong");
-        database.getConnection().close();
+        verify(gui).showWarningAlert("Username already taken!", "Something went wrong");
     }
 
     //3 ftf
@@ -170,7 +166,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("k").thenReturn("k")
             .thenReturn("y").thenReturn("").thenReturn("y");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -183,7 +179,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("q").thenReturn("q").thenReturn("")
             .thenReturn("").thenReturn("y");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -196,7 +192,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("q").thenReturn("q")
             .thenReturn("").thenReturn("").thenReturn("");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -209,7 +205,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("a")
             .thenReturn("a").thenReturn("x").thenReturn("").thenReturn("");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -222,7 +218,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("l")
             .thenReturn("l").thenReturn("").thenReturn("f").thenReturn("");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 
@@ -235,7 +231,7 @@ class LoginControllerTest {
         when(gui.getText(any())).thenReturn("v")
             .thenReturn("v").thenReturn("q").thenReturn("f").thenReturn("");
         loginController.register();
-        verify(gui).showAlert(multiple,
+        verify(gui).showWarningAlert(multiple,
             empty);
     }
 

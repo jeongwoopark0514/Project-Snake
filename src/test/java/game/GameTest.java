@@ -1,8 +1,13 @@
 package game;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
@@ -12,20 +17,16 @@ import org.junit.jupiter.api.Test;
 
 class GameTest {
     private transient Game game;
+    private transient Board board;
 
     @BeforeEach
     void setUp() {
         Canvas canvas = mock(Canvas.class);
-
         Painter painter = mock(Painter.class);
-
         Scene scene = mock(Scene.class);
-
         Snake snake = mock(Snake.class);
-
-        Text score = mock(Text.class);
-
-        game = new Game(scene, painter, canvas, snake, score);
+        board = mock(Board.class);
+        game = new Game(scene, painter, canvas, snake, mock(Text.class));
     }
 
     @AfterEach
@@ -43,26 +44,39 @@ class GameTest {
 
     @Test
     void gameStartTest() throws InterruptedException {
+        when(board.getTile(anyInt(), anyInt())).thenReturn(null);
         game.start();
         Thread.sleep(1000);
         assertNotNull(game.getScheduler());
     }
 
-    // TODO: TO BE IMPLEMENTED
-    //@Test
-    //void gameStopTest() {
-    //}
+    @Test
+    void checkFruitsSmaller() {
+        List<Fruit> fruits = new ArrayList<>();
+        fruits.add(new Fruit(1, 1, GameSettings.FRUIT_COLOR, null, 10));
+        game.setFruits(fruits);
+        game.checkFruits();
+        assertEquals(fruits, game.getFruits());
+    }
 
-    // TODO: TO BE IMPLEMENTED
-    //@Test
-    //void gamePauseTest() {
-    //}
+    @Test
+    void locationNewFruitNotOccupiedTest() {
+        when(board.getTile(anyInt(), anyInt())).thenReturn(null);
+        assertNotNull(game.createFruit());
+    }
 
-    //@Test
-    //void verifyOnKeyPressedListenersWereSet() {
-    // implicitly verifies init is called in constructor
-    //verify(game.getCanvas()).setOnKeyPressed(Mockito.any());
-    //verify(game.getCanvas()).requestFocus(); // TODO: Interchanging these two lines causes
-    // error
-    //}
+    @Test
+    void locationNewFruitOccupiedTest() {
+        when(board.getTile(anyInt(), anyInt())).thenReturn(mock(Fruit.class)).thenReturn(null);
+        assertNotNull(game.createFruit());
+    }
+
+    @Test
+    void increaseScoreTest() {
+        assertEquals(0, game.getScore());
+        game.increaseScore(10);
+        assertEquals(10, game.getScore());
+    }
+
+
 }

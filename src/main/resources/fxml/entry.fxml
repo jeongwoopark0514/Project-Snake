@@ -11,7 +11,7 @@
             <Image url="@../image/entryBackground.png" />
          </image>
       </ImageView>
-      <Button layoutX="305.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#startGame" prefHeight="71.0" prefWidth="415.0" stylesheets="@../css/entryStyle.css">
+      <Button layoutX="305.0" layoutY="264.0" mnemonicParsing="false" onMouseClicked="#startGame" prefHeight="71.0" prefWidth="415.0" stylesheets="@../css/entryStyle.css">
          <effect>
             <DropShadow />
          </effect>
@@ -23,7 +23,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button layoutX="405.0" layoutY="386.0" mnemonicParsing="false" onMouseClicked="#changeToLeaderBoard" stylesheets="@../css/entryStyle.css">
+      <Button layoutX="404.0" layoutY="342.0" mnemonicParsing="false" onMouseClicked="#changeToLeaderBoard" stylesheets="@../css/entryStyle.css">
          <graphic>
             <ImageView fitHeight="62.0" fitWidth="218.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -40,10 +40,34 @@
             <Image url="@../image/snakeTitle.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="52.0" fitWidth="44.0" layoutX="936.0" layoutY="541.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="52.0" fitWidth="44.0" layoutX="936.0" layoutY="541.0" onMouseClicked="#quitButton" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/exit.png" />
          </image>
       </ImageView>
+      <Button layoutX="307.0" layoutY="422.0" mnemonicParsing="false" onMouseClicked="#changeToLogin" prefHeight="71.0" prefWidth="415.0" stylesheets="@../css/entryStyle.css">
+         <graphic>
+            <ImageView fitHeight="62.0" fitWidth="202.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/sign_out.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button layoutX="402.0" layoutY="499.0" mnemonicParsing="false" onMouseClicked="#changeToLeaderBoard" stylesheets="@../css/entryStyle.css">
+         <graphic>
+            <ImageView fitHeight="71.0" fitWidth="206.0" pickOnBounds="true" preserveRatio="true">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <image>
+                  <Image url="@../image/Settings.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
