@@ -7,6 +7,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -211,28 +212,24 @@ public class Game {
         }
         //Image sprite = new Image("/image/apple_pellet.png");
     }
-
     /**
      * Adds event listeners for arrow keys.
      */
+
     private void setOnKeyPressedListener() {
         canvas.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case LEFT:
                     snake.changeDirection(Directions.LEFT);
-                    this.snake.setDirection(Directions.LEFT);
                     break;
                 case RIGHT:
                     snake.changeDirection(Directions.RIGHT);
-                    this.snake.setDirection(Directions.RIGHT);
                     break;
                 case UP:
                     snake.changeDirection(Directions.UP);
-                    this.snake.setDirection(Directions.UP);
                     break;
                 case DOWN:
                     snake.changeDirection(Directions.DOWN);
-                    this.snake.setDirection(Directions.DOWN);
                     break;
                 default:
                     break;
