@@ -1,14 +1,15 @@
 package gui.controller;
 
 import database.DBconnect;
+import database.SessionManager;
 import gui.Gui;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import lombok.Getter;
 import lombok.Setter;
-
 
 
 public class LoginController {
@@ -22,11 +23,16 @@ public class LoginController {
 
     public transient Gui gui = new Gui();
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private DBconnect database = DBconnect.getInstance();
+    @Getter
+    @Setter
+    private SessionManager manager = SessionManager.getInstance();
 
     /**
      * when you click register button, move to register page.
+     *
      * @throws IOException IOexception thrown for null file.
      */
     public void clickRegister() throws IOException {
@@ -45,6 +51,9 @@ public class LoginController {
         } else if (database.authenticate(gui.getText(loginUsername),
             gui.getText(loginPassword), null)) {
             System.out.println("LOGIN SUCCESSFUL");
+            //This is actually closed in the SessionsManager but PMD does not register this.
+            PrintWriter writer = new PrintWriter("cookie.txt"); //NOPMD
+            manager.saveCookie(writer, gui.getText(loginUsername));
             gui.switchScene("src/main/resources/fxml/entry.fxml");
         } else {
             gui.showWarningAlert("Wrong username/password combination. Please try again.",
@@ -78,6 +87,7 @@ public class LoginController {
 
     /**
      * when you click goback button, move to login page.
+     *
      * @throws IOException IOexception thrown for null file.
      */
     public void goBackLogin() throws IOException {

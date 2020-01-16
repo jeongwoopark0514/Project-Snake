@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import database.DBconnect;
+import database.SessionManager;
 import gui.Gui;
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
@@ -68,6 +69,7 @@ class LoginControllerTest {
     void loginDatabaseTrue() throws IOException {
         Gui gui = mock(Gui.class);
         LoginController loginController = new LoginController();
+        loginController.setManager(mock(SessionManager.class));
         loginController.gui = gui;
         DBconnect database = mock(DBconnect.class);
         when(database.authenticate("hey", "hey", null)).thenReturn(true);

@@ -1,9 +1,11 @@
 package gui;
 
+import database.SessionManager;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -34,20 +36,31 @@ public class MainRunner extends Application {
         stage.getIcons().add(new Image("image/transparent_logo.png"));
         stage.setTitle("Snake");
         stage.setResizable(false);
-        final Scene splash = new Scene(parent, 1000,600);
+        final Scene splash = new Scene(parent, 1000, 600);
         stage.setScene(splash);
         stage.show();
 
-        final URL url2 = new File("src/main/resources/fxml/login.fxml").toURI().toURL();
-        final Parent login = FXMLLoader.load(url2);
+        final URL url2;
+        final Parent entry;
+        //This is a false positive,
+        // since the reader is actually closed inside the SessionManger class.
+        BufferedReader reader = new BufferedReader(new FileReader("cookie.txt")); //NOPMD
+
+        if (SessionManager.getInstance().retrieveUserData(reader) != null) {
+            url2 = new File("src/main/resources/fxml/entry.fxml").toURI().toURL();
+            entry = FXMLLoader.load(url2);
+        } else {
+            url2 = new File("src/main/resources/fxml/login.fxml").toURI().toURL();
+            entry = FXMLLoader.load(url2);
+        }
 
         //first suppressed PMD error since it is not a big bug,
         //but will fix if it is fixable, or worth fixable
-        final Scene loginScene = new Scene(login, 1000, 600); //NOPMD
+        final Scene entryScene = new Scene(entry, 1000, 600); //NOPMD
         final PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(event -> stage.setScene(loginScene));
+        pause.setOnFinished(event -> stage.setScene(entryScene));
         pause.play();
     }
 
-    
+
 }
