@@ -11,17 +11,17 @@ import javafx.scene.control.TextField;
 import lombok.Getter;
 import lombok.Setter;
 
-
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class LoginController {
 
     @FXML
-    public transient TextField loginUsername;
-    public transient PasswordField loginPassword;
-    public transient TextField registerUsername;
-    public transient PasswordField registerPassword;
-    public transient PasswordField confirmPassword;
+    public TextField loginUsername;
+    public PasswordField loginPassword;
+    public TextField registerUsername;
+    public PasswordField registerPassword;
+    public PasswordField confirmPassword;
 
-    public transient Gui gui = new Gui();
+    public Gui gui = new Gui();
 
     @Getter
     @Setter
@@ -44,6 +44,7 @@ public class LoginController {
      * This method checks if the login was successful.
      */
     public void login() throws IOException {
+        database.openConnection();
         if (gui.getText(loginUsername).equals("") || gui.getText(loginPassword).equals("")) {
             System.out.println("LOGIN UNSUCCESSFUL");
             gui.showWarningAlert("One or multiple fields have not been filled in!",
@@ -60,12 +61,14 @@ public class LoginController {
                 "Something went wrong");
             System.out.println("LOGIN UNSUCCESSFUL");
         }
+        database.closeConnection();
     }
 
     /**
      * This method checks if the user gets registered into the database.
      */
     public void register() {
+        database.openConnection();
         if (!gui.getText(registerPassword).equals(gui.getText(confirmPassword))) {
             gui.showWarningAlert("Passwords do not match!", "Something went wrong");
             System.out.println("REGISTRATION UNSUCCESSFUL");
@@ -83,6 +86,7 @@ public class LoginController {
             gui.showWarningAlert("Username already taken!", "Something went wrong");
             System.out.println("REGISTRATION UNSUCCESSFUL");
         }
+        database.closeConnection();
     }
 
     /**
