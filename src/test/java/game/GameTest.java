@@ -16,8 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class GameTest {
-    private transient Game game;
-    private transient Board board;
+    private Game game;
+    private Board board;
 
     @BeforeEach
     void setUp() {

@@ -7,7 +7,7 @@ import gui.Gui;
  * This class will be used later in the future. (in progress).
  */
 public class ScoreController {
-    public transient Gui gui = new Gui();
+    public Gui gui = new Gui();
 
     /**
      * No testing required because impossible to test system.exit.

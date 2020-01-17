@@ -22,9 +22,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class SessionManagerTest {
-    private transient SessionManager manager;
-    private transient DBconnect dbconnect;
-    private transient PrintWriter writer;
+    private SessionManager manager;
+    private DBconnect dbconnect;
+    private PrintWriter writer;
 
     @BeforeEach
     void setUp() {

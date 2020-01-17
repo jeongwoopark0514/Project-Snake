@@ -11,21 +11,30 @@ import database.DBconnect;
 import database.SessionManager;
 import gui.Gui;
 import java.io.IOException;
+import java.sql.SQLException;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
-
-
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 class LoginControllerTest {
 
-    private transient String multiple = "One or multiple fields have not been filled in!";
-    private transient String empty = "Empty field(s)";
+    private String multiple = "One or multiple fields have not been filled in!";
+    private String empty = "Empty field(s)";
+    private LoginController loginController;
+    private DBconnect database;
+
+    @BeforeEach
+    void setUp() {
+        loginController = new LoginController();
+        database = mock(DBconnect.class);
+        loginController.setDatabase(database);
+    }
 
     @Test
     void clickRegisterTest() {
         try {
             Gui gui = mock(Gui.class);
-            LoginController loginController = new LoginController();
             loginController.gui = gui;
             doNothing().when(gui).switchScene("whatever");
             loginController.clickRegister();
@@ -37,7 +46,6 @@ class LoginControllerTest {
     @Test
     void loginNamePassEmpty() throws IOException {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("");
         loginController.login();
@@ -48,7 +56,6 @@ class LoginControllerTest {
     @Test
     void loginNameTruePassFalse() throws IOException {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("").thenReturn(" ");
         loginController.login();
@@ -58,7 +65,6 @@ class LoginControllerTest {
     @Test
     void loginNameFalsePassTrue() throws IOException {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn(" ").thenReturn("");
         loginController.login();
@@ -68,12 +74,9 @@ class LoginControllerTest {
     @Test
     void loginDatabaseTrue() throws IOException {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.setManager(mock(SessionManager.class));
         loginController.gui = gui;
-        DBconnect database = mock(DBconnect.class);
         when(database.authenticate("hey", "hey", null)).thenReturn(true);
-        loginController.setDatabase(database);
         when(gui.getText(any())).thenReturn("hey");
         try {
             doNothing().when(gui).switchScene("message");
@@ -86,11 +89,8 @@ class LoginControllerTest {
     @Test
     void loginDatabaseFalse() throws IOException {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
-        DBconnect database = mock(DBconnect.class);
         when(database.authenticate("bye", "bye", null)).thenReturn(false);
-        loginController.setDatabase(database);
         when(gui.getText(any())).thenReturn("bye");
         try {
             doNothing().when(gui).switchScene("file");
@@ -103,7 +103,6 @@ class LoginControllerTest {
     @Test
     void registerEqualsFalse() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("").thenReturn(" ");
         doNothing().when(gui).showWarningAlert("message", "title");
@@ -114,7 +113,6 @@ class LoginControllerTest {
     @Test
     void registerThreeEqualsTrueFalseFalse() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("k")
             .thenReturn("k").thenReturn("").thenReturn(" ").thenReturn(" ");
@@ -128,15 +126,12 @@ class LoginControllerTest {
     @Test
     void registerThreeEqualsFalseFalseFalse() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("k")
             .thenReturn("k").thenReturn("y").thenReturn("y").thenReturn("y");
-        DBconnect database = mock(DBconnect.class);
         when(gui.getText(any())).thenReturn("Kk").thenReturn("Kk");
         when(database.registerUser(gui.getText(any()),
             gui.getText(any()), null)).thenReturn(true);
-        loginController.setDatabase(database);
         loginController.register();
         verify(gui).showAlert("Successfully registered.", "Success");
     }
@@ -144,15 +139,12 @@ class LoginControllerTest {
     @Test
     void registerThreeEqualsFalseFalseFalse2() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("k").thenReturn("k")
             .thenReturn("y").thenReturn("y").thenReturn("y");
-        DBconnect database = mock(DBconnect.class);
         when(gui.getText(any())).thenReturn("Kk").thenReturn("Kk");
         when(database.registerUser(gui.getText(any()),
             gui.getText(any()), null)).thenReturn(false);
-        loginController.setDatabase(database);
         loginController.register();
         verify(gui).showWarningAlert("Username already taken!", "Something went wrong");
     }
@@ -161,7 +153,6 @@ class LoginControllerTest {
     @Test
     void registerThreeEqualsFalseTrueFalse() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("k").thenReturn("k")
             .thenReturn("y").thenReturn("").thenReturn("y");
@@ -174,7 +165,6 @@ class LoginControllerTest {
     @Test
     void registerThreeEqualsTrueTrueFalse() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("q").thenReturn("q").thenReturn("")
             .thenReturn("").thenReturn("y");
@@ -187,7 +177,6 @@ class LoginControllerTest {
     @Test
     void registerThreeEqualsTrueTrueTrue() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("q").thenReturn("q")
             .thenReturn("").thenReturn("").thenReturn("");
@@ -200,7 +189,6 @@ class LoginControllerTest {
     @Test
     void registerThreeEqualsFalseTrueTrue() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("a")
             .thenReturn("a").thenReturn("x").thenReturn("").thenReturn("");
@@ -213,7 +201,6 @@ class LoginControllerTest {
     @Test
     void registerThreeEqualsTrueFalseTrue() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("l")
             .thenReturn("l").thenReturn("").thenReturn("f").thenReturn("");
@@ -226,7 +213,6 @@ class LoginControllerTest {
     @Test
     void registerThreeEqualsFalseFalseTrue() {
         Gui gui = mock(Gui.class);
-        LoginController loginController = new LoginController();
         loginController.gui = gui;
         when(gui.getText(any())).thenReturn("v")
             .thenReturn("v").thenReturn("q").thenReturn("f").thenReturn("");
@@ -239,7 +225,6 @@ class LoginControllerTest {
     void goBackLoginTest() {
         try {
             Gui gui = mock(Gui.class);
-            LoginController loginController = new LoginController();
             loginController.gui = gui;
             doNothing().when(gui).switchScene("whatever");
             loginController.goBackLogin();

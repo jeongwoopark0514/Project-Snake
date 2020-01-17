@@ -3,7 +3,6 @@ package game;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Board representing the back structure of the game.
@@ -14,15 +13,15 @@ import lombok.Setter;
  * and updated to stay up to date with the dynamics of the game.
  */
 class Board {
-    private transient ArrayList<ArrayList<Tile>> grid;
+    private ArrayList<ArrayList<Tile>> grid;
     @Getter
     private int width;
     @Getter
     private int height;
     @Getter
-    private transient String background;
+    private String background;
     @Getter
-    private transient List<Tile> elements;
+    private List<Tile> elements;
 
     /**
      * Constructor for the board class, this will create an instance of a board.

@@ -6,6 +6,7 @@ import static game.Directions.RIGHT;
 import static game.Directions.UP;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
@@ -19,12 +20,12 @@ import org.mockito.MockitoAnnotations;
 
 
 class SnakeTest {
-    private transient Snake snake;
-    private transient ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private transient PrintStream originalOut = System.out;
-    private transient String miss = "Miss";
+    private Snake snake;
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private PrintStream originalOut = System.out;
+    private String miss = "Miss";
     @Mock
-    private transient Game game;
+    private Game game;
 
 
     @BeforeEach
@@ -50,27 +51,26 @@ class SnakeTest {
         snake.changeDirection(RIGHT);
         assertEquals(1, snake.getHead().getDirectionX());
         assertEquals(0, snake.getHead().getDirectionY());
+        assertEquals(RIGHT, snake.getDirection());
     }
 
     @Test
     void changeDirectionBiggerSnakeTest() {
         snake.grow();
+        snake.move();
+        snake.grow();
+        snake.move();
+        snake.grow();
+        snake.move();
         snake.setDirection(LEFT);
         snake.changeDirection(UP);
-        assertEquals(0, snake.getHead().getDirectionX());
-        assertEquals(-1, snake.getHead().getDirectionY());
+        assertEquals(UP, snake.getDirection());
         snake.grow();
+        snake.move();
+        snake.changeDirection(LEFT);
         snake.grow();
-        snake.changeDirection(DOWN);
-        assertEquals(0, snake.getHead().getDirectionX());
-        assertEquals(1, snake.getHead().getDirectionY());
-        snake.changeDirection(DOWN);
-        assertEquals(0, snake.getHead().getDirectionX());
-        assertEquals(1, snake.getHead().getDirectionY());
-        snake.setDirection(null);
-        snake.changeDirection(DOWN);
-        assertEquals(0, snake.getHead().getDirectionX());
-        assertEquals(1, snake.getHead().getDirectionY());
+        snake.move();
+        assertEquals(LEFT, snake.getDirection());
     }
 
     @Test
@@ -78,8 +78,7 @@ class SnakeTest {
         snake.grow();
         snake.setDirection(LEFT);
         snake.changeDirection(LEFT);
-        assertEquals(-1, snake.getHead().getDirectionX());
-        assertEquals(0, snake.getHead().getDirectionY());
+        assertEquals(LEFT, snake.getDirection());
     }
 
     @Test
@@ -87,16 +86,27 @@ class SnakeTest {
         snake.grow();
         snake.setDirection(LEFT);
         snake.changeDirection(RIGHT);
-        assertEquals(-1, snake.getHead().getDirectionX());
-        assertEquals(0, snake.getHead().getDirectionY());
+        assertEquals(LEFT, snake.getDirection());
     }
 
+    @Test
+    void changeDirectionNull() {
+        assertThrows(NullPointerException.class, () -> snake.changeDirection(null));
+    }
 
+    @Test
+    void changeAllDirections() {
+        snake.changeDirection(LEFT);
+        snake.changeDirection(UP);
+        snake.changeDirection(RIGHT);
+        snake.changeDirection(DOWN);
+        assertEquals(DOWN, snake.getDirection());
+    }
 
     @Test
     void moveSizeOneTest() {
         snake.move();
-        assertEquals(4, snake.getHead().getX());
+        assertEquals(6, snake.getHead().getX());
         assertEquals(5, snake.getHead().getY());
     }
 
@@ -105,9 +115,9 @@ class SnakeTest {
         BodyPart newPart = new BodyPart(6, 5, Color.GREEN, null);
         snake.getBody().add(newPart);
         snake.move();
-        BodyPart first = (BodyPart) snake.getBody().get(0);
-        BodyPart second = (BodyPart) snake.getBody().get(1);
-        assertEquals(4, first.getX());
+        BodyPart first =  snake.getBody().get(0);
+        BodyPart second =  snake.getBody().get(1);
+        assertEquals(6, first.getX());
         assertEquals(5, first.getY());
         assertEquals(5, second.getX());
         assertEquals(5, second.getY());
@@ -127,15 +137,25 @@ class SnakeTest {
 
     @Test
     void setSpritesTailTest() {
+        snake.changeDirection(UP);
         snake.grow();
-        assertEquals(GameSettings.SNAKE_TAIL, snake.getBody().get(1).getSprite());
+        assertEquals("/image/green_snake_body.png", snake.getBody().get(1).getSprite());
     }
 
     @Test
     void setSpritesBodyTest() {
+        snake.changeDirection(LEFT);
         snake.grow();
+        snake.move();
         snake.grow();
         assertEquals(GameSettings.SNAKE_BODY, snake.getBody().get(1).getSprite());
+    }
+
+    @Test
+    void setSpritesSmallSnake() {
+        snake.changeDirection(LEFT);
+        snake.setSprites();
+        assertEquals("image/green_snake_head_LEFT.png", snake.getBody().get(0).getSprite());
     }
 
 }
