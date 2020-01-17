@@ -22,27 +22,27 @@ import lombok.Setter;
  */
 public class Game {
     @Getter
-    private final transient Scene scene;
+    private final Scene scene;
     @Getter
-    private final transient Painter painter;
+    private final Painter painter;
     @Getter
-    private final transient Canvas canvas;
+    private final Canvas canvas;
     @Getter
-    private final transient Snake snake;
+    private final Snake snake;
     //Made the fruits a list to provide the option to add multiple fruits.
     @Getter
     @Setter
-    private transient List<Fruit> fruits;
-    private transient List<Wall> walls;
+    private List<Fruit> fruits;
+    private List<Wall> walls;
     @Getter
-    private transient int score;
-    private transient Text scoreText;
-    private transient Board board;
-    private transient CollisionManager collisionManager;
+    private int score;
+    private Text scoreText;
+    private CollisionManager collisionManager;
     @Getter
     @Setter
     private boolean isPaused;
-    private transient Text pauseText;
+    private Text pauseText;
+    private Board board;
     @Getter
     @Setter
     private AnimationTimer timer;
@@ -235,19 +235,15 @@ public class Game {
             switch (e.getCode()) {
                 case LEFT:
                     snake.changeDirection(Directions.LEFT);
-                    this.snake.setDirection(Directions.LEFT);
                     break;
                 case RIGHT:
                     snake.changeDirection(Directions.RIGHT);
-                    this.snake.setDirection(Directions.RIGHT);
                     break;
                 case UP:
                     snake.changeDirection(Directions.UP);
-                    this.snake.setDirection(Directions.UP);
                     break;
                 case DOWN:
                     snake.changeDirection(Directions.DOWN);
-                    this.snake.setDirection(Directions.DOWN);
                     break;
                 default:
                     break;

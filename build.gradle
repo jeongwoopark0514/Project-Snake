@@ -15,7 +15,7 @@ plugins {
     id 'pmd'
 
     // FindBugs / SpotBugs
-    id "com.github.spotbugs" version "2.0.1"
+    id "com.github.spotbugs" version "3.0.0"
 
     // Lombok
     id "io.freefair.lombok" version "4.1.4"
@@ -135,6 +135,8 @@ checkstyle {
 pmd {
     incrementalAnalysis = true
     toolVersion "6.20.0"
+    ruleSets = []
+    ruleSetFiles = files("config/pmd/ruleset.xml")
 }
 
 spotbugs {

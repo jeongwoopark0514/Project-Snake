@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class FruitTest {
-    private transient Fruit fruit;
+    private Fruit fruit;
 
     @BeforeEach
     void setUp() {

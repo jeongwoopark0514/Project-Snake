@@ -1,16 +1,16 @@
 package database;
 
+import com.mysql.cj.jdbc.MysqlDataSource;
 import gui.controller.PasswordHash;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import lombok.Getter;
 import lombok.Setter;
 
 public class DBconnect {
-
     @Getter
     @Setter
     private Connection connection;
@@ -23,9 +23,11 @@ public class DBconnect {
     @Getter
     @Setter
     private PreparedStatement preparedStatement;
-    private transient String prefix = "Error: ";
+    private String prefix = "Error: ";
 
     private static DBconnect INSTANCE;
+    @Setter
+    private MysqlDataSource ds;
 
     /**
      * First time this method is called an instance of DBconnect will be created. Subsequent
@@ -44,21 +46,17 @@ public class DBconnect {
     }
 
     /**
-     * Method that establishes connection to the mysql database.
+     * Instantiate the datasource which can be used to create a connection.
      */
     public DBconnect() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            StringBuilder url = new StringBuilder();
-            url.append("jdbc:mysql://projects-db.ewi.tudelft.nl/projects_Snake1?");
-            url.append("useUnicode=true&characterEncoding=utf8&use");
-            url.append("SSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC");
-            connection = DriverManager.getConnection(url.toString(),
-                "pu_Snake1", "tHWLSWJqg57E");
-            statement = connection.createStatement();
-        } catch (Exception exception) {
-            System.out.println(prefix + exception);
-        }
+        ds = new MysqlDataSource();
+        StringBuilder url = new StringBuilder();
+        url.append("jdbc:mysql://projects-db.ewi.tudelft.nl/projects_Snake1?");
+        url.append("useUnicode=true&characterEncoding=utf8&use");
+        url.append("SSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC");
+        ds.setUrl(url.toString());
+        ds.setUser("pu_Snake1");
+        ds.setPassword("tHWLSWJqg57E");
     }
 
     /**
@@ -80,6 +78,28 @@ public class DBconnect {
         }
 
         return resultSet;
+    }
+
+    /**
+     * Open the connection of the set datasource.
+     */
+    public void openConnection() {
+        try {
+            connection = ds.getConnection();
+        } catch (SQLException e) {
+            System.out.println(prefix + e);
+        }
+    }
+
+    /**
+     * Close the connection with the database.
+     */
+    public void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println(prefix + e);
+        }
     }
 
     /**
