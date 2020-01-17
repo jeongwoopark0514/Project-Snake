@@ -25,7 +25,7 @@ public class Snake {
     @Getter
     @Setter
     private Game game;
-    private transient int minSize = 1; //minimal size the snake has to be to have a body
+    private int minSize = 1; //minimal size the snake has to be to have a body
 
     /**
      * Constructor.

@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import lombok.Getter;
 import lombok.Setter;
 
-@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class LoginController {
 
     public transient TextField loginUsername;

@@ -9,8 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class WallTest {
-    private transient Tile tile;
-    private transient Tile other;
+    private Tile tile;
+    private Tile other;
 
     @BeforeEach
     void setUp() {

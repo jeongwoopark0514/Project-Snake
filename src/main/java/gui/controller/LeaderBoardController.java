@@ -28,7 +28,7 @@ import lombok.Setter;
  */
 public class LeaderBoardController implements Initializable {
 
-    public transient Gui gui = new Gui();
+    public Gui gui = new Gui();
 
     public transient TableView<GlobalDetails> globalTable = new TableView<>();
     public transient TableView<PersonalDetails> personalTable = new TableView<>();

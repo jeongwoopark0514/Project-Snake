@@ -15,7 +15,7 @@ plugins {
     id 'pmd'
 
     // FindBugs / SpotBugs
-    id "com.github.spotbugs" version "2.0.1"
+    id "com.github.spotbugs" version "3.0.0"
 
     // Lombok
     id "io.freefair.lombok" version "4.1.4"
@@ -72,6 +72,7 @@ jacocoTestCoverageVerification {
                 'game.SnakeApp.*', // only used for going to game screen directly
                 'game.Painter.*', // uses final class so needs to use PowerMock
                 // TODO: Figure out how to test this
+                'game.Game.lambda$setOnKeyPressedListener$0(javafx.scene.input.KeyEvent)',
                 'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
                 'game.Game.lambda$setOnKeyPressedListener$2(javafx.scene.input.KeyEvent)',
                 'game.Game.lambda$gameLoop$0()', //TODO Is this testable?
@@ -92,6 +93,12 @@ jacocoTestCoverageVerification {
                 'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
                 'database.DBconnect.getGlobalScores(java.util.ArrayList)',
                 'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
+                'game.Game.gameLoop()', // private method
+                'game.Game.1.handle(long)', // TODO: look into what this method is
+                'game.Game.1.{...}', // TODO: look into what this method is
+                'game.Game.start()', // only calls a private method
+                'game.Sound.closeClip()', // Impossible to test static.
+                'game.Sound.*' //uses static class
             ]
         }
         rule {
@@ -105,6 +112,7 @@ jacocoTestCoverageVerification {
                     'game.GameSettings.*', // just constants
                     'game.SnakeApp.*', // only used for going to game screen directly during development
                     'game.Painter.*', // uses final class so needs to use PowerMock
+                    'game.Game.lambda$setOnKeyPressedListener$0(javafx.scene.input.KeyEvent)', //private method
                     'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)', //private method
                     'game.Game.lambda$setOnKeyPressedListener$2(javafx.scene.input.KeyEvent)', //private method
                     'game.Game.lambda$gameLoop$0()', //TODO Is this testable?
@@ -117,12 +125,18 @@ jacocoTestCoverageVerification {
                     'gui.controller.ScoreController.*', //delete this when implementation and test is ready
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                    'gui.controller.LeaderBoardController.*', //impossible to test System.exit
+                    'gui.controller.LeaderBoardController.*' ,//impossible to test System.exit
                     'database.DBconnect.openConnection()',
                     'database.DBconnect.closeConnection()',
                     'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
                     'database.DBconnect.getGlobalScores(java.util.ArrayList)',
                     'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
+                    'game.Game.gameLoop()', // private method
+                    'game.Game.1.handle(long)', // TODO: look into what this method is
+                    'game.Game.1.{...}', // TODO: look into what this method is
+                    'game.Game.start()', // only calls a private method
+                    'game.Sound.closeClip()', // Impossible to test static.
+                    'game.Sound.*' //uses static class
             ]
         }
 
@@ -141,6 +155,8 @@ checkstyle {
 pmd {
     incrementalAnalysis = true
     toolVersion "6.20.0"
+    ruleSets = []
+    ruleSetFiles = files("config/pmd/ruleset.xml")
 }
 
 spotbugs {

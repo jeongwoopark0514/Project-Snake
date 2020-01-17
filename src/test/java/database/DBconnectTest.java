@@ -69,9 +69,8 @@ public class DBconnectTest {
     }
 
     @AfterEach
-    void cleanUp() throws SQLException {
+    void cleanUp() {
         System.setOut(originalOut);
-        dbconnect.getConnection().close();
     }
 
     @Test

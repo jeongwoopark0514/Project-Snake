@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 class BodyPartTest {
-    private transient BodyPart part;
+    private BodyPart part;
 
     @BeforeEach
     void setUp() {
