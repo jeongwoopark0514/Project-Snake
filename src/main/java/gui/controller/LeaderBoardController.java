@@ -16,7 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import lombok.Getter;
+import lombok.Setter;
 
 
 /**
@@ -47,6 +48,12 @@ public class LeaderBoardController implements Initializable {
     private ArrayList<GlobalDetails> list = new ArrayList<>();
     private ArrayList<PersonalDetails> list2 = new ArrayList<>();
 
+    @Getter
+    @Setter
+    private DBconnect database = DBconnect.getInstance();
+    @Getter
+    @Setter
+    private SessionManager manager = SessionManager.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,8 +65,9 @@ public class LeaderBoardController implements Initializable {
      */
     public void populateLeaderboards() {
         try {
-            DBconnect.getInstance().getGlobalScores(list);
-            DBconnect.getInstance().getPersonalScores(list2, SessionManager.getInstance().getUsername());
+            database.openConnection();
+            database.getGlobalScores(list);
+            database.getPersonalScores(list2, manager.getUsername());
             globalScores = FXCollections.observableArrayList(list);
             personalScores = FXCollections.observableArrayList(list2);
             globalRank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
@@ -72,6 +80,7 @@ public class LeaderBoardController implements Initializable {
             personalTable.setEditable(true);
             globalTable.setItems(globalScores);
             personalTable.setItems(personalScores);
+            database.closeConnection();
         } catch (Exception e) {
             System.out.println("populateTable" + e);
         }

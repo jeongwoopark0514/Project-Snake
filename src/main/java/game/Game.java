@@ -5,6 +5,7 @@ import static game.GameSettings.X_MAX;
 import static game.GameSettings.Y_MAX;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,13 +41,11 @@ public class Game {
     private transient List<Fruit> fruits;
     private transient List<Wall> walls;
     @Getter
-    private transient int score;
+    public int score;
     private transient Text scoreText;
     private transient Board board;
     private transient CollisionManager collisionManager;
-
     public ScoreController scoreController = new ScoreController();
-
 
     /**
      * The constructor of the game object.
@@ -125,14 +124,12 @@ public class Game {
     public void stop() {
         //This is just for the prototype the actual game will not use this,
         //therefore it needs to be suppressed.
-        try {
-            scoreController.scoreSave(score);
-        } catch (Exception e) {
-            System.out.println(e);
-            System.out.println(score);
+        try{
+            scoreController.scoreSave();
+        } catch (Exception e){
+            System.out.println("stop" + e);
         }
-
-        System.exit(0); //NOPMD
+        System.exit(0);
     }
 
     ///**
