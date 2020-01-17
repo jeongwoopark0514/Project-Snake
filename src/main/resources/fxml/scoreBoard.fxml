@@ -18,7 +18,7 @@
             <Font name="Goudy Stout" size="45.0" />
          </font>
       </Text>
-      <Button layoutX="97.0" layoutY="466.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0">
+      <Button layoutX="97.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#goBackMain" prefHeight="65.0" prefWidth="170.0">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
                <image>

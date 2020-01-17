@@ -73,7 +73,10 @@ jacocoTestCoverageVerification {
                 'game.Painter.*', // uses final class so needs to use PowerMock
                 // TODO: Figure out how to test this
                 'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
+                'game.Game.lambda$setOnKeyPressedListener$2(javafx.scene.input.KeyEvent)',
                 'game.Game.lambda$gameLoop$0()', //TODO Is this testable?
+                'game.Game.lambda$gameLoop$1()', //TODO Is this testable?
+                'game.Game.lambda$stop$0()',
                 'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
                 'gui.Gui.*',
                 'gui.AlertBox.*',
@@ -81,8 +84,14 @@ jacocoTestCoverageVerification {
                 'gui.controller.ScoreController.*', //delete this when the implementation and test is ready
                 'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                 'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                'gui.controller.LeaderBoardController.*' //impossible to test System.exit
-
+                'gui.controller.LeaderBoardController.*', //impossible to test System.exit
+                'database.PersonalDetails.*', //POJO class
+                'database.GlobalDetails.*',    //POJO class
+                'database.DBconnect.openConnection()',
+                'database.DBconnect.closeConnection()',
+                'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
+                'database.DBconnect.getGlobalScores(java.util.ArrayList)',
+                'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
             ]
         }
         rule {
@@ -97,7 +106,10 @@ jacocoTestCoverageVerification {
                     'game.SnakeApp.*', // only used for going to game screen directly during development
                     'game.Painter.*', // uses final class so needs to use PowerMock
                     'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)', //private method
+                    'game.Game.lambda$setOnKeyPressedListener$2(javafx.scene.input.KeyEvent)', //private method
                     'game.Game.lambda$gameLoop$0()', //TODO Is this testable?
+                    'game.Game.lambda$gameLoop$1()', //TODO Is this testable?
+                    'game.Game.lambda$stop$0()',
                     'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
                     'gui.Gui.*',
                     'gui.AlertBox.*',
@@ -105,7 +117,12 @@ jacocoTestCoverageVerification {
                     'gui.controller.ScoreController.*', //delete this when implementation and test is ready
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                    'gui.controller.LeaderBoardController.quitButton()' //impossible to test System.exit
+                    'gui.controller.LeaderBoardController.*', //impossible to test System.exit
+                    'database.DBconnect.openConnection()',
+                    'database.DBconnect.closeConnection()',
+                    'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
+                    'database.DBconnect.getGlobalScores(java.util.ArrayList)',
+                    'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
             ]
         }
 

@@ -42,11 +42,11 @@ public class LeaderBoardController implements Initializable {
     public transient TableColumn<GlobalDetails, Integer> globalScore;
     public transient TableColumn<PersonalDetails, Integer> personalScore;
 
-    private ObservableList<GlobalDetails> globalScores;
-    private ObservableList<PersonalDetails> personalScores;
+    private transient ObservableList<GlobalDetails> globalScores;
+    private transient ObservableList<PersonalDetails> personalScores;
 
-    private ArrayList<GlobalDetails> list = new ArrayList<>();
-    private ArrayList<PersonalDetails> list2 = new ArrayList<>();
+    private transient ArrayList<GlobalDetails> list = new ArrayList<>();
+    private transient ArrayList<PersonalDetails> list2 = new ArrayList<>();
 
     @Getter
     @Setter

@@ -5,6 +5,8 @@ import static game.GameSettings.X_MAX;
 import static game.GameSettings.Y_MAX;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import gui.Gui;
+import gui.controller.ScoreController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +14,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 
-import gui.Gui;
-import gui.controller.ScoreController;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -123,16 +123,16 @@ public class Game {
      * Stops the game.
      */
     public void stop() {
-            Platform.runLater(()-> {
-                try {
-                    gui.switchScene("src/main/resources/fxml/scoreBoard.fxml");
-                    ScoreController scoreController = gui.loader.getController();
-                    gui.setText(scoreController.scoreText, score + "");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-//        System.exit(0);
+        Platform.runLater(() -> {
+            try {
+                gui.switchScene("src/main/resources/fxml/scoreBoard.fxml");
+                ScoreController scoreController = gui.loader.getController();
+                gui.setText(scoreController.scoreText, score + "");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        // System.exit(0);
     }
 
     ///**

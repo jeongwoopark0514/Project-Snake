@@ -2,12 +2,12 @@ package database;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import gui.controller.PasswordHash;
+
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.ArrayList;
 
@@ -21,6 +21,8 @@ public class DBconnect {
     @Getter @Setter private Statement statement;
     @Getter @Setter private ResultSet resultSet;
     @Getter @Setter private PreparedStatement preparedStatement;
+    private String prefix = "Error: ";
+    private int position = 1;
 
     private static DBconnect INSTANCE;
     @Setter
@@ -71,7 +73,7 @@ public class DBconnect {
             }
 
         } catch (Exception exception) {
-            System.out.println("getData" + exception);
+            System.out.println(prefix + exception);
         }
 
         return resultSet;
@@ -84,7 +86,7 @@ public class DBconnect {
         try {
             connection = ds.getConnection();
         } catch (SQLException e) {
-            System.out.println("openConnection" + e);
+            System.out.println(prefix + e);
         }
     }
 
@@ -95,7 +97,7 @@ public class DBconnect {
         try {
             connection.close();
         } catch (SQLException e) {
-            System.out.println("closeConnection" + e);
+            System.out.println(prefix + e);
         }
     }
 
@@ -122,7 +124,7 @@ public class DBconnect {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println("authenticate" + e);
+            System.out.println(prefix + e);
         }
         return false;
     }
@@ -142,7 +144,7 @@ public class DBconnect {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println("usernameCheck" + e);
+            System.out.println(prefix + e);
         }
         return false;
     }
@@ -177,7 +179,7 @@ public class DBconnect {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println("registerUser" + e);
+            System.out.println(prefix + e);
         }
         return false;
     }
@@ -198,7 +200,7 @@ public class DBconnect {
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
-            System.out.println("storeCookie" + e);
+            System.out.println(prefix + e);
             return false;
         }
     }
@@ -219,7 +221,7 @@ public class DBconnect {
                 return resultSet.getString("username");
             }
         } catch (Exception e) {
-            System.out.println("getUsername" + e);
+            System.out.println(prefix + e);
         }
         return null;
     }
@@ -241,7 +243,7 @@ public class DBconnect {
                 preparedStatement.executeUpdate();
             }
         } catch (Exception e) {
-            System.out.println("saveScore" + e);
+            System.out.println(prefix + e);
         }
     }
 
@@ -252,7 +254,6 @@ public class DBconnect {
      */
     public void getGlobalScores(ArrayList<GlobalDetails> list) {
         try {
-            int position = 1;
             String highScores = "SELECT username,score FROM scores ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(highScores);
             resultSet = preparedStatement.executeQuery();
@@ -264,7 +265,7 @@ public class DBconnect {
                 position += 1;
             }
         } catch (Exception e) {
-            System.out.println("getGlobalScores" + e);
+            System.out.println(prefix + e);
         }
     }
 
@@ -276,7 +277,6 @@ public class DBconnect {
      */
     public void getPersonalScores(ArrayList<PersonalDetails> list2, String username) {
         try {
-            int position = 1;
             String personalScores = "SELECT nickname,score FROM scores WHERE username = ? "
                     + "ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(personalScores);
@@ -290,7 +290,7 @@ public class DBconnect {
                 position += 1;
             }
         } catch (Exception e) {
-            System.out.println("getPersonalScores " + e);
+            System.out.println(prefix + e);
         }
     }
 

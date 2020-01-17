@@ -28,12 +28,15 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Contains all the methods needed for controller logic.
  */
 public class Gui {
 
+    @Getter @Setter
     public FXMLLoader loader;
 
     /**

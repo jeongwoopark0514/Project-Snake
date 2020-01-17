@@ -3,15 +3,15 @@ package gui.controller;
 import database.DBconnect;
 import database.SessionManager;
 import game.Game;
-
 import gui.Gui;
-import javafx.fxml.FXML;
+
+import java.io.IOException;
+
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.IOException;
 
 /**
  * This class is for controller of score screen.
@@ -30,7 +30,7 @@ public class ScoreController {
     private SessionManager manager = SessionManager.getInstance();
     public Game game;
 
-    public transient TextField nickname ;
+    public transient TextField nickname;
 
     public transient Text scoreText = new Text();
 
@@ -47,11 +47,20 @@ public class ScoreController {
         } else {
             System.out.println(manager.getUsername());
             System.out.println(scoreText.getText());
-            database.saveScore(manager.getUsername(),Integer.parseInt(scoreText.getText()), nickname.getText());
+            database.saveScore(manager.getUsername(),
+                    Integer.parseInt(scoreText.getText()),
+                    nickname.getText());
             System.out.println("Score Saved");
             gui.showAlert("Your score was saved", "Success!");
         }
         database.closeConnection();
+    }
+
+    /**
+     * This methods go back to the entry page when you click goBack button.
+     */
+    public void goBackMain() throws IOException {
+        gui.switchScene("src/main/resources/fxml/entry.fxml");
     }
 
     /**
