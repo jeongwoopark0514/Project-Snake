@@ -5,7 +5,9 @@ import database.SessionManager;
 import game.Game;
 
 import gui.Gui;
+import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,6 +20,7 @@ import java.io.IOException;
 public class ScoreController {
 
     public transient Gui gui = new Gui();
+    public int score;
 
     @Getter
     @Setter
@@ -28,6 +31,8 @@ public class ScoreController {
     public Game game;
 
     public transient TextField nickname ;
+
+    public transient Text scoreText = new Text();
 
 
     /**
@@ -41,19 +46,12 @@ public class ScoreController {
             gui.showAlert("Enter a nickname", "Empty field(s)");
         } else {
             System.out.println(manager.getUsername());
-            System.out.println(game.getScore());
-            database.saveScore(manager.getUsername(),game.getScore(), "nickname");
+            System.out.println(scoreText.getText());
+            database.saveScore(manager.getUsername(),Integer.parseInt(scoreText.getText()), nickname.getText());
             System.out.println("Score Saved");
             gui.showAlert("Your score was saved", "Success!");
         }
         database.closeConnection();
-    }
-
-    /**
-     * This methods go back to the entry page when you click goBack button.
-     */
-    public void goToScore() throws IOException {
-        gui.switchScene("src/main/resources/fxml/score.fxml");
     }
 
     /**

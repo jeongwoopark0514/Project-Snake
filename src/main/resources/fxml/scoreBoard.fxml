@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -12,7 +13,7 @@
             <Image url="@../image/yourscore.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="169.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="696.6708984375">
+      <Text fx:id="scoreText" fill="WHITE" layoutX="169.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="696.6708984375">
          <font>
             <Font name="Goudy Stout" size="45.0" />
          </font>

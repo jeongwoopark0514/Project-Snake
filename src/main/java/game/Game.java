@@ -7,12 +7,12 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 
+import gui.Gui;
 import gui.controller.ScoreController;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -46,7 +46,7 @@ public class Game {
     private transient Text scoreText;
     private transient Board board;
     private transient CollisionManager collisionManager;
-    public ScoreController scoreController = new ScoreController();
+    private transient Gui gui = new Gui();
 
     /**
      * The constructor of the game object.
@@ -125,7 +125,9 @@ public class Game {
     public void stop() {
             Platform.runLater(()-> {
                 try {
-                    scoreController.goToScore();
+                    gui.switchScene("src/main/resources/fxml/scoreBoard.fxml");
+                    ScoreController scoreController = gui.loader.getController();
+                    gui.setText(scoreController.scoreText, score + "");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -34,6 +34,7 @@ import javafx.scene.text.Text;
  */
 public class Gui {
 
+    public FXMLLoader loader;
 
     /**
      * This method pops up an alert box that gives notifications.
@@ -64,7 +65,9 @@ public class Gui {
      */
     public void switchScene(String path) throws IOException {
         final URL url = new File(path).toURI().toURL();
-        final Parent entryParent = FXMLLoader.load(url);
+        loader = new FXMLLoader();
+        loader.setLocation(url);
+        Parent entryParent = loader.load();
         MainRunner.stage.setScene(new Scene(entryParent, 1000, 600));
     }
 
@@ -128,5 +131,10 @@ public class Gui {
         AlertBox.displayQuit("Do you really want to quit? ", "Game over");
     }
 
+    public void setText(Text text, String setting) {
+        text.setText(setting);
+    }
+
 }
+
 
