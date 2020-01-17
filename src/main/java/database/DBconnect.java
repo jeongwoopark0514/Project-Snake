@@ -22,7 +22,8 @@ public class DBconnect {
     @Getter @Setter private ResultSet resultSet;
     @Getter @Setter private PreparedStatement preparedStatement;
     private String prefix = "Error: ";
-    private int position = 1;
+    private int globalPosition = 1;
+    private int personalPosition = 1;
 
     private static DBconnect INSTANCE;
     @Setter
@@ -259,10 +260,10 @@ public class DBconnect {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(new GlobalDetails(
-                        position,
+                        globalPosition,
                         resultSet.getString("username"),
                         resultSet.getInt("score")));
-                position += 1;
+                globalPosition += 1;
             }
         } catch (Exception e) {
             System.out.println(prefix + e);
@@ -284,10 +285,10 @@ public class DBconnect {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list2.add(new PersonalDetails(
-                        position,
+                        personalPosition,
                         resultSet.getInt("score"),
                         resultSet.getString("nickname")));
-                position += 1;
+                personalPosition += 1;
             }
         } catch (Exception e) {
             System.out.println(prefix + e);
