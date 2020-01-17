@@ -4,12 +4,18 @@ import static game.GameSettings.MIN_PELLETS;
 import static game.GameSettings.X_MAX;
 import static game.GameSettings.Y_MAX;
 
+import gui.Gui;
+import gui.controller.ScoreController;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
+
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
@@ -46,6 +52,7 @@ public class Game {
     @Getter
     @Setter
     private AnimationTimer timer;
+    private transient Gui gui = new Gui();
 
     /**
      * The constructor of the game object.
@@ -124,7 +131,16 @@ public class Game {
      * Used for stopping a game.
      */
     public void stop() {
-        timer.stop();
+        Platform.runLater(() -> {
+            try {
+                timer.stop();
+                gui.switchScene("src/main/resources/fxml/scoreBoard.fxml");
+                ScoreController scoreController = gui.loader.getController();
+                gui.setText(scoreController.scoreText, score + "");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**

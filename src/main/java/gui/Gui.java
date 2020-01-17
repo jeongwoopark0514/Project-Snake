@@ -11,9 +11,11 @@ import game.Game;
 import game.GameSettings;
 import game.Painter;
 import game.Snake;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -26,13 +28,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
 import javax.sound.sampled.LineUnavailableException;
+
+import lombok.Getter;
+import lombok.Setter;
+
 
 /**
  * Contains all the methods needed for controller logic.
  */
 public class Gui {
+
+    @Getter @Setter
+    public FXMLLoader loader;
+
     /**
      * This method pops up an alert box that gives notifications.
      *
@@ -62,7 +71,9 @@ public class Gui {
      */
     public void switchScene(String path) throws IOException {
         final URL url = new File(path).toURI().toURL();
-        final Parent entryParent = FXMLLoader.load(url);
+        loader = new FXMLLoader();
+        loader.setLocation(url);
+        Parent entryParent = loader.load();
         MainRunner.stage.setScene(new Scene(entryParent, 1000, 600));
     }
 
@@ -78,7 +89,7 @@ public class Gui {
     /**
      * Make GUI Scene for the snake game.
      */
-    public void startSnakeGame() throws LineUnavailableException {
+    public void startSnakeGame() throws LineUnavailableException{
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -130,14 +141,8 @@ public class Gui {
             game.pause();
         });
 
-        stopButton.setOnAction((event) -> {
-            System.out.println("Clicked on stop button.");
+        stopButton.setOnAction(event -> {
             game.stop();
-            try {
-                this.switchScene("src/main/resources/fxml/login.fxml");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         });
 
         snake.setGame(game);
@@ -152,6 +157,10 @@ public class Gui {
      */
     public void quit() {
         AlertBox.displayQuit("Do you really want to quit? ", "Game over");
+    }
+
+    public void setText(Text text, String setting) {
+        text.setText(setting);
     }
 
 }

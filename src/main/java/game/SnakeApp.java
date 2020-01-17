@@ -35,7 +35,7 @@ public class SnakeApp extends Application {
      * @param primaryStage stage to use.
      */
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws LineUnavailableException {
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -57,13 +57,13 @@ public class SnakeApp extends Application {
         Button pauseButton = new Button("Pause");
         pauseButton.setLayoutX(1068);
         pauseButton.setLayoutY(350);
-        pauseButton.setPrefSize(70,40);
+        pauseButton.setPrefSize(70, 40);
 
         // Stop button
         Button stopButton = new Button("stop");
         stopButton.setLayoutX(1068);
         stopButton.setLayoutY(420);
-        stopButton.setPrefSize(70,40);
+        stopButton.setPrefSize(70, 40);
 
         // Add elements to scene
         Group root = new Group();
@@ -85,17 +85,12 @@ public class SnakeApp extends Application {
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
 
-        try {
-            Game game = new Game(scene, painter, canvas, snake, score, pauseText);
-            snake.setGame(game);
-            game.start();
-            // Add action listener to pause button.
-            pauseButton.setOnAction(event -> {
-                game.pause();
-            });
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        }
-
+        Game game = new Game(scene, painter, canvas, snake, score, pauseText);
+        snake.setGame(game);
+        game.start();
+        // Add action listener to pause button.
+        pauseButton.setOnAction(event -> {
+            game.pause();
+        });
     }
 }

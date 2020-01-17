@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
@@ -12,12 +13,12 @@
             <Image url="@../image/yourscore.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="169.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="696.6708984375">
+      <Text fx:id="scoreText" fill="WHITE" layoutX="169.0" layoutY="245.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="696.6708984375">
          <font>
             <Font name="Goudy Stout" size="45.0" />
          </font>
       </Text>
-      <Button layoutX="97.0" layoutY="466.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="170.0">
+      <Button layoutX="97.0" layoutY="466.0" mnemonicParsing="false" onMouseClicked="#goBackMain" prefHeight="65.0" prefWidth="170.0">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -38,8 +39,8 @@
             <Image url="@../image/nickname.png" />
          </image>
       </ImageView>
-      <TextField layoutX="487.0" layoutY="356.0" prefHeight="37.0" prefWidth="281.0" />
-      <Button layoutX="403.0" layoutY="473.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="158.0">
+      <TextField fx:id="nickname" layoutX="487.0" layoutY="356.0" prefHeight="37.0" prefWidth="281.0" />
+      <Button layoutX="403.0" layoutY="473.0" mnemonicParsing="false" onMouseClicked="#scoreSave" prefHeight="37.0" prefWidth="158.0">
          <graphic>
             <ImageView fitHeight="49.0" fitWidth="176.0" pickOnBounds="true" preserveRatio="true">
                <image>
