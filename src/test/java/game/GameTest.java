@@ -88,15 +88,15 @@ class GameTest {
         assertEquals(10, game.getScore());
     }
 
-    @Test
-    void gamePauseChangesStateTest() {
-        doNothing().when(timer).stop();
-        doNothing().when(timer).start();
-
-        assertFalse(game.isPaused());
-        game.pause();
-        assertTrue(game.isPaused());
-        game.pause();
-        assertFalse(game.isPaused());
-    }
+//    @Test
+//    void gamePauseChangesStateTest() {
+//        doNothing().when(timer).stop();
+//        doNothing().when(timer).start();
+//
+//        assertFalse(game.isPaused());
+//        game.pause();
+//        assertTrue(game.isPaused());
+//        game.pause();
+//        assertFalse(game.isPaused());
+//    }
 }
