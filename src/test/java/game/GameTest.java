@@ -4,12 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -23,15 +20,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class GameTest {
-    private transient Game game;
-    private transient Board board;
-    private transient Canvas canvas;
-    private transient Painter painter;
-    private transient Scene scene;
-    private transient Snake snake;
-    private transient AnimationTimer timer;
-    private transient Text scoreText;
-    private transient Text pauseText;
+    private Game game;
+    private Board board;
+    private Canvas canvas;
+    private Painter painter;
+    private Scene scene;
+    private Snake snake;
+    private AnimationTimer timer;
+    private Text scoreText;
+    private Text pauseText;
 
     @BeforeEach
     void setUp() {
@@ -41,7 +38,7 @@ class GameTest {
         snake = mock(Snake.class);
         board = mock(Board.class);
         scoreText = mock(Text.class);
-        pauseText = mock(Text.class);
+        pauseText = new Text();
         game = new Game(scene, painter, canvas, snake, scoreText, pauseText);
         timer = mock(AnimationTimer.class);
         game.setTimer(timer);
@@ -88,15 +85,16 @@ class GameTest {
         assertEquals(10, game.getScore());
     }
 
-//    @Test
-//    void gamePauseChangesStateTest() {
-//        doNothing().when(timer).stop();
-//        doNothing().when(timer).start();
-//
-//        assertFalse(game.isPaused());
-//        game.pause();
-//        assertTrue(game.isPaused());
-//        game.pause();
-//        assertFalse(game.isPaused());
-//    }
+    @Test
+    void gamePauseChangesStateTest() {
+        doNothing().when(timer).stop();
+        doNothing().when(timer).start();
+        doNothing().when(canvas).requestFocus();
+
+        assertFalse(game.isPaused());
+        game.pause();
+        assertTrue(game.isPaused());
+        game.pause();
+        assertFalse(game.isPaused());
+    }
 }

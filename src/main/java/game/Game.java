@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.Scene;
@@ -136,14 +135,10 @@ public class Game {
     public void pause() {
         if (!isPaused) {
             timer.stop();
-            Platform.runLater(() -> {
-                pauseText.setText("Paused");
-            });
+            pauseText.setText("Paused");
         } else {
             timer.start();
-            Platform.runLater(() -> {
-                pauseText.setText("");
-            });
+            pauseText.setText("");
         }
         isPaused = !isPaused;
         canvas.requestFocus();
