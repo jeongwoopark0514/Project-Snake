@@ -14,6 +14,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ThreadLocalRandom;
 
 import gui.controller.ScoreController;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
@@ -122,14 +123,14 @@ public class Game {
      * Stops the game.
      */
     public void stop() {
-        //This is just for the prototype the actual game will not use this,
-        //therefore it needs to be suppressed.
-        try{
-            scoreController.goToScore();
-        } catch (Exception e){
-            System.out.println("stop" + e);
-        }
-        System.exit(0);
+            Platform.runLater(()-> {
+                try {
+                    scoreController.goToScore();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+//        System.exit(0);
     }
 
     ///**
@@ -171,7 +172,7 @@ public class Game {
      * @param value the value to increase the score with.
      */
     void increaseScore(int value) {
-        score += value;
+        this.score += value;
     }
 
     /**

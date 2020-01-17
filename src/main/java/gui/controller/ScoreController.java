@@ -4,6 +4,7 @@ import database.DBconnect;
 import database.SessionManager;
 import game.Game;
 
+import gui.Gui;
 import javafx.scene.control.TextField;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,6 +40,8 @@ public class ScoreController {
             System.out.println("SCORE NOT SAVED");
             gui.showAlert("Enter a nickname", "Empty field(s)");
         } else {
+            System.out.println(manager.getUsername());
+            System.out.println(game.getScore());
             database.saveScore(manager.getUsername(),game.getScore(), "nickname");
             System.out.println("Score Saved");
             gui.showAlert("Your score was saved", "Success!");

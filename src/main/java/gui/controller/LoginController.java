@@ -3,6 +3,9 @@ package gui.controller;
 import database.DBconnect;
 import database.SessionManager;
 import gui.Gui;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javafx.fxml.FXML;
@@ -53,6 +56,8 @@ public class LoginController {
             //This is actually closed in the SessionsManager but PMD does not register this.
             PrintWriter writer = new PrintWriter("cookie.txt"); //NOPMD
             manager.saveCookie(writer, gui.getText(loginUsername));
+            BufferedReader reader = new BufferedReader(new FileReader("cookie.txt")); //NOPMD
+            manager.retrieveUserData(reader);
             gui.switchScene("src/main/resources/fxml/entry.fxml");
         } else {
             gui.showWarningAlert("Wrong username/password combination. Please try again.",
