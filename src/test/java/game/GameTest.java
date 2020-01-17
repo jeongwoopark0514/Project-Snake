@@ -15,6 +15,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
+import javax.sound.sampled.LineUnavailableException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ class GameTest {
     private Text pauseText;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws LineUnavailableException {
         canvas = mock(Canvas.class);
         painter = mock(Painter.class);
         scene = mock(Scene.class);

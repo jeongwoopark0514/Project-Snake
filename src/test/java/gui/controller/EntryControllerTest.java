@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 
 import gui.Gui;
 import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
 import org.junit.jupiter.api.Test;
 
 class EntryControllerTest {
@@ -23,7 +24,7 @@ class EntryControllerTest {
     }
 
     @Test
-    void startSnakeTest() {
+    void startSnakeTest() throws LineUnavailableException {
         Gui gui = mock(Gui.class);
         EntryController entryController = new EntryController();
         entryController.gui = gui;

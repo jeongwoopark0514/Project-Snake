@@ -4,6 +4,7 @@ import static game.GameSettings.MIN_PELLETS;
 import static game.GameSettings.X_MAX;
 import static game.GameSettings.Y_MAX;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -13,6 +14,8 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,7 +61,7 @@ public class Game {
      * @param scoreText the element representing the player score.
      */
     public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText,
-                Text pauseText) {
+                Text pauseText) throws LineUnavailableException {
         this.scene = scene;
         this.canvas = canvas;
         this.snake = snake;
@@ -82,7 +85,7 @@ public class Game {
      * Also initializes the collisionManager,
      * which is used to determine if the snake collides with other objects.
      */
-    private void init() {
+    private void init() throws LineUnavailableException {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();

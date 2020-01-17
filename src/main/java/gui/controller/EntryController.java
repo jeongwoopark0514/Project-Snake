@@ -1,8 +1,8 @@
 package gui.controller;
 
 import gui.Gui;
-
 import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
 
 
 /**
@@ -16,7 +16,7 @@ public class EntryController {
     /**
      * When you click start button, move to game screen.
      */
-    public void startGame() {
+    public void startGame() throws LineUnavailableException {
         gui.startSnakeGame();
     }
 

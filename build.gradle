@@ -86,7 +86,9 @@ jacocoTestCoverageVerification {
                     'game.Game.gameLoop()', // private method
                     'game.Game.1.handle(long)', // TODO: look into what this method is
                     'game.Game.1.{...}', // TODO: look into what this method is
-                    'game.Game.start()' // only calls a private method
+                    'game.Game.start()', // only calls a private method
+                    'game.Sound.closeClip()', // Impossible to test static.
+                    'game.Sound.*' //uses static class
             ]
         }
         rule {
@@ -115,8 +117,9 @@ jacocoTestCoverageVerification {
                     'game.Game.gameLoop()', // private method
                     'game.Game.1.handle(long)', // TODO: look into what this method is
                     'game.Game.1.{...}', // TODO: look into what this method is
-                    'game.Game.start()' // only calls a private method
-
+                    'game.Game.start()', // only calls a private method
+                    'game.Sound.closeClip()', // Impossible to test static.
+                    'game.Sound.*' //uses static class
             ]
         }
 

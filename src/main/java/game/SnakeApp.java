@@ -18,6 +18,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.LineUnavailableException;
+
 /**
  * This class is only used for testing purposes. This way we can directly go
  * to the game screen and we do not have to click through splash and register screen.
@@ -82,15 +84,18 @@ public class SnakeApp extends Application {
 
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        Game game = new Game(scene, painter, canvas, snake, score, pauseText);
 
-        // Add action listener to pause button.
-        pauseButton.setOnAction(event -> {
-            game.pause();
-        });
+        try {
+            Game game = new Game(scene, painter, canvas, snake, score, pauseText);
+            snake.setGame(game);
+            game.start();
+            // Add action listener to pause button.
+            pauseButton.setOnAction(event -> {
+                game.pause();
+            });
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        }
 
-        snake.setGame(game);
-
-        game.start();
     }
 }
