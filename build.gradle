@@ -68,23 +68,27 @@ jacocoTestCoverageVerification {
                 minimum = 0.8
             }
             excludes = [
-                'game.GameSettings.*', // just constants
-                'game.SnakeApp.*', // only used for going to game screen directly
-                'game.Painter.*', // uses final class so needs to use PowerMock
-                // TODO: Figure out how to test this
-                'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)',
-                'game.Game.lambda$gameLoop$0()', //TODO Is this testable?
-                'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
-                'game.Sound.closeClip()', // Impossible to test static.
-                'gui.Gui.*',
-                'gui.AlertBox.*',
-                'gui.MainRunner.*',
-                'gui.controller.ScoreController.*', //delete this when the implementation and test is ready
-                'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
-                'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                'gui.controller.LeaderBoardController.quitButton()', //impossible to test System.exit
+                    'game.GameSettings.*', // just constants
+                    'game.SnakeApp.*', // only used for going to game screen directly during development
+                    'game.Painter.*', // uses final class so needs to use PowerMock
+                    'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)', //private method
+                    'game.Game.lambda$gameLoop$0()', //TODO Is this testable?
+                    'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
+                    'gui.Gui.*',
+                    'gui.AlertBox.*',
+                    'gui.MainRunner.*',
+                    'gui.controller.ScoreController.*', //delete this when implementation and test is ready
+                    'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
+                    'gui.controller.EntryController.quitButton()', //impossible to test System.exit
+                    'gui.controller.LeaderBoardController.quitButton()', //impossible to test System.exit
+                    'game.Game.lambda$setOnKeyPressedListener$0(javafx.scene.input.KeyEvent)', // listener calls a
+                    // function which is tested
+                    'game.Game.gameLoop()', // private method
+                    'game.Game.1.handle(long)', // TODO: look into what this method is
+                    'game.Game.1.{...}', // TODO: look into what this method is
+                    'game.Game.start()', // only calls a private method
+                    'game.Sound.closeClip()', // Impossible to test static.
                     'game.Sound.*' //uses static class
-
             ]
         }
         rule {
@@ -101,7 +105,6 @@ jacocoTestCoverageVerification {
                     'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)', //private method
                     'game.Game.lambda$gameLoop$0()', //TODO Is this testable?
                     'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
-                    'game.Sound.closeClip()', // Impossible to test static.
                     'gui.Gui.*',
                     'gui.AlertBox.*',
                     'gui.MainRunner.*',
@@ -109,6 +112,13 @@ jacocoTestCoverageVerification {
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
                     'gui.controller.LeaderBoardController.quitButton()', //impossible to test System.exit
+                    'game.Game.lambda$setOnKeyPressedListener$0(javafx.scene.input.KeyEvent)', // listener calls a
+                    // function which is tested
+                    'game.Game.gameLoop()', // private method
+                    'game.Game.1.handle(long)', // TODO: look into what this method is
+                    'game.Game.1.{...}', // TODO: look into what this method is
+                    'game.Game.start()', // only calls a private method
+                    'game.Sound.closeClip()', // Impossible to test static.
                     'game.Sound.*' //uses static class
             ]
         }
