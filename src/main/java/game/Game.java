@@ -5,6 +5,7 @@ import static game.GameSettings.X_MAX;
 import static game.GameSettings.Y_MAX;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -13,8 +14,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import lombok.Getter;
 import lombok.Setter;
+
 
 /**
  * Main game control class.
@@ -53,7 +57,8 @@ public class Game {
      * @param snake     the snake that represents the player on the board.
      * @param scoreText the element representing the player score.
      */
-    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText) {
+    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText)
+        throws LineUnavailableException {
         this.scene = scene;
         this.canvas = canvas;
         this.snake = snake;
@@ -75,7 +80,7 @@ public class Game {
      * Also initializes the collisionManager,
      * which is used to determine if the snake collides with other objects.
      */
-    private void init() {
+    private void init() throws LineUnavailableException {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();
@@ -143,9 +148,14 @@ public class Game {
             Tile tail = snake.getTail();
             board.updateTile(tail.getX(), tail.getY(), null);
             snake.move();
-            if (collisionManager.check()) {
-                return;
+            try {
+                if (collisionManager.check()) {
+                    return;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+
             painter.writeScore(scoreText, score);
             Tile head = snake.getHead();
             board.updateTile(head.getX(), head.getY(), head);

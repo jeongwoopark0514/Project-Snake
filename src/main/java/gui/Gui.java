@@ -27,6 +27,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import javax.sound.sampled.LineUnavailableException;
+
 /**
  * Contains all the methods needed for controller logic.
  */
@@ -78,7 +80,7 @@ public class Gui {
     /**
      * Make GUI Scene for the snake game.
      */
-    public void startSnakeGame() {
+    public void startSnakeGame() throws LineUnavailableException {
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 

@@ -11,6 +11,7 @@ import java.util.List;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
+import javax.sound.sampled.LineUnavailableException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ class GameTest {
     private Board board;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws LineUnavailableException {
         Canvas canvas = mock(Canvas.class);
         Painter painter = mock(Painter.class);
         Scene scene = mock(Scene.class);
