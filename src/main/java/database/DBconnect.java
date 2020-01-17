@@ -2,28 +2,28 @@ package database;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import gui.controller.PasswordHash;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import java.util.ArrayList;
+
 import lombok.Getter;
 import lombok.Setter;
 
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class DBconnect {
-    @Getter
-    @Setter
-    private Connection connection;
-    @Getter
-    @Setter
-    private Statement statement;
-    @Getter
-    @Setter
-    private ResultSet resultSet;
-    @Getter
-    @Setter
-    private PreparedStatement preparedStatement;
+
+    @Getter @Setter private Connection connection;
+    @Getter @Setter private Statement statement;
+    @Getter @Setter private ResultSet resultSet;
+    @Getter @Setter private PreparedStatement preparedStatement;
     private String prefix = "Error: ";
+    private int globalPosition = 1;
+    private int personalPosition = 1;
 
     private static DBconnect INSTANCE;
     @Setter
@@ -65,7 +65,7 @@ public class DBconnect {
     public ResultSet getData() {
         try {
             String query = "SELECT * FROM users";
-            resultSet = statement.executeQuery(query);
+            resultSet = preparedStatement.executeQuery(query);
             System.out.println("Records:");
             while (resultSet.next()) {
                 String username = resultSet.getString("username");
@@ -104,7 +104,6 @@ public class DBconnect {
 
     /**
      * This method checks the database if the entered username and password are valid.
-     *
      * @param username - the username
      * @param password - the password
      * @param pwdHash  - the hash of the password, if it already exists
@@ -132,6 +131,26 @@ public class DBconnect {
     }
 
     /**
+     * Checks if the user exists.
+     * @param username - username of the player
+     * @return - true iff user exists else false
+     */
+    public boolean usernameCheck(String username) {
+        try {
+            String usernameCheck = "SELECT username FROM users WHERE username = ?";
+            preparedStatement = connection.prepareStatement(usernameCheck);
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(prefix + e);
+        }
+        return false;
+    }
+
+    /**
      * This method checks if a username is already taken.
      * New users are registered by adding username and password to the database.
      *
@@ -147,11 +166,7 @@ public class DBconnect {
         }
 
         try {
-            String usernameCheck = "SELECT * FROM users WHERE username = ?";
-            preparedStatement = connection.prepareStatement(usernameCheck);
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
+            if (usernameCheck(username)) {
                 return false;
             }
             String hashed = pwdHash.createHash();
@@ -211,5 +226,75 @@ public class DBconnect {
         }
         return null;
     }
+
+
+    /**
+     * This method saves the score of the user when the game ends.
+     * @param username - the username of the player
+     * @param score - the score of the user for that game
+     */
+    public void saveScore(String username, int score, String nickname) {
+        try {
+            if (usernameCheck(username)) {
+                String insertScore = "INSERT INTO scores (username,score,nickname) VALUES (?,?,?)";
+                preparedStatement = connection.prepareStatement(insertScore);
+                preparedStatement.setString(1,username);
+                preparedStatement.setInt(2,score);
+                preparedStatement.setString(3,nickname);
+                preparedStatement.executeUpdate();
+            }
+        } catch (Exception e) {
+            System.out.println(prefix + e);
+        }
+    }
+
+    /**
+     * This method returns the scores in descending order.
+     * It also returns the usernames associated to it.
+     * @param list - arraylist of usernames and scores.
+     */
+    public void getGlobalScores(ArrayList<GlobalDetails> list) {
+        try {
+            String highScores = "SELECT username,score FROM scores ORDER BY score DESC";
+            preparedStatement = connection.prepareStatement(highScores);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                list.add(new GlobalDetails(
+                        globalPosition,
+                        resultSet.getString("username"),
+                        resultSet.getInt("score")));
+                globalPosition += 1;
+            }
+        } catch (Exception e) {
+            System.out.println(prefix + e);
+        }
+    }
+
+    /**
+     * Returns the highest scores of the current user in descending order.
+     * Also returns the nicknames associated to the score.
+     * @param list2 - list of personal scores and nicknames.
+     * @param username - username of the current user.
+     */
+    public void getPersonalScores(ArrayList<PersonalDetails> list2, String username) {
+        try {
+            String personalScores = "SELECT nickname,score FROM scores WHERE username = ? "
+                    + "ORDER BY score DESC";
+            preparedStatement = connection.prepareStatement(personalScores);
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                list2.add(new PersonalDetails(
+                        personalPosition,
+                        resultSet.getInt("score"),
+                        resultSet.getString("nickname")));
+                personalPosition += 1;
+            }
+        } catch (Exception e) {
+            System.out.println(prefix + e);
+        }
+    }
+
+
 
 }
