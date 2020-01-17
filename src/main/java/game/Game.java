@@ -20,7 +20,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
 import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -129,8 +128,7 @@ public class Game {
     }
 
     /**
-     * TODO: TO BE IMPLEMENTED.
-     * Stops the game.
+     * Used for stopping a game.
      */
     public void stop() {
         Platform.runLater(() -> {
