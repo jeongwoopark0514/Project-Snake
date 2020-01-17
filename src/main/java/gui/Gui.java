@@ -89,7 +89,7 @@ public class Gui {
     /**
      * Make GUI Scene for the snake game.
      */
-    public void startSnakeGame() throws LineUnavailableException {
+    public void startSnakeGame() throws LineUnavailableException{
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -164,5 +164,4 @@ public class Gui {
     }
 
 }
-
 

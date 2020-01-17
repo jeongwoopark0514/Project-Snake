@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
 import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -203,7 +204,7 @@ public class Game {
      * @param value the value to increase the score with.
      */
     void increaseScore(int value) {
-        this.score += value;
+        score += value;
     }
 
     /**
@@ -244,7 +245,6 @@ public class Game {
     /**
      * Adds event listeners for arrow keys.
      */
-
     private void setOnKeyPressedListener() {
         canvas.setOnKeyPressed(e -> {
             switch (e.getCode()) {

@@ -50,7 +50,7 @@ class CollisionManager {
      *
      * @return false if there was no collision and true if there is a collision.
      */
-    boolean check() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+    boolean check() {
         BodyPart head = snake.getHead();
         int x = head.getX();
         int y = head.getY();
@@ -58,7 +58,11 @@ class CollisionManager {
         if (tile == null) {
             return false;
         } else if (tile instanceof Fruit) {
-            sound.play();
+            try {
+                sound.play();
+            } catch (Exception e) {
+                System.out.println("Could not play sound.");
+            }
             manageFruits((Fruit) tile);
             board.updateTile(x, y, head);
             System.out.println("Collision with fruit");
