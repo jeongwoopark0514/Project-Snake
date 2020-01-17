@@ -3,7 +3,7 @@ package gui.controller;
 import database.DBconnect;
 import database.SessionManager;
 import game.Game;
-import gui.Gui;
+
 import javafx.scene.control.TextField;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,14 +35,14 @@ public class ScoreController {
      */
     public void scoreSave() {
         database.openConnection();
-//        if (gui.getText(nickname).equals("")) {
-//            System.out.println("SCORE NOT SAVED");
-//            gui.showAlert("Enter a nickname", "Empty field(s)");
-//        } else {
+        if (gui.getText(nickname).equals("")) {
+            System.out.println("SCORE NOT SAVED");
+            gui.showAlert("Enter a nickname", "Empty field(s)");
+        } else {
             database.saveScore(manager.getUsername(),game.getScore(), "nickname");
             System.out.println("Score Saved");
             gui.showAlert("Your score was saved", "Success!");
-//        }
+        }
         database.closeConnection();
     }
 

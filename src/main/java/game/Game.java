@@ -125,7 +125,7 @@ public class Game {
         //This is just for the prototype the actual game will not use this,
         //therefore it needs to be suppressed.
         try{
-            scoreController.scoreSave();
+            scoreController.goToScore();
         } catch (Exception e){
             System.out.println("stop" + e);
         }
