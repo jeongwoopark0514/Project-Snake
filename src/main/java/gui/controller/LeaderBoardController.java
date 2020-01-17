@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 public class LeaderBoardController {
 
-    public transient Gui gui = new Gui();
+    public Gui gui = new Gui();
 
     /**
      * This methods go back to the entry page when you click goBack button.

@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class EntryController {
 
-    public transient Gui gui = new Gui();
+    public Gui gui = new Gui();
 
     /**
      * When you click start button, move to game screen.

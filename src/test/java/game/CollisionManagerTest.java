@@ -12,9 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CollisionManagerTest {
-    private transient CollisionManager collisionManager;
-    private transient Board board;
-    private transient Game game;
+    private CollisionManager collisionManager;
+    private Board board;
+    private Game game;
 
     @BeforeEach
     void setUp() {

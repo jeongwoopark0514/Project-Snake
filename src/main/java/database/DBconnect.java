@@ -10,9 +10,7 @@ import java.sql.Statement;
 import lombok.Getter;
 import lombok.Setter;
 
-@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class DBconnect {
-
     @Getter
     @Setter
     private Connection connection;

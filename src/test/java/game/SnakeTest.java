@@ -20,12 +20,12 @@ import org.mockito.MockitoAnnotations;
 
 
 class SnakeTest {
-    private transient Snake snake;
-    private transient ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private transient PrintStream originalOut = System.out;
-    private transient String miss = "Miss";
+    private Snake snake;
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private PrintStream originalOut = System.out;
+    private String miss = "Miss";
     @Mock
-    private transient Game game;
+    private Game game;
 
 
     @BeforeEach

@@ -8,7 +8,7 @@ import java.io.IOException;
  * This class is a controller class for settings.
  */
 public class SettingController {
-    public transient Gui gui = new Gui();
+    public Gui gui = new Gui();
 
     /**
      * This method goes back to the Entry page from Settings page.
