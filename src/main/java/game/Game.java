@@ -134,6 +134,7 @@ public class Game {
     public void stop() {
         Platform.runLater(() -> {
             try {
+                timer.stop();
                 gui.switchScene("src/main/resources/fxml/scoreBoard.fxml");
                 ScoreController scoreController = gui.loader.getController();
                 gui.setText(scoreController.scoreText, score + "");
@@ -141,7 +142,6 @@ public class Game {
                 e.printStackTrace();
             }
         });
-        // System.exit(0);
     }
 
     /**
