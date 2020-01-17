@@ -28,10 +28,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javax.sound.sampled.LineUnavailableException;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.sound.sampled.LineUnavailableException;
 
 /**
  * Contains all the methods needed for controller logic.
@@ -138,6 +139,10 @@ public class Gui {
         // Add action listener to pause button.
         pauseButton.setOnAction(event -> {
             game.pause();
+        });
+
+        stopButton.setOnAction(event -> {
+            game.stop();
         });
 
         snake.setGame(game);
