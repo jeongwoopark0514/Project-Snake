@@ -165,8 +165,12 @@ public class Game {
                         Tile tail = snake.getTail();
                         board.updateTile(tail.getX(), tail.getY(), null);
                         snake.move();
-                        if (collisionManager.check()) {
-                            return;
+                        try {
+                            if (collisionManager.check()) {
+                                return;
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                         painter.writeScore(scoreText, score);
                         Tile head = snake.getHead();
