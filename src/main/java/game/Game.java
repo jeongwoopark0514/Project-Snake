@@ -237,7 +237,6 @@ public class Game {
         } else {
             return new Fruit(x, y, GameSettings.FRUIT_COLOR, null, 10);
         }
-        //Image sprite = new Image("/image/apple_pellet.png");
     }
 
     /**

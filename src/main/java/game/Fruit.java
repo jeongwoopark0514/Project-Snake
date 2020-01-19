@@ -1,9 +1,11 @@
 package game;
 
-import javafx.scene.image.Image;
+import java.util.Random;
 import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
+
+
 
 /**
  * Fruit class representing the pellets on the map,
@@ -26,5 +28,9 @@ public class Fruit extends Tile {
     public Fruit(int x, int y, Color color, String sprite, int value) {
         super(x, y, color, sprite);
         this.value = value;
+        int random = new Random().nextInt((4)) + 1;
+        String pelletSprite = "image/Pellet" + random + ".png";
+        System.out.println(pelletSprite);
+        this.setSprite(pelletSprite);
     }
 }
