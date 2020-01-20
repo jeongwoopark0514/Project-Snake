@@ -17,6 +17,9 @@ public class Fruit extends Tile {
     @Setter
     private int value;
 
+    private int apple_orange = 2;
+    private int mellon_banana = 4;
+
     /**
      * Default constructor for the Fruit items on the map.
      * @param x the x coordinate on the map.
@@ -34,14 +37,14 @@ public class Fruit extends Tile {
         int rand = random.nextInt(10) + 1;
 
         if (Settings.getPellets().equals("apple-orange")) {
-            if (rand != 2) {
+            if (rand != apple_orange) {
                 rand = 1;
             } else {
                 this.value = 50;
             }
 
         } else if (Settings.getPellets().equals("mellon-banana")) {
-            if (rand != 4) {
+            if (rand != mellon_banana) {
                 rand = 3;
             } else {
                 this.value = 50;
