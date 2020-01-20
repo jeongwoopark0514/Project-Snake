@@ -22,5 +22,4 @@ public class GameSettings {
 
     public static final String SNAKE_HEAD = "/image/green_snake_head_UP.png";
     public static final String SNAKE_BODY = "/image/green_snake_body.png";
-    public static final String SNAKE_TAIL = "/image/green_snake_body.png";
 }

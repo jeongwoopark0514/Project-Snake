@@ -15,4 +15,8 @@ public class Settings {
     @Getter
     private static int gameMode = 0;
 
+    @Getter
+    @Setter
+    private static String snakeColor = "green";
+
 }

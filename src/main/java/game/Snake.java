@@ -46,14 +46,15 @@ public class Snake {
      */
     public void setSprites() {
         if (direction == null) {
-            head.setSprite(GameSettings.SNAKE_HEAD);
+            head.setSprite("/image/" + Settings.getSnakeColor() + "_snake_head_UP.png");
             return;
         }
-        String newSpriteHead = "image/green_snake_head_" + direction + ".png";
+        String newSpriteHead = "image/" + Settings.getSnakeColor() + "_snake_head_" + direction + ".png";
         head.setSprite(newSpriteHead);
         if (body.size() > minSize) {
+            String newSpriteBody = "image/" + Settings.getSnakeColor() + "_snake_body.png";
             for (int i = 1; i <= body.size() - 1; i++) {
-                body.get(i).setSprite(GameSettings.SNAKE_BODY);
+                body.get(i).setSprite(newSpriteBody);
             }
         }
     }

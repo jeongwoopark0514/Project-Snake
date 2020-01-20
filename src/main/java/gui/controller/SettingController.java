@@ -22,6 +22,10 @@ public class SettingController {
     public RadioButton insaneRadio;
     public ToggleGroup difficulty;
 
+    public RadioButton greenRadio;
+    public RadioButton yellowRadio;
+    public ToggleGroup snakeColor;
+
     /**
      * This method goes back to the Entry page from Settings page.
      * @throws IOException exception for file. (exists or not).
@@ -56,6 +60,15 @@ public class SettingController {
             Settings.setGameMode(1);
         } else if (selected.equals(insaneRadio)) {
             Settings.setGameMode(2);
+        }
+    }
+
+    public void changeSnakeColor() {
+        RadioButton selected = (RadioButton)snakeColor.getSelectedToggle();
+        if (selected.equals(greenRadio)) {
+            Settings.setSnakeColor("green");
+        } else if (selected.equals(yellowRadio)) {
+            Settings.setSnakeColor("yellow");
         }
     }
 }

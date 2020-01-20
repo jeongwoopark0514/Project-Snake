@@ -71,7 +71,7 @@ public class Game {
      * @param scoreText the element representing the player score.
      */
     public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText,
-                Text pauseText) throws LineUnavailableException {
+                Text pauseText) {
         this.scene = scene;
         this.canvas = canvas;
         this.snake = snake;
