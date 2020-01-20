@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #6e6d6a;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SettingController">
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #68e96d;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SettingController">
    <children>
       <ImageView fitHeight="74.0" fitWidth="278.0" layoutX="81.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -59,7 +59,7 @@
             <Image url="@../image/night.PNG" />
          </image>
       </ImageView>
-      <RadioButton fx:id="basicRadio" layoutX="698.0" layoutY="241.0" mnemonicParsing="false" onAction="#changeThemes" onMouseClicked="#changeToBasic" prefHeight="32.0" prefWidth="166.0" toggleGroup="$themes">
+      <RadioButton fx:id="basicRadio" layoutX="698.0" layoutY="241.0" mnemonicParsing="false" onAction="#changeThemes"  prefHeight="32.0" prefWidth="166.0" toggleGroup="$themes">
          <graphic>
             <ImageView fitHeight="45.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
                <image>

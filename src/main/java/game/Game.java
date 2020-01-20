@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
 
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
@@ -90,11 +90,11 @@ public class Game {
      * Also initializes the collisionManager,
      * which is used to determine if the snake collides with other objects.
      */
-    private void init() throws LineUnavailableException {
+    private void init() {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();
-
+        System.out.println(GameSettings.background);
         // collect all tile elements in ArrayList
         List<Tile> elements = new ArrayList<>();
         elements.addAll(fruits);

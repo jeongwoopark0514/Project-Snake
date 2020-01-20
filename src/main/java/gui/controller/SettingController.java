@@ -1,5 +1,6 @@
 package gui.controller;
 
+import game.GameSettings;
 import gui.Gui;
 import java.io.IOException;
 import javafx.scene.control.RadioButton;
@@ -26,10 +27,16 @@ public class SettingController {
 
 
     /**
-     * will be implemented.
+     * Changes the theme of the game based on which one is selected.
      */
     public void changeThemes() {
-//        RadioButton selected = (RadioButton)themes.getSelectedToggle();
+        RadioButton selected = (RadioButton)themes.getSelectedToggle();
+        if (selected.equals(jungleRadio)) {
+            GameSettings.background = "/image/jungle_bg.png";
+        } else if (selected.equals(nightRadio)) {
+            GameSettings.background = "/image/night.png";
+        } else if (selected.equals(basicRadio)) {
+            GameSettings.background = "basic";
+        }
     }
-
 }
