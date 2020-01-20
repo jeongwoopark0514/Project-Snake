@@ -99,7 +99,10 @@ jacocoTestCoverageVerification {
                 'game.Game.1.{...}', // TODO: look into what this method is
                 'game.Game.start()', // only calls a private method
                 'game.Sound.closeClip()', // Impossible to test static.
-                'game.Sound.*' //uses static class
+                'game.Sound.*', //uses static class
+                'game.Game.createWalls()', //uses private method
+                'game.Game.extraWalls()', //private method
+                'game.Settings.Settings()' // class does not need a constructor
             ]
         }
         rule {
@@ -138,10 +141,12 @@ jacocoTestCoverageVerification {
                     'game.Game.1.{...}', // TODO: look into what this method is
                     'game.Game.start()', // only calls a private method
                     'game.Sound.closeClip()', // Impossible to test static.
-                    'game.Sound.*' //uses static class
+                    'game.Sound.*', //uses static class
+                    'game.Game.createWalls()', //uses private method
+                    'game.Game.extraWalls()', //private method
+                    'game.Settings.Settings()' // class does not need a constructor
             ]
         }
-
     }
 }
 

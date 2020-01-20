@@ -10,6 +10,7 @@ import gui.controller.ScoreController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -52,7 +53,11 @@ public class Game {
     @Getter
     @Setter
     private AnimationTimer timer;
-    private transient Gui gui = new Gui();
+    private Gui gui = new Gui();
+    private int difficultGameMode = 1;
+    private int insaneGameMode = 2;
+
+
 
     /**
      * The constructor of the game object.
@@ -94,7 +99,7 @@ public class Game {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();
-        System.out.println(GameSettings.background);
+        System.out.println(Settings.getBackground());
         // collect all tile elements in ArrayList
         List<Tile> elements = new ArrayList<>();
         elements.addAll(fruits);
@@ -221,6 +226,27 @@ public class Game {
         }
         for (int i = 0; i < GameSettings.X_MAX; i++) {
             walls.add(new Wall(i, GameSettings.Y_MAX - 1, GameSettings.WALL_COLOR, null));
+        }
+
+        if (Settings.getGameMode() == difficultGameMode) {
+            extraWalls();
+        }
+        if (Settings.getGameMode() == insaneGameMode) {
+            extraWalls();
+            extraWalls();
+            extraWalls();
+        }
+    }
+
+    /**
+     *  Adds extra walls for the difficult game modes.
+     */
+    private void extraWalls() {
+        for (int i = 0; i <= 20; i++) {
+            int random1 = new Random().nextInt((X_MAX));
+            int random2 = new Random().nextInt((Y_MAX));
+
+            walls.add(new Wall(random1,random2,GameSettings.WALL_COLOR, null));
         }
     }
 
