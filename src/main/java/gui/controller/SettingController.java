@@ -24,6 +24,7 @@ public class SettingController {
 
     public RadioButton greenRadio;
     public RadioButton yellowRadio;
+    public RadioButton greyRadio;
     public ToggleGroup snakeColor;
 
     /**
@@ -43,7 +44,7 @@ public class SettingController {
         if (selected.equals(jungleRadio)) {
             Settings.setBackground("/image/jungle_bg.png");
         } else if (selected.equals(nightRadio)) {
-            Settings.setBackground("/image/night.png");
+            Settings.setBackground("/image/night_bg.png");
         } else if (selected.equals(basicRadio)) {
             Settings.setBackground("");
         }
@@ -72,6 +73,8 @@ public class SettingController {
             Settings.setSnakeColor("green");
         } else if (selected.equals(yellowRadio)) {
             Settings.setSnakeColor("yellow");
+        } else if (selected.equals(greyRadio)) {
+            Settings.setSnakeColor("grey");
         }
     }
 }

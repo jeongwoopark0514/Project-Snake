@@ -51,11 +51,11 @@
          </graphic></RadioButton>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="162.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/jungle.jpeg" />
+            <Image url="@../image/jungle_bg.png" />
          </image></ImageView>
       <ImageView fitHeight="168.0" fitWidth="159.0" layoutX="444.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/night.PNG" />
+            <Image url="@../image/night_bg.png" />
          </image>
       </ImageView>
       <RadioButton fx:id="basicRadio" layoutX="698.0" layoutY="241.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="32.0" prefWidth="166.0" toggleGroup="$themes">
@@ -121,5 +121,10 @@
             <Image url="@../image/snakeColor.png" />
          </image>
       </ImageView>
+      <RadioButton fx:id="greyRadio" layoutX="338.0" layoutY="531.0" mnemonicParsing="false" onAction="#changeSnakeColor" toggleGroup="$snakeColor">
+         <graphic>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5b5a5b" height="35.0" stroke="#5b5a5b" strokeType="INSIDE" width="33.0" />
+         </graphic>
+      </RadioButton>
    </children>
 </AnchorPane>
