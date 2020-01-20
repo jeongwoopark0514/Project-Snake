@@ -15,11 +15,11 @@ import lombok.Setter;
 
 public class LoginController {
 
-    public transient TextField loginUsername;
-    public transient PasswordField loginPassword;
-    public transient TextField registerUsername;
-    public transient PasswordField registerPassword;
-    public transient PasswordField confirmPassword;
+    public TextField loginUsername;
+    public PasswordField loginPassword;
+    public TextField registerUsername;
+    public PasswordField registerPassword;
+    public PasswordField confirmPassword;
 
     public transient Gui gui = new Gui();
 

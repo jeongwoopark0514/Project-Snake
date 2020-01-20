@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -30,5 +31,43 @@
             </ImageView>
          </graphic>
       </Button>
+      <RadioButton fx:id="jungleRadio" layoutX="146.0" layoutY="243.0" mnemonicParsing="false" onMouseClicked="#changeToJungle" prefHeight="46.0" prefWidth="159.0">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Jungle.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <toggleGroup>
+            <ToggleGroup fx:id="themes" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="nightRadio" layoutX="421.0" layoutY="242.0" mnemonicParsing="false" onMouseClicked="#changeToNight" prefHeight="49.0" prefWidth="159.0" toggleGroup="$themes">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/Night2.png" />
+               </image>
+            </ImageView>
+         </graphic></RadioButton>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="162.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/jungle.jpeg" />
+         </image></ImageView>
+      <ImageView fitHeight="168.0" fitWidth="159.0" layoutX="444.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/night.PNG" />
+         </image>
+      </ImageView>
+      <RadioButton layoutX="698.0" layoutY="241.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="166.0" toggleGroup="$themes">
+         <graphic>
+            <ImageView fitHeight="45.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/basic_black.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </RadioButton>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="162.0" layoutX="722.0" layoutY="294.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
    </children>
 </AnchorPane>
