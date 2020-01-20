@@ -27,6 +27,10 @@ public class SettingController {
     public RadioButton greyRadio;
     public ToggleGroup snakeColor;
 
+    public RadioButton appleOrangeRadio;
+    public RadioButton mellonBananaRadio;
+    public ToggleGroup pellets;
+
     /**
      * This method goes back to the Entry page from Settings page.
      * @throws IOException exception for file. (exists or not).
@@ -75,6 +79,18 @@ public class SettingController {
             Settings.setSnakeColor("yellow");
         } else if (selected.equals(greyRadio)) {
             Settings.setSnakeColor("grey");
+        }
+    }
+
+    /**
+     * Changes the set of pellets to be used.
+     */
+    public void changePellets() {
+        RadioButton selected = (RadioButton)pellets.getSelectedToggle();
+        if (selected.equals(appleOrangeRadio)) {
+            Settings.setPellets("apple-orange");
+        } else if (selected.equals(mellonBananaRadio)) {
+            Settings.setPellets("mellon-banana");
         }
     }
 }

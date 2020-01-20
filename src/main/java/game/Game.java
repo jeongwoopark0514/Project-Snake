@@ -261,7 +261,9 @@ public class Game {
         if (tile != null) {
             return createFruit();
         } else {
-            return new Fruit(x, y, GameSettings.FRUIT_COLOR, null, 10);
+            Fruit fruit = new Fruit(x, y, GameSettings.FRUIT_COLOR, null, 10);
+            fruit.randomize(new Random());
+            return  fruit;
         }
     }
 

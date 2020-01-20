@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #68e96d;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SettingController">
    <children>
-      <ImageView fitHeight="74.0" fitWidth="278.0" layoutX="81.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="106.0" fitWidth="364.0" layoutX="13.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/Settings_font.png" />
          </image>
@@ -30,7 +30,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <RadioButton fx:id="jungleRadio" layoutX="146.0" layoutY="243.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="46.0" prefWidth="159.0" toggleGroup="$themes">
+      <RadioButton fx:id="jungleRadio" layoutX="143.0" layoutY="219.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="46.0" prefWidth="159.0" toggleGroup="$themes">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -41,7 +41,7 @@
          <toggleGroup>
             <ToggleGroup fx:id="themes" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="nightRadio" layoutX="421.0" layoutY="242.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="49.0" prefWidth="159.0" toggleGroup="$themes">
+      <RadioButton fx:id="nightRadio" layoutX="421.0" layoutY="218.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="49.0" prefWidth="159.0" toggleGroup="$themes">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -49,16 +49,16 @@
                </image>
             </ImageView>
          </graphic></RadioButton>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="162.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="159.0" fitWidth="226.0" layoutX="123.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/jungle_bg.png" />
          </image></ImageView>
-      <ImageView fitHeight="168.0" fitWidth="159.0" layoutX="444.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="168.0" fitWidth="159.0" layoutX="422.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/night_bg.png" />
          </image>
       </ImageView>
-      <RadioButton fx:id="basicRadio" layoutX="698.0" layoutY="241.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="32.0" prefWidth="166.0" toggleGroup="$themes">
+      <RadioButton fx:id="basicRadio" layoutX="693.0" layoutY="221.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="32.0" prefWidth="166.0" toggleGroup="$themes">
          <graphic>
             <ImageView fitHeight="45.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -67,8 +67,8 @@
             </ImageView>
          </graphic>
       </RadioButton>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="162.0" layoutX="722.0" layoutY="294.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
-      <RadioButton fx:id="easyRadio" layoutX="599.0" layoutY="46.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="159.0" layoutX="689.0" layoutY="262.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
+      <RadioButton fx:id="easyRadio" layoutX="708.0" layoutY="50.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
          <graphic>
             <ImageView fitHeight="53.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -80,7 +80,7 @@
             <ToggleGroup fx:id="difficulty" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="difficultRadio" layoutX="599.0" layoutY="93.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
+      <RadioButton fx:id="difficultRadio" layoutX="708.0" layoutY="103.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="257.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -89,7 +89,7 @@
             </ImageView>
          </graphic>
       </RadioButton>
-      <RadioButton fx:id="insaneRadio" layoutX="599.0" layoutY="141.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
+      <RadioButton fx:id="insaneRadio" layoutX="708.0" layoutY="149.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -98,7 +98,7 @@
             </ImageView>
          </graphic>
       </RadioButton>
-      <ImageView fitHeight="103.0" fitWidth="197.0" layoutX="392.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="103.0" fitWidth="197.0" layoutX="502.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/difficulty.png" />
          </image>
@@ -116,7 +116,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e9ba4b" height="35.0" stroke="#e9ba4b" strokeType="INSIDE" width="33.0" />
          </graphic>
       </RadioButton>
-      <ImageView fitHeight="53.0" fitWidth="309.0" layoutX="162.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="53.0" fitWidth="309.0" layoutX="163.0" layoutY="456.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/snakeColor.png" />
          </image>
@@ -124,6 +124,32 @@
       <RadioButton fx:id="greyRadio" layoutX="338.0" layoutY="531.0" mnemonicParsing="false" onAction="#changeSnakeColor" toggleGroup="$snakeColor">
          <graphic>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5b5a5b" height="35.0" stroke="#5b5a5b" strokeType="INSIDE" width="33.0" />
+         </graphic>
+      </RadioButton>
+      <ImageView fitHeight="53.0" fitWidth="309.0" layoutX="524.0" layoutY="456.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/pelletSelection.png" />
+         </image>
+      </ImageView>
+      <RadioButton fx:id="appleOrangeRadio" layoutX="502.0" layoutY="522.0" mnemonicParsing="false" onAction="#changePellets" prefHeight="46.0" prefWidth="159.0">
+         <toggleGroup>
+            <ToggleGroup fx:id="pellets" />
+         </toggleGroup>
+         <graphic>
+            <ImageView fitHeight="43.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/apple_orange.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </RadioButton>
+      <RadioButton fx:id="mellonBananaRadio" layoutX="642.0" layoutY="522.0" mnemonicParsing="false" onAction="#changePellets" prefHeight="46.0" prefWidth="159.0" toggleGroup="$pellets">
+         <graphic>
+            <ImageView fitHeight="43.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/mellon_banana.png" />
+               </image>
+            </ImageView>
          </graphic>
       </RadioButton>
    </children>
