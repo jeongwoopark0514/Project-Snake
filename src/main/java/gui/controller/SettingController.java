@@ -1,9 +1,9 @@
 package gui.controller;
 
 import gui.Gui;
-import javafx.scene.control.RadioButton;
-
 import java.io.IOException;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 /**
  * This class is a controller class for settings.
@@ -13,6 +13,8 @@ public class SettingController {
 
     public RadioButton jungleRadio;
     public RadioButton nightRadio;
+    public RadioButton basicRadio;
+    public ToggleGroup themes;
 
     /**
      * This method goes back to the Entry page from Settings page.
@@ -23,10 +25,11 @@ public class SettingController {
     }
 
 
-    public void changeToJungle() {
-
+    /**
+     * will be implemented.
+     */
+    public void changeThemes() {
+//        RadioButton selected = (RadioButton)themes.getSelectedToggle();
     }
 
-    public void changeToNight() {
-    }
 }
