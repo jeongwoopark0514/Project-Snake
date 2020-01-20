@@ -139,7 +139,7 @@ class SnakeTest {
     void setSpritesTailTest() {
         snake.changeDirection(UP);
         snake.grow();
-        assertEquals("/image/green_snake_body.png", snake.getBody().get(1).getSprite());
+        assertEquals(GameSettings.SNAKE_BODY, snake.getBody().get(1).getSprite());
     }
 
     @Test

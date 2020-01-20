@@ -63,6 +63,9 @@ public class SettingController {
         }
     }
 
+    /**
+     * Changes the color of the snake.
+     */
     public void changeSnakeColor() {
         RadioButton selected = (RadioButton)snakeColor.getSelectedToggle();
         if (selected.equals(greenRadio)) {

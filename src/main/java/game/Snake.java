@@ -49,7 +49,8 @@ public class Snake {
             head.setSprite("/image/" + Settings.getSnakeColor() + "_snake_head_UP.png");
             return;
         }
-        String newSpriteHead = "image/" + Settings.getSnakeColor() + "_snake_head_" + direction + ".png";
+        String newSpriteHead = "image/" + Settings.getSnakeColor() + "_snake_head_"
+                + direction + ".png";
         head.setSprite(newSpriteHead);
         if (body.size() > minSize) {
             String newSpriteBody = "image/" + Settings.getSnakeColor() + "_snake_body.png";
