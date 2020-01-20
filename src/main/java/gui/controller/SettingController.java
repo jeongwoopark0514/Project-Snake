@@ -15,7 +15,7 @@ public class SettingController {
     public RadioButton jungleRadio;
     public RadioButton nightRadio;
     public RadioButton basicRadio;
-    public ToggleGroup themes;
+    public ToggleGroup background;
 
     public RadioButton easyRadio;
     public RadioButton difficultRadio;
@@ -41,10 +41,10 @@ public class SettingController {
 
 
     /**
-     * Changes the theme of the game based on which one is selected.
+     * Changes the background of the game based on which one is selected.
      */
-    public void changeThemes() {
-        RadioButton selected = (RadioButton)themes.getSelectedToggle();
+    public void changeBackground() {
+        RadioButton selected = (RadioButton)background.getSelectedToggle();
         if (selected.equals(jungleRadio)) {
             Settings.setBackground("/image/jungle_bg.png");
         } else if (selected.equals(nightRadio)) {

@@ -17,9 +17,6 @@ public class Fruit extends Tile {
     @Setter
     private int value;
 
-    private int apple_orange = 2;
-    private int mellon_banana = 4;
-
     /**
      * Default constructor for the Fruit items on the map.
      * @param x the x coordinate on the map.
@@ -33,18 +30,27 @@ public class Fruit extends Tile {
         this.value = value;
     }
 
+    /**
+     * This method randomizes the pellet that is spawned.
+     * There is a 1/10 chance that a pellet worth 50 points
+     * instead of 10 spawns.
+     * @param random the Random generator that is used to
+     *               check if such a pellet should be spawned.
+     */
     public void randomize(Random random) {
         int rand = random.nextInt(10) + 1;
 
         if (Settings.getPellets().equals("apple-orange")) {
-            if (rand != apple_orange) {
+            int appleOrange = 2;
+            if (rand != appleOrange) {
                 rand = 1;
             } else {
                 this.value = 50;
             }
 
         } else if (Settings.getPellets().equals("mellon-banana")) {
-            if (rand != mellon_banana) {
+            int mellonBanana = 4;
+            if (rand != mellonBanana) {
                 rand = 3;
             } else {
                 this.value = 50;

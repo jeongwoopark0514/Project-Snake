@@ -30,7 +30,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <RadioButton fx:id="jungleRadio" layoutX="143.0" layoutY="219.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="46.0" prefWidth="159.0" toggleGroup="$themes">
+      <RadioButton fx:id="jungleRadio" layoutX="143.0" layoutY="219.0" mnemonicParsing="false" onAction="#changeBackground" prefHeight="46.0" prefWidth="159.0" toggleGroup="$background">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -39,9 +39,9 @@
             </ImageView>
          </graphic>
          <toggleGroup>
-            <ToggleGroup fx:id="themes" />
+            <ToggleGroup fx:id="background" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="nightRadio" layoutX="421.0" layoutY="218.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="49.0" prefWidth="159.0" toggleGroup="$themes">
+      <RadioButton fx:id="nightRadio" layoutX="421.0" layoutY="218.0" mnemonicParsing="false" onAction="#changeBackground" prefHeight="49.0" prefWidth="159.0" toggleGroup="$background">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -58,7 +58,7 @@
             <Image url="@../image/night_bg.png" />
          </image>
       </ImageView>
-      <RadioButton fx:id="basicRadio" layoutX="693.0" layoutY="221.0" mnemonicParsing="false" onAction="#changeThemes" prefHeight="32.0" prefWidth="166.0" toggleGroup="$themes">
+      <RadioButton fx:id="basicRadio" layoutX="693.0" layoutY="221.0" mnemonicParsing="false" onAction="#changeBackground" prefHeight="32.0" prefWidth="166.0" toggleGroup="$background">
          <graphic>
             <ImageView fitHeight="45.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
                <image>

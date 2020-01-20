@@ -20,7 +20,6 @@ import javafx.beans.property.SimpleLongProperty;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
-import javax.sound.sampled.LineUnavailableException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -54,9 +53,6 @@ public class Game {
     @Setter
     private AnimationTimer timer;
     private Gui gui = new Gui();
-    private int difficultGameMode = 1;
-    private int insaneGameMode = 2;
-
 
 
     /**
@@ -228,9 +224,11 @@ public class Game {
             walls.add(new Wall(i, GameSettings.Y_MAX - 1, GameSettings.WALL_COLOR, null));
         }
 
+        int difficultGameMode = 1;
         if (Settings.getGameMode() == difficultGameMode) {
             extraWalls();
         }
+        int insaneGameMode = 2;
         if (Settings.getGameMode() == insaneGameMode) {
             extraWalls();
             extraWalls();
@@ -239,7 +237,7 @@ public class Game {
     }
 
     /**
-     *  Adds extra walls for the difficult game modes.
+     *  Adds extra walls for the difficult and insane game modes.
      */
     private void extraWalls() {
         for (int i = 0; i <= 20; i++) {
