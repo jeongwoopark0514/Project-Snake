@@ -6,29 +6,26 @@ import static game.GameSettings.HEIGHT;
 import static game.GameSettings.TEXT_COLOR;
 import static game.GameSettings.WIDTH;
 
-import game.BodyPart;
-import game.Game;
-import game.GameSettings;
-import game.Painter;
-import game.Snake;
+import game.*;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javax.sound.sampled.LineUnavailableException;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -89,7 +86,7 @@ public class Gui {
     /**
      * Make GUI Scene for the snake game.
      */
-    public void startSnakeGame() throws LineUnavailableException {
+    public void startSnakeGame() {
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
@@ -120,13 +117,27 @@ public class Gui {
         stopButton.setPrefSize(70,40);
 
         // Add elements to scene
-        Group root = new Group();
+        Pane root = new Pane();
         root.getChildren().add(canvas);
         root.getChildren().add(score);
         root.getChildren().add(pauseButton);
         root.getChildren().add(stopButton);
         root.getChildren().add(pauseText);
         root.getStylesheets().add("/css/GameButton.css");
+        if (!Settings.getBackground().equals("")) {
+            BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO,
+                    BackgroundSize.AUTO, false,false,false,false);
+            root.setBackground(new Background(new BackgroundImage(
+                    new Image(Settings.getBackground()),
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    backgroundSize)));
+        } else {
+            BackgroundFill bgf = new BackgroundFill(Color.BLACK, null, null);
+            Background bg = new Background(bgf);
+            root.setBackground(bg);
+        }
 
         Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
