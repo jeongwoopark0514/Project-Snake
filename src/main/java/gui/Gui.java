@@ -163,5 +163,10 @@ public class Gui {
         text.setText(setting);
     }
 
+    public int getScoreFromText(Text text) {
+        return Integer.parseInt(text.getText());
+    }
+
+
 }
 

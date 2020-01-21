@@ -30,23 +30,23 @@ public class LeaderBoardController implements Initializable {
 
     public Gui gui = new Gui();
 
-    public transient TableView<GlobalDetails> globalTable = new TableView<>();
-    public transient TableView<PersonalDetails> personalTable = new TableView<>();
+    public TableView<GlobalDetails> globalTable = new TableView<>();
+    public TableView<PersonalDetails> personalTable = new TableView<>();
 
-    public transient TableColumn<GlobalDetails, Integer> globalRank;
-    public transient TableColumn<PersonalDetails, Integer> personalRank;
+    public TableColumn<GlobalDetails, Integer> globalRank;
+    public TableColumn<PersonalDetails, Integer> personalRank;
 
-    public transient TableColumn<GlobalDetails, String> username;
-    public transient TableColumn<PersonalDetails, String> nickname;
+    public TableColumn<GlobalDetails, String> username;
+    public TableColumn<PersonalDetails, String> nickname;
 
-    public transient TableColumn<GlobalDetails, Integer> globalScore;
-    public transient TableColumn<PersonalDetails, Integer> personalScore;
+    public TableColumn<GlobalDetails, Integer> globalScore;
+    public TableColumn<PersonalDetails, Integer> personalScore;
 
-    private transient ObservableList<GlobalDetails> globalScores;
-    private transient ObservableList<PersonalDetails> personalScores;
+    private ObservableList<GlobalDetails> globalScores;
+    private ObservableList<PersonalDetails> personalScores;
 
-    private transient ArrayList<GlobalDetails> list = new ArrayList<>();
-    private transient ArrayList<PersonalDetails> list2 = new ArrayList<>();
+    private ArrayList<GlobalDetails> list = new ArrayList<>();
+    private ArrayList<PersonalDetails> list2 = new ArrayList<>();
 
     @Getter
     @Setter

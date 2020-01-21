@@ -11,8 +11,6 @@ import database.DBconnect;
 import database.SessionManager;
 import gui.Gui;
 import java.io.IOException;
-import java.sql.SQLException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

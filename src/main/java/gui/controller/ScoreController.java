@@ -19,8 +19,7 @@ import lombok.Setter;
  */
 public class ScoreController {
 
-    public transient Gui gui = new Gui();
-    public int score;
+    public Gui gui = new Gui();
 
     @Getter
     @Setter
@@ -28,11 +27,10 @@ public class ScoreController {
     @Getter
     @Setter
     private SessionManager manager = SessionManager.getInstance();
-    public Game game;
 
-    public transient TextField nickname;
+    public TextField nickname;
 
-    public transient Text scoreText = new Text();
+    public Text scoreText = new Text();
 
 
     /**
@@ -45,11 +43,9 @@ public class ScoreController {
             System.out.println("SCORE NOT SAVED");
             gui.showAlert("Enter a nickname", "Empty field(s)");
         } else {
-            System.out.println(manager.getUsername());
-            System.out.println(scoreText.getText());
             database.saveScore(manager.getUsername(),
-                    Integer.parseInt(scoreText.getText()),
-                    nickname.getText());
+                    gui.getScoreFromText(scoreText),
+                    gui.getText(nickname));
             System.out.println("Score Saved");
             gui.showAlert("Your score was saved", "Success!");
         }
