@@ -28,8 +28,35 @@ public class Fruit extends Tile {
     public Fruit(int x, int y, Color color, String sprite, int value) {
         super(x, y, color, sprite);
         this.value = value;
-        int random = new Random().nextInt((4)) + 1;
-        String pelletSprite = "image/Pellet" + random + ".png";
+    }
+
+    /**
+     * This method randomizes the pellet that is spawned.
+     * There is a 1/10 chance that a pellet worth 50 points
+     * instead of 10 spawns.
+     * @param random the Random generator that is used to
+     *               check if such a pellet should be spawned.
+     */
+    public void randomize(Random random) {
+        int rand = random.nextInt(10) + 1;
+
+        if (Settings.getPellets().equals("apple-orange")) {
+            int appleOrange = 2;
+            if (rand != appleOrange) {
+                rand = 1;
+            } else {
+                this.value = 50;
+            }
+
+        } else if (Settings.getPellets().equals("mellon-banana")) {
+            int mellonBanana = 4;
+            if (rand != mellonBanana) {
+                rand = 3;
+            } else {
+                this.value = 50;
+            }
+        }
+        String pelletSprite = "image/Pellet" + rand + ".png";
         System.out.println(pelletSprite);
         this.setSprite(pelletSprite);
     }
