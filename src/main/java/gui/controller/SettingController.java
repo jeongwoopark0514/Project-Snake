@@ -48,7 +48,7 @@ public class SettingController {
         if (selected.equals(jungleRadio)) {
             Settings.setBackground("/image/jungle_image.png");
         } else if (selected.equals(nightRadio)) {
-            Settings.setBackground("/image/night_bg.png");
+            Settings.setBackground("/image/night_image.png");
         } else if (selected.equals(basicRadio)) {
             Settings.setBackground("");
         }
