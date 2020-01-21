@@ -86,6 +86,7 @@ jacocoTestCoverageVerification {
                 'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                 'gui.controller.EntryController.quitButton()', //impossible to test System.exit
                 'gui.controller.LeaderBoardController.*', //impossible to test System.exit
+                'gui.controller.SettingController.*',
                 'database.PersonalDetails.*', //POJO class
                 'database.GlobalDetails.*',    //POJO class
                 'database.DBconnect.openConnection()',
@@ -98,7 +99,10 @@ jacocoTestCoverageVerification {
                 'game.Game.1.{...}', // TODO: look into what this method is
                 'game.Game.start()', // only calls a private method
                 'game.Sound.closeClip()', // Impossible to test static.
-                'game.Sound.*' //uses static class
+                'game.Sound.*', //uses static class
+                'game.Game.createWalls()', //uses private method
+                'game.Game.extraWalls()', //private method
+                'game.Settings.Settings()' // class does not need a constructor
             ]
         }
         rule {
@@ -126,6 +130,7 @@ jacocoTestCoverageVerification {
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
                     'gui.controller.LeaderBoardController.*' ,//impossible to test System.exit
+                    'gui.controller.SettingController.*',
                     'database.DBconnect.openConnection()',
                     'database.DBconnect.closeConnection()',
                     'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
@@ -136,10 +141,12 @@ jacocoTestCoverageVerification {
                     'game.Game.1.{...}', // TODO: look into what this method is
                     'game.Game.start()', // only calls a private method
                     'game.Sound.closeClip()', // Impossible to test static.
-                    'game.Sound.*' //uses static class
+                    'game.Sound.*', //uses static class
+                    'game.Game.createWalls()', //uses private method
+                    'game.Game.extraWalls()', //private method
+                    'game.Settings.Settings()' // class does not need a constructor
             ]
         }
-
     }
 }
 
