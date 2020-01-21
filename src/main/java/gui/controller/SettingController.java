@@ -46,7 +46,7 @@ public class SettingController {
     public void changeBackground() {
         RadioButton selected = (RadioButton)background.getSelectedToggle();
         if (selected.equals(jungleRadio)) {
-            Settings.setBackground("/image/jungle_bg.png");
+            Settings.setBackground("/image/jungle_image.png");
         } else if (selected.equals(nightRadio)) {
             Settings.setBackground("/image/night_bg.png");
         } else if (selected.equals(basicRadio)) {

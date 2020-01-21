@@ -68,9 +68,9 @@
          </graphic>
       </RadioButton>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="159.0" layoutX="689.0" layoutY="262.0" stroke="BLACK" strokeType="INSIDE" width="175.0" />
-      <RadioButton fx:id="easyRadio" layoutX="708.0" layoutY="50.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
+      <RadioButton fx:id="easyRadio" layoutX="708.0" layoutY="51.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
          <graphic>
-            <ImageView fitHeight="53.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="53.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/easy.png" />
                </image>
@@ -80,7 +80,7 @@
             <ToggleGroup fx:id="difficulty" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="difficultRadio" layoutX="708.0" layoutY="103.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
+      <RadioButton fx:id="difficultRadio" layoutX="707.0" layoutY="94.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
          <graphic>
             <ImageView fitHeight="36.0" fitWidth="257.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -89,7 +89,7 @@
             </ImageView>
          </graphic>
       </RadioButton>
-      <RadioButton fx:id="insaneRadio" layoutX="708.0" layoutY="149.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
+      <RadioButton fx:id="insaneRadio" layoutX="707.0" layoutY="133.0" mnemonicParsing="false" onAction="#changeDifficulty" prefHeight="46.0" prefWidth="159.0" toggleGroup="$difficulty">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
                <image>
