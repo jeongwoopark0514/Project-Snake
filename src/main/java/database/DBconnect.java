@@ -268,6 +268,7 @@ public class DBconnect {
         } catch (Exception e) {
             System.out.println(prefix + e);
         }
+        globalPosition = 1;
     }
 
     /**
@@ -290,6 +291,7 @@ public class DBconnect {
                         resultSet.getString("nickname")));
                 personalPosition += 1;
             }
+            personalPosition = 1;
         } catch (Exception e) {
             System.out.println(prefix + e);
         }

@@ -85,8 +85,9 @@ jacocoTestCoverageVerification {
                 'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
                 'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                 'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                'gui.controller.LeaderBoardController.*', //impossible to test System.exit
+                'gui.controller.LeaderBoardController.*', //Gui for setting the tables, also contains system.exit.
                 'gui.controller.SettingController.*',
+                'gui.GuiText.*', //gui
                 'database.PersonalDetails.*', //POJO class
                 'database.GlobalDetails.*',    //POJO class
                 'database.DBconnect.openConnection()',
@@ -126,10 +127,11 @@ jacocoTestCoverageVerification {
                     'gui.Gui.*', //gui
                     'gui.AlertBox.*', //gui
                     'gui.MainRunner.*', //main
+                    'gui.GuiText.*', //gui
                     'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                    'gui.controller.LeaderBoardController.*' ,//impossible to test System.exit
+                    'gui.controller.LeaderBoardController.*' ,//Gui for setting the tables, also contains system.exit.
                     'gui.controller.SettingController.*',
                     'database.DBconnect.openConnection()',
                     'database.DBconnect.closeConnection()',

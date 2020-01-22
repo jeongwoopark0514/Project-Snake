@@ -61,15 +61,22 @@ public class LeaderBoardController implements Initializable {
         tableViewGlobal();
         tableViewPersonal();
         populateLeaderboards();
+
         database.closeConnection();
     }
 
+    /**
+     * Open DB connection for tables.
+     */
     public void openDB() {
         database.openConnection();
         database.getGlobalScores(list);
         database.getPersonalScores(list2, manager.getUsername());
     }
 
+    /**
+     * Setting up tableview for global table.
+     */
     public void tableViewGlobal() {
         globalScores = FXCollections.observableArrayList(list);
         globalRank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
@@ -77,12 +84,16 @@ public class LeaderBoardController implements Initializable {
         globalScore.setCellValueFactory(new PropertyValueFactory<>("globalScore"));
     }
 
+    /**
+     * Setting up tableview for personal table.
+     */
     public void tableViewPersonal() {
         personalScores = FXCollections.observableArrayList(list2);
         personalRank.setCellValueFactory(new PropertyValueFactory<>("personalRank"));
         personalScore.setCellValueFactory(new PropertyValueFactory<>("personalScore"));
         nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
     }
+
     /**
      * Fill in leaderboard information.
      */
@@ -102,6 +113,13 @@ public class LeaderBoardController implements Initializable {
      */
     public void goBackMain() throws IOException {
         gui.switchScene("src/main/resources/fxml/entry.fxml");
+    }
+
+    /**
+     * No testing required because impossible to test system.exit.
+     */
+    public void quitButton() {
+        gui.quit();
     }
 
 
