@@ -84,11 +84,9 @@ public class Game {
     }
 
     /**
-     * Initializes the game by setting the on-key-pressed listeners (for arrow buttons) and
-     * sets focus on canvas.
-     * Also creates the walls, the initial fruits, add everything to the board,
-     * and makes sure that the elements are all drawn.
-     * Also initializes the collisionManager,
+     * Initializes the game by setting the on-key-pressed listeners (for arrow buttons) and sets
+     * focus on canvas. Also creates the walls, the initial fruits, add everything to the board,
+     * and makes sure that the elements are all drawn. Also initializes the collisionManager,
      * which is used to determine if the snake collides with other objects.
      */
     private void init() {

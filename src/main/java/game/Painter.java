@@ -100,15 +100,4 @@ public class Painter {
     void writeScore(Text scoreText, int value) {
         scoreText.setText("Score: " + value);
     }
-
-    ///**
-    //* TODO: TO BE IMPLEMENTED
-    //* Corrects points that are outside of the dimensions of the field.
-    //*
-    //* @param point Point.
-    //* @return A wrapped point.
-    //*/
-    //private Point wrap(Point point) {
-    //    return new Point(0, 0);
-    //}
 }
