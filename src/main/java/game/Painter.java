@@ -100,4 +100,5 @@ public class Painter {
     void writeScore(Text scoreText, int value) {
         scoreText.setText("Score: " + value);
     }
+
 }
