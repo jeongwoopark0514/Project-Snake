@@ -7,6 +7,7 @@ import gui.Gui;
 
 import java.io.IOException;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import lombok.Getter;
@@ -29,7 +30,7 @@ public class ScoreController {
     private SessionManager manager = SessionManager.getInstance();
 
     public TextField nickname;
-
+    public Button saveButton;
     public Text scoreText = new Text();
 
 
@@ -47,10 +48,12 @@ public class ScoreController {
                     gui.getScoreFromText(scoreText),
                     gui.getText(nickname));
             System.out.println("Score Saved");
+            gui.disableButton(saveButton);
             gui.showAlert("Your score was saved", "Success!");
         }
         database.closeConnection();
     }
+
 
     /**
      * This methods go back to the entry page when you click goBack button.
