@@ -33,24 +33,23 @@ public class Game {
     private final Canvas canvas;
     @Getter
     private final Snake snake;
-    //Made the fruits a list to provide the option to add multiple fruits.
     @Getter
     @Setter
     private List<Fruit> fruits;
     private List<Wall> walls;
+    private Text scoreText;
     @Getter
     private int score;
-    private Text scoreText;
-    private CollisionManager collisionManager;
+    private Text pauseText;
     @Getter
     @Setter
     private boolean isPaused;
-    private Text pauseText;
+    private CollisionManager collisionManager;
     private Board board;
     @Getter
     @Setter
     private AnimationTimer timer;
-    private Gui gui = new Gui();
+    private Gui gui;
 
 
     /**
@@ -58,23 +57,22 @@ public class Game {
      * The Game class runs the main structure of the game,
      * it can create elements needed to play and also manages the score and the controls.
      *
-     * @param scene     the scene in which the game is painted.
-     * @param painter   the painter that paints all the elements.
-     * @param canvas    the canvas to paint on.
-     * @param snake     the snake that represents the player on the board.
-     * @param scoreText the element representing the player score.
+     * @param painter      the painter that paints all the elements.
+     * @param canvas       the canvas to paint on.
+     * @param snake        the snake that represents the player on the board.
+     * @param textElements list of text elements for Score and Pause indication.
      */
-    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText,
-                Text pauseText) {
+    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, List<Text> textElements) {
         this.scene = scene;
         this.canvas = canvas;
         this.snake = snake;
         this.painter = painter;
         this.fruits = new ArrayList<>();
-        this.scoreText = scoreText;
+        this.scoreText = textElements.get(0);
+        this.pauseText = textElements.get(1);
         this.score = 0;
-        this.pauseText = pauseText;
         this.isPaused = false;
+        this.gui = new Gui();
 
         //This would only be an error if we had subclasses extending from the game class,
         //but since this is not the case this doesn't actually pose a risk.
@@ -82,18 +80,16 @@ public class Game {
     }
 
     /**
-     * Initializes the game by setting the on-key-pressed listeners (for arrow buttons) and
-     * sets focus on canvas.
-     * Also creates the walls, the initial fruits, add everything to the board,
-     * and makes sure that the elements are all drawn.
-     * Also initializes the collisionManager,
+     * Initializes the game by setting the on-key-pressed listeners (for arrow buttons) and sets
+     * focus on canvas. Also creates the walls, the initial fruits, add everything to the board,
+     * and makes sure that the elements are all drawn. Also initializes the collisionManager,
      * which is used to determine if the snake collides with other objects.
      */
     private void init() {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();
-        System.out.println(Settings.getBackground());
+
         // collect all tile elements in ArrayList
         List<Tile> elements = new ArrayList<>();
         elements.addAll(fruits);
@@ -111,7 +107,11 @@ public class Game {
         painter.paintBoard(board);
     }
 
-    void checkFruits() {
+    /**
+     * Checks whether there is a fruit on gamescreen.
+     * If there is no fruit on the gamescreen a new fruit is added.
+     */
+    public void checkFruits() {
         if (fruits.size() < MIN_PELLETS) {
             Fruit newFruit = createFruit();
             fruits.add(newFruit);
@@ -175,14 +175,10 @@ public class Game {
                         Tile tail = snake.getTail();
                         board.updateTile(tail.getX(), tail.getY(), null);
                         snake.move();
-                        try {
-                            if (collisionManager.check()) {
-                                return;
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        if (collisionManager.check()) {
+                            return;
                         }
-                        painter.writeScore(scoreText, score);
+                        scoreText.setText("Score: " + score);
                         Tile head = snake.getHead();
                         board.updateTile(head.getX(), head.getY(), head);
                         painter.paint(snake.getBody());
@@ -235,14 +231,14 @@ public class Game {
     }
 
     /**
-     *  Adds extra walls for the difficult and insane game modes.
+     * Adds extra walls for the difficult and insane game modes.
      */
     private void extraWalls() {
         for (int i = 0; i <= 20; i++) {
             int random1 = new Random().nextInt((X_MAX));
             int random2 = new Random().nextInt((Y_MAX));
 
-            walls.add(new Wall(random1,random2,GameSettings.WALL_COLOR, null));
+            walls.add(new Wall(random1, random2, GameSettings.WALL_COLOR, null));
         }
     }
 
@@ -259,7 +255,7 @@ public class Game {
         } else {
             Fruit fruit = new Fruit(x, y, GameSettings.FRUIT_COLOR, null, 10);
             fruit.randomize(new Random());
-            return  fruit;
+            return fruit;
         }
     }
 

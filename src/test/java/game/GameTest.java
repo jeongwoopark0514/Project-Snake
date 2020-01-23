@@ -10,39 +10,37 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
-import javax.sound.sampled.LineUnavailableException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class GameTest {
     private Game game;
     private Board board;
     private Canvas canvas;
     private Painter painter;
-    private Scene scene;
     private Snake snake;
     private AnimationTimer timer;
-    private Text scoreText;
-    private Text pauseText;
+    private List<Text> textElements;
+    private Scene scene;
 
     @BeforeEach
-    void setUp() throws LineUnavailableException {
+    void setUp() {
         canvas = mock(Canvas.class);
         painter = mock(Painter.class);
-        scene = mock(Scene.class);
         snake = mock(Snake.class);
         board = mock(Board.class);
-        scoreText = mock(Text.class);
-        pauseText = new Text();
-        game = new Game(scene, painter, canvas, snake, scoreText, pauseText);
         timer = mock(AnimationTimer.class);
+        scene = mock(Scene.class);
+        textElements = Arrays.asList(new Text(), new Text());
+
+        game = new Game(scene, painter, canvas, snake, textElements);
         game.setTimer(timer);
     }
 
@@ -53,7 +51,6 @@ class GameTest {
     @Test
     void instructorNotNullTest() {
         assertNotNull(game);
-        assertNotNull(game.getScene());
         assertNotNull(game.getCanvas());
         assertNotNull(game.getSnake());
         assertNotNull(game.getPainter());

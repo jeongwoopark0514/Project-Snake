@@ -2,16 +2,18 @@ package database;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import gui.controller.PasswordHash;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.ArrayList;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class DBconnect {
 
     @Getter
@@ -71,17 +73,13 @@ public class DBconnect {
         try {
             String query = "SELECT * FROM users";
             resultSet = preparedStatement.executeQuery(query);
-            System.out.println("Records:");
             while (resultSet.next()) {
-                String username = resultSet.getString("username");
-                String password = resultSet.getString("password");
-                System.out.println("Username: " + username + "      password: " + password);
+                resultSet.getString("username");
+                resultSet.getString("password");
             }
-
         } catch (Exception exception) {
             System.out.println(prefix + exception);
         }
-
         return resultSet;
     }
 

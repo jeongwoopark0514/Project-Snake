@@ -15,6 +15,8 @@ import game.Snake;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,7 +37,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -44,8 +45,8 @@ import lombok.Setter;
  * Contains all the methods needed for controller logic.
  */
 public class Gui {
-
-    @Getter @Setter
+    @Getter
+    @Setter
     public FXMLLoader loader;
 
     public GuiText guiText = new GuiText();
@@ -89,6 +90,7 @@ public class Gui {
 
     /**
      * Getting text from textfield.
+     *
      * @param any Textfield
      * @return content of textfield
      */
@@ -98,6 +100,7 @@ public class Gui {
 
     /**
      * Disable button.
+     *
      * @param button - button
      */
     public void disableButton(Button button) {
@@ -111,69 +114,46 @@ public class Gui {
         final Canvas canvas = new Canvas(WIDTH, HEIGHT);
         final GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        // Text element to show score.
-        final Text score = new Text();
-        score.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        score.setFill(TEXT_COLOR);
-        score.setX(1060);
-        score.setY(60);
-
-        // Text element to show score.
-        final Text pauseText = new Text();
-        pauseText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-        pauseText.setFill(TEXT_COLOR);
-        pauseText.setX(1060);
-        pauseText.setY(120);
-
-        // Pause button
-        Button pauseButton = new Button("Pause");
-        pauseButton.setLayoutX(1068);
-        pauseButton.setLayoutY(350);
-        pauseButton.setPrefSize(70,40);
-
-        // Stop button
-        Button stopButton = new Button("stop");
-        stopButton.setLayoutX(1068);
-        stopButton.setLayoutY(420);
-        stopButton.setPrefSize(70,40);
+        List<Button> buttons = createButtons();
+        List<Text> textElements = createText();
 
         // Add elements to scene
         Pane root = new Pane();
         root.getChildren().add(canvas);
-        root.getChildren().add(score);
-        root.getChildren().add(pauseButton);
-        root.getChildren().add(stopButton);
-        root.getChildren().add(pauseText);
+        root.getChildren().add(buttons.get(0));
+        root.getChildren().add(buttons.get(1));
+        root.getChildren().add(textElements.get(0));
+        root.getChildren().add(textElements.get(1));
         root.getStylesheets().add("/css/GameButton.css");
+
         if (!Settings.getBackground().equals("")) {
             BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO,
-                    BackgroundSize.AUTO, false,false,false,false);
+                BackgroundSize.AUTO, false, false, false, false);
             root.setBackground(new Background(new BackgroundImage(
-                    new Image(Settings.getBackground()),
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.DEFAULT,
-                    backgroundSize)));
+                new Image(Settings.getBackground()),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                backgroundSize)));
         } else {
             BackgroundFill bgf = new BackgroundFill(Color.BLACK, null, null);
             Background bg = new Background(bgf);
             root.setBackground(bg);
         }
 
-        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
-
         Painter painter = new Painter(gc);
+        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        Game game = new Game(scene, painter, canvas, snake, score, pauseText);
+        Game game = new Game(scene, painter, canvas, snake, textElements);
 
         // Add action listener to pause button.
-        pauseButton.setOnAction(event -> {
+        buttons.get(0).setOnAction(event -> {
             game.pause();
         });
 
-        stopButton.setOnAction(event -> {
+        buttons.get(1).setOnAction(event -> {
             game.stop();
         });
 
@@ -185,7 +165,7 @@ public class Gui {
     }
 
     /**
-     * Quit the game by closing the window.
+     * Quits the game by closing the window.
      */
     public void quit() {
         alertBox.displayQuit("Do you really want to quit? ", "Game over");
@@ -199,6 +179,50 @@ public class Gui {
         return guiText.getScoreFromText(text);
     }
 
+
+    /**
+     * Creates a pause and stop button.
+     *
+     * @return list with pause and stop button.
+     */
+    private List<Button> createButtons() {
+        // Pause button
+        Button pauseButton = new Button("Pause");
+        pauseButton.setLayoutX(1068);
+        pauseButton.setLayoutY(350);
+        pauseButton.setPrefSize(70, 40);
+
+        // Stop button
+        Button stopButton = new Button("Stop");
+        stopButton.setLayoutX(1068);
+        stopButton.setLayoutY(420);
+        stopButton.setPrefSize(70, 40);
+
+        return Arrays.asList(pauseButton, stopButton);
+    }
+
+    /**
+     * Creates text elements for score and pause.
+     *
+     * @return list with text elements for score and pause.
+     */
+    private List<Text> createText() {
+        // Text element to show score.
+        Text scoreText = new Text();
+        scoreText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        scoreText.setFill(TEXT_COLOR);
+        scoreText.setX(1060);
+        scoreText.setY(60);
+
+        // Text element to show score.
+        Text pauseText = new Text();
+        pauseText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
+        pauseText.setFill(TEXT_COLOR);
+        pauseText.setX(1060);
+        pauseText.setY(120);
+
+        return Arrays.asList(scoreText, pauseText);
+    }
 
 }
 

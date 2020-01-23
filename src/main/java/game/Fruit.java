@@ -57,7 +57,6 @@ public class Fruit extends Tile {
             }
         }
         String pelletSprite = "image/Pellet" + rand + ".png";
-        System.out.println(pelletSprite);
         this.setSprite(pelletSprite);
     }
 }

@@ -99,7 +99,7 @@ public class LeaderBoardController implements Initializable {
             globalTable.setItems(globalScores);
             personalTable.setItems(personalScores);
         } catch (Exception e) {
-            System.out.println("populateTable" + e);
+            System.out.println(e.toString());
         }
     }
 
