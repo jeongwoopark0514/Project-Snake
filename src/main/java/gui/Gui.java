@@ -6,12 +6,15 @@ import static game.GameSettings.HEIGHT;
 import static game.GameSettings.TEXT_COLOR;
 import static game.GameSettings.WIDTH;
 
-import game.*;
-
+import game.BodyPart;
+import game.Game;
+import game.GameSettings;
+import game.Painter;
+import game.Settings;
+import game.Snake;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,7 +23,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -39,6 +48,10 @@ public class Gui {
     @Getter @Setter
     public FXMLLoader loader;
 
+    public GuiText guiText = new GuiText();
+
+    public AlertBox alertBox = new AlertBox();
+
     /**
      * This method pops up an alert box that gives notifications.
      *
@@ -46,7 +59,7 @@ public class Gui {
      * @param title   - title of the alert
      */
     public void showAlert(String message, String title) {
-        AlertBox.display(message, title);
+        alertBox.display(message, title);
     }
 
     /**
@@ -56,7 +69,7 @@ public class Gui {
      * @param title   - title of the alert
      */
     public void showWarningAlert(String message, String title) {
-        AlertBox.displayWarning(message, title);
+        alertBox.displayWarning(message, title);
     }
 
 
@@ -80,7 +93,7 @@ public class Gui {
      * @return content of textfield
      */
     public String getText(TextField any) {
-        return any.getText();
+        return guiText.getText(any);
     }
 
     /**
@@ -167,12 +180,17 @@ public class Gui {
      * Quit the game by closing the window.
      */
     public void quit() {
-        AlertBox.displayQuit("Do you really want to quit? ", "Game over");
+        alertBox.displayQuit("Do you really want to quit? ", "Game over");
     }
 
     public void setText(Text text, String setting) {
-        text.setText(setting);
+        guiText.setText(text, setting);
     }
+
+    public int getScoreFromText(Text text) {
+        return guiText.getScoreFromText(text);
+    }
+
 
 }
 

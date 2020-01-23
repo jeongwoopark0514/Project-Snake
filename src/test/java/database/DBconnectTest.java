@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import gui.controller.PasswordHash;
@@ -235,11 +237,11 @@ public class DBconnectTest {
         assertTrue(contains);
     }
 
-//    @Test
-//    void openConnectionTest() throws SQLException {
-//        dbconnect.openConnection();
-//        verify(ds).getConnection();
-//    }
+    //    @Test
+    //    void openConnectionTest() throws SQLException {
+    //        dbconnect.openConnection();
+    //        verify(ds).getConnection();
+    //    }
 
     @Test
     void openConnectionTestFail() throws SQLException {
@@ -255,12 +257,12 @@ public class DBconnectTest {
         verify(connection).close();
     }
 
-//    @Test
-//    void closeConnectionTestFail() throws SQLException {
-//        doThrow(SQLException.class).when(connection).close();
-//        dbconnect.closeConnection();
-//        boolean contains = outContent.toString().contains(error);
-//        assertTrue(contains);
-//    }
+    //    @Test
+    //    void closeConnectionTestFail() throws SQLException {
+    //        doThrow(SQLException.class).when(connection).close();
+    //        dbconnect.closeConnection();
+    //        boolean contains = outContent.toString().contains(error);
+    //        assertTrue(contains);
+    //    }
 
 }

@@ -30,23 +30,23 @@ public class LeaderBoardController implements Initializable {
 
     public Gui gui = new Gui();
 
-    public transient TableView<GlobalDetails> globalTable = new TableView<>();
-    public transient TableView<PersonalDetails> personalTable = new TableView<>();
+    public TableView<GlobalDetails> globalTable = new TableView<>();
+    public TableView<PersonalDetails> personalTable = new TableView<>();
 
-    public transient TableColumn<GlobalDetails, Integer> globalRank;
-    public transient TableColumn<PersonalDetails, Integer> personalRank;
+    public TableColumn<GlobalDetails, Integer> globalRank;
+    public TableColumn<PersonalDetails, Integer> personalRank;
 
-    public transient TableColumn<GlobalDetails, String> username;
-    public transient TableColumn<PersonalDetails, String> nickname;
+    public TableColumn<GlobalDetails, String> username;
+    public TableColumn<PersonalDetails, String> nickname;
 
-    public transient TableColumn<GlobalDetails, Integer> globalScore;
-    public transient TableColumn<PersonalDetails, Integer> personalScore;
+    public TableColumn<GlobalDetails, Integer> globalScore;
+    public TableColumn<PersonalDetails, Integer> personalScore;
 
-    private transient ObservableList<GlobalDetails> globalScores;
-    private transient ObservableList<PersonalDetails> personalScores;
+    private ObservableList<GlobalDetails> globalScores;
+    private ObservableList<PersonalDetails> personalScores;
 
-    private transient ArrayList<GlobalDetails> list = new ArrayList<>();
-    private transient ArrayList<PersonalDetails> list2 = new ArrayList<>();
+    private ArrayList<GlobalDetails> list = new ArrayList<>();
+    private ArrayList<PersonalDetails> list2 = new ArrayList<>();
 
     @Getter
     @Setter
@@ -57,7 +57,41 @@ public class LeaderBoardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        openDB();
+        tableViewGlobal();
+        tableViewPersonal();
         populateLeaderboards();
+
+        database.closeConnection();
+    }
+
+    /**
+     * Open DB connection for tables.
+     */
+    public void openDB() {
+        database.openConnection();
+        database.getGlobalScores(list);
+        database.getPersonalScores(list2, manager.getUsername());
+    }
+
+    /**
+     * Setting up tableview for global table.
+     */
+    public void tableViewGlobal() {
+        globalScores = FXCollections.observableArrayList(list);
+        globalRank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
+        username.setCellValueFactory(new PropertyValueFactory<>("username"));
+        globalScore.setCellValueFactory(new PropertyValueFactory<>("globalScore"));
+    }
+
+    /**
+     * Setting up tableview for personal table.
+     */
+    public void tableViewPersonal() {
+        personalScores = FXCollections.observableArrayList(list2);
+        personalRank.setCellValueFactory(new PropertyValueFactory<>("personalRank"));
+        personalScore.setCellValueFactory(new PropertyValueFactory<>("personalScore"));
+        nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
     }
 
     /**
@@ -65,22 +99,10 @@ public class LeaderBoardController implements Initializable {
      */
     public void populateLeaderboards() {
         try {
-            database.openConnection();
-            database.getGlobalScores(list);
-            database.getPersonalScores(list2, manager.getUsername());
-            globalScores = FXCollections.observableArrayList(list);
-            personalScores = FXCollections.observableArrayList(list2);
-            globalRank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
-            username.setCellValueFactory(new PropertyValueFactory<>("username"));
-            globalScore.setCellValueFactory(new PropertyValueFactory<>("globalScore"));
-            personalRank.setCellValueFactory(new PropertyValueFactory<>("personalRank"));
-            personalScore.setCellValueFactory(new PropertyValueFactory<>("personalScore"));
-            nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
             globalTable.setEditable(true);
             personalTable.setEditable(true);
             globalTable.setItems(globalScores);
             personalTable.setItems(personalScores);
-            database.closeConnection();
         } catch (Exception e) {
             System.out.println("populateTable" + e);
         }
@@ -99,5 +121,6 @@ public class LeaderBoardController implements Initializable {
     public void quitButton() {
         gui.quit();
     }
+
 
 }
