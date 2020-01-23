@@ -30,16 +30,8 @@ public class MainRunner extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        stage = primaryStage;
-        final URL url = new File("src/main/resources/fxml/splash.fxml").toURI().toURL();
-        final Parent parent = FXMLLoader.load(url);
 
-        stage.getIcons().add(new Image("image/transparent_logo.png"));
-        stage.setTitle("Snake");
-        stage.setResizable(false);
-        final Scene splash = new Scene(parent, 1000, 600);
-        stage.setScene(splash);
-        stage.show();
+        initialize(primaryStage);
 
         final URL url2;
         final Parent entry;
@@ -57,6 +49,23 @@ public class MainRunner extends Application {
         }
         database.closeConnection();
 
+        manageScene(entry);
+    }
+
+    private void initialize(Stage primaryStage) throws IOException {
+        stage = primaryStage;
+        final URL url = new File("src/main/resources/fxml/splash.fxml").toURI().toURL();
+        final Parent parent = FXMLLoader.load(url);
+
+        stage.getIcons().add(new Image("image/transparent_logo.png"));
+        stage.setTitle("Snake");
+        stage.setResizable(false);
+        final Scene splash = new Scene(parent, 1000, 600);
+        stage.setScene(splash);
+        stage.show();
+    }
+
+    private void manageScene(Parent entry) {
         //first suppressed PMD error since it is not a big bug,
         //but will fix if it is fixable, or worth fixable
         final Scene entryScene = new Scene(entry, 1000, 600); //NOPMD
@@ -64,6 +73,5 @@ public class MainRunner extends Application {
         pause.setOnFinished(event -> stage.setScene(entryScene));
         pause.play();
     }
-
 
 }
