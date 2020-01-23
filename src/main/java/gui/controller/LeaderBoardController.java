@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -18,7 +17,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Getter;
 import lombok.Setter;
-
 
 /**
  * This is the controller of LeaderBoard.
@@ -29,31 +27,29 @@ import lombok.Setter;
 public class LeaderBoardController implements Initializable {
 
     public Gui gui = new Gui();
-
-    public TableView<GlobalDetails> globalTable = new TableView<>();
-    public TableView<PersonalDetails> personalTable = new TableView<>();
-
+    public TableView<GlobalDetails> globalTable;
+    public TableView<PersonalDetails> personalTable;
     public TableColumn<GlobalDetails, Integer> globalRank;
     public TableColumn<PersonalDetails, Integer> personalRank;
-
     public TableColumn<GlobalDetails, String> username;
     public TableColumn<PersonalDetails, String> nickname;
-
     public TableColumn<GlobalDetails, Integer> globalScore;
     public TableColumn<PersonalDetails, Integer> personalScore;
-
     private ObservableList<GlobalDetails> globalScores;
     private ObservableList<PersonalDetails> personalScores;
-
     private ArrayList<GlobalDetails> list = new ArrayList<>();
     private ArrayList<PersonalDetails> list2 = new ArrayList<>();
-
     @Getter
     @Setter
     private DBconnect database = DBconnect.getInstance();
     @Getter
     @Setter
     private SessionManager manager = SessionManager.getInstance();
+
+    public LeaderBoardController() {
+        globalTable = new TableView<>();
+        personalTable = new TableView<>();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -77,7 +73,7 @@ public class LeaderBoardController implements Initializable {
     /**
      * Setting up tableview for global table.
      */
-    public void tableViewGlobal() {
+    private void tableViewGlobal() {
         globalScores = FXCollections.observableArrayList(list);
         globalRank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -87,7 +83,7 @@ public class LeaderBoardController implements Initializable {
     /**
      * Setting up tableview for personal table.
      */
-    public void tableViewPersonal() {
+    private void tableViewPersonal() {
         personalScores = FXCollections.observableArrayList(list2);
         personalRank.setCellValueFactory(new PropertyValueFactory<>("personalRank"));
         personalScore.setCellValueFactory(new PropertyValueFactory<>("personalScore"));
@@ -97,7 +93,7 @@ public class LeaderBoardController implements Initializable {
     /**
      * Fill in leaderboard information.
      */
-    public void populateLeaderboards() {
+    private void populateLeaderboards() {
         try {
             globalTable.setEditable(true);
             personalTable.setEditable(true);
@@ -116,11 +112,9 @@ public class LeaderBoardController implements Initializable {
     }
 
     /**
-     * No testing required because impossible to test system.exit.
+     * Implements the functionality for the quit button.
      */
     public void quitButton() {
         gui.quit();
     }
-
-
 }

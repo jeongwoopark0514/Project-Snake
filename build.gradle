@@ -85,14 +85,15 @@ jacocoTestCoverageVerification {
                 'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
                 'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                 'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                'gui.controller.LeaderBoardController.*', //Gui for setting the tables, also contains system.exit.
+                'gui.controller.LeaderBoardController.LeaderBoardController()', //Contains gui
+                'gui.controller.LeaderBoardController.initialize(java.net.URL, java.util.ResourceBundle)', //Contains gui
+                'gui.controller.LeaderBoardController.tableViewGlobal()', //Contains gui
+                'gui.controller.LeaderBoardController.tableViewPersonal()', //Contains gui
+                'gui.controller.LeaderBoardController.populateLeaderboards()', //Contains gui
                 'gui.controller.SettingController.*',
                 'gui.GuiText.*', //gui
                 'database.PersonalDetails.*', //POJO class
                 'database.GlobalDetails.*',    //POJO class
-                'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
-                'database.DBconnect.getGlobalScores(java.util.ArrayList)',
-                'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
                 'game.Game.gameLoop()', // private method
                 'game.Game.1.handle(long)', // TODO: look into what this method is
                 'game.Game.1.{...}', // TODO: look into what this method is
@@ -129,11 +130,12 @@ jacocoTestCoverageVerification {
                     'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                    'gui.controller.LeaderBoardController.*' ,//Gui for setting the tables, also contains system.exit.
+                    'gui.controller.LeaderBoardController.LeaderBoardController()', //Contains gui
+                    'gui.controller.LeaderBoardController.initialize(java.net.URL, java.util.ResourceBundle)', //Contains gui
+                    'gui.controller.LeaderBoardController.tableViewGlobal()', //Contains gui
+                    'gui.controller.LeaderBoardController.tableViewPersonal()', //Contains gui
+                    'gui.controller.LeaderBoardController.populateLeaderboards()', //Contains gui
                     'gui.controller.SettingController.*',
-                    'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
-                    'database.DBconnect.getGlobalScores(java.util.ArrayList)',
-                    'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
                     'game.Game.gameLoop()', // private method
                     'game.Game.1.handle(long)', // TODO: look into what this method is
                     'game.Game.1.{...}', // TODO: look into what this method is
