@@ -17,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import lombok.Getter;
 import lombok.Setter;
 
-
 /**
  * This is the controller of LeaderBoard.
  * This class will contain all the methods that control leader board, and will be kept separate
@@ -27,31 +26,29 @@ import lombok.Setter;
 public class LeaderBoardController implements Initializable {
 
     public Gui gui = new Gui();
-
-    public TableView<Details> globalTable = new TableView<>();
-    public TableView<Details> personalTable = new TableView<>();
-
+    public TableView<Details> globalTable;
+    public TableView<Details> personalTable;
     public TableColumn<Details, Integer> globalRank;
     public TableColumn<Details, Integer> personalRank;
-
     public TableColumn<Details, String> username;
     public TableColumn<Details, String> nickname;
-
     public TableColumn<Details, Integer> globalScore;
     public TableColumn<Details, Integer> personalScore;
-
     private ObservableList<Details> globalScores;
     private ObservableList<Details> personalScores;
-
     private ArrayList<Details> globalList = new ArrayList<>();
     private ArrayList<Details> personalList = new ArrayList<>();
-
     @Getter
     @Setter
     private DBconnect database = DBconnect.getInstance();
     @Getter
     @Setter
     private SessionManager manager = SessionManager.getInstance();
+
+    public LeaderBoardController() {
+        globalTable = new TableView<>();
+        personalTable = new TableView<>();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,7 +72,7 @@ public class LeaderBoardController implements Initializable {
     /**
      * Setting up tableview for global table.
      */
-    public void tableViewGlobal() {
+    private void tableViewGlobal() {
         globalScores = FXCollections.observableArrayList(globalList);
         globalRank.setCellValueFactory(new PropertyValueFactory<>("rank"));
         username.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -85,7 +82,7 @@ public class LeaderBoardController implements Initializable {
     /**
      * Setting up tableview for personal table.
      */
-    public void tableViewPersonal() {
+    private void tableViewPersonal() {
         personalScores = FXCollections.observableArrayList(personalList);
         personalRank.setCellValueFactory(new PropertyValueFactory<>("rank"));
         personalScore.setCellValueFactory(new PropertyValueFactory<>("score"));
@@ -95,7 +92,7 @@ public class LeaderBoardController implements Initializable {
     /**
      * Fill in leaderboard information.
      */
-    public void populateLeaderboards() {
+    private void populateLeaderboards() {
         try {
             globalTable.setEditable(true);
             personalTable.setEditable(true);
@@ -114,11 +111,9 @@ public class LeaderBoardController implements Initializable {
     }
 
     /**
-     * No testing required because impossible to test system.exit.
+     * Implements the functionality for the quit button.
      */
     public void quitButton() {
         gui.quit();
     }
-
-
 }
