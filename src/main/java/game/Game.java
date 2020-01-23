@@ -1,6 +1,5 @@
 package game;
 
-import static game.GameSettings.MIN_PELLETS;
 import static game.GameSettings.X_MAX;
 import static game.GameSettings.Y_MAX;
 
@@ -9,8 +8,6 @@ import gui.controller.ScoreController;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
@@ -33,10 +30,6 @@ public class Game {
     private final Canvas canvas;
     @Getter
     private final Snake snake;
-    @Getter
-    @Setter
-    private List<Fruit> fruits;
-    private List<Wall> walls;
     private Text scoreText;
     @Getter
     private int score;
@@ -67,7 +60,6 @@ public class Game {
         this.canvas = canvas;
         this.snake = snake;
         this.painter = painter;
-        this.fruits = new ArrayList<>();
         this.scoreText = textElements.get(0);
         this.pauseText = textElements.get(1);
         this.score = 0;
@@ -88,12 +80,9 @@ public class Game {
     private void init() {
         canvas.requestFocus();
         setOnKeyPressedListener();
-        createWalls();
-
+        PieceCreator pieceCreator = new PieceCreator();
         // collect all tile elements in ArrayList
-        List<Tile> elements = new ArrayList<>();
-        elements.addAll(fruits);
-        elements.addAll(walls);
+        List<Tile> elements = new ArrayList<>(pieceCreator.createWalls());
         elements.add(snake.getHead());
         // build the board
         this.board = new BoardBuilder()
@@ -101,22 +90,10 @@ public class Game {
             .withBackground("image/background.png")
             .withElements(elements)
             .build();
-
-        checkFruits();
+        Fruit fruit = pieceCreator.createFruit(board);
+        board.updateTile(fruit.getX(), fruit.getY(), fruit);
         collisionManager = new CollisionManager(board, snake, this);
         painter.paintBoard(board);
-    }
-
-    /**
-     * Checks whether there is a fruit on gamescreen.
-     * If there is no fruit on the gamescreen a new fruit is added.
-     */
-    public void checkFruits() {
-        if (fruits.size() < MIN_PELLETS) {
-            Fruit newFruit = createFruit();
-            fruits.add(newFruit);
-            board.updateTile(newFruit.getX(), newFruit.getY(), newFruit);
-        }
     }
 
     /**
@@ -198,65 +175,6 @@ public class Game {
      */
     void increaseScore(int value) {
         score += value;
-    }
-
-    /**
-     * Simple method to create walls objects to be put onto the map.
-     */
-    private void createWalls() {
-        walls = new ArrayList<>();
-        for (int i = 0; i < GameSettings.Y_MAX; i++) {
-            walls.add(new Wall(0, i, GameSettings.WALL_COLOR, null));
-        }
-        for (int i = 0; i < GameSettings.X_MAX; i++) {
-            walls.add(new Wall(i, 0, GameSettings.WALL_COLOR, null));
-        }
-        for (int i = 0; i < GameSettings.Y_MAX; i++) {
-            walls.add(new Wall(GameSettings.X_MAX - 1, i, GameSettings.WALL_COLOR, null));
-        }
-        for (int i = 0; i < GameSettings.X_MAX; i++) {
-            walls.add(new Wall(i, GameSettings.Y_MAX - 1, GameSettings.WALL_COLOR, null));
-        }
-
-        int difficultGameMode = 1;
-        if (Settings.getGameMode() == difficultGameMode) {
-            extraWalls();
-        }
-        int insaneGameMode = 2;
-        if (Settings.getGameMode() == insaneGameMode) {
-            extraWalls();
-            extraWalls();
-            extraWalls();
-        }
-    }
-
-    /**
-     * Adds extra walls for the difficult and insane game modes.
-     */
-    private void extraWalls() {
-        for (int i = 0; i <= 20; i++) {
-            int random1 = new Random().nextInt((X_MAX));
-            int random2 = new Random().nextInt((Y_MAX));
-
-            walls.add(new Wall(random1, random2, GameSettings.WALL_COLOR, null));
-        }
-    }
-
-    /**
-     * Create a piece of fruit to be put onto the map.
-     * The method makes sure that the place the fruits spawns is actually empty.
-     */
-    public Fruit createFruit() {
-        int x = ThreadLocalRandom.current().nextInt(1, X_MAX - 2);
-        int y = ThreadLocalRandom.current().nextInt(1, Y_MAX - 2);
-        Tile tile = board.getTile(x, y);
-        if (tile != null) {
-            return createFruit();
-        } else {
-            Fruit fruit = new Fruit(x, y, GameSettings.FRUIT_COLOR, null, 10);
-            fruit.randomize(new Random());
-            return fruit;
-        }
     }
 
     /**

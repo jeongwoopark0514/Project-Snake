@@ -69,7 +69,6 @@ jacocoTestCoverageVerification {
             }
             excludes = [
                 'game.GameSettings.*', // just constants
-                'game.SnakeApp.*', // only used for going to game screen directly
                 'game.Painter.*', // uses final class so needs to use PowerMock
                 // TODO: Figure out how to test this
                 'game.Game.lambda$setOnKeyPressedListener$0(javafx.scene.input.KeyEvent)',
@@ -83,7 +82,6 @@ jacocoTestCoverageVerification {
                 'gui.AlertBox.*', //gui
                 'gui.MainRunner.*', //main
                 'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
-                'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                 'gui.controller.EntryController.quitButton()', //impossible to test System.exit.
                 'gui.controller.SettingController.changeBackground()', //GUI methods
                 'gui.controller.SettingController.changeDifficulty()', //GUI methods
@@ -102,8 +100,6 @@ jacocoTestCoverageVerification {
                 'game.Game.start()', // only calls a private method
                 'game.Sound.closeClip()', // Impossible to test static.
                 'game.Sound.*', //uses static class
-                'game.Game.createWalls()', //uses private method
-                'game.Game.extraWalls()', //private method
                 'game.Settings.Settings()' // class does not need a constructor
             ]
         }
@@ -116,7 +112,6 @@ jacocoTestCoverageVerification {
             }
             excludes = [
                     'game.GameSettings.*', // just constants
-                    'game.SnakeApp.*', // only used for going to game screen directly during development
                     'game.Painter.*', // uses final class so needs to use PowerMock
                     'game.Game.lambda$setOnKeyPressedListener$0(javafx.scene.input.KeyEvent)', //private method
                     'game.Game.lambda$setOnKeyPressedListener$1(javafx.scene.input.KeyEvent)', //private method
@@ -130,7 +125,6 @@ jacocoTestCoverageVerification {
                     'gui.MainRunner.*', //main
                     'gui.GuiText.*', //gui
                     'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
-                    'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
                     'gui.controller.SettingController.changeBackground()', //GUI methods
                     'gui.controller.SettingController.changeDifficulty()', //GUI methods
@@ -147,8 +141,6 @@ jacocoTestCoverageVerification {
                     'game.Game.start()', // only calls a private method
                     'game.Sound.closeClip()', // Impossible to test static.
                     'game.Sound.*', //uses static class
-                    'game.Game.createWalls()', //uses private method
-                    'game.Game.extraWalls()', //private method
                     'game.Settings.Settings()' // class does not need a constructor
             ]
         }

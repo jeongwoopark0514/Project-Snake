@@ -1,10 +1,5 @@
 package game;
 
-import java.io.IOException;
-import java.util.List;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +15,8 @@ class CollisionManager {
     private Snake snake;
     private Game game;
     private Painter painter;
+    @Setter
+    private PieceCreator creator;
 
     //Sound effects obtained from https://www.zapsplat.com“
     @Getter @Setter
@@ -37,6 +34,7 @@ class CollisionManager {
         this.snake = snake;
         this.game = game;
         this.painter = game.getPainter();
+        this.creator = new PieceCreator();
     }
 
     /**
@@ -61,7 +59,7 @@ class CollisionManager {
             try {
                 sound.play();
             } catch (Exception e) {
-                System.out.println(e.toString());
+                System.out.println();
             }
             manageFruits((Fruit) tile);
             board.updateTile(x, y, head);
@@ -79,13 +77,10 @@ class CollisionManager {
      * Make sure there is always a fruit on the map and repaint all fruits on the map.
      */
     private void manageFruits(Fruit fruit) {
-        List<Fruit> fruits = game.getFruits();
         game.increaseScore(fruit.getValue());
-        fruits.remove(fruit);
         painter.unPaint(fruit);
         snake.grow();
-        Fruit newFruit = game.createFruit();
-        fruits.add(newFruit);
+        Fruit newFruit = creator.createFruit(board);
         board.updateTile(newFruit.getX(), newFruit.getY(), newFruit);
         painter.paint(newFruit);
     }
