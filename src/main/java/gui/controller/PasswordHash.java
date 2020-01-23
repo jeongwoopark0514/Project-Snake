@@ -100,8 +100,6 @@ public class PasswordHash {
      * @return true if both byte arrays are the same, false if not
      */
     private static boolean slowEquals(byte[] a, byte[] b) {
-        System.out.println("a length: " + a.length);
-        System.out.println("b length: " + b.length);
         int diff = a.length ^ b.length;
         for (int i = 0; i < a.length; i++) {
             diff |= a[i] ^ b[i];

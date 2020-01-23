@@ -42,15 +42,11 @@ public class ScoreController {
     public void scoreSave() {
         database.openConnection();
         if (gui.getText(nickname).equals("")) {
-            System.out.println("SCORE NOT SAVED");
             gui.showAlert("Enter a nickname", "Empty field(s)");
         } else {
-            System.out.println(manager.getUsername());
-            System.out.println(scoreText.getText());
             database.saveScore(manager.getUsername(),
                     Integer.parseInt(scoreText.getText()),
                     nickname.getText());
-            System.out.println("Score Saved");
             gui.showAlert("Your score was saved", "Success!");
         }
         database.closeConnection();

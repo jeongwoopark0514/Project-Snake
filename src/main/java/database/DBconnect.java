@@ -66,11 +66,9 @@ public class DBconnect {
         try {
             String query = "SELECT * FROM users";
             resultSet = preparedStatement.executeQuery(query);
-            System.out.println("Records:");
             while (resultSet.next()) {
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
-                System.out.println("Username: " + username + "      password: " + password);
             }
 
         } catch (Exception exception) {

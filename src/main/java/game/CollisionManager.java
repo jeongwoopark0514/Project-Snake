@@ -65,10 +65,8 @@ class CollisionManager {
             }
             manageFruits((Fruit) tile);
             board.updateTile(x, y, head);
-            System.out.println("Collision with fruit");
             return true;
         } else {
-            System.out.println("Collision with " + tile.getClass().getName());
             game.stop();
             return true;
         }

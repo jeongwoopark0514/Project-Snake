@@ -89,7 +89,7 @@ public class Game {
         canvas.requestFocus();
         setOnKeyPressedListener();
         createWalls();
-        System.out.println(Settings.getBackground());
+
         // collect all tile elements in ArrayList
         List<Tile> elements = new ArrayList<>();
         elements.addAll(fruits);
