@@ -251,7 +251,7 @@ public class DBconnect {
     /**
      * This method returns the scores in descending order.
      * It also returns the usernames associated to it.
-     * @param list - arraylist of usernames and scores.
+     * @param list usernames and scores.
      */
     public void getGlobalScores(ArrayList<GlobalDetails> list) {
         try {

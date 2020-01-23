@@ -50,7 +50,7 @@ public class Game {
     @Getter
     @Setter
     private AnimationTimer timer;
-    private Gui gui = new Gui();
+    private Gui gui;
 
 
     /**
@@ -58,7 +58,6 @@ public class Game {
      * The Game class runs the main structure of the game,
      * it can create elements needed to play and also manages the score and the controls.
      *
-     * @param scene     the scene in which the game is painted.
      * @param painter   the painter that paints all the elements.
      * @param canvas    the canvas to paint on.
      * @param snake     the snake that represents the player on the board.
@@ -74,6 +73,7 @@ public class Game {
         this.score = 0;
         this.pauseText = pauseText;
         this.isPaused = false;
+        this.gui = new Gui();
 
         //This would only be an error if we had subclasses extending from the game class,
         //but since this is not the case this doesn't actually pose a risk.

@@ -6,12 +6,15 @@ import static game.GameSettings.HEIGHT;
 import static game.GameSettings.TEXT_COLOR;
 import static game.GameSettings.WIDTH;
 
-import game.*;
-
+import game.BodyPart;
+import game.Game;
+import game.GameSettings;
+import game.Painter;
+import game.Settings;
+import game.Snake;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,13 +23,18 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +44,8 @@ import lombok.Setter;
  */
 public class Gui {
 
-    @Getter @Setter
+    @Getter
+    @Setter
     public FXMLLoader loader;
 
     /**
@@ -76,6 +85,7 @@ public class Gui {
 
     /**
      * Getting text from textfield.
+     *
      * @param any Textfield
      * @return content of textfield
      */
@@ -108,13 +118,13 @@ public class Gui {
         Button pauseButton = new Button("Pause");
         pauseButton.setLayoutX(1068);
         pauseButton.setLayoutY(350);
-        pauseButton.setPrefSize(70,40);
+        pauseButton.setPrefSize(70, 40);
 
         // Stop button
         Button stopButton = new Button("stop");
         stopButton.setLayoutX(1068);
         stopButton.setLayoutY(420);
-        stopButton.setPrefSize(70,40);
+        stopButton.setPrefSize(70, 40);
 
         // Add elements to scene
         Pane root = new Pane();
@@ -126,20 +136,18 @@ public class Gui {
         root.getStylesheets().add("/css/GameButton.css");
         if (!Settings.getBackground().equals("")) {
             BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO,
-                    BackgroundSize.AUTO, false,false,false,false);
+                BackgroundSize.AUTO, false, false, false, false);
             root.setBackground(new Background(new BackgroundImage(
-                    new Image(Settings.getBackground()),
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.DEFAULT,
-                    backgroundSize)));
+                new Image(Settings.getBackground()),
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                backgroundSize)));
         } else {
             BackgroundFill bgf = new BackgroundFill(Color.BLACK, null, null);
             Background bg = new Background(bgf);
             root.setBackground(bg);
         }
-
-        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         Painter painter = new Painter(gc);
 
@@ -159,6 +167,8 @@ public class Gui {
         snake.setGame(game);
 
         game.start();
+
+        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         MainRunner.stage.setScene(scene);
     }
