@@ -86,10 +86,11 @@ jacocoTestCoverageVerification {
                 'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                 'gui.controller.EntryController.quitButton()', //impossible to test System.exit
                 'gui.controller.LeaderBoardController.*', //Gui for setting the tables, also contains system.exit.
-                'gui.controller.SettingController.*',
+                'gui.controller.SettingController.changeBackground()', //GUI methods
+                'gui.controller.SettingController.changeDifficulty()', //GUI methods
+                'gui.controller.SettingController.changeSnakeColor()', //GUI methods
+                'gui.controller.SettingController.changePellets()', //GUI methods
                 'gui.GuiText.*', //gui
-                'database.PersonalDetails.*', //POJO class
-                'database.GlobalDetails.*',    //POJO class
                 'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
                 'database.DBconnect.getGlobalScores(java.util.ArrayList)',
                 'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
@@ -130,7 +131,10 @@ jacocoTestCoverageVerification {
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
                     'gui.controller.LeaderBoardController.*' ,//Gui for setting the tables, also contains system.exit.
-                    'gui.controller.SettingController.*',
+                    'gui.controller.SettingController.changeBackground()', //GUI methods
+                    'gui.controller.SettingController.changeDifficulty()', //GUI methods
+                    'gui.controller.SettingController.changeSnakeColor()', //GUI methods
+                    'gui.controller.SettingController.changePellets()', //GUI methods
                     'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
                     'database.DBconnect.getGlobalScores(java.util.ArrayList)',
                     'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
