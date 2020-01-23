@@ -28,8 +28,6 @@ import lombok.Setter;
  */
 public class Game {
     @Getter
-    private final Scene scene;
-    @Getter
     private final Painter painter;
     @Getter
     private final Canvas canvas;
@@ -65,10 +63,9 @@ public class Game {
      * @param canvas    the canvas to paint on.
      * @param snake     the snake that represents the player on the board.
      * @param scoreText the element representing the player score.
+     * @param pauseText the text element used for indicating state of game.
      */
-    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, Text scoreText,
-                Text pauseText) {
-        this.scene = scene;
+    public Game(Painter painter, Canvas canvas, Snake snake, Text scoreText, Text pauseText) {
         this.canvas = canvas;
         this.snake = snake;
         this.painter = painter;

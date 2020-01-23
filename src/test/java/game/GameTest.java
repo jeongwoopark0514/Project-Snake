@@ -26,22 +26,20 @@ class GameTest {
     private Board board;
     private Canvas canvas;
     private Painter painter;
-    private Scene scene;
     private Snake snake;
     private AnimationTimer timer;
     private Text scoreText;
     private Text pauseText;
 
     @BeforeEach
-    void setUp() throws LineUnavailableException {
+    void setUp() {
         canvas = mock(Canvas.class);
         painter = mock(Painter.class);
-        scene = mock(Scene.class);
         snake = mock(Snake.class);
         board = mock(Board.class);
         scoreText = mock(Text.class);
         pauseText = new Text();
-        game = new Game(scene, painter, canvas, snake, scoreText, pauseText);
+        game = new Game(painter, canvas, snake, scoreText, pauseText);
         timer = mock(AnimationTimer.class);
         game.setTimer(timer);
     }
@@ -53,7 +51,6 @@ class GameTest {
     @Test
     void instructorNotNullTest() {
         assertNotNull(game);
-        assertNotNull(game.getScene());
         assertNotNull(game.getCanvas());
         assertNotNull(game.getSnake());
         assertNotNull(game.getPainter());

@@ -145,7 +145,7 @@ public class Gui {
 
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        Game game = new Game(scene, painter, canvas, snake, score, pauseText);
+        Game game = new Game(painter, canvas, snake, score, pauseText);
 
         // Add action listener to pause button.
         pauseButton.setOnAction(event -> {
