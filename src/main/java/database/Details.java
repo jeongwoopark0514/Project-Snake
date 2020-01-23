@@ -3,8 +3,11 @@ package database;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * POJO class that contains all the data that is retrieved from the database,
+ * which needs to be put into the lists of the leaderboard.
+ */
 public class Details {
-
     private SimpleIntegerProperty rank;
     private SimpleStringProperty name;
     private SimpleIntegerProperty score;
@@ -12,9 +15,9 @@ public class Details {
     /**
      * Constructor for POJO class.
      *
-     * @param rank  - the rank of players highscore
-     * @param name  - name of player
-     * @param score - score of the player
+     * @param rank  the rank of players highscore
+     * @param name  name of player
+     * @param score score of the player
      */
     public Details(Integer rank, String name, Integer score) {
         this.rank = new SimpleIntegerProperty(rank);
@@ -22,39 +25,30 @@ public class Details {
         this.score = new SimpleIntegerProperty(score);
     }
 
+    /**
+     * Get the rank of the player.
+     *
+     * @return the rank
+     */
     public int getRank() {
         return rank.get();
     }
 
-    public void setRank(int rank) {
-        this.rank = new SimpleIntegerProperty(rank);
-    }
-
-    public SimpleIntegerProperty rankProperty() {
-        return rank;
-    }
-
+    /**
+     * Get the name of the user.
+     *
+     * @return the name
+     */
     public String getName() {
         return name.get();
     }
 
-    public void setName(String name) {
-        this.name = new SimpleStringProperty(name);
-    }
-
-    public SimpleStringProperty nameProperty() {
-        return name;
-    }
-
+    /**
+     * Get the score of the user.
+     *
+     * @return the score
+     */
     public int getScore() {
         return score.get();
-    }
-
-    public void setScore(int score) {
-        this.score = new SimpleIntegerProperty(score);
-    }
-
-    public SimpleIntegerProperty scoreProperty() {
-        return score;
     }
 }
