@@ -61,7 +61,7 @@ class CollisionManager {
             try {
                 sound.play();
             } catch (Exception e) {
-                System.out.println("Could not play sound.");
+                System.out.println(e.toString());
             }
             manageFruits((Fruit) tile);
             board.updateTile(x, y, head);

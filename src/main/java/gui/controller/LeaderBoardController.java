@@ -82,7 +82,7 @@ public class LeaderBoardController implements Initializable {
             personalTable.setItems(personalScores);
             database.closeConnection();
         } catch (Exception e) {
-            System.out.println("populateTable" + e);
+            System.out.println(e.toString());
         }
     }
 

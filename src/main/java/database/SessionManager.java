@@ -80,7 +80,7 @@ public class SessionManager {
             this.username = username;
             return username;
         } catch (Exception e) {
-            System.out.println("No cookie found");
+            System.out.println(e.toString());
             return null;
         }
     }

@@ -45,12 +45,10 @@ public class LoginController {
     public void login() throws IOException {
         database.openConnection();
         if (gui.getText(loginUsername).equals("") || gui.getText(loginPassword).equals("")) {
-            System.out.println("LOGIN UNSUCCESSFUL");
             gui.showWarningAlert("One or multiple fields have not been filled in!",
                 "Empty field(s)");
         } else if (database.authenticate(gui.getText(loginUsername),
             gui.getText(loginPassword), null)) {
-            System.out.println("LOGIN SUCCESSFUL");
             //This is actually closed in the SessionsManager but PMD does not register this.
             PrintWriter writer = new PrintWriter("cookie.txt"); //NOPMD
             manager.saveCookie(writer, gui.getText(loginUsername));
@@ -60,7 +58,6 @@ public class LoginController {
         } else {
             gui.showWarningAlert("Wrong username/password combination. Please try again.",
                 "Something went wrong");
-            System.out.println("LOGIN UNSUCCESSFUL");
         }
         database.closeConnection();
     }
@@ -72,20 +69,16 @@ public class LoginController {
         database.openConnection();
         if (!gui.getText(registerPassword).equals(gui.getText(confirmPassword))) {
             gui.showWarningAlert("Passwords do not match!", "Something went wrong");
-            System.out.println("REGISTRATION UNSUCCESSFUL");
         } else if (gui.getText(registerUsername).equals("")
             || gui.getText(registerPassword).equals("")
             || gui.getText(registerPassword).equals("")) {
             gui.showWarningAlert("One or multiple fields have not been filled in!",
                     "Empty field(s)");
-            System.out.println("REGISTRATION UNSUCCESSFUL");
         } else if (database.registerUser(gui.getText(registerUsername),
             gui.getText(registerPassword), null)) {
             gui.showAlert("Successfully registered.", "Success");
-            System.out.println("REGISTRATION SUCCESSFUL");
         } else {
             gui.showWarningAlert("Username already taken!", "Something went wrong");
-            System.out.println("REGISTRATION UNSUCCESSFUL");
         }
         database.closeConnection();
     }
