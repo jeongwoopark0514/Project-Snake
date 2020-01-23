@@ -2,7 +2,6 @@ package game;
 
 import static game.GameSettings.SNAKE_HEAD;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
@@ -74,5 +73,14 @@ class BoardTest {
             "4, 0, true", "4, -1, false", "4, 5, false"})
     void onBoardTest(int x, int y, boolean result) {
         assertEquals(result, board.onBoard(x, y));
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+        {"0, 3", "3, 0", "0, 0"})
+    void createBoardTest(int width, int height) {
+        ArrayList<Tile> list = new ArrayList<>();
+        Board board = new Board(width, height, "", list);
+        assertNull(board.getGrid());
     }
 }

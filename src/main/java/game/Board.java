@@ -13,6 +13,7 @@ import lombok.Getter;
  * and updated to stay up to date with the dynamics of the game.
  */
 class Board {
+    @Getter
     private ArrayList<ArrayList<Tile>> grid;
     @Getter
     private int width;
