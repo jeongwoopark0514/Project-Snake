@@ -82,19 +82,12 @@ jacocoTestCoverageVerification {
                 'gui.Gui.*', //gui
                 'gui.AlertBox.*', //gui
                 'gui.MainRunner.*', //main
-                'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
                 'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
-                'gui.controller.EntryController.quitButton()', //impossible to test System.exit.
-                'gui.controller.SettingController.changeBackground()', //GUI methods
-                'gui.controller.SettingController.changeDifficulty()', //GUI methods
-                'gui.controller.SettingController.changeSnakeColor()', //GUI methods
-                'gui.controller.SettingController.changePellets()', //GUI methods
                 'gui.controller.LeaderBoardController.LeaderBoardController()', //Contains gui
                 'gui.controller.LeaderBoardController.initialize(java.net.URL, java.util.ResourceBundle)', //Contains gui
                 'gui.controller.LeaderBoardController.tableViewGlobal()', //Contains gui
                 'gui.controller.LeaderBoardController.tableViewPersonal()', //Contains gui
                 'gui.controller.LeaderBoardController.populateLeaderboards()', //Contains gui
-                'gui.controller.SettingController.*',
                 'gui.GuiText.*', //gui
                 'game.Game.gameLoop()', // private method
                 'game.Game.1.handle(long)', // TODO: look into what this method is
@@ -129,13 +122,7 @@ jacocoTestCoverageVerification {
                     'gui.AlertBox.*', //gui
                     'gui.MainRunner.*', //main
                     'gui.GuiText.*', //gui
-                    'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
-                    'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                    'gui.controller.SettingController.changeBackground()', //GUI methods
-                    'gui.controller.SettingController.changeDifficulty()', //GUI methods
-                    'gui.controller.SettingController.changeSnakeColor()', //GUI methods
-                    'gui.controller.SettingController.changePellets()', //GUI methods
                     'gui.controller.LeaderBoardController.LeaderBoardController()', //Contains gui
                     'gui.controller.LeaderBoardController.initialize(java.net.URL, java.util.ResourceBundle)', //Contains gui
                     'gui.controller.LeaderBoardController.tableViewGlobal()', //Contains gui

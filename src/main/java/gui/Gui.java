@@ -23,7 +23,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -48,10 +50,10 @@ public class Gui {
     @Getter
     @Setter
     public FXMLLoader loader;
-
-    public GuiText guiText = new GuiText();
-
-    public AlertBox alertBox = new AlertBox();
+    private GuiText guiText = new GuiText();
+    private AlertBox alertBox = new AlertBox();
+    @Setter
+    private ToggleGroup group;
 
     /**
      * This method pops up an alert box that gives notifications.
@@ -72,7 +74,6 @@ public class Gui {
     public void showWarningAlert(String message, String title) {
         alertBox.displayWarning(message, title);
     }
-
 
     /**
      * This method changes the url for the respective scenes.
@@ -168,7 +169,7 @@ public class Gui {
      * Quits the game by closing the window.
      */
     public void quit() {
-        alertBox.displayQuit("Do you really want to quit? ", "Game over");
+        AlertBox.displayQuit("Do you really want to quit? ", "Game over");
     }
 
     public void setText(Text text, String setting) {
@@ -224,5 +225,15 @@ public class Gui {
         return Arrays.asList(scoreText, pauseText);
     }
 
+    /**
+     * Check if a selected button from a group is equal to the input button.
+     *
+     * @param button the button to check for
+     * @return if the button is selected or not
+     */
+    public boolean equalsButton(RadioButton button) {
+        RadioButton selected = (RadioButton) group.getSelectedToggle();
+        return selected.equals(button);
+    }
 }
 

@@ -28,7 +28,7 @@ public class SettingController {
     public ToggleGroup snakeColor;
 
     public RadioButton appleOrangeRadio;
-    public RadioButton mellonBananaRadio;
+    public RadioButton melonBananaRadio;
     public ToggleGroup pellets;
 
     /**
@@ -39,17 +39,16 @@ public class SettingController {
         gui.switchScene("src/main/resources/fxml/Entry.fxml");
     }
 
-
     /**
      * Changes the background of the game based on which one is selected.
      */
     public void changeBackground() {
-        RadioButton selected = (RadioButton)background.getSelectedToggle();
-        if (selected.equals(jungleRadio)) {
+        gui.setGroup(background);
+        if (gui.equalsButton(jungleRadio)) {
             Settings.setBackground("/image/jungle_image.png");
-        } else if (selected.equals(nightRadio)) {
+        } else if (gui.equalsButton(nightRadio)) {
             Settings.setBackground("/image/night_image.png");
-        } else if (selected.equals(basicRadio)) {
+        } else if (gui.equalsButton(basicRadio)) {
             Settings.setBackground("");
         }
     }
@@ -58,12 +57,12 @@ public class SettingController {
      * Changes the difficulty of the game.
      */
     public void changeDifficulty() {
-        RadioButton selected = (RadioButton)difficulty.getSelectedToggle();
-        if (selected.equals(easyRadio)) {
+        gui.setGroup(difficulty);
+        if (gui.equalsButton(easyRadio)) {
             Settings.setGameMode(0);
-        } else if (selected.equals(difficultRadio)) {
+        } else if (gui.equalsButton(difficultRadio)) {
             Settings.setGameMode(1);
-        } else if (selected.equals(insaneRadio)) {
+        } else if (gui.equalsButton(insaneRadio)) {
             Settings.setGameMode(2);
         }
     }
@@ -72,12 +71,12 @@ public class SettingController {
      * Changes the color of the snake.
      */
     public void changeSnakeColor() {
-        RadioButton selected = (RadioButton)snakeColor.getSelectedToggle();
-        if (selected.equals(greenRadio)) {
+        gui.setGroup(snakeColor);
+        if (gui.equalsButton(greenRadio)) {
             Settings.setSnakeColor("green");
-        } else if (selected.equals(yellowRadio)) {
+        } else if (gui.equalsButton(yellowRadio)) {
             Settings.setSnakeColor("yellow");
-        } else if (selected.equals(greyRadio)) {
+        } else if (gui.equalsButton(greyRadio)) {
             Settings.setSnakeColor("grey");
         }
     }
@@ -86,11 +85,11 @@ public class SettingController {
      * Changes the set of pellets to be used.
      */
     public void changePellets() {
-        RadioButton selected = (RadioButton)pellets.getSelectedToggle();
-        if (selected.equals(appleOrangeRadio)) {
+        gui.setGroup(pellets);
+        if (gui.equalsButton(appleOrangeRadio)) {
             Settings.setPellets("apple-orange");
-        } else if (selected.equals(mellonBananaRadio)) {
-            Settings.setPellets("mellon-banana");
+        } else if (gui.equalsButton(melonBananaRadio)) {
+            Settings.setPellets("melon-banana");
         }
     }
 }
