@@ -261,13 +261,13 @@ public class DBconnect {
      *
      * @param list the list of usernames and scores.
      */
-    public void getGlobalScores(ArrayList<GlobalDetails> list) {
+    public void getGlobalScores(ArrayList<Details> list) {
         try {
             String highScores = "SELECT username,score FROM scores ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(highScores);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new GlobalDetails(
+                list.add(new Details(
                     globalPosition,
                     resultSet.getString("username"),
                     resultSet.getInt("score")));
@@ -286,7 +286,7 @@ public class DBconnect {
      * @param list     - list of personal scores and nicknames.
      * @param username - username of the current user.
      */
-    public void getPersonalScores(ArrayList<PersonalDetails> list, String username) {
+    public void getPersonalScores(ArrayList<Details> list, String username) {
         try {
             String personalScores = "SELECT nickname,score FROM scores WHERE username = ? "
                 + "ORDER BY score DESC";
@@ -294,10 +294,10 @@ public class DBconnect {
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new PersonalDetails(
+                list.add(new Details(
                     personalPosition,
-                    resultSet.getInt("score"),
-                    resultSet.getString("nickname")));
+                    resultSet.getString("nickname"),
+                    resultSet.getInt("score")));
                 personalPosition += 1;
             }
             personalPosition = 1;

@@ -315,7 +315,7 @@ public class DBconnectTest {
         when(resultSet.next()).thenReturn(true).thenReturn(false);
         when(resultSet.getString("username")).thenReturn(name);
         when(resultSet.getInt("score")).thenReturn(10);
-        ArrayList<GlobalDetails> list = new ArrayList<>();
+        ArrayList<Details> list = new ArrayList<>();
         dbconnect.getGlobalScores(list);
         assertEquals(1, list.size());
     }
@@ -323,7 +323,7 @@ public class DBconnectTest {
     @Test
     void getGlobalScoresFail() throws SQLException {
         doThrow(SQLException.class).when(connection).prepareStatement(anyString());
-        ArrayList<GlobalDetails> list = new ArrayList<>();
+        ArrayList<Details> list = new ArrayList<>();
         dbconnect.getGlobalScores(list);
         boolean contains = outContent.toString().contains(error);
         assertTrue(contains);
@@ -336,7 +336,7 @@ public class DBconnectTest {
         when(resultSet.next()).thenReturn(true).thenReturn(false);
         when(resultSet.getString("nickname")).thenReturn(name);
         when(resultSet.getInt("score")).thenReturn(10);
-        ArrayList<PersonalDetails> list = new ArrayList<>();
+        ArrayList<Details> list = new ArrayList<>();
         dbconnect.getPersonalScores(list, name);
         assertEquals(1, list.size());
     }
@@ -344,7 +344,7 @@ public class DBconnectTest {
     @Test
     void getPersonalScoresFail() throws SQLException {
         doThrow(SQLException.class).when(connection).prepareStatement(anyString());
-        ArrayList<PersonalDetails> list = new ArrayList<>();
+        ArrayList<Details> list = new ArrayList<>();
         dbconnect.getPersonalScores(list, name);
         boolean contains = outContent.toString().contains(error);
         assertTrue(contains);
