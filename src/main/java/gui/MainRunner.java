@@ -2,6 +2,7 @@ package gui;
 
 import database.DBconnect;
 import database.SessionManager;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -28,6 +29,11 @@ public class MainRunner extends Application {
         Application.launch(args);
     }
 
+    /**
+     * Starts the application.
+     * @param primaryStage the initial stage that should be shown.
+     * @throws IOException iff the file does not exist or if the url is invalid
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
 
@@ -52,19 +58,34 @@ public class MainRunner extends Application {
         manageScene(entry);
     }
 
-    private void initialize(Stage primaryStage) throws IOException {
+    /**
+     * Sets up the main screen that is shown when starting the application.
+     * @param primaryStage the initial stage that should be shown.
+     */
+    private void initialize(Stage primaryStage) {
         stage = primaryStage;
-        final URL url = new File("src/main/resources/fxml/splash.fxml").toURI().toURL();
-        final Parent parent = FXMLLoader.load(url);
+        final URL url;
+        final Parent parent;
+        try {
+            url = new File("src/main/resources/fxml/splash.fxml").toURI().toURL();
+            parent = FXMLLoader.load(url);
+            Scene splash = new Scene(parent, 1000, 600);
+            stage.setScene(splash);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         stage.getIcons().add(new Image("image/transparent_logo.png"));
         stage.setTitle("Snake");
         stage.setResizable(false);
-        final Scene splash = new Scene(parent, 1000, 600);
-        stage.setScene(splash);
         stage.show();
     }
 
+    /**
+     * Sets up the entry scene of the application.
+     * @param entry is either the login screen (if user is not logged in)
+     *             or the splash screen (if user is already logged in)
+     */
     private void manageScene(Parent entry) {
         //first suppressed PMD error since it is not a big bug,
         //but will fix if it is fixable, or worth fixable
