@@ -24,5 +24,6 @@ create table scores
 create table sessions
 (
   cookie varchar(36) not null primary key,
-  username varchar(20) not null
+  username varchar(20) not null,
+  foreign key (username) references users(username)
 );

@@ -1,9 +1,12 @@
 package gui.controller;
 
+import database.DBconnect;
+import database.SessionManager;
 import gui.Gui;
 import java.io.IOException;
-import javax.sound.sampled.LineUnavailableException;
-
+import java.io.PrintWriter;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * This is 'EntryController' class. It controls the entry page after login page.
@@ -12,11 +15,17 @@ import javax.sound.sampled.LineUnavailableException;
 public class EntryController {
 
     public Gui gui = new Gui();
+    @Getter
+    @Setter
+    private DBconnect database = DBconnect.getInstance();
+    @Getter
+    @Setter
+    private SessionManager manager = SessionManager.getInstance();
 
     /**
      * When you click start button, move to game screen.
      */
-    public void startGame() throws LineUnavailableException {
+    public void startGame() {
         gui.startSnakeGame();
     }
 
@@ -35,9 +44,14 @@ public class EntryController {
     }
 
     /**
-     *  Sign out the game and go back to login page.
+     * Sign out the game and go back to login page.
      */
     public void changeToLogin() throws IOException {
+        //This is actually closed in the SessionsManager but PMD does not register this.
+        PrintWriter writer = new PrintWriter("cookie.txt"); //NOPMD
+        database.openConnection();
+        manager.logOut(manager.getUsername(), writer);
+        database.closeConnection();
         gui.switchScene("src/main/resources/fxml/login.fxml");
     }
 

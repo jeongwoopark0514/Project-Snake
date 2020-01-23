@@ -47,12 +47,10 @@ public class DBconnectTest {
 
     private String defaultUser;
     private String defaultPassword;
-    private String defaultNickname;
-    private int defaultScore;
-
     private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private PrintStream originalOut = System.out;
     private String error = "Error";
+    private String name = "name";
 
     @BeforeEach
     void setUp() {
@@ -66,8 +64,6 @@ public class DBconnectTest {
         dbconnect.setPreparedStatement(preparedStatement);
         defaultUser = "username";
         defaultPassword = "password";
-        defaultNickname = "nickname";
-        defaultScore = 0;
     }
 
     @AfterEach
@@ -218,8 +214,8 @@ public class DBconnectTest {
         when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
         when(preparedStatement.executeQuery()).thenReturn(resultSet);
         when(resultSet.next()).thenReturn(true);
-        when(resultSet.getString("username")).thenReturn("name");
-        assertEquals("name", dbconnect.getUsername("chocolate-chip"));
+        when(resultSet.getString("username")).thenReturn(name);
+        assertEquals(name, dbconnect.getUsername("chocolate-chip"));
     }
 
     @Test
@@ -237,11 +233,11 @@ public class DBconnectTest {
         assertTrue(contains);
     }
 
-    //    @Test
-    //    void openConnectionTest() throws SQLException {
-    //        dbconnect.openConnection();
-    //        verify(ds).getConnection();
-    //    }
+    @Test
+    void openConnectionTest() throws SQLException {
+        dbconnect.openConnection();
+        verify(ds).getConnection();
+    }
 
     @Test
     void openConnectionTestFail() throws SQLException {
@@ -257,12 +253,28 @@ public class DBconnectTest {
         verify(connection).close();
     }
 
-    //    @Test
-    //    void closeConnectionTestFail() throws SQLException {
-    //        doThrow(SQLException.class).when(connection).close();
-    //        dbconnect.closeConnection();
-    //        boolean contains = outContent.toString().contains(error);
-    //        assertTrue(contains);
-    //    }
+    @Test
+    void closeConnectionTestFail() throws SQLException {
+        doThrow(SQLException.class).when(connection).close();
+        dbconnect.closeConnection();
+        boolean contains = outContent.toString().contains(error);
+        assertTrue(contains);
+    }
+
+    @Test
+    void removeSessionTest() throws SQLException {
+        when(connection.prepareStatement(Mockito.anyString()))
+            .thenReturn(preparedStatement);
+        dbconnect.removeSession(name);
+        verify(preparedStatement).executeUpdate();
+    }
+
+    @Test
+    void removeSessionFail() throws SQLException {
+        doThrow(SQLException.class).when(connection).prepareStatement(anyString());
+        dbconnect.removeSession(name);
+        boolean contains = outContent.toString().contains(error);
+        assertTrue(contains);
+    }
 
 }

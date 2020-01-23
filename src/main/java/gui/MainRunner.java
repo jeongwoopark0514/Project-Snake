@@ -1,5 +1,6 @@
 package gui;
 
+import database.DBconnect;
 import database.SessionManager;
 import java.io.BufferedReader;
 import java.io.File;
@@ -45,7 +46,8 @@ public class MainRunner extends Application {
         //This is a false positive,
         // since the reader is actually closed inside the SessionManger class.
         BufferedReader reader = new BufferedReader(new FileReader("cookie.txt")); //NOPMD
-
+        DBconnect database = DBconnect.getInstance();
+        database.openConnection();
         if (SessionManager.getInstance().retrieveUserData(reader) != null) {
             url2 = new File("src/main/resources/fxml/entry.fxml").toURI().toURL();
             entry = FXMLLoader.load(url2);
@@ -53,6 +55,7 @@ public class MainRunner extends Application {
             url2 = new File("src/main/resources/fxml/login.fxml").toURI().toURL();
             entry = FXMLLoader.load(url2);
         }
+        database.closeConnection();
 
         //first suppressed PMD error since it is not a big bug,
         //but will fix if it is fixable, or worth fixable

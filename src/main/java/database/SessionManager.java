@@ -84,4 +84,17 @@ public class SessionManager {
             return null;
         }
     }
+
+    /**
+     * Logout the user and remove it's session from the database.
+     *
+     * @param username the username of the user to logout.
+     * @param writer   the writer containg the cookie file to empty.
+     */
+    public void logOut(String username, PrintWriter writer) {
+        dbconnect.removeSession(username);
+        writer.write("");
+        writer.close();
+
+    }
 }
