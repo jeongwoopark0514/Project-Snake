@@ -97,6 +97,14 @@ public class Gui {
     }
 
     /**
+     * Disable button.
+     * @param button - button
+     */
+    public void disableButton(Button button) {
+        button.setDisable(true);
+    }
+
+    /**
      * Make GUI Scene for the snake game.
      */
     public void startSnakeGame() {
