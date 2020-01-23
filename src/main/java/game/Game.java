@@ -107,7 +107,11 @@ public class Game {
         painter.paintBoard(board);
     }
 
-    void checkFruits() {
+    /**
+     * Checks whether there is a fruit on gamescreen.
+     * If there is no fruit on the gamescreen a new fruit is added.
+     */
+    public void checkFruits() {
         if (fruits.size() < MIN_PELLETS) {
             Fruit newFruit = createFruit();
             fruits.add(newFruit);
@@ -174,7 +178,7 @@ public class Game {
                         if (collisionManager.check()) {
                             return;
                         }
-                        painter.writeScore(scoreText, score);
+                        scoreText.setText("Score: " + score);
                         Tile head = snake.getHead();
                         board.updateTile(head.getX(), head.getY(), head);
                         painter.paint(snake.getBody());

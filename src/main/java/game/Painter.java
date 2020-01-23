@@ -11,7 +11,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 /**
- * Used for painting shapes on a canvas, which usually represents the game screen.
+ * Used for painting shapes on a canvas, which represents the game screen.
  */
 public class Painter {
     @Getter
@@ -79,7 +79,7 @@ public class Painter {
     /**
      * Removes the sprite/color from a Tile on the board.
      *
-     * @param tile Coordinate
+     * @param tile the tile to clear
      */
     void unPaint(@NonNull Tile tile) {
         gc.clearRect(tile.getX() * CELL_SIZE, tile.getY() * CELL_SIZE, CELL_SIZE, CELL_SIZE);
@@ -96,9 +96,4 @@ public class Painter {
             unPaint((Tile) tile);
         }
     }
-
-    void writeScore(Text scoreText, int value) {
-        scoreText.setText("Score: " + value);
-    }
-
 }
