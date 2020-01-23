@@ -113,6 +113,7 @@ public class Gui {
         root.getChildren().add(textElements.get(0));
         root.getChildren().add(textElements.get(1));
         root.getStylesheets().add("/css/GameButton.css");
+
         if (!Settings.getBackground().equals("")) {
             BackgroundSize backgroundSize = new BackgroundSize(BackgroundSize.AUTO,
                 BackgroundSize.AUTO, false, false, false, false);
@@ -129,10 +130,11 @@ public class Gui {
         }
 
         Painter painter = new Painter(gc);
+        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         Snake snake = new Snake(new BodyPart(10, 10,
             GameSettings.SNAKE_COLOR, GameSettings.SNAKE_HEAD), DOWN);
-        Game game = new Game(painter, canvas, snake, textElements);
+        Game game = new Game(scene, painter, canvas, snake, textElements);
 
         // Add action listener to pause button.
         buttons.get(0).setOnAction(event -> {
@@ -146,8 +148,6 @@ public class Gui {
         snake.setGame(game);
 
         game.start();
-
-        Scene scene = new Scene(root, WIDTH, HEIGHT, BACKGROUND_COLOR);
 
         MainRunner.stage.setScene(scene);
     }

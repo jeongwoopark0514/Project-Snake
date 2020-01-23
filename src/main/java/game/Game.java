@@ -15,6 +15,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
 import lombok.Getter;
@@ -24,6 +25,8 @@ import lombok.Setter;
  * Main game control class.
  */
 public class Game {
+    @Getter
+    private final Scene scene;
     @Getter
     private final Painter painter;
     @Getter
@@ -59,7 +62,8 @@ public class Game {
      * @param snake        the snake that represents the player on the board.
      * @param textElements list of text elements for Score and Pause indication.
      */
-    public Game(Painter painter, Canvas canvas, Snake snake, List<Text> textElements) {
+    public Game(Scene scene, Painter painter, Canvas canvas, Snake snake, List<Text> textElements) {
+        this.scene = scene;
         this.canvas = canvas;
         this.snake = snake;
         this.painter = painter;

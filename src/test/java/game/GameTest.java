@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.animation.AnimationTimer;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
 import org.junit.jupiter.api.AfterEach;
@@ -27,6 +28,7 @@ class GameTest {
     private Snake snake;
     private AnimationTimer timer;
     private List<Text> textElements;
+    private Scene scene;
 
     @BeforeEach
     void setUp() {
@@ -35,9 +37,10 @@ class GameTest {
         snake = mock(Snake.class);
         board = mock(Board.class);
         timer = mock(AnimationTimer.class);
+        scene = mock(Scene.class);
         textElements = Arrays.asList(new Text(), new Text());
 
-        game = new Game(painter, canvas, snake, textElements);
+        game = new Game(scene, painter, canvas, snake, textElements);
         game.setTimer(timer);
     }
 
