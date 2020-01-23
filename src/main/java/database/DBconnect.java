@@ -14,13 +14,20 @@ import java.util.ArrayList;
 import lombok.Getter;
 import lombok.Setter;
 
-@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class DBconnect {
 
-    @Getter @Setter private Connection connection;
-    @Getter @Setter private Statement statement;
-    @Getter @Setter private ResultSet resultSet;
-    @Getter @Setter private PreparedStatement preparedStatement;
+    @Getter
+    @Setter
+    private Connection connection;
+    @Getter
+    @Setter
+    private Statement statement;
+    @Getter
+    @Setter
+    private ResultSet resultSet;
+    @Getter
+    @Setter
+    private PreparedStatement preparedStatement;
     private String prefix = "Error: ";
     private int globalPosition = 1;
     private int personalPosition = 1;
@@ -100,6 +107,7 @@ public class DBconnect {
 
     /**
      * This method checks the database if the entered username and password are valid.
+     *
      * @param username - the username
      * @param password - the password
      * @param pwdHash  - the hash of the password, if it already exists
@@ -128,6 +136,7 @@ public class DBconnect {
 
     /**
      * Checks if the user exists.
+     *
      * @param username - username of the player
      * @return - true iff user exists else false
      */
@@ -135,7 +144,7 @@ public class DBconnect {
         try {
             String usernameCheck = "SELECT username FROM users WHERE username = ?";
             preparedStatement = connection.prepareStatement(usernameCheck);
-            preparedStatement.setString(1,username);
+            preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 return true;
@@ -226,17 +235,18 @@ public class DBconnect {
 
     /**
      * This method saves the score of the user when the game ends.
+     *
      * @param username - the username of the player
-     * @param score - the score of the user for that game
+     * @param score    - the score of the user for that game
      */
     public void saveScore(String username, int score, String nickname) {
         try {
             if (usernameCheck(username)) {
                 String insertScore = "INSERT INTO scores (username,score,nickname) VALUES (?,?,?)";
                 preparedStatement = connection.prepareStatement(insertScore);
-                preparedStatement.setString(1,username);
-                preparedStatement.setInt(2,score);
-                preparedStatement.setString(3,nickname);
+                preparedStatement.setString(1, username);
+                preparedStatement.setInt(2, score);
+                preparedStatement.setString(3, nickname);
                 preparedStatement.executeUpdate();
             }
         } catch (Exception e) {
@@ -245,51 +255,69 @@ public class DBconnect {
     }
 
     /**
-     * Retrieves scores in descending order together with username.
-     * @param list usernames and scores.
+     * This return the scores in descending order together with the usernames.
+     *
+     * @param list the list of usernames and scores.
      */
-    public void getGlobalScores(ArrayList<GlobalDetails> list) {
+    public void getGlobalScores(ArrayList<Details> list) {
         try {
             String highScores = "SELECT username,score FROM scores ORDER BY score DESC";
             preparedStatement = connection.prepareStatement(highScores);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new GlobalDetails(
-                        globalPosition,
-                        resultSet.getString("username"),
-                        resultSet.getInt("score")));
+                list.add(new Details(
+                    globalPosition,
+                    resultSet.getString("username"),
+                    resultSet.getInt("score")));
                 globalPosition += 1;
             }
+        } catch (Exception e) {
+            System.out.println(prefix + e);
+        }
+        globalPosition = 1;
+    }
+
+    /**
+     * Returns the highest scores of the current user in descending order.
+     * Also returns the nicknames associated to the score.
+     *
+     * @param list     - list of personal scores and nicknames.
+     * @param username - username of the current user.
+     */
+    public void getPersonalScores(ArrayList<Details> list, String username) {
+        try {
+            String personalScores = "SELECT nickname,score FROM scores WHERE username = ? "
+                + "ORDER BY score DESC";
+            preparedStatement = connection.prepareStatement(personalScores);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                list.add(new Details(
+                    personalPosition,
+                    resultSet.getString("nickname"),
+                    resultSet.getInt("score")));
+                personalPosition += 1;
+            }
+            personalPosition = 1;
         } catch (Exception e) {
             System.out.println(prefix + e);
         }
     }
 
     /**
-     * Returns the highest scores of the current user in descending order.
-     * Also returns the nicknames associated to the score.
-     * @param list2 - list of personal scores and nicknames.
-     * @param username - username of the current user.
+     * Remove a sessions from the database (Logout),
+     * by using the username.
+     *
+     * @param username the username of the user to remove (logout).
      */
-    public void getPersonalScores(ArrayList<PersonalDetails> list2, String username) {
+    public void removeSession(String username) {
         try {
-            String personalScores = "SELECT nickname,score FROM scores WHERE username = ? "
-                    + "ORDER BY score DESC";
-            preparedStatement = connection.prepareStatement(personalScores);
-            preparedStatement.setString(1,username);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                list2.add(new PersonalDetails(
-                        personalPosition,
-                        resultSet.getInt("score"),
-                        resultSet.getString("nickname")));
-                personalPosition += 1;
-            }
+            String sql = "DELETE FROM sessions WHERE username = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.println(prefix + e);
         }
     }
-
-
-
 }

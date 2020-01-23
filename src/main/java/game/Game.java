@@ -277,6 +277,9 @@ public class Game {
                 case DOWN:
                     snake.changeDirection(Directions.DOWN);
                     break;
+                case P:
+                    pause();
+                    break;
                 default:
                     break;
             }

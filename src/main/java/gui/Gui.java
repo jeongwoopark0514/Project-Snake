@@ -45,10 +45,13 @@ import lombok.Setter;
  * Contains all the methods needed for controller logic.
  */
 public class Gui {
-
     @Getter
     @Setter
     public FXMLLoader loader;
+
+    public GuiText guiText = new GuiText();
+
+    public AlertBox alertBox = new AlertBox();
 
     /**
      * This method pops up an alert box that gives notifications.
@@ -57,7 +60,7 @@ public class Gui {
      * @param title   - title of the alert
      */
     public void showAlert(String message, String title) {
-        AlertBox.display(message, title);
+        alertBox.display(message, title);
     }
 
     /**
@@ -67,7 +70,7 @@ public class Gui {
      * @param title   - title of the alert
      */
     public void showWarningAlert(String message, String title) {
-        AlertBox.displayWarning(message, title);
+        alertBox.displayWarning(message, title);
     }
 
 
@@ -92,7 +95,16 @@ public class Gui {
      * @return content of textfield
      */
     public String getText(TextField any) {
-        return any.getText();
+        return guiText.getText(any);
+    }
+
+    /**
+     * Disable button.
+     *
+     * @param button - button
+     */
+    public void disableButton(Button button) {
+        button.setDisable(true);
     }
 
     /**
@@ -156,12 +168,17 @@ public class Gui {
      * Quits the game by closing the window.
      */
     public void quit() {
-        AlertBox.displayQuit("Do you really want to quit? ", "Game over");
+        alertBox.displayQuit("Do you really want to quit? ", "Game over");
     }
 
     public void setText(Text text, String setting) {
-        text.setText(setting);
+        guiText.setText(text, setting);
     }
+
+    public int getScoreFromText(Text text) {
+        return guiText.getScoreFromText(text);
+    }
+
 
     /**
      * Creates a pause and stop button.

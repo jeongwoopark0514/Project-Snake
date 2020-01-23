@@ -79,21 +79,23 @@ jacocoTestCoverageVerification {
                 'game.Game.lambda$gameLoop$1()', //TODO Is this testable?
                 'game.Game.lambda$stop$0()',
                 'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
-                'gui.Gui.*',
-                'gui.AlertBox.*',
-                'gui.MainRunner.*',
-                'gui.controller.ScoreController.*', //delete this when the implementation and test is ready
+                'gui.Gui.*', //gui
+                'gui.AlertBox.*', //gui
+                'gui.MainRunner.*', //main
+                'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
                 'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
-                'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                'gui.controller.LeaderBoardController.*', //impossible to test System.exit
+                'gui.controller.EntryController.quitButton()', //impossible to test System.exit.
+                'gui.controller.SettingController.changeBackground()', //GUI methods
+                'gui.controller.SettingController.changeDifficulty()', //GUI methods
+                'gui.controller.SettingController.changeSnakeColor()', //GUI methods
+                'gui.controller.SettingController.changePellets()', //GUI methods
+                'gui.controller.LeaderBoardController.LeaderBoardController()', //Contains gui
+                'gui.controller.LeaderBoardController.initialize(java.net.URL, java.util.ResourceBundle)', //Contains gui
+                'gui.controller.LeaderBoardController.tableViewGlobal()', //Contains gui
+                'gui.controller.LeaderBoardController.tableViewPersonal()', //Contains gui
+                'gui.controller.LeaderBoardController.populateLeaderboards()', //Contains gui
                 'gui.controller.SettingController.*',
-                'database.PersonalDetails.*', //POJO class
-                'database.GlobalDetails.*',    //POJO class
-                'database.DBconnect.openConnection()',
-                'database.DBconnect.closeConnection()',
-                'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
-                'database.DBconnect.getGlobalScores(java.util.ArrayList)',
-                'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
+                'gui.GuiText.*', //gui
                 'game.Game.gameLoop()', // private method
                 'game.Game.1.handle(long)', // TODO: look into what this method is
                 'game.Game.1.{...}', // TODO: look into what this method is
@@ -123,19 +125,22 @@ jacocoTestCoverageVerification {
                     'game.Game.lambda$gameLoop$1()', //TODO Is this testable?
                     'game.Game.lambda$stop$0()',
                     'game.Game.stop()', //Impossible to test system.exit (which will get replaced after the prototype)
-                    'gui.Gui.*',
-                    'gui.AlertBox.*',
-                    'gui.MainRunner.*',
-                    'gui.controller.ScoreController.*', //delete this when implementation and test is ready
+                    'gui.Gui.*', //gui
+                    'gui.AlertBox.*', //gui
+                    'gui.MainRunner.*', //main
+                    'gui.GuiText.*', //gui
+                    'gui.controller.ScoreController.quitButton()', //impossible to test System.exit
                     'game.Game.createFruit()', // uses random element which is hard and unnecessary to test
                     'gui.controller.EntryController.quitButton()', //impossible to test System.exit
-                    'gui.controller.LeaderBoardController.*' ,//impossible to test System.exit
-                    'gui.controller.SettingController.*',
-                    'database.DBconnect.openConnection()',
-                    'database.DBconnect.closeConnection()',
-                    'database.DBconnect.saveScore(java.lang.String, int, java.lang.String)',
-                    'database.DBconnect.getGlobalScores(java.util.ArrayList)',
-                    'database.DBconnect.getPersonalScores(java.util.ArrayList, java.lang.String)',
+                    'gui.controller.SettingController.changeBackground()', //GUI methods
+                    'gui.controller.SettingController.changeDifficulty()', //GUI methods
+                    'gui.controller.SettingController.changeSnakeColor()', //GUI methods
+                    'gui.controller.SettingController.changePellets()', //GUI methods
+                    'gui.controller.LeaderBoardController.LeaderBoardController()', //Contains gui
+                    'gui.controller.LeaderBoardController.initialize(java.net.URL, java.util.ResourceBundle)', //Contains gui
+                    'gui.controller.LeaderBoardController.tableViewGlobal()', //Contains gui
+                    'gui.controller.LeaderBoardController.tableViewPersonal()', //Contains gui
+                    'gui.controller.LeaderBoardController.populateLeaderboards()', //Contains gui
                     'game.Game.gameLoop()', // private method
                     'game.Game.1.handle(long)', // TODO: look into what this method is
                     'game.Game.1.{...}', // TODO: look into what this method is

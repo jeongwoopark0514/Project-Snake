@@ -11,32 +11,11 @@ public class AlertBox {
      * @param message the message being displayed
      */
 
-    public static void display(String message, String title) {
+    public void display(String message, String title) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
-
-        //comment out because the code above is shorter and does the same job
-        //        Stage window = new Stage();
-        //
-        //        window.initModality(Modality.APPLICATION_MODAL);
-        //        window.setTitle(title);
-        //        window.setMinWidth(400);
-        //
-        //        Label label = new Label(message);
-        //
-        //        Button close = new Button("Ok");
-        //        close.setOnAction(e -> window.close());
-        //        close.setPadding(new Insets(10, 10, 10, 10));
-        //
-        //        VBox layout = new VBox(10);
-        //        layout.getChildren().addAll(label, close);
-        //        layout.setAlignment(Pos.CENTER);
-        //
-        //        Scene scene = new Scene(layout);
-        //        window.setScene(scene);
-        //        window.showAndWait();
     }
 
     /**
@@ -46,7 +25,7 @@ public class AlertBox {
      * @param title title of the alert box
      */
 
-    public static void displayWarning(String message, String title) {
+    public void displayWarning(String message, String title) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(title);
         alert.setContentText(message);

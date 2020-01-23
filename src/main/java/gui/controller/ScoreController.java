@@ -2,11 +2,9 @@ package gui.controller;
 
 import database.DBconnect;
 import database.SessionManager;
-import game.Game;
 import gui.Gui;
-
 import java.io.IOException;
-
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import lombok.Getter;
@@ -18,9 +16,7 @@ import lombok.Setter;
  * This class will be used later in the future. (in progress).
  */
 public class ScoreController {
-
-    public transient Gui gui = new Gui();
-    public int score;
+    public Gui gui = new Gui();
 
     @Getter
     @Setter
@@ -28,16 +24,14 @@ public class ScoreController {
     @Getter
     @Setter
     private SessionManager manager = SessionManager.getInstance();
-    public Game game;
 
-    public transient TextField nickname;
-
-    public transient Text scoreText = new Text();
+    public TextField nickname;
+    public Button saveButton;
+    public Text scoreText = new Text();
 
 
     /**
      * Method that stores the nickname and the score after each game.
-     * @throws IOException - Exception.
      */
     public void scoreSave() {
         database.openConnection();
@@ -45,8 +39,9 @@ public class ScoreController {
             gui.showAlert("Enter a nickname", "Empty field(s)");
         } else {
             database.saveScore(manager.getUsername(),
-                    Integer.parseInt(scoreText.getText()),
-                    nickname.getText());
+                gui.getScoreFromText(scoreText),
+                gui.getText(nickname));
+            gui.disableButton(saveButton);
             gui.showAlert("Your score was saved", "Success!");
         }
         database.closeConnection();
