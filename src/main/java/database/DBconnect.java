@@ -283,10 +283,10 @@ public class DBconnect {
      * Returns the highest scores of the current user in descending order.
      * Also returns the nicknames associated to the score.
      *
-     * @param list2    - list of personal scores and nicknames.
+     * @param list     - list of personal scores and nicknames.
      * @param username - username of the current user.
      */
-    public void getPersonalScores(ArrayList<PersonalDetails> list2, String username) {
+    public void getPersonalScores(ArrayList<PersonalDetails> list, String username) {
         try {
             String personalScores = "SELECT nickname,score FROM scores WHERE username = ? "
                 + "ORDER BY score DESC";
@@ -294,7 +294,7 @@ public class DBconnect {
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list2.add(new PersonalDetails(
+                list.add(new PersonalDetails(
                     personalPosition,
                     resultSet.getInt("score"),
                     resultSet.getString("nickname")));

@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -21,6 +23,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -273,6 +276,76 @@ public class DBconnectTest {
     void removeSessionFail() throws SQLException {
         doThrow(SQLException.class).when(connection).prepareStatement(anyString());
         dbconnect.removeSession(name);
+        boolean contains = outContent.toString().contains(error);
+        assertTrue(contains);
+    }
+
+    @Test
+    void saveScoreWrongNameTest() throws SQLException {
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(false);
+        dbconnect.saveScore(name, 10, "nick");
+        verify(preparedStatement, times(0)).executeUpdate();
+    }
+
+    @Test
+    void saveScoreTest() throws SQLException {
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(true);
+        dbconnect.saveScore(name, 10, "nick");
+        verify(preparedStatement).executeUpdate();
+    }
+
+    @Test
+    void saveScoreFail() throws SQLException {
+        doReturn(preparedStatement).doThrow(SQLException.class)
+            .when(connection).prepareStatement(anyString());
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(true);
+        dbconnect.saveScore(name, 10, "nick");
+        verify(preparedStatement, times(0)).executeUpdate();
+    }
+
+    @Test
+    void getGlobalScoresTest() throws SQLException {
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(true).thenReturn(false);
+        when(resultSet.getString("username")).thenReturn(name);
+        when(resultSet.getInt("score")).thenReturn(10);
+        ArrayList<GlobalDetails> list = new ArrayList<>();
+        dbconnect.getGlobalScores(list);
+        assertEquals(1, list.size());
+    }
+
+    @Test
+    void getGlobalScoresFail() throws SQLException {
+        doThrow(SQLException.class).when(connection).prepareStatement(anyString());
+        ArrayList<GlobalDetails> list = new ArrayList<>();
+        dbconnect.getGlobalScores(list);
+        boolean contains = outContent.toString().contains(error);
+        assertTrue(contains);
+    }
+
+    @Test
+    void getPersonalScoresTest() throws SQLException {
+        when(connection.prepareStatement(anyString())).thenReturn(preparedStatement);
+        when(preparedStatement.executeQuery()).thenReturn(resultSet);
+        when(resultSet.next()).thenReturn(true).thenReturn(false);
+        when(resultSet.getString("nickname")).thenReturn(name);
+        when(resultSet.getInt("score")).thenReturn(10);
+        ArrayList<PersonalDetails> list = new ArrayList<>();
+        dbconnect.getPersonalScores(list, name);
+        assertEquals(1, list.size());
+    }
+
+    @Test
+    void getPersonalScoresFail() throws SQLException {
+        doThrow(SQLException.class).when(connection).prepareStatement(anyString());
+        ArrayList<PersonalDetails> list = new ArrayList<>();
+        dbconnect.getPersonalScores(list, name);
         boolean contains = outContent.toString().contains(error);
         assertTrue(contains);
     }
