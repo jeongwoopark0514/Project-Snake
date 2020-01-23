@@ -1,15 +1,13 @@
 package gui.controller;
 
 import database.DBconnect;
-import database.GlobalDetails;
-import database.PersonalDetails;
+import database.Details;
 import database.SessionManager;
 import gui.Gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -30,23 +28,23 @@ public class LeaderBoardController implements Initializable {
 
     public Gui gui = new Gui();
 
-    public TableView<GlobalDetails> globalTable = new TableView<>();
-    public TableView<PersonalDetails> personalTable = new TableView<>();
+    public TableView<Details> globalTable = new TableView<>();
+    public TableView<Details> personalTable = new TableView<>();
 
-    public TableColumn<GlobalDetails, Integer> globalRank;
-    public TableColumn<PersonalDetails, Integer> personalRank;
+    public TableColumn<Details, Integer> globalRank;
+    public TableColumn<Details, Integer> personalRank;
 
-    public TableColumn<GlobalDetails, String> username;
-    public TableColumn<PersonalDetails, String> nickname;
+    public TableColumn<Details, String> username;
+    public TableColumn<Details, String> nickname;
 
-    public TableColumn<GlobalDetails, Integer> globalScore;
-    public TableColumn<PersonalDetails, Integer> personalScore;
+    public TableColumn<Details, Integer> globalScore;
+    public TableColumn<Details, Integer> personalScore;
 
-    private ObservableList<GlobalDetails> globalScores;
-    private ObservableList<PersonalDetails> personalScores;
+    private ObservableList<Details> globalScores;
+    private ObservableList<Details> personalScores;
 
-    private ArrayList<GlobalDetails> list = new ArrayList<>();
-    private ArrayList<PersonalDetails> list2 = new ArrayList<>();
+    private ArrayList<Details> globalList = new ArrayList<>();
+    private ArrayList<Details> personalList = new ArrayList<>();
 
     @Getter
     @Setter
@@ -70,28 +68,28 @@ public class LeaderBoardController implements Initializable {
      */
     public void openDB() {
         database.openConnection();
-        database.getGlobalScores(list);
-        database.getPersonalScores(list2, manager.getUsername());
+        database.getGlobalScores(globalList);
+        database.getPersonalScores(personalList, manager.getUsername());
     }
 
     /**
      * Setting up tableview for global table.
      */
     public void tableViewGlobal() {
-        globalScores = FXCollections.observableArrayList(list);
-        globalRank.setCellValueFactory(new PropertyValueFactory<>("globalRank"));
-        username.setCellValueFactory(new PropertyValueFactory<>("username"));
-        globalScore.setCellValueFactory(new PropertyValueFactory<>("globalScore"));
+        globalScores = FXCollections.observableArrayList(globalList);
+        globalRank.setCellValueFactory(new PropertyValueFactory<>("rank"));
+        username.setCellValueFactory(new PropertyValueFactory<>("name"));
+        globalScore.setCellValueFactory(new PropertyValueFactory<>("score"));
     }
 
     /**
      * Setting up tableview for personal table.
      */
     public void tableViewPersonal() {
-        personalScores = FXCollections.observableArrayList(list2);
-        personalRank.setCellValueFactory(new PropertyValueFactory<>("personalRank"));
-        personalScore.setCellValueFactory(new PropertyValueFactory<>("personalScore"));
-        nickname.setCellValueFactory(new PropertyValueFactory<>("nickname"));
+        personalScores = FXCollections.observableArrayList(personalList);
+        personalRank.setCellValueFactory(new PropertyValueFactory<>("rank"));
+        personalScore.setCellValueFactory(new PropertyValueFactory<>("score"));
+        nickname.setCellValueFactory(new PropertyValueFactory<>("name"));
     }
 
     /**
