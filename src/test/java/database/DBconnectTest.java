@@ -238,6 +238,14 @@ public class DBconnectTest {
     }
 
     @Test
+    void closeConnectionTestFail() throws SQLException {
+        doThrow(SQLException.class).when(connection).close();
+        dbconnect.closeConnection();
+        boolean contains = outContent.toString().contains(error);
+        assertTrue(contains);
+    }
+
+    @Test
     void openConnectionTestFail() throws SQLException {
         doThrow(SQLException.class).when(ds).getConnection();
         dbconnect.openConnection();

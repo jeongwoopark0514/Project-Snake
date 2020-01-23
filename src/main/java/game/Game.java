@@ -37,14 +37,14 @@ public class Game {
     @Setter
     private List<Fruit> fruits;
     private List<Wall> walls;
+    private Text scoreText;
     @Getter
     private int score;
-    private Text scoreText;
-    private CollisionManager collisionManager;
+    private Text pauseText;
     @Getter
     @Setter
     private boolean isPaused;
-    private Text pauseText;
+    private CollisionManager collisionManager;
     private Board board;
     @Getter
     @Setter

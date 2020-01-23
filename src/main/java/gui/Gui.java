@@ -159,7 +159,6 @@ public class Gui {
         AlertBox.displayQuit("Do you really want to quit? ", "Game over");
     }
 
-
     public void setText(Text text, String setting) {
         text.setText(setting);
     }
