@@ -52,8 +52,7 @@ public class Gui {
     public FXMLLoader loader;
     private GuiText guiText = new GuiText();
     private AlertBox alertBox = new AlertBox();
-    @Setter
-    private ToggleGroup group;
+
 
     /**
      * This method pops up an alert box that gives notifications.
@@ -97,15 +96,6 @@ public class Gui {
      */
     public String getText(TextField any) {
         return guiText.getText(any);
-    }
-
-    /**
-     * Disable button.
-     *
-     * @param button - button
-     */
-    public void disableButton(Button button) {
-        button.setDisable(true);
     }
 
     /**
@@ -169,7 +159,7 @@ public class Gui {
      * Quits the game by closing the window.
      */
     public void quit() {
-        AlertBox.displayQuit("Do you really want to quit? ", "Game over");
+        alertBox.displayQuit("Do you really want to quit? ", "Game over");
     }
 
     public void setText(Text text, String setting) {
@@ -223,17 +213,6 @@ public class Gui {
         pauseText.setY(120);
 
         return Arrays.asList(scoreText, pauseText);
-    }
-
-    /**
-     * Check if a selected button from a group is equal to the input button.
-     *
-     * @param button the button to check for
-     * @return if the button is selected or not
-     */
-    public boolean equalsButton(RadioButton button) {
-        RadioButton selected = (RadioButton) group.getSelectedToggle();
-        return selected.equals(button);
     }
 }
 

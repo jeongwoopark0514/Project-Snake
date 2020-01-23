@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 
 import database.DBconnect;
 import gui.Gui;
+import gui.GuiButton;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,15 +18,18 @@ import org.junit.jupiter.api.Test;
 class ScoreControllerTest {
 
     private Gui gui;
+    private GuiButton guiButton;
     private ScoreController controller;
     private DBconnect dbconnect;
 
     @BeforeEach
     void setUp() {
         gui = mock(Gui.class);
+        guiButton = mock(GuiButton.class);
         dbconnect = mock(DBconnect.class);
         controller = new ScoreController();
         controller.gui = gui;
+        controller.guiButton = guiButton;
         controller.setDatabase(dbconnect);
     }
 

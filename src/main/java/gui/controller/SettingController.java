@@ -2,6 +2,7 @@ package gui.controller;
 
 import game.Settings;
 import gui.Gui;
+import gui.GuiButton;
 import java.io.IOException;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -11,6 +12,7 @@ import javafx.scene.control.ToggleGroup;
  */
 public class SettingController {
     public Gui gui = new Gui();
+    public GuiButton guiButton = new GuiButton();
 
     public RadioButton jungleRadio;
     public RadioButton nightRadio;
@@ -43,12 +45,12 @@ public class SettingController {
      * Changes the background of the game based on which one is selected.
      */
     public void changeBackground() {
-        gui.setGroup(background);
-        if (gui.equalsButton(jungleRadio)) {
+        guiButton.setGroup(background);
+        if (guiButton.equalsButton(jungleRadio)) {
             Settings.setBackground("/image/jungle_image.png");
-        } else if (gui.equalsButton(nightRadio)) {
+        } else if (guiButton.equalsButton(nightRadio)) {
             Settings.setBackground("/image/night_image.png");
-        } else if (gui.equalsButton(basicRadio)) {
+        } else if (guiButton.equalsButton(basicRadio)) {
             Settings.setBackground("");
         }
     }
@@ -57,12 +59,12 @@ public class SettingController {
      * Changes the difficulty of the game.
      */
     public void changeDifficulty() {
-        gui.setGroup(difficulty);
-        if (gui.equalsButton(easyRadio)) {
+        guiButton.setGroup(difficulty);
+        if (guiButton.equalsButton(easyRadio)) {
             Settings.setGameMode(0);
-        } else if (gui.equalsButton(difficultRadio)) {
+        } else if (guiButton.equalsButton(difficultRadio)) {
             Settings.setGameMode(1);
-        } else if (gui.equalsButton(insaneRadio)) {
+        } else if (guiButton.equalsButton(insaneRadio)) {
             Settings.setGameMode(2);
         }
     }
@@ -71,12 +73,12 @@ public class SettingController {
      * Changes the color of the snake.
      */
     public void changeSnakeColor() {
-        gui.setGroup(snakeColor);
-        if (gui.equalsButton(greenRadio)) {
+        guiButton.setGroup(snakeColor);
+        if (guiButton.equalsButton(greenRadio)) {
             Settings.setSnakeColor("green");
-        } else if (gui.equalsButton(yellowRadio)) {
+        } else if (guiButton.equalsButton(yellowRadio)) {
             Settings.setSnakeColor("yellow");
-        } else if (gui.equalsButton(greyRadio)) {
+        } else if (guiButton.equalsButton(greyRadio)) {
             Settings.setSnakeColor("grey");
         }
     }
@@ -85,10 +87,10 @@ public class SettingController {
      * Changes the set of pellets to be used.
      */
     public void changePellets() {
-        gui.setGroup(pellets);
-        if (gui.equalsButton(appleOrangeRadio)) {
+        guiButton.setGroup(pellets);
+        if (guiButton.equalsButton(appleOrangeRadio)) {
             Settings.setPellets("apple-orange");
-        } else if (gui.equalsButton(melonBananaRadio)) {
+        } else if (guiButton.equalsButton(melonBananaRadio)) {
             Settings.setPellets("melon-banana");
         }
     }
