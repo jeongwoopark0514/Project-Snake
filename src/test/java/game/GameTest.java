@@ -10,16 +10,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.animation.AnimationTimer;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
-import javax.sound.sampled.LineUnavailableException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 class GameTest {
     private Game game;
@@ -28,8 +26,7 @@ class GameTest {
     private Painter painter;
     private Snake snake;
     private AnimationTimer timer;
-    private Text scoreText;
-    private Text pauseText;
+    private List<Text> textElements;
 
     @BeforeEach
     void setUp() {
@@ -37,10 +34,10 @@ class GameTest {
         painter = mock(Painter.class);
         snake = mock(Snake.class);
         board = mock(Board.class);
-        scoreText = mock(Text.class);
-        pauseText = new Text();
-        game = new Game(painter, canvas, snake, scoreText, pauseText);
         timer = mock(AnimationTimer.class);
+        textElements = Arrays.asList(new Text(), new Text());
+
+        game = new Game(painter, canvas, snake, textElements);
         game.setTimer(timer);
     }
 

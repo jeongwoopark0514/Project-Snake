@@ -6,7 +6,6 @@ import static game.GameSettings.Y_MAX;
 
 import gui.Gui;
 import gui.controller.ScoreController;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +15,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleLongProperty;
-
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.text.Text;
 import lombok.Getter;
@@ -33,7 +30,6 @@ public class Game {
     private final Canvas canvas;
     @Getter
     private final Snake snake;
-    //Made the fruits a list to provide the option to add multiple fruits.
     @Getter
     @Setter
     private List<Fruit> fruits;
@@ -58,20 +54,19 @@ public class Game {
      * The Game class runs the main structure of the game,
      * it can create elements needed to play and also manages the score and the controls.
      *
-     * @param painter   the painter that paints all the elements.
-     * @param canvas    the canvas to paint on.
-     * @param snake     the snake that represents the player on the board.
-     * @param scoreText the element representing the player score.
-     * @param pauseText the text element used for indicating state of game.
+     * @param painter      the painter that paints all the elements.
+     * @param canvas       the canvas to paint on.
+     * @param snake        the snake that represents the player on the board.
+     * @param textElements list of text elements for Score and Pause indication.
      */
-    public Game(Painter painter, Canvas canvas, Snake snake, Text scoreText, Text pauseText) {
+    public Game(Painter painter, Canvas canvas, Snake snake, List<Text> textElements) {
         this.canvas = canvas;
         this.snake = snake;
         this.painter = painter;
         this.fruits = new ArrayList<>();
-        this.scoreText = scoreText;
+        this.scoreText = textElements.get(0);
+        this.pauseText = textElements.get(1);
         this.score = 0;
-        this.pauseText = pauseText;
         this.isPaused = false;
         this.gui = new Gui();
 
@@ -173,7 +168,7 @@ public class Game {
                         board.updateTile(tail.getX(), tail.getY(), null);
                         snake.move();
                         if (collisionManager.check()) {
-                                return;
+                            return;
                         }
                         painter.writeScore(scoreText, score);
                         Tile head = snake.getHead();
@@ -228,14 +223,14 @@ public class Game {
     }
 
     /**
-     *  Adds extra walls for the difficult and insane game modes.
+     * Adds extra walls for the difficult and insane game modes.
      */
     private void extraWalls() {
         for (int i = 0; i <= 20; i++) {
             int random1 = new Random().nextInt((X_MAX));
             int random2 = new Random().nextInt((Y_MAX));
 
-            walls.add(new Wall(random1,random2,GameSettings.WALL_COLOR, null));
+            walls.add(new Wall(random1, random2, GameSettings.WALL_COLOR, null));
         }
     }
 
@@ -252,7 +247,7 @@ public class Game {
         } else {
             Fruit fruit = new Fruit(x, y, GameSettings.FRUIT_COLOR, null, 10);
             fruit.randomize(new Random());
-            return  fruit;
+            return fruit;
         }
     }
 
