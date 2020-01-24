@@ -3,6 +3,7 @@ package gui.controller;
 import database.DBconnect;
 import database.SessionManager;
 import gui.Gui;
+import gui.GuiButton;
 import java.io.IOException;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -17,6 +18,7 @@ import lombok.Setter;
  */
 public class ScoreController {
     public Gui gui = new Gui();
+    public GuiButton guiButton = new GuiButton();
 
     @Getter
     @Setter
@@ -41,7 +43,7 @@ public class ScoreController {
             database.saveScore(manager.getUsername(),
                 gui.getScoreFromText(scoreText),
                 gui.getText(nickname));
-            gui.disableButton(saveButton);
+            guiButton.disableButton(saveButton);
             gui.showAlert("Your score was saved", "Success!");
         }
         database.closeConnection();

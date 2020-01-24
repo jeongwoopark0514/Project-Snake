@@ -69,4 +69,10 @@ class EntryControllerTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void quitButtonTest() {
+        entryController.quitButton();
+        verify(gui).quit();
+    }
 }

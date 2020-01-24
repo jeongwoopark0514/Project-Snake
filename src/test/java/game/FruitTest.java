@@ -33,16 +33,16 @@ class FruitTest {
     }
 
     @Test
-    void randomizeTestMellonBanana() {
-        Settings.setPellets("mellon-banana");
+    void randomizeTestMelonBanana() {
+        Settings.setPellets("melon-banana");
         Mockito.when(random.nextInt(Mockito.anyInt())).thenReturn(3);
         fruit.randomize(random);
         assertEquals(50, fruit.getValue());
     }
 
     @Test
-    void randomizeTestMellonBananaNotRare() {
-        Settings.setPellets("mellon-banana");
+    void randomizeTestMelonBananaNotRare() {
+        Settings.setPellets("melon-banana");
         Mockito.when(random.nextInt(Mockito.anyInt())).thenReturn(2);
         fruit.randomize(random);
         assertEquals(10, fruit.getValue());

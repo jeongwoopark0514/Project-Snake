@@ -48,9 +48,9 @@ public class Fruit extends Tile {
                 this.value = 50;
             }
 
-        } else if (Settings.getPellets().equals("mellon-banana")) {
-            int mellonBanana = 4;
-            if (rand != mellonBanana) {
+        } else if (Settings.getPellets().equals("melon-banana")) {
+            int melonBanana = 4;
+            if (rand != melonBanana) {
                 rand = 3;
             } else {
                 this.value = 50;

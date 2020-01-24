@@ -23,7 +23,9 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -48,10 +50,9 @@ public class Gui {
     @Getter
     @Setter
     public FXMLLoader loader;
+    private GuiText guiText = new GuiText();
+    private AlertBox alertBox = new AlertBox();
 
-    public GuiText guiText = new GuiText();
-
-    public AlertBox alertBox = new AlertBox();
 
     /**
      * This method pops up an alert box that gives notifications.
@@ -72,7 +73,6 @@ public class Gui {
     public void showWarningAlert(String message, String title) {
         alertBox.displayWarning(message, title);
     }
-
 
     /**
      * This method changes the url for the respective scenes.
@@ -96,15 +96,6 @@ public class Gui {
      */
     public String getText(TextField any) {
         return guiText.getText(any);
-    }
-
-    /**
-     * Disable button.
-     *
-     * @param button - button
-     */
-    public void disableButton(Button button) {
-        button.setDisable(true);
     }
 
     /**
@@ -223,6 +214,5 @@ public class Gui {
 
         return Arrays.asList(scoreText, pauseText);
     }
-
 }
 
