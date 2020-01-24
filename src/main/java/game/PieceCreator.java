@@ -9,8 +9,8 @@ import java.util.Random;
 import lombok.Setter;
 
 /**
- * A class that creates the pieces which are neccessary for the game.
- * These pieces will be placed on the board.
+ * A class that creates the pieces which are necessary for the game.
+ * This covers the following game pieces: Fruit, Wall and Board.
  */
 public class PieceCreator {
     @Setter
@@ -83,5 +83,24 @@ public class PieceCreator {
             fruit.randomize(new Random());
             return fruit;
         }
+    }
+
+    /**
+     * Create the board piece of the game.
+     *
+     * @param snake the snake to put on the board
+     * @return the created board
+     */
+    Board createBoard(Snake snake) {
+        List<Tile> elements = new ArrayList<>(createWalls());
+        elements.add(snake.getHead());
+        Board board = new BoardBuilder()
+            .withDimensions(X_MAX, Y_MAX)
+            .withBackground("image/background.png")
+            .withElements(elements)
+            .build();
+        Fruit fruit = createFruit(board);
+        board.updateTile(fruit.getX(), fruit.getY(), fruit);
+        return board;
     }
 }
