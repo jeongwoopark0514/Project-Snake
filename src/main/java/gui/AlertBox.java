@@ -37,7 +37,7 @@ public class AlertBox {
      * @param message the message to ask.
      * @param title title of the alert box
      */
-    public static void displayQuit(String message, String title) {
+    public void displayQuit(String message, String title) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setContentText(message);

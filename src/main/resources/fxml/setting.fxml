@@ -9,7 +9,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
-
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #68e96d;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controller.SettingController">
    <children>
       <ImageView fitHeight="72.0" fitWidth="463.0" layoutX="38.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
@@ -187,11 +186,12 @@
             </ImageView>
          </graphic>
       </RadioButton>
-      <RadioButton fx:id="mellonBananaRadio" layoutX="642.0" layoutY="522.0" mnemonicParsing="false" onAction="#changePellets" prefHeight="46.0" prefWidth="159.0" toggleGroup="$pellets">
+       <RadioButton fx:id="melonBananaRadio" layoutX="642.0" layoutY="522.0" mnemonicParsing="false"
+                    onAction="#changePellets" prefHeight="46.0" prefWidth="159.0" toggleGroup="$pellets">
          <graphic>
             <ImageView fitHeight="43.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/mellon_banana.png" />
+                   <Image url="@../image/melon_banana.png"/>
                </image>
             </ImageView>
          </graphic>
