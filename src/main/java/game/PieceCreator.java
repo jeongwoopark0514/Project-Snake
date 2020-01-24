@@ -9,8 +9,8 @@ import java.util.Random;
 import lombok.Setter;
 
 /**
- * A class that creates the pieces which are neccessary for the game.
- * These pieces will be placed on the board.
+ * A class that creates the pieces which are necessary for the game.
+ * This covers the following game pieces: Fruit, Wall and Board.
  */
 public class PieceCreator {
     @Setter
