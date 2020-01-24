@@ -67,12 +67,15 @@ public class Snake {
      */
     public void changeDirection(@NonNull Directions dir) throws NullPointerException {
         if (this.body.size() <= minSize) {
-            this.head.setDirection(dir);
-            this.setDirection(dir);
+            setDirectionTo(dir);
         } else if (dir != this.direction.opposite() && dir != this.direction) {
-            this.head.setDirection(dir);
-            this.setDirection(dir);
+            setDirectionTo(dir);
         }
+    }
+
+    public void setDirectionTo(Directions dir) {
+        this.head.setDirection(dir);
+        this.setDirection(dir);
     }
 
     /**
