@@ -9,10 +9,10 @@
         My custom rules
     </description>
 
-
     <!-- Your rules will come here -->
     <rule ref="category/java/errorprone.xml">
         <exclude name="BeanMembersShouldSerialize"/>
+        <!-- the Dataflow errors the PMD checks, it does not detect faults in our code but does error the plugin -->
+        <exclude name="DataflowAnomalyAnalysis" />
     </rule>
-
 </ruleset>
