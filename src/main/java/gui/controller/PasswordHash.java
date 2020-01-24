@@ -53,6 +53,17 @@ public class PasswordHash {
     }
 
     /**
+     * Validates a password using a hash.
+     *
+     * @param goodHash the hash of the valid password
+     * @return true if the password is correct, false if not
+     */
+    public boolean validatePassword(String goodHash)
+        throws NoSuchAlgorithmException, InvalidKeySpecException {
+        return validatePassword(password.toCharArray(), goodHash);
+    }
+
+    /**
      * Compares two byte arrays in length-constant time. This comparison method
      * is used so that password hashes cannot be extracted from an on-line
      * system using a timing attack and then attacked off-line.
@@ -144,17 +155,4 @@ public class PasswordHash {
         // format iterations:salt:hash
         return PBKDF2_ITERATIONS + ":" + toHex(salt) + ":" + toHex(hash);
     }
-
-    /**
-     * Validates a password using a hash.
-     *
-     * @param goodHash the hash of the valid password
-     * @return true if the password is correct, false if not
-     */
-    public boolean validatePassword(String goodHash)
-        throws NoSuchAlgorithmException, InvalidKeySpecException {
-        return validatePassword(password.toCharArray(), goodHash);
-    }
-
-
 }

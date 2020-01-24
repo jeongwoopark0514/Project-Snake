@@ -13,7 +13,6 @@ import lombok.Setter;
 
 /**
  * This class encapsulates a connection to the database.
- *
  * Implements the singleton pattern. This class provides functionality to save and retrieve data
  * from the database (e.g. usernames and scores).
  */
