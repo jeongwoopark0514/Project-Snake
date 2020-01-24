@@ -73,6 +73,10 @@ public class Snake {
         }
     }
 
+    /**
+     * Set direction of head and direction to the certain direction.
+     * @param dir direction that the snake proceeds.
+     */
     public void setDirectionTo(Directions dir) {
         this.head.setDirection(dir);
         this.setDirection(dir);
