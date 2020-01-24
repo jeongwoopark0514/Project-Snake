@@ -18,14 +18,7 @@ public class Wall extends Tile {
      */
     public Wall(int x, int y, Color color, String sprite) {
         super(x, y, color, sprite);
-        int random = new Random().nextInt((9)) + 1;
-        if (random == 6 || random == 7) {
-            random = 1;
-        }
-        if (random == 8 || random == 9) {
-            random = 2;
-        }
-        String wallSprite = "image/Wall" + random + ".png";
-        this.setSprite(wallSprite);
+        int random = new Random().nextInt(5) + 1;
+        this.setSprite("image/Wall" + random + ".png");
     }
 }
