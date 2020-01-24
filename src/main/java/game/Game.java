@@ -81,17 +81,8 @@ public class Game {
         canvas.requestFocus();
         setOnKeyPressedListener();
         PieceCreator pieceCreator = new PieceCreator();
-        // collect all tile elements in ArrayList
-        List<Tile> elements = new ArrayList<>(pieceCreator.createWalls());
-        elements.add(snake.getHead());
-        // build the board
-        this.board = new BoardBuilder()
-            .withDimensions(X_MAX, Y_MAX)
-            .withBackground("image/background.png")
-            .withElements(elements)
-            .build();
-        Fruit fruit = pieceCreator.createFruit(board);
-        board.updateTile(fruit.getX(), fruit.getY(), fruit);
+        //Create the board
+        board = pieceCreator.createBoard(snake);
         collisionManager = new CollisionManager(board, snake, this);
         painter.paintBoard(board);
     }

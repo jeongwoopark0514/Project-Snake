@@ -77,4 +77,15 @@ class PieceCreatorTest {
         assertEquals(nextY, fruit.getY());
     }
 
+    @Test
+    void createBoardTest() {
+        Snake snake = mock(Snake.class);
+        BodyPart part = new BodyPart(2, 2, GameSettings.SNAKE_COLOR, null);
+        when(snake.getHead()).thenReturn(part);
+        board = creator.createBoard(snake);
+        assertEquals(X_MAX, board.getWidth());
+        assertEquals(Y_MAX, board.getHeight());
+        assertEquals(part, board.getTile(2,2));
+    }
+
 }
