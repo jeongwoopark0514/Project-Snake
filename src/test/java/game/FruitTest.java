@@ -1,6 +1,7 @@
 package game;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
 
 import java.util.Random;
 import javafx.scene.paint.Color;
@@ -27,7 +28,7 @@ class FruitTest {
     @Test
     void randomizeTestAppleOrange() {
         Settings.setPellets("apple-orange");
-        Mockito.when(random.nextInt(Mockito.anyInt())).thenReturn(1);
+        Mockito.when(random.nextInt(anyInt())).thenReturn(1);
         fruit.randomize(random);
         assertEquals(50, fruit.getValue());
     }
@@ -35,7 +36,7 @@ class FruitTest {
     @Test
     void randomizeTestMelonBanana() {
         Settings.setPellets("melon-banana");
-        Mockito.when(random.nextInt(Mockito.anyInt())).thenReturn(3);
+        Mockito.when(random.nextInt(anyInt())).thenReturn(3);
         fruit.randomize(random);
         assertEquals(50, fruit.getValue());
     }
@@ -43,7 +44,7 @@ class FruitTest {
     @Test
     void randomizeTestMelonBananaNotRare() {
         Settings.setPellets("melon-banana");
-        Mockito.when(random.nextInt(Mockito.anyInt())).thenReturn(2);
+        Mockito.when(random.nextInt(anyInt())).thenReturn(2);
         fruit.randomize(random);
         assertEquals(10, fruit.getValue());
     }
@@ -51,7 +52,15 @@ class FruitTest {
     @Test
     void randomizeTestInvalidPelletSet() {
         Settings.setPellets("potato");
-        Mockito.when(random.nextInt(Mockito.anyInt())).thenReturn(2);
+        Mockito.when(random.nextInt(anyInt())).thenReturn(2);
+        fruit.randomize(random);
+        assertEquals(10, fruit.getValue());
+    }
+
+    @Test
+    void randomizeTestAppleOrangeRare() {
+        Settings.setPellets("apple-orange");
+        Mockito.when(random.nextInt(anyInt())).thenReturn(0);
         fruit.randomize(random);
         assertEquals(10, fruit.getValue());
     }
