@@ -8,7 +8,6 @@ import lombok.Setter;
  * It will check if the head of the snake collides with another elements on the board,
  * if it does collide it executes actions accordingly.
  */
-@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 class CollisionManager {
     private Board board;
     @Setter
@@ -19,7 +18,8 @@ class CollisionManager {
     private PieceCreator creator;
 
     //Sound effects obtained from https://www.zapsplat.com“
-    @Getter @Setter
+    @Getter
+    @Setter
     private Sound sound = new Sound("music/pellet.wav");
 
     /**

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A class tht holds the settings from the "Settings" screen.
+ * A class that holds the settings from the "Settings" screen.
  */
 public class Settings {
 

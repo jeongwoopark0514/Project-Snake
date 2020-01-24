@@ -8,7 +8,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 
 /**
- * This class is a controller class for settings.
+ * Controller for the settings page.
+ * Changes settings in <code>Settings</code> based on which settings the user chooses in the
+ * settings menu.
  */
 public class SettingController {
     public Gui gui = new Gui();
@@ -35,6 +37,7 @@ public class SettingController {
 
     /**
      * This method goes back to the Entry page from Settings page.
+     *
      * @throws IOException exception for file. (exists or not).
      */
     public void goBackEntry() throws IOException {

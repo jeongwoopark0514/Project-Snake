@@ -11,28 +11,32 @@ import lombok.Setter;
 
 
 /**
- * This class is for making sound. If you put a correct fileName for the parameter,
- * that file will be played.
+ * This class is for making sound.
+ * If you put a correct fileName for the parameter, that file will be played.
  */
-
-@SuppressWarnings("PMD.BeanMembersShouldSerialize") //no transient
 public class Sound {
-    @Getter @Setter
+    @Getter
+    @Setter
     private File clap;
-    @Getter @Setter
+    @Getter
+    @Setter
     private Clip clip;
 
-
+    /**
+     * Constructor for a sound object.
+     *
+     * @param fileName the name of the sound.
+     */
     public Sound(String fileName) {
         this.clap = new File(fileName);
-
     }
 
     /**
-     * It playes the audio file.
-     * @throws LineUnavailableException if a clip object is
-     *      not available due to resource restrictions.
-     * @throws IOException Exception for file input stream.
+     * Plays the audio file.
+     *
+     * @throws LineUnavailableException      if a clip object is
+     *                                       not available due to resource restrictions.
+     * @throws IOException                   Exception for file input stream.
      * @throws UnsupportedAudioFileException If the audio file is not supported.
      */
     public void play() throws LineUnavailableException, IOException, UnsupportedAudioFileException {

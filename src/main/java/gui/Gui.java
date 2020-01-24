@@ -23,9 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -44,7 +42,9 @@ import lombok.Setter;
 
 
 /**
- * Contains all the methods needed for controller logic.
+ * The actual window of the game.
+ * Controllers use this class to change scenes, start the actual game or show alerts to the
+ * player. Also used to add create buttons for the gamescreen.
  */
 public class Gui {
     @Getter

@@ -1,12 +1,8 @@
 package game;
 
-import static game.GameSettings.X_MAX;
-import static game.GameSettings.Y_MAX;
-
 import gui.Gui;
 import gui.controller.ScoreController;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;

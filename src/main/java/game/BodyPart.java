@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A part of the snake, which has a direction in which it needs to move.
- * A BodyPart is actually just a specific implementation of Tile
+ * A bodypart of the snake.
+ * Each bodypart has a position and a direction.
+ * This class implements Tile class.
  */
 public class BodyPart extends Tile {
     @Getter
@@ -39,7 +40,7 @@ public class BodyPart extends Tile {
      * LEFT:    x = -1      y = 0
      * RIGHT:   x = 1       y = 0
      *
-     * @param dir Enum type of direction (UP, DOWN, LEFT or RIGHT)
+     * @param dir enum type of direction (UP, DOWN, LEFT or RIGHT)
      */
     public void setDirection(Directions dir) {
         this.direction = dir;

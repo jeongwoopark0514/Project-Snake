@@ -50,7 +50,7 @@ public class Snake {
             return;
         }
         String newSpriteHead = "image/" + Settings.getSnakeColor() + "_snake_head_"
-                + direction + ".png";
+            + direction + ".png";
         head.setSprite(newSpriteHead);
         if (body.size() > minSize) {
             for (int i = 1; i <= body.size() - 1; i++) {
@@ -75,6 +75,7 @@ public class Snake {
 
     /**
      * Set direction of head and direction to the certain direction.
+     *
      * @param dir direction that the snake proceeds.
      */
     public void setDirectionTo(Directions dir) {

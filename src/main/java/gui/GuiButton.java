@@ -6,7 +6,7 @@ import javafx.scene.control.ToggleGroup;
 import lombok.Setter;
 
 /**
- * Gui class for buttons. (button, radiobuttons)
+ * Gui class for buttons (e.g. normal buttons and radiobuttons)
  */
 public class GuiButton {
     @Setter

@@ -2,7 +2,6 @@ package gui;
 
 import database.DBconnect;
 import database.SessionManager;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -31,6 +30,7 @@ public class MainRunner extends Application {
 
     /**
      * Starts the application.
+     *
      * @param primaryStage the initial stage that should be shown.
      * @throws IOException iff the file does not exist or if the url is invalid
      */
@@ -60,6 +60,7 @@ public class MainRunner extends Application {
 
     /**
      * Sets up the main screen that is shown when starting the application.
+     *
      * @param primaryStage the initial stage that should be shown.
      */
     private void initialize(Stage primaryStage) {
@@ -83,8 +84,9 @@ public class MainRunner extends Application {
 
     /**
      * Sets up the entry scene of the application.
+     *
      * @param entry is either the login screen (if user is not logged in)
-     *             or the splash screen (if user is already logged in)
+     *              or the splash screen (if user is already logged in)
      */
     private void manageScene(Parent entry) {
         //first suppressed PMD error since it is not a big bug,
