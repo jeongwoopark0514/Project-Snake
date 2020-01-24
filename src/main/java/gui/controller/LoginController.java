@@ -3,7 +3,6 @@ package gui.controller;
 import database.DBconnect;
 import database.SessionManager;
 import gui.Gui;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,8 +12,12 @@ import javafx.scene.control.TextField;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Controller for the login screen.
+ * Contains methods to extract username and login and save this to database. Also used for
+ * registration of new users.
+ */
 public class LoginController {
-
     public TextField loginUsername;
     public PasswordField loginPassword;
     public TextField registerUsername;
@@ -32,6 +35,7 @@ public class LoginController {
 
     /**
      * when you click register button, move to register page.
+     *
      * @throws IOException IOexception thrown for null file.
      */
     public void clickRegister() throws IOException {
@@ -73,7 +77,7 @@ public class LoginController {
             || gui.getText(registerPassword).equals("")
             || gui.getText(registerPassword).equals("")) {
             gui.showWarningAlert("One or multiple fields have not been filled in!",
-                    "Empty field(s)");
+                "Empty field(s)");
         } else if (database.registerUser(gui.getText(registerUsername),
             gui.getText(registerPassword), null)) {
             gui.showAlert("Successfully registered.", "Success");
@@ -85,6 +89,7 @@ public class LoginController {
 
     /**
      * when you click goback button, move to login page.
+     *
      * @throws IOException IOexception thrown for null file.
      */
     public void goBackLogin() throws IOException {

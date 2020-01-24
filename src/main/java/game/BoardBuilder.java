@@ -16,9 +16,9 @@ public class BoardBuilder {
     /**
      * Sets the dimensions of the board (width and height).
      *
-     * @param width     number of cells on x-axis
-     * @param height    number of cells on y-axis
-     * @return          BoardBuilder object used for further construction
+     * @param width  number of cells on x-axis
+     * @param height number of cells on y-axis
+     * @return BoardBuilder object used for further construction
      */
     public BoardBuilder withDimensions(int width, int height) {
         this.width = width;
@@ -29,8 +29,8 @@ public class BoardBuilder {
     /**
      * Sets the background image for the board.
      *
-     * @param background    path to background image
-     * @return              BoardBuilder object used for further construction
+     * @param background path to background image
+     * @return BoardBuilder object used for further construction
      */
     public BoardBuilder withBackground(String background) {
         this.background = background;
@@ -40,8 +40,8 @@ public class BoardBuilder {
     /**
      * Sets the elements (Fruit, BodyPart and Wall) belonging to the board.
      *
-     * @param elements  list of Wall, Fruit and Bodypart objects belonging to this board
-     * @return          BoardBuilder object used for further construction
+     * @param elements list of Wall, Fruit and Bodypart objects belonging to this board
+     * @return BoardBuilder object used for further construction
      */
     public BoardBuilder withElements(List<Tile> elements) {
         this.elements = elements;
@@ -51,7 +51,7 @@ public class BoardBuilder {
     /**
      * Constructs a Board object with set attributes.
      *
-     * @return  Board object
+     * @return Board the board object
      */
     public Board build() {
         return new Board(width, height, background, elements);

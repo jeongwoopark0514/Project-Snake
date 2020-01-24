@@ -2,20 +2,24 @@ package database;
 
 import com.mysql.cj.jdbc.MysqlDataSource;
 import gui.controller.PasswordHash;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import java.util.ArrayList;
-
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This class encapsulates a connection to the database.
+ *
+ * Implements the singleton pattern. This class provides functionality to save and retrieve data
+ * from the database (e.g. usernames and scores).
+ */
 public class DBconnect {
 
+    private static DBconnect INSTANCE;
     @Getter
     @Setter
     private Connection connection;
@@ -31,10 +35,22 @@ public class DBconnect {
     private String prefix = "Error: ";
     private int globalPosition = 1;
     private int personalPosition = 1;
-
-    private static DBconnect INSTANCE;
     @Setter
     private MysqlDataSource ds;
+
+    /**
+     * Instantiate the datasource which can be used to create a connection.
+     */
+    public DBconnect() {
+        ds = new MysqlDataSource();
+        StringBuilder url = new StringBuilder();
+        url.append("jdbc:mysql://projects-db.ewi.tudelft.nl/projects_Snake1?");
+        url.append("useUnicode=true&characterEncoding=utf8&use");
+        url.append("SSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC");
+        ds.setUrl(url.toString());
+        ds.setUser("pu_Snake1");
+        ds.setPassword("tHWLSWJqg57E");
+    }
 
     /**
      * First time this method is called an instance of DBconnect will be created. Subsequent
@@ -50,20 +66,6 @@ public class DBconnect {
         } else {
             return INSTANCE;
         }
-    }
-
-    /**
-     * Instantiate the datasource which can be used to create a connection.
-     */
-    public DBconnect() {
-        ds = new MysqlDataSource();
-        StringBuilder url = new StringBuilder();
-        url.append("jdbc:mysql://projects-db.ewi.tudelft.nl/projects_Snake1?");
-        url.append("useUnicode=true&characterEncoding=utf8&use");
-        url.append("SSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC");
-        ds.setUrl(url.toString());
-        ds.setUser("pu_Snake1");
-        ds.setPassword("tHWLSWJqg57E");
     }
 
     /**

@@ -18,13 +18,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * This is the controller of LeaderBoard.
- * This class will contain all the methods that control leader board, and will be kept separate
+ * Controller for leaderboard.
+ * This class contains all the methods that control the leaderboard, and is kept separate
  * from GUI logic.
- * This controller class is in progress. Will be modified a lot in the next sprint.
  */
 public class LeaderBoardController implements Initializable {
-
     public Gui gui = new Gui();
     public TableView<Details> globalTable;
     public TableView<Details> personalTable;

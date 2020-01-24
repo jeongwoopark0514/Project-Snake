@@ -85,7 +85,7 @@ class PieceCreatorTest {
         board = creator.createBoard(snake);
         assertEquals(X_MAX, board.getWidth());
         assertEquals(Y_MAX, board.getHeight());
-        assertEquals(part, board.getTile(2,2));
+        assertEquals(part, board.getTile(2, 2));
     }
 
 }

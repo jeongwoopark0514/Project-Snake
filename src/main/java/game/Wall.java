@@ -10,10 +10,11 @@ import javafx.scene.paint.Color;
  */
 public class Wall extends Tile {
     /**
-     * Default constructor to create a Wall object.
-     * @param x the x coordinate on the map
-     * @param y the y coordinate on the map
-     * @param color the color of the wall
+     * Constructor to create a Wall object.
+     *
+     * @param x      the x coordinate on the map
+     * @param y      the y coordinate on the map
+     * @param color  the color of the wall
      * @param sprite the sprite of the wall (optional)
      */
     public Wall(int x, int y, Color color, String sprite) {

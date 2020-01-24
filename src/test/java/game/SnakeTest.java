@@ -4,7 +4,6 @@ import static game.Directions.DOWN;
 import static game.Directions.LEFT;
 import static game.Directions.RIGHT;
 import static game.Directions.UP;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -115,8 +114,8 @@ class SnakeTest {
         BodyPart newPart = new BodyPart(6, 5, Color.GREEN, null);
         snake.getBody().add(newPart);
         snake.move();
-        BodyPart first =  snake.getBody().get(0);
-        BodyPart second =  snake.getBody().get(1);
+        BodyPart first = snake.getBody().get(0);
+        BodyPart second = snake.getBody().get(1);
         assertEquals(6, first.getX());
         assertEquals(5, first.getY());
         assertEquals(5, second.getX());

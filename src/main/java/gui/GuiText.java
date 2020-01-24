@@ -10,7 +10,8 @@ public class GuiText {
 
     /**
      * Set the text with the parameter given.
-     * @param text text you want to modify.
+     *
+     * @param text    text you want to modify.
      * @param setting String that you want to change to.
      */
     public void setText(Text text, String setting) {
@@ -19,6 +20,7 @@ public class GuiText {
 
     /**
      * Get score from the text in the main board and then change in into integer.
+     *
      * @param text to read in.
      * @return integer in the text.
      */
@@ -28,6 +30,7 @@ public class GuiText {
 
     /**
      * Getting text from textfield.
+     *
      * @param any Textfield
      * @return content of textfield
      */

@@ -1,9 +1,7 @@
 package game;
 
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -11,7 +9,6 @@ import lombok.ToString;
  * A tile that has an x and y value.
  * Includes some operations on points such as translate.
  */
-@ToString
 public abstract class Tile {
     @Getter
     @Setter
@@ -44,11 +41,10 @@ public abstract class Tile {
     }
 
     /**
-     * TODO: Current implementation only checks whether x or y are below 0.
      * Changes the coordinate of this point.
      *
-     * @param dx    change in x
-     * @param dy    change in y
+     * @param dx change in x
+     * @param dy change in y
      */
     public void translate(int dx, int dy) {
         this.x += dx;

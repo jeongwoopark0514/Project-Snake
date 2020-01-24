@@ -9,11 +9,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * This is 'EntryController' class. It controls the entry page after login page.
+ * Controls the entry page after login page.
  * This class calls methods from Gui class which contains only GUI logic.
  */
 public class EntryController {
-
     public Gui gui = new Gui();
     @Getter
     @Setter

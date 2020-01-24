@@ -13,24 +13,21 @@ import lombok.Setter;
 
 
 /**
- * This class is for controller of score screen.
- * This class will be used later in the future. (in progress).
+ * Controller for the score screen.
+ * Contains methods for extracting the score from the screen and saving this to the database.
  */
 public class ScoreController {
     public Gui gui = new Gui();
     public GuiButton guiButton = new GuiButton();
-
+    public TextField nickname;
+    public Button saveButton;
+    public Text scoreText = new Text();
     @Getter
     @Setter
     private DBconnect database = DBconnect.getInstance();
     @Getter
     @Setter
     private SessionManager manager = SessionManager.getInstance();
-
-    public TextField nickname;
-    public Button saveButton;
-    public Text scoreText = new Text();
-
 
     /**
      * Method that stores the nickname and the score after each game.
