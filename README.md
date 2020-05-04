@@ -27,3 +27,10 @@ we would never harm your privacy and protect your data as best as we can.
 To run the game make sure you have Java installed on your PC/Laptop (Java 12)
 A mouse and keyboard are required to use the actual game.
 You can start the game by running `gradle run`.
+
+## Group Member
+* Jeongwoo Park
+* Leon de Klerk
+* Remco den Heijer
+* Andrei Stefan
+* Rohan Deshamudre
